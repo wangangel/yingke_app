@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		25446DD91B8AFD1800A1B107 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 25446DD81B8AFD1800A1B107 /* main.m */; };
-		25446DDC1B8AFD1800A1B107 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25446DDB1B8AFD1800A1B107 /* AppDelegate.m */; };
 		25446DE41B8AFD1800A1B107 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25446DE31B8AFD1800A1B107 /* Images.xcassets */; };
 		25446DF31B8AFD1800A1B107 /* SkyEyesLiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25446DF21B8AFD1800A1B107 /* SkyEyesLiveTests.m */; };
+		25446E191B8AFF5A00A1B107 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25446E0D1B8AFF5A00A1B107 /* AppDelegate.m */; };
+		25446E1A1B8AFF5A00A1B107 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 25446E0E1B8AFF5A00A1B107 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,12 +28,13 @@
 		25446DD31B8AFD1800A1B107 /* SkyEyesLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyEyesLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25446DD71B8AFD1800A1B107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25446DD81B8AFD1800A1B107 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		25446DDA1B8AFD1800A1B107 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		25446DDB1B8AFD1800A1B107 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		25446DE31B8AFD1800A1B107 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		25446DEC1B8AFD1800A1B107 /* SkyEyesLiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkyEyesLiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25446DF11B8AFD1800A1B107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25446DF21B8AFD1800A1B107 /* SkyEyesLiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkyEyesLiveTests.m; sourceTree = "<group>"; };
+		25446E0C1B8AFF5A00A1B107 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		25446E0D1B8AFF5A00A1B107 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		25446E0E1B8AFF5A00A1B107 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +76,7 @@
 		25446DD51B8AFD1800A1B107 /* SkyEyesLive */ = {
 			isa = PBXGroup;
 			children = (
-				25446DDA1B8AFD1800A1B107 /* AppDelegate.h */,
-				25446DDB1B8AFD1800A1B107 /* AppDelegate.m */,
+				25446DFD1B8AFF5A00A1B107 /* Classes */,
 				25446DE31B8AFD1800A1B107 /* Images.xcassets */,
 				25446DD61B8AFD1800A1B107 /* Supporting Files */,
 			);
@@ -106,6 +107,208 @@
 				25446DF11B8AFD1800A1B107 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		25446DFD1B8AFF5A00A1B107 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				25446DFE1B8AFF5A00A1B107 /* live(直播) */,
+				25446E021B8AFF5A00A1B107 /* Login(登入) */,
+				25446E061B8AFF5A00A1B107 /* Mian(主要) */,
+				25446E111B8AFF5A00A1B107 /* Ranking(排行) */,
+				25446E151B8AFF5A00A1B107 /* Square(广场) */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		25446DFE1B8AFF5A00A1B107 /* live(直播) */ = {
+			isa = PBXGroup;
+			children = (
+				25446DFF1B8AFF5A00A1B107 /* Controller */,
+				25446E001B8AFF5A00A1B107 /* Model */,
+				25446E011B8AFF5A00A1B107 /* View */,
+			);
+			path = "live(直播)";
+			sourceTree = "<group>";
+		};
+		25446DFF1B8AFF5A00A1B107 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25446E001B8AFF5A00A1B107 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25446E011B8AFF5A00A1B107 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		25446E021B8AFF5A00A1B107 /* Login(登入) */ = {
+			isa = PBXGroup;
+			children = (
+				25446E031B8AFF5A00A1B107 /* Controller */,
+				25446E041B8AFF5A00A1B107 /* Model */,
+				25446E051B8AFF5A00A1B107 /* View */,
+			);
+			path = "Login(登入)";
+			sourceTree = "<group>";
+		};
+		25446E031B8AFF5A00A1B107 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25446E041B8AFF5A00A1B107 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25446E051B8AFF5A00A1B107 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		25446E061B8AFF5A00A1B107 /* Mian(主要) */ = {
+			isa = PBXGroup;
+			children = (
+				25446E071B8AFF5A00A1B107 /* Category */,
+				25446E081B8AFF5A00A1B107 /* Controller */,
+				25446E091B8AFF5A00A1B107 /* Lib */,
+				25446E0A1B8AFF5A00A1B107 /* Model */,
+				25446E0B1B8AFF5A00A1B107 /* Other */,
+				25446E0F1B8AFF5A00A1B107 /* Tool */,
+				25446E101B8AFF5A00A1B107 /* View */,
+			);
+			path = "Mian(主要)";
+			sourceTree = "<group>";
+		};
+		25446E071B8AFF5A00A1B107 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		25446E081B8AFF5A00A1B107 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25446E091B8AFF5A00A1B107 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		25446E0A1B8AFF5A00A1B107 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25446E0B1B8AFF5A00A1B107 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				25446E0C1B8AFF5A00A1B107 /* AppDelegate.h */,
+				25446E0D1B8AFF5A00A1B107 /* AppDelegate.m */,
+				25446E0E1B8AFF5A00A1B107 /* main.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		25446E0F1B8AFF5A00A1B107 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		25446E101B8AFF5A00A1B107 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		25446E111B8AFF5A00A1B107 /* Ranking(排行) */ = {
+			isa = PBXGroup;
+			children = (
+				25446E121B8AFF5A00A1B107 /* Controller */,
+				25446E131B8AFF5A00A1B107 /* Model */,
+				25446E141B8AFF5A00A1B107 /* View */,
+			);
+			path = "Ranking(排行)";
+			sourceTree = "<group>";
+		};
+		25446E121B8AFF5A00A1B107 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25446E131B8AFF5A00A1B107 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25446E141B8AFF5A00A1B107 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		25446E151B8AFF5A00A1B107 /* Square(广场) */ = {
+			isa = PBXGroup;
+			children = (
+				25446E161B8AFF5A00A1B107 /* Controller */,
+				25446E171B8AFF5A00A1B107 /* Model */,
+				25446E181B8AFF5A00A1B107 /* View */,
+			);
+			path = "Square(广场)";
+			sourceTree = "<group>";
+		};
+		25446E161B8AFF5A00A1B107 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25446E171B8AFF5A00A1B107 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25446E181B8AFF5A00A1B107 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,7 +409,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25446DDC1B8AFD1800A1B107 /* AppDelegate.m in Sources */,
+				25446E191B8AFF5A00A1B107 /* AppDelegate.m in Sources */,
+				25446E1A1B8AFF5A00A1B107 /* main.m in Sources */,
 				25446DD91B8AFD1800A1B107 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +587,7 @@
 				25446DF81B8AFD1800A1B107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		25446DF91B8AFD1800A1B107 /* Build configuration list for PBXNativeTarget "SkyEyesLiveTests" */ = {
 			isa = XCConfigurationList;
@@ -391,6 +596,7 @@
 				25446DFB1B8AFD1800A1B107 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
