@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SDLoginViewController.h"
+#import "OTT6PublicHeader.h"
+#import "Device.h"
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +19,28 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //创建窗口
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    
+    //设置窗口的根控制器
+
+
+    SDLoginViewController *login = [[SDLoginViewController alloc] init];
+    
+    //login.navigationItem.title = @"登入";
+
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    self.window.rootViewController = nav;
+    //显示窗口（成为主窗口）
+    [self.window makeKeyAndVisible];
+    
+   
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.enableAutoToolbar = NO;
     return YES;
 }
 
@@ -40,6 +64,13 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+/** 修改状态栏 */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    // 修改状态栏的颜色(白色)
+    return UIStatusBarStyleLightContent;
 }
 
 @end
