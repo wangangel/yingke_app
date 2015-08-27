@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git://github.com/php-fig/log.git
+	pushurl = git@github.com:php-fig/log.git
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[remote "composer"]
+	url = git://github.com/php-fig/log.git
+	fetch = +refs/heads/*:refs/remotes/composer/*

@@ -1,0 +1,112 @@
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"会员资料</strong> / <small>Member information</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+     
+
+      </div>
+
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" id="myForm" action={:U("admin/member/member_edit")} method='post'>
+          <div class="am-form-group">
+            <label for="user-username" class="am-u-sm-3 am-form-label">用户名 / UserName</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-username" name='username' value="{$member_info.username}" readonly="true">
+            </div>
+          </div>
+          
+          <div class="am-form-group">
+            <label for="user-password" class="am-u-sm-3 am-form-label">密码 / Password</label>
+            <div class="am-u-sm-9">
+              <input type="password" id="user-password" name='password' 
+              value="{$member_info.password}" readonly="true">
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">联系电话 / Phone</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-phone" name='phone' value="{$member_info.phone}" readonly="true">
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">邮箱 / Email</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-email" name='email' value="{$member_info.email}" readonly="true">
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-logincount" class="am-u-sm-3 am-form-label">登陆次数 / LoginCount</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-email" name='logincount' readonly="true" value="{$member_info.logincount}">
+            </div>
+          </div>
+
+			<input type="hidden"  name='id' value='{$member_info.id}'>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <!-- <button type="button" onclick="checkPhone();" class="am-btn am-btn-primary">保存修改</button> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<include file="Index:footer"/>
+<script data-cfasync="false" type="text/javascript">
+  function check(){
+    var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;
+    var tel = document.getElementById('user-phone').value;
+    if(!isMobile.test(tel)){ //如果用户输入的值不同时满足手机号和座机号的正则
+        if("" == tel){
+            alert( "手机号码不能为空,请正确填写电话号码!");
+            return false;
+        }else{
+            alert(innerHTML = "请正确填写手机号码，例如:13415764179");
+            return false; 
+            }       
+        }
+  }
+
+
+  function checkPhone(){
+
+    var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;
+    var tel = document.getElementById('user-phone').value;
+    var form = document.getElementById("myForm");
+    //alert(isMobile.test(tel));
+    if(!isMobile.test(tel)){ //如果用户输入的值不同时满足手机号和座机号的正则
+          if("" == tel){
+              alert( "手机号码不能为空,请正确填写电话号码!");
+              return false;
+          }else{
+              alert(innerHTML = "请正确填写手机号码，例如:13415764179");
+              return false; 
+              }       
+      }else{
+        form.submit();
+      }
+
+
+  }
+
+
+
+</script>

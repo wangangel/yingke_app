@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>企业注册</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+<script src="__PUBLIC__/home/js/index_ver.js"></script>
+<script type="text/javascript">
+var smsurl = "{:U('Home/Sms/smsinterface','','')}";
+var usernameurl = "{:U('Home/Regist/Regist_verity','','')}";
+var numurl ="{:U('Home/Regist/Regist_verity_num','','')}";
+var nextUrl = "{:U('Home/Regist/regist_company2')}";
+//提交注册进行下一步
+function next_Regist_company() {
+ var username = $("#pr_uname").val();
+ var password = $("#pr_psw").val();
+ var password1 = $("#pr_psw_check").val();
+ var phone = $("#pr_psw_tel").val();
+ var num1 = $("#yzm").val();
+ var num = $("#pr_num").val();
+ var email = $("#email").val();
+ var str_data=$("#company_form input").map(function(){
+  return ($(this).attr("name")+'='+$(this).val());
+}).get().join("&") ;
+  var agree = document.getElementById("check_agree").checked;
+  var id = num1;
+  //alert(id);
+  return false;
+      if(''== username){
+            alert('用户名不能为空!');
+            return false;
+     }else if(''==password){
+            alert('密码不能为空!');
+            return false;
+     }else if('' == password1){
+            alert('验证密码不能为空!');
+            return false;
+     }else if(''==phone){
+            alert('手机号码不能为空!');
+            return false;
+     }else if('' == num ){
+            alert('验证码不能为空!');
+            return false;
+     }else if(num != num1 ){
+            alert('验证码填写错误!请重新输入');
+            return false;
+     }else if(!agree){
+        alert('请阅读并同意<安居易用户协议>!');
+            return false;
+
+     }else if(''==email){
+         alert('邮箱不能为空!');
+            return false;
+     }else if('' != num){
+        $.getJSON(numurl,{"num":num} ,function(json){
+                    if(json.status == 1){
+                        alert('验证码输入错误!');
+                        $('#pr_num').val("");  
+                        return false;
+                    }
+                  });
+     }else{
+           window.location.href="{:U('Home/Regist/regist_company2')}?"+str_data;
+       
+     }
+
+}
+</script>
+</head>
+
+<body style="background:#fff;">
+<!--logo1内容-->
+<div class="logo1">
+		<div class="basewidth">
+        		<a class="logo_pic" href="##"><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <h3>企业注册</h3>
+        </div>
+        <input type='hidden' id='yzm' value="{$_SESSION['num']}">
+</div>
+<!--注册-->
+<div class="regist basewidth">
+		<div style="padding-bottom:40px;"></div>
+        <div class="progressbar">
+        		<span class="tip">欢迎注册成为企业用户</span><center><img src="__PUBLIC__/home/img/progressbar_pic1.png"></center>
+        </div>
+        <div style="padding-bottom:25px;"></div>
+        <form action="" method="get" id="company_form">
+        <div class="title1 clearfix">
+        		<span class="sp1">账户信息</span>
+                <span class="sp2"></span>
+        </div>
+        <ul class="fm">
+                <li><label class="lb1">用户名：</label><input id="pr_uname" class="ipt1" name="username" type="text" autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')" onblur='VeriftyUsername()'><label class="lb2 warn1">4-20位字符,用户名、邮箱、手机号</label><label class="lb2 warn2">用户名格式错误</label></li>
+                <li><label class="lb1">请设置密码：</label><input id="pr_psw" class="ipt1" name="password" type="password" onblur='VeriftyPWD()' autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')"><label class="lb2 warn1">6-20位字符,字母、数字</label><label class="lb2 warn2">密码格式错误</label></li>
+                <li><label class="lb1">请确认密码：</label><input id="pr_psw_check" class="ipt1" name="password" type="password" autocomplete="off"  onblur='VeriftyPWD2()' onkeyup="this.value=this.value.replace(/[, ]/g,'')"><label class="lb2 warn2">两次密码不一样</label></li>
+                
+                
+        </ul>
+        <div style="padding-bottom:20px;"></div>
+        <div class="title1 clearfix">
+        		<span class="sp1">联系人信息</span>
+                <span class="sp2"></span>
+        </div>
+        <ul class="fm">
+                <li><label class="lb1">联系人姓名：</label><input class="ipt1" name="pname" type="text" autocomplete="off"></li>
+                <li class="department"><label class="lb1">所在部门：</label><input class="ipt1" name="department" type="text" autocomplete="off" value="请选择">
+                		<div class="dropdown">
+                                <a href="##">请选择</a>
+                        		<a href="##">办公室</a>
+                                <a href="##">市场部</a>
+                                <a href="##">技术部</a>
+                                <a href="##">人力资源</a>
+                                <a href="##">其他</a>
+                        </div>
+                </li>
+                <li><label class="lb1">固定电话：</label><input class="ipt1" name="number" id="number" type="text" autocomplete="off"  onkeyup="this.value=this.value.replace(/[, ]/g,'')"><label class="lb2 warn2">固定电话格式不正确</label></li>
+                <li><label class="lb1">联系人邮箱：</label><input class="ipt1" name="email" id="email" type="email" autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')"></li>
+                <li><label class="lb1">手机号：</label><input id="pr_psw_tel" class="ipt1" name="phone" type="tel" autocomplete="off" onblur='VeriftyPhone();' onkeyup="this.value=this.value.replace(/[, ]/g,'')"><label class="lb2 warn2">请输入正确的号码</label></li>
+                <li><label class="lb1">短信验证码：</label><input class="ipt2" name="yzm" type="text" autocomplete="off"  onkeyup="this.value=this.value.replace(/[, ]/g,'')"><input class="btn1" name="b01"  id='b01' type="button" value="获取短信验证码"></li>
+                <li class="deal"><label class="lb1"></label><input id="check_agree" name="" type="checkbox" value=""> <label for="check_agree">我已阅读并同意</label><a href="##">《安居易用户协议》</a></li>
+                <li><label class="lb1"></label><input class="btn2" name="" onclick="next_Regist_company()" type="button" value="下一步"></li>
+                
+        </ul>
+        </form>
+        
+        
+        
+        <br><br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div style="padding-bottom:30px;"></div>
+<div class="bot_nav2 basewidth">
+		<a href="##">关于安居易</a> |
+        <a href="##">免责声明</a> |
+        <a href="##">隐私声明</a> |
+        <a href="##">版权声明</a> |
+        <a href="##">联系我们</a> |
+        <a href="##">帮助我们</a> |
+        <a href="##">网站联盟</a>
+</div>
+<!--版权-->
+<p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;沪ICP背1402883号-1&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101050201483&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+<div class="certificate basewidth">
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">字典类型</strong> / <small>Dictionary information</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+       
+
+      </div>
+
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" id="myform" action={:U("admin/dictionary/dictionary_add")} method='post'>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">字典类型 / dictionary</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="dictionary-name" placeholder="类型名称 / Name" name='dictionary'>
+              <small>字典类型名称</small>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" onclick="check()" class="am-btn am-btn-primary">保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<include file="Index:footer"/>
+<script data-cfasync="false" type="text/javascript">
+    function check(){
+      var chname = $("#dictionary-name").val();
+      if(chname == ""){
+        alert("类型名称不能为空！");
+        return false;
+      }
+      document.getElementById("myform").submit();
+
+    }
+
+</script>

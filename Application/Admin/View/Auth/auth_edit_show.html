@@ -1,0 +1,161 @@
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">权限资料</strong> / <small>Auth information</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+       
+
+      </div>
+
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/auth/auth_update')} method='post'>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">权限名称 / authname</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="auth-name" placeholder="权限名称 / AuthName" name='auth_name' 
+              value="{$authinfo.auth_name}">
+              
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">是否为菜单 / Is_menu</label>
+            <div class="am-u-sm-9">
+              <select  name="is_menu" >
+                <if condition="$authinfo.is_menu eq 0">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                    <else/>
+                    <option value="0" >否</option>
+                    <option value="1" selected="selected">是</option>
+                </if>
+                
+              </select>
+              
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">父级菜单 / auth_pid</label>
+            <div class="am-u-sm-9">
+              <select  name="auth_pid" >
+                <if condition="$authinfo.auth_pid eq 0">
+                    <option value="0" selected="selected">无父级菜单</option>
+                    <foreach name="info" item="vo" key="k" >  
+                        <option value="{$vo.auth_id}" >{$vo.auth_name}</option>
+                    </foreach>
+                    <else/>
+                      <option value="0">无父级菜单</option>
+                      <foreach name="info" item="vo" key="k" >  
+                        <if condition="$vo.auth_id eq $authinfo['auth_pid']">
+                          <option value="{$vo.auth_id}" selected="selected">{$vo.auth_name}</option>
+                          <else/>
+                            <option value="{$vo.auth_id}">{$vo.auth_name}</option>
+                        </if>
+                        
+                      </foreach>
+                </if>
+
+              </select>
+            </div>
+          </div>
+		  
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">模块 / model</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="auth-c" placeholder="输入模块 / Model" name='auth_c' 
+              value="{$authinfo.auth_c}" onblur="trimcheck(this);">
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">方法 / action</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="auth_a" placeholder="输入方法 / Action" name='auth_a' 
+              value="{$authinfo.auth_a}" onblur="trimcheck(this);" >
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">排序 / Order</label>
+            <div class="am-u-sm-9">
+              <select  name="auth_order" >
+                <if condition="$authinfo.auth_order eq 1">
+                  <option value="1"selected="true">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <elseif condition="$authinfo.auth_order eq 2" />
+                  <option value="1">1</option>
+                  <option value="2"selected="true">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <elseif condition="$authinfo.auth_order eq 3" />
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3"selected="true">3</option>
+                  <option value="4">4</option>
+                  <elseif condition="$authinfo.auth_order eq 4" />
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4"selected="true">4</option>
+                  <else/>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </if>
+              </select>
+            </div>
+          </div>
+          <input type="hidden" name="auth_id" value="{$authinfo.auth_id}"/>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" onclick="check()" class="am-btn am-btn-primary">保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<include file="Index:footer"/>
+<script data-cfasync="false" type="text/javascript">
+  function check(){
+    var authname = $("#auth-name").val();
+    if(trim(authname).length == 0 ){
+        alert("请填写权限名称！");
+        return false;   
+    }else{
+        $("#myForm").submit();
+    }
+   
+  }
+   /**
+   * 去除左右两端空格
+   */
+  function trimcheck(obj){
+    var trimvalue = trim(obj.value);
+    obj.value = trimvalue;
+    
+  }
+  //删除左右两端的空格
+  function trim(str){ 
+　　  return str.replace(/(^\s*)|(\s*$)/g, "");
+　　}
+
+</script>

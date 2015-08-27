@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+
+<script type='text/javascript'>
+var smsurl = "{:U('Home/Sms/smsinterface','','')}";
+function openRegistPersonal(){
+window.open("{:U('Home/Regist/regist_personal')}");
+}
+function openRegistCompanny(){
+window.location.href="{:U('Home/Regist/regist_company')}";        
+}
+function login(){
+        var username =$("#username").val();
+        var password =$("#password").val();
+  window.location.href="{:U('Home/login/login')}?username="+username+"&password="+password;
+}
+
+
+function findpwd(){
+    $('#findpwd_1').css('display','block');
+}
+
+
+
+//验证手机号码
+function VeriftyPhone(){
+        var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/; //手机号码验证规则
+        var phone = $("#pr_psw_tel").val();   //获得用户填写的号码值 赋值给变量phone
+        if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
+                if("" == phone){
+                   alert("手机号码不能为空,请正确填写手机号码!");
+                    $('#pr_psw_tel').val("");
+                    return false;
+                }else{
+                    alert("请正确填写手机号码，例如:13415764179");
+                    $('#pr_psw_tel').val("");
+                    return false; 
+                }       
+        }
+}
+//获取短信验证码
+$(function() {  
+$("#b01").click(function() {  
+    var o = this;
+    var phone = $("#pr_psw_tel").val(); 
+    if('' == phone){
+        alert("电话号码不能为空!");
+        return false;
+    }else{
+        $.post(smsurl,{'phone':phone,'type':'findpassword'} ,function(json){
+           // alert(json.status = 1);
+                    if(json.status = 1){
+                        alert('短信发送成功!');
+                        get_code_time(o);
+                    }else if(json.status = 0){
+                        alert('短信发送失败!');
+                        return false;
+                    }
+                  });
+}
+
+    }); 
+});
+  
+
+
+//获取验证码发送倒计时
+var wait = 60;  
+get_code_time = function (o) {  
+    if (wait == 0) {  
+        o.removeAttribute("disabled");  
+        o.value = "免费获取验证码"; 
+        document.getElementById("b01").style.background="#1163AF";  
+        wait = 60;  
+    } else {  
+        o.setAttribute("disabled", true);  
+        o.value = "(" + wait + ")秒后重新获取";
+        document.getElementById("b01").style.background="#666"; 
+        wait--;  
+        setTimeout(function() {  
+            get_code_time(o)  
+        }, 1000)  
+    }  
+}  
+
+
+function next_find_pwd(){
+var num = $('#num').val();
+var url = "{:U('Home/Login/find_password')}";
+var phone = $("#pr_psw_tel").val(); 
+    if('' == phone){
+        alert("电话号码不能为空!");
+        return false;
+    }else{
+$.post(url,{'num':num,'phone':phone} ,function(json){
+                    //alert(json.status == 0);
+                    if(json.status == 0){
+                        $('#findpwd_1').css('display','none');
+                        $('#findpwd_2').css('display','block');
+                        $('#phone').val(json.phone);
+                    }else if(json.status == 1){
+                        alert('验证码校验失败!');
+                        return false;
+                    }
+                  });
+}
+}
+
+
+
+//验证密码
+function VeriftyPWD(){
+    var password = $("#pr_psw").val();
+    var plength = password.length;
+    if(plength<6){
+       alert("您输入的密码太短,请重新输入!");
+        $('#pr_psw').val("");
+        return false;
+    }else if(plength>20){
+        alert("您输入的密码太长,请重新输入!");
+         $('#pr_psw').val("");
+        return false;
+    }
+}
+//验证密码重复
+function VeriftyPWD2(){
+    var password = $("#pr_psw_check").val();
+    var password1 = $("#pr_psw").val();
+    var plength = password.length;
+    if(plength<6){
+        alert("您输入的密码太短,请重新输入!");
+           $('#pr_psw_check').val("");
+        return false;
+    }else if(plength>20){
+        alert("您输入的密码太长,请重新输入!");
+          $('#pr_psw_check').val("");
+        return false;
+    }else if(password != password1){
+
+        //$("tishi3").val("两次输入的密码不一致!");
+        alert("两次输入的密码不一致!");
+        $('#pr_psw_check').val("");
+        return false;
+    }
+}
+
+
+
+function tijiao(){
+    var password = $("#pr_psw_check").val();
+    var phone =$("#phone").val();  
+    var url = "{:U('Home/Login/edit_password')}";
+    $.post(url,{'password':password,'phone':phone},function(json){
+       // alert(json.status);
+                if(json.status==1){
+                    alert('该手机未注册!');
+                }else if(json.status==2){
+                    alert('密码修改成功!');
+                    close1();
+                    $('#findpwd_2').css('display','none');
+                }else if(json.status==3){
+                    alert('密码修改失败!');
+                }
+
+    });
+
+}
+
+function close1(id){
+    //alert(id);
+$("#"+id).css('display','none');
+}
+
+</script>
+
+</head>
+
+<body>
+<!--logo1内容-->
+<div class="logo1">
+		<div class="basewidth">
+        		<a class="logo_pic" href={:U("home/index/index")}><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <h3>欢迎登录</h3>
+        </div>
+</div>
+<!--登录-->
+<div class="login">
+		<div class="basewidth">
+        		<form action={:U('Home/Login/login')} method="post">
+                <ul class="fm">
+                		<li class="tit">登录安居易</li>
+                        <li><input class="ipt1 bg1" id="username" name="username" type="text" autocomplete="off" placeholder="用户名"></li>
+                        <li><input class="ipt1 bg2" id="password" name="password" type="password" autocomplete="off" placeholder="密码"></li>
+                        <li class="forgot_pw">
+                        		<a class="right" href="javascript:void(0)" onclick='findpwd()'>忘记密码？</a>
+                                <input id="autologin" name="" type="checkbox" value=""> <label for="autologin">自动登录</label>
+                        </li>
+                        <li></li>
+                        <li><input class="btn1" name="" type="submit"  value="登 录"></li>
+                        <li><input class="btn2 right" name="" onclick='openRegistCompanny()' type="button" value="企业注册"><input class="btn2" name="" onclick='openRegistPersonal()' type="button" value="个人注册"></li>
+                        <li>
+                        		<a href={:U('Home/login/Third_login?type=qq')} title="用qq号登录"><img src="__PUBLIC__/home/img/ico_qq1.png"></a>
+                                <a href={:U('Home/login/Third_login?type=sina')} title="用新浪号登录"><img src="__PUBLIC__/home/img/ico_sina1.png"></a>
+                                <a href={:U('Home/login/Third_login?type=weixin')} title="用微信号登录"><img src="__PUBLIC__/home/img/ico_weixin1.png"></a>
+                        </li>
+                </ul>
+                </form>
+                <div class="pic"><img src="__PUBLIC__/home/img/pic1.png"></div>
+                <div class="clear"></div>
+                 <!--忘记密码弹出框-->
+                <div class="popup_bg"></div>
+                <form action="" method="get"  >
+                <div style=' display:block; position: absolute;top:40%;left:35%;'>
+                <ul class="fm popup popup_step1" id='findpwd_1' style='display: none'>
+                        <li class="tit"><a class="right ico_del" href="javascript:void(0);" onclick='close1("findpwd_1")'><img src="__PUBLIC__/home/img/ico_del.png"></a>找回密码</li>
+                        <li><input class="ipt1 bg3" name="" onblur='VeriftyPhone();' id='pr_psw_tel' type="tel" autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')" placeholder="请输入手机号"></li>
+                        <li class="clearfix">
+                                <input class="ipt2" name="" id='num' type="text" autocomplete="off" placeholder="手机验证码">
+                                <input class="btn2 right" name="" id='b01' type="button" value="获取短信验证码" style="font-size:14px;">
+                        </li>
+                        
+                        <li></li>
+                        <li><input class="btn1 btn_nextstep" name="" type="button" onclick='next_find_pwd()' value="下一步"></li>
+                        <li></li>
+                        <li></li>
+                </ul>
+                </div>
+                <div style=' display:block; position: absolute;top:40%;left:35%;'>
+                <ul class="fm popup popup_step2" id='findpwd_2' style='display: none'>
+                        <li class="tit"><a class="right ico_del" href="javascript:;" onclick='close1("findpwd_2")'><img src="__PUBLIC__/home/img/ico_del.png"></a>设置新密码</li>
+                        <li><input class="ipt1 bg2" onblur='VeriftyPWD()' name="" id="pr_psw" type="password" autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')" placeholder="新登录密码"></li>
+                        <li><input class="ipt1 bg2" name="" id="pr_psw_check" type="password" autocomplete="off" onkeyup="this.value=this.value.replace(/[, ]/g,'')" onblur='VeriftyPWD2()' placeholder="确认登录密码"></li>
+                        <input type='hidden' id='phone'/>
+                        <li></li>
+        <li><input class="btn1" name="" type="button" onclick='tijiao()' value="提交"></li>
+                        <li></li>
+                        <li></li>
+                </ul>
+                </div>
+                </form>
+        </div>
+</div>
+<div style="padding-bottom:30px;"></div>
+<div class="bot_nav2 basewidth">
+        <a href="##">关于安居易</a> |
+        <a href="##">免责声明</a> |
+        <a href="##">隐私声明</a> |
+        <a href="##">版权声明</a> |
+        <a href="##">联系我们</a> |
+        <a href="##">帮助我们</a> |
+        <a href="##">网站联盟</a>
+</div>
+<!--版权-->
+<p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;沪ICP背1402883号-1&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101050201483&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+<div class="certificate basewidth">
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+</div>
+
+
+
+
+</body>
+</html>

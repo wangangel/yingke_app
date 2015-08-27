@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页-安居易</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/index.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.superslide.2.1.1.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+<script src="__PUBLIC__/home/js/index_ver.js"></script>
+
+</head>
+<script type="text/javascript">
+    window.onload=function(){
+            getServer('1','sel','9','hot_serve_tit','hot_serve_con','0');
+            getServer('1','sel','6','hot_product_tit','hot_product_con','1');
+       
+    }
+    
+</script>
+<body onload="getload()">
+<!--顶部登录/注册-->
+<include file="Index:header"/>
+<!--首页幻灯-->
+<div class="banner">
+        <ul class="banner_pic">
+            <volist name="banner_info" id="vo">
+            <li><a href="{$vo.bannerlink}" target="_blank"><img src="__ROOT__/{$vo.picurl}" /></a></li>
+        </volist>
+        </ul>
+        <!--<a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>-->
+        <div class="num">
+            <ul></ul>
+        </div>
+</div>
+<div style="padding-bottom:10px;"></div>
+<!--idx_section1-->
+<div class="idx_section1 basewidth clearfix">
+		<ul class="tit">
+        		<li class="bg1"><a id="idx_sect1_tit1" href="javascript:;" onClick="tabsub(1,'sel',3,'idx_sect1_tit','idx_sect1_con')">安居活动</a></li>
+                <li class="bg2"><a id="idx_sect1_tit2" class="sel" href="javascript:;" onClick="tabsub(2,'sel',3,'idx_sect1_tit','idx_sect1_con')">商家资讯</a></li>
+                <li class="bg3"><a id="idx_sect1_tit3" href="javascript:;" onClick="tabsub(3,'sel',3,'idx_sect1_tit','idx_sect1_con')">优惠券</a></li>
+        </ul>
+        <ul id="idx_sect1_con1" class="ul2" style="display:none;">
+            <foreach name="content_info" item="vo" key="k" >
+        		<li><a href={:U('home/activity/act_detail',array('id'=>$vo['id']))} target="_blank">{$vo.title}</a></li>
+            </foreach>   
+        </ul>
+        <ul id="idx_sect1_con2" class="ul2">
+            <foreach name="shop_info" item="vo" key="k" >
+        		<li><a href={:U('home/activity/act_detail',array('id'=>$vo['id']))} target="_blank">{$vo.title}</a></li>
+            </foreach>    
+        </ul>
+        <ul id="idx_sect1_con3" class="ul2" style="display:none;">
+            <foreach name="coupon_info" item="vo" key="k" >
+        		<li><a href={:U('home/coupon/coupon_detail',array('id'=>$vo['id']))} target="_blank">{$vo.detail}</a></li>
+            </foreach> 
+               
+        </ul>        
+</div>
+<div style="padding-bottom:30px;"></div>
+<!--热门服务-->
+<div class="idx_title1"><span>热门服务</span></div>
+<div class="idx_tab_tit basewidth">
+        <foreach name="servercategory_info" item="vo" key="k" >
+            <if condition="($k eq 0)">
+                <a id="hot_serve_tit{$k+1}" class="sel" href="javascript:;" onClick="getServer({$k+1},'sel',{$servercategory_info|count},'hot_serve_tit','hot_serve_con','0')">{$vo.servername}</a>
+                <input type="hidden" id="categoryId{$k+1}" value="{$vo.id}">
+            <else/>
+                <a id="hot_serve_tit{$k+1}"  href="javascript:;" onClick="getServer({$k+1},'sel',{$servercategory_info|count},'hot_serve_tit','hot_serve_con','0')">{$vo.servername}</a>
+                <input type="hidden" id="categoryId{$k+1}" value="{$vo.id}">
+             </if>
+        </foreach>
+</div>
+<foreach name="servercategory_info" item="vo" key="k" >
+    <if condition="($k eq 0)">
+        <div id="hot_serve_con{$k+1}" class="idx_hot_con basewidth" >
+                <!-- <ul class="hot_list">
+                        <li class="pic"><a href="##" target="_blank"><img src="img/hot_service0.jpg"></a></li>
+                        <li class="tit1"><a href="##" target="_blank"> 大型吊灯安装服务大型吊灯安装服务</a></li>
+                        <li class="price">
+                        <span class="span_pictext right"><img src="img/ico_discuss.png"> <a href="##" target="_blank" title="销量">1100</a></span>
+                        <span class="color">&yen;369</span>
+                        </li>
+                </ul>  -->
+        </div>
+    <else/>
+        <div id="hot_serve_con{$k+1}" class="idx_hot_con basewidth" style="display:none;">
+            
+        </div>
+    </if>
+</foreach>
+`
+<!--热门商品-->
+<div class="idx_title1"><span>热门商品</span></div>
+<div class="idx_tab_tit basewidth">
+    <foreach name="category_info" item="vo" key="k" > 
+        <if condition="($k eq 0)">
+        <a id="hot_product_tit{$k+1}" class="sel" href="javascript:;" onClick="getServer({$k+1},'sel',{$category_info|count},'hot_product_tit','hot_product_con','1')">{$vo.servername}</a>
+        <input type="hidden" id="procategory_Id{$k+1}" value="{$vo.id}">
+        <else/>
+         <a id="hot_product_tit{$k+1}"  href="javascript:;" onClick="getServer({$k+1},'sel',{$category_info|count},'hot_product_tit','hot_product_con','1')">{$vo.servername}</a>
+         <input type="hidden" id="procategory_Id{$k+1}" value="{$vo.id}">
+         </if>
+    </foreach>
+</div>
+<foreach name="category_info" item="vo" key="k" >
+    <if condition="($k eq 0)">
+        <div id="hot_product_con{$k+1}" class="idx_hot_con basewidth">
+            
+                <!-- <ul class="hot_list">
+                        <li class="pic"><a href={:U('home/serverdetail/serverdetail',array('id'=>$vo['id']))} target="_blank"> <img src="/anjuyi/Upload/{$vo.faceurl}"></a></li>
+                        <li class="tit1"><a href={:U('home/serverdetail/serverdetail',array('id'=>$vo['id']))} target="_blank">{$vo.goodsname}</a></li>
+                        <li class="price">
+                                <span class="span_pictext right"> <img src="__PUBLIC__/home/img/ico_discuss.png"> <a href="##" target="_blank" title="销量">{$vo.sale_count}</a></span>
+                                <span class="color">&yen;{$vo.goodsprice1}</span>
+                        </li>
+                </ul> -->
+            
+        </div>
+       <else/>
+            <div id="hot_product_con{$k+1}" class="idx_hot_con basewidth" style="display:none;">
+                    
+            </div>
+       </if>
+</foreach>
+<include file="Index:footer" />
+
+
+</body>
+</html>
+<script>
+$(".banner").slide({ titCell:".num ul" , mainCell:".banner_pic" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+</script>
+<script defer>
+   /* window.onload=function(){
+            getServer('1','sel','9','hot_serve_tit','hot_serve_con','0');
+            getServer('1','sel','6','hot_product_tit','hot_product_con','1');
+       
+    }*/
+</script>
+<script type="text/javascript">
+    //自动加载
+    function getload(){
+            getServer('1','sel','9','hot_serve_tit','hot_serve_con','0');
+            getServer('1','sel','6','hot_product_tit','hot_product_con','1');
+       
+    }
+
+    //获取商品
+    function getServer(num,classname,sum,tid,cid,attr){ 
+        var categoryid;
+        var attribute;
+        var divid = cid + num;
+        if(attr == "0"){
+            //服务
+            categoryid = $("#categoryId"+ num).val();
+            attribute = "#fuwu";
+        }else{
+            //商品
+            categoryid = $("#procategory_Id"+ num).val();
+            attribute = "#goods";
+        }
+        var flag = "#goto";
+        $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('home/index/getServer')}",
+                dataType:"json",
+                data:{categoryid:categoryid},
+                timeout:30000,
+                success:function(data){
+                    $("#"+divid).empty();
+                    var count = data.length;
+                    var i = 0;
+                    var b = "";
+                    if(attr == "0"){
+                        for(i=0;i<count;i++){
+                        b+="<ul class='hot_list'>"+
+                        "<li class='pic'>"+
+                        "<a href='{:U("home/serverdetail/serverdetail")}?id="+data[i].id+"&attr="+attr+""+attribute+""+flag+"' target='_blank'><img src='__ROOT__/Upload/"+data[i].faceurl+"'></a></li>"+
+                        "<li class='tit1'><a href='{:U("home/serverdetail/serverdetail")}?id="+data[i].id+"&attr="+attr+""+attribute+""+flag+"' target='_blank'>"+data[i].goodsname+"</a></li>"+
+                        "<li class='price'>"+
+                        "<span class='right'>"+
+                        "销量："+data[i].sale_count+"</a></span>"+
+                        "<span class='color'>&yen;"+data[i].goodsprice2+"</span></li>"+
+                        "</ul>";
+                      }
+                  }else{
+                        for(i=0;i<count;i++){
+                        b+="<ul class='hot_list'>"+
+                        "<li class='pic'>"+
+                        "<a href='{:U("home/serverdetail/serverdetail")}?id="+data[i].id+"&attr="+attr+""+attribute+""+flag+"' target='_blank'><img src='__ROOT__/Upload/"+data[i].faceurl+"'></a></li>"+
+                        "<li class='tit1'><a href='{:U("home/serverdetail/serverdetail")}?id="+data[i].id+"&attr="+attr+""+attribute+""+flag+"' target='_blank'>"+data[i].goodsname+"</a></li>"+
+                        "<li class='price'>"+
+                        "<span class='right'>"+
+                        "销量："+data[i].sale_count+"</a></span>"+
+                        "<span class='color'>&yen;"+data[i].goodsprice1+"</span></li>"+
+                        "</ul>";
+                      }
+                  }
+                   
+                     
+                     $("#"+divid).append(b);
+                  }
+                }); 
+            for(i=1;i<=sum;i++)
+            {      
+                if(i == num){
+                    document.getElementById(tid+i).className = classname ; 
+                    document.getElementById(cid+i).style.display = "block";        
+                }else{          
+                    document.getElementById(tid+i).className = ""; 
+                    document.getElementById(cid+i).style.display = "none";           
+                }       
+            }
+ 
+}
+</script>

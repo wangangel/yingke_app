@@ -1,0 +1,2677 @@
+[ 2015-08-26T11:28:04+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000798s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000913s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001041s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0075s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000060s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000161s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035693s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035811s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000851s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000926s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000995s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001076s ]
+
+[ 2015-08-26T11:28:04+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000511s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000854s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000936s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0063s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0005s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0017s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000119s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000277s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016469s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016620s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000877s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001016s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001276s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001389s ]
+
+[ 2015-08-26T11:28:04+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000916s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000983s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001088s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 AND `role_status` = 1  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0065s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000142s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000306s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022649s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022805s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001146s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001295s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002719s ]
+
+[ 2015-08-26T11:28:04+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002209s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001423s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001584s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0095s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0252s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000239s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012205s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012371s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000900s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001315s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001440s ]
+
+[ 2015-08-26T11:28:16+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000970s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001410s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001539s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+ERR: 模板不存在:./Application/Admin/View/Public/jump.html
+
+[ 2015-08-26T11:28:53+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000730s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001101s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001235s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000165s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009878s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009975s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000687s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000751s ]
+
+[ 2015-08-26T11:28:57+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000657s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000989s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001066s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000133s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000314s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.106915s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.107081s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001549s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001736s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002175s ]
+
+[ 2015-08-26T11:28:57+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000765s ]
+
+[ 2015-08-26T11:29:01+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000582s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000920s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001027s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0066s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `username` = 'admin' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' AND `attribute` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: UPDATE `base_user` SET `logintime`='1440559741' WHERE `id` = '1' [ RunTime:0.0241s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000159s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009998s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010120s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000680s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000745s ]
+NOTIC: [8] Undefined variable: debug_mode D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 66 行.
+NOTIC: [8] Undefined index: HTTP_X_FORWARDED_FOR D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `base_syslog` [ RunTime:0.0057s ]
+SQL: INSERT INTO `base_syslog` (`logtype`,`viewurl`,`username`,`ip`,`addtime`) VALUES ('0','/login','admin','127.0.0.1','1440559741') [ RunTime:0.0006s ]
+
+[ 2015-08-26T11:29:02+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000566s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001392s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001580s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000058s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000179s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009058s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009281s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000953s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001071s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001176s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001278s ]
+
+[ 2015-08-26T11:29:02+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000538s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000984s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001095s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0072s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000135s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000293s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014193s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014342s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001162s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001298s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001345s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001467s ]
+
+[ 2015-08-26T11:29:02+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000723s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001397s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001558s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0068s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 AND `role_status` = 1  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000115s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000235s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018759s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018933s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000912s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001007s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001297s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001441s ]
+
+[ 2015-08-26T11:29:02+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001536s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001438s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001616s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000247s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011127s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011276s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000918s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001031s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001478s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001619s ]
+
+[ 2015-08-26T11:29:14+08:00 ] 127.0.0.1 /base/index.php/admin/System/update
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000794s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003876s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004065s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_sysconfig` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `base_sysconfig` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'saveorupdate'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000099s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000205s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014103s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014190s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000576s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000642s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000901s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000968s ]
+
+[ 2015-08-26T11:29:15+08:00 ] 127.0.0.1 /base/index.php/admin/Data/data_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000848s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001432s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001680s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0065s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_datadictionary` [ RunTime:0.0068s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_datadictionary` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_datadictionary` LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Data' AND `auth_a` = 'add_show'  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Data' AND `auth_a` = 'editor_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Data' AND `auth_a` = 'data_del'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000087s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000188s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015342s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015515s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000833s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000963s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001028s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001128s ]
+
+[ 2015-08-26T11:29:18+08:00 ] 127.0.0.1 /base/index.php/admin/Dictionary/dictionary_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000990s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000956s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001087s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_dictype` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_dictype` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_dictype` LIMIT 0,8   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Dictionary' AND `auth_a` = 'add_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Dictionary' AND `auth_a` = 'edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Dictionary' AND `auth_a` = 'dictionary_del'  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000206s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031509s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031727s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000689s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000852s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000859s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000951s ]
+
+[ 2015-08-26T11:29:19+08:00 ] 127.0.0.1 /base/index.php/admin/Backup/backup_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000472s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000628s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000724s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: show tables [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Backup' AND `auth_a` = 'backup_table'  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Backup' AND `auth_a` = 'backup_all'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000191s ]
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 34 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 36 行.
+NOTIC: [8] Undefined index: tables_in_anjuyi D:\amp\apache\htdocs\base\Runtime\Cache\Admin\b63ba74029007f2a72f5261e1c7f4ba0.php 第 40 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012592s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012687s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000429s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000498s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000915s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001031s ]
+
+[ 2015-08-26T11:29:20+08:00 ] 127.0.0.1 /base/index.php/admin/Advice/advice_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000586s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000695s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000793s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_advice` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_advice` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_advice` LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Advice' AND `auth_a` = 'advice_del'  [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000182s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013691s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013815s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000420s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000485s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000726s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000793s ]
+
+[ 2015-08-26T11:29:22+08:00 ] 127.0.0.1 /base/index.php/admin/Member/admin_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000049s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000714s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001077s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001232s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0064s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 0,8   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_add_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_role_show'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000194s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012224s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012332s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000444s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000537s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000834s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000937s ]
+
+[ 2015-08-26T11:29:23+08:00 ] 127.0.0.1 /base/index.php/admin/Member/businessman_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000694s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000644s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000742s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_user` WHERE `attribute` = 1 AND `isdelete` = 0 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_user` WHERE `attribute` = 1 AND `isdelete` = 0 LIMIT 0,10   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'businessman_del'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'businessman_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'businessman_verify_show'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000191s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012517s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012634s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000405s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000483s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002541s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002644s ]
+
+[ 2015-08-26T11:29:25+08:00 ] 127.0.0.1 /base/index.php/admin/Member/member_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001327s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001549s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001673s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_user` WHERE `attribute` = 2 AND `isdelete` = 0 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_user` WHERE `attribute` = 2 AND `isdelete` = 0 LIMIT 0,10   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0089s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'member_del'  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'member_edit_show'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000176s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012823s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012917s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000389s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000462s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000816s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000891s ]
+
+[ 2015-08-26T11:29:27+08:00 ] 127.0.0.1 /base/index.php/admin/Member/admin_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000631s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000866s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001011s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_role_show'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000292s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015353s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015459s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000378s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000454s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001038s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001144s ]
+
+[ 2015-08-26T11:29:31+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000639s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000729s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000129s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000224s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014798s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014910s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000414s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000491s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000927s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001006s ]
+
+[ 2015-08-26T11:29:32+08:00 ] 127.0.0.1 /base/index.php/admin/Auth/auth_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000491s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000634s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000726s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0048s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000192s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015687s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015788s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000646s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000719s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000785s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000879s ]
+
+[ 2015-08-26T11:29:42+08:00 ] 127.0.0.1 /base/index.php/admin/auth/auth_search.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000715s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000840s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001075s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: auth_count D:\amp\apache\htdocs\base\Application\Admin\Controller\AuthController.class.php 第 154 行.
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_name` LIKE '%用户管理%' ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000132s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000237s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.041370s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.041476s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000341s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000627s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000696s ]
+
+[ 2015-08-26T11:29:45+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000499s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001095s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001320s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000132s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000263s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013549s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013691s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000433s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000668s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000736s ]
+
+[ 2015-08-26T11:29:47+08:00 ] 127.0.0.1 /base/index.php/admin/Member/admin_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000693s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000996s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001124s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `attribute` = 0 AND `isdelete` = 0 LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_add_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Member' AND `auth_a` = 'admin_role_show'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000093s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000232s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012116s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012210s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000428s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000494s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000726s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000794s ]
+
+[ 2015-08-26T11:33:04+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000609s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000946s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001050s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000059s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000139s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009009s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009114s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000506s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000575s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000803s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000878s ]
+
+[ 2015-08-26T11:33:05+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000511s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000949s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001077s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000171s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009313s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009403s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000339s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000704s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000836s ]
+
+[ 2015-08-26T11:33:05+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000502s ]
+
+[ 2015-08-26T11:41:27+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000963s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000827s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000929s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0047s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000163s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009310s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009425s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000587s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000667s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001522s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001624s ]
+
+[ 2015-08-26T11:41:27+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000781s ]
+
+[ 2015-08-26T11:41:36+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000589s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000756s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000834s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0058s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `username` = 'kufan' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' AND `attribute` = 0 LIMIT 1   [ RunTime:0.0005s ]
+SQL: UPDATE `base_user` SET `logintime`='1440560496' WHERE `id` = '86' [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000170s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010019s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010199s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000582s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000676s ]
+NOTIC: [8] Undefined variable: debug_mode D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 66 行.
+NOTIC: [8] Undefined index: HTTP_X_FORWARDED_FOR D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `base_syslog` [ RunTime:0.0054s ]
+SQL: INSERT INTO `base_syslog` (`logtype`,`viewurl`,`username`,`ip`,`addtime`) VALUES ('0','/login','kufan','127.0.0.1','1440560496') [ RunTime:0.0003s ]
+
+[ 2015-08-26T11:41:37+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000690s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000910s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000994s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000157s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007819s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007937s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000526s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000852s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000924s ]
+
+[ 2015-08-26T11:41:37+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000070s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001084s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000910s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001059s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000111s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000262s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009791s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009944s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000528s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000718s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001102s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001252s ]
+
+[ 2015-08-26T11:41:37+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000038s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000680s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001035s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001190s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0077s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0071s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000171s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007155s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007282s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000466s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000887s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000997s ]
+
+[ 2015-08-26T11:41:37+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000769s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001575s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001765s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0074s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 AND `role_status` = 1  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 and auth_id in (64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,106) ) ORDER BY auth_order asc  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 and auth_id in (64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,106) ) ORDER BY auth_order asc  [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000126s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000249s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019776s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019915s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001389s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001513s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001787s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002186s ]
+
+[ 2015-08-26T11:41:42+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000653s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000754s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000859s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000165s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008358s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008487s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000440s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000511s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000765s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000840s ]
+
+[ 2015-08-26T11:41:43+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000690s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000919s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001049s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0052s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000162s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009308s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009415s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000486s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000558s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000644s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000731s ]
+
+[ 2015-08-26T11:41:43+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000576s ]
+
+[ 2015-08-26T11:41:56+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000550s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000747s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0056s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `username` = 'admin' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' AND `attribute` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: UPDATE `base_user` SET `logintime`='1440560516' WHERE `id` = '1' [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000238s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008351s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008466s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000424s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000502s ]
+NOTIC: [8] Undefined variable: debug_mode D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 66 行.
+NOTIC: [8] Undefined index: HTTP_X_FORWARDED_FOR D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `base_syslog` [ RunTime:0.0046s ]
+SQL: INSERT INTO `base_syslog` (`logtype`,`viewurl`,`username`,`ip`,`addtime`) VALUES ('0','/login','admin','127.0.0.1','1440560516') [ RunTime:0.0004s ]
+
+[ 2015-08-26T11:41:57+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000716s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000969s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001116s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000142s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007766s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007875s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000337s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000672s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000805s ]
+
+[ 2015-08-26T11:41:57+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000068s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002187s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002300s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 AND `role_status` = 1  [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000222s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015258s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015356s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000618s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000820s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001214s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001354s ]
+
+[ 2015-08-26T11:41:57+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000660s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002252s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002376s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0064s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000102s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000260s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011920s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012036s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000431s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000500s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000625s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000702s ]
+
+[ 2015-08-26T11:41:57+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000616s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000850s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000991s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0063s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000174s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008514s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008634s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000368s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000440s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000819s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000927s ]
+
+[ 2015-08-26T11:42:00+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001454s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001581s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001752s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000133s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000230s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014815s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014952s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000744s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000813s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001016s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001085s ]
+
+[ 2015-08-26T11:42:01+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute/id/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000689s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000917s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001013s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 )  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 )  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000206s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035683s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035787s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000620s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000690s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001021s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001115s ]
+
+[ 2015-08-26T11:42:18+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute_role.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000768s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001106s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001192s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0067s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_id` IN ('1','2','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','3','5','7','8','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63')  [ RunTime:0.0008s ]
+ERR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'base.ajy_role' doesn't exist
+
+[ 2015-08-26T11:42:56+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000863s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000952s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0011s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000106s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000208s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013930s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014039s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000772s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000909s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000895s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000974s ]
+
+[ 2015-08-26T11:42:57+08:00 ] 127.0.0.1 /base/index.php/admin/role/role_add_show.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000524s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000919s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001012s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000086s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000199s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.060429s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060518s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000768s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000839s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001050s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001121s ]
+
+[ 2015-08-26T11:42:59+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000695s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001347s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001434s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000190s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014226s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014323s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000690s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000758s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001028s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001099s ]
+
+[ 2015-08-26T11:44:49+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000681s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001240s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001394s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000221s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013440s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013536s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000609s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000676s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000827s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000897s ]
+
+[ 2015-08-26T11:44:51+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute/id/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000625s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000946s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001100s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 )  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 )  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000099s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000200s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015716s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015809s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000680s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000748s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003604s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003718s ]
+
+[ 2015-08-26T11:44:55+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute_role.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001008s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000882s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000981s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_id` IN ('1','2','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39')  [ RunTime:0.0005s ]
+SQL: update base_role set role_auth_ids='1,2,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39',role_auth_ac='Member-admin_list,Member-admin_add_show,Member-admin_add,Member-admin_edit_show,Member-admin_edit,Member-admin_del,Member-admin_role_show,Member-admin_role,Member-businessman_list,Member-businessman_del,Member-businessman_edit_show,Member-businessman_edit,Member-businessman_verify_show,Member-business_verify,Member-member_list,Member-member_del,Member-member_edit_show,Member-member_edit' where role_id='2' [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000200s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009289s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009376s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000566s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000632s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000810s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000880s ]
+
+[ 2015-08-26T11:44:56+08:00 ] 127.0.0.1 /base/index.php/admin/role/role_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000763s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001472s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000192s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016075s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016182s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000714s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000787s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000868s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000937s ]
+
+[ 2015-08-26T11:44:57+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000759s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001178s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001295s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000188s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014530s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014629s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000777s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000897s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001101s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001224s ]
+
+[ 2015-08-26T11:45:00+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000683s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000949s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001035s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000166s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008646s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008751s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000715s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000784s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000924s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000999s ]
+
+[ 2015-08-26T11:45:01+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000783s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001216s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001330s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000184s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009137s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009235s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000597s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000665s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000863s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000939s ]
+
+[ 2015-08-26T11:45:01+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000759s ]
+
+[ 2015-08-26T11:45:06+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000529s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000948s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001051s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0055s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_user` WHERE `username` = 'kufan' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' AND `attribute` = 0 LIMIT 1   [ RunTime:0.0009s ]
+SQL: UPDATE `base_user` SET `logintime`='1440560706' WHERE `id` = '86' [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000181s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009885s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010020s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000662s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000745s ]
+NOTIC: [8] Undefined variable: debug_mode D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 66 行.
+NOTIC: [8] Undefined index: HTTP_X_FORWARDED_FOR D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `base_syslog` [ RunTime:0.0042s ]
+SQL: INSERT INTO `base_syslog` (`logtype`,`viewurl`,`username`,`ip`,`addtime`) VALUES ('0','/login','kufan','127.0.0.1','1440560706') [ RunTime:0.0003s ]
+
+[ 2015-08-26T11:45:08+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000524s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001026s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001128s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000181s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010056s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010174s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000850s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000963s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001351s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001490s ]
+
+[ 2015-08-26T11:45:08+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000626s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001090s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001226s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000140s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000311s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012030s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012168s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001011s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001115s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001366s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001511s ]
+
+[ 2015-08-26T11:45:08+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001045s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001368s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001526s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0091s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000071s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000199s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009686s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009837s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000874s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000977s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001272s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001384s ]
+
+[ 2015-08-26T11:45:08+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000729s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001513s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001746s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 AND `role_status` = 1  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 and auth_id in (1,2,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39) ) ORDER BY auth_order asc  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 and auth_id in (1,2,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39) ) ORDER BY auth_order asc  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000104s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000223s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016671s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016786s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000650s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000721s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000901s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000978s ]
+
+[ 2015-08-26T11:45:14+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000704s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001206s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001370s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '86' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 2 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000153s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009369s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009485s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000602s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000672s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000969s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001037s ]
+
+[ 2015-08-26T11:45:15+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000667s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001197s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001341s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0067s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0135s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000158s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009744s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009833s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000718s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000783s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001090s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001211s ]
+
+[ 2015-08-26T11:45:15+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000792s ]
+
+[ 2015-08-26T14:14:28+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000599s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000908s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001006s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0080s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0091s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_user` WHERE `username` = 'admin' AND `password` = 'e10adc3949ba59abbe56e057f20f883e' AND `attribute` = 0 LIMIT 1   [ RunTime:0.0006s ]
+SQL: UPDATE `base_user` SET `logintime`='1440569667' WHERE `id` = '1' [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000194s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009760s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009851s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000687s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000767s ]
+NOTIC: [8] Undefined variable: debug_mode D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 66 行.
+NOTIC: [8] Undefined index: HTTP_X_FORWARDED_FOR D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `base_syslog` [ RunTime:0.0061s ]
+SQL: INSERT INTO `base_syslog` (`logtype`,`viewurl`,`username`,`ip`,`addtime`) VALUES ('0','/login','admin','127.0.0.1','1440569668') [ RunTime:0.0004s ]
+
+[ 2015-08-26T14:14:29+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000567s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000998s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001108s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000061s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000183s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009903s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010039s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000892s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000998s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001401s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001510s ]
+
+[ 2015-08-26T14:14:29+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000543s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000882s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000985s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0063s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000172s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010258s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010370s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000692s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000779s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001048s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001143s ]
+
+[ 2015-08-26T14:14:29+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000803s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002105s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002302s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0065s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0001s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000119s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000283s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010126s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010257s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001133s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001247s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001146s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001260s ]
+
+[ 2015-08-26T14:14:29+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000773s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001375s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001541s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0071s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 AND `role_status` = 1  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000235s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000408s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016078s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016255s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001054s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001181s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001303s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001425s ]
+
+[ 2015-08-26T14:48:20+08:00 ] 127.0.0.1 /base/index.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000787s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001292s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001407s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000161s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008018s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008114s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000743s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000811s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001018s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001090s ]
+
+[ 2015-08-26T14:48:20+08:00 ] 127.0.0.1 /base/index.php/admin/index/top.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000770s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000956s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001077s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Servers' AND `auth_a` = 'servers_list'  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Order' AND `auth_a` = 'order_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Content' AND `auth_a` = 'content_list'  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 0 D:\amp\apache\htdocs\base\Application\Admin\Controller\IndexController.class.php 第 78 行.
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'update'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000070s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000167s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009554s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009679s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000667s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000777s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000853s ]
+
+[ 2015-08-26T14:48:21+08:00 ] 127.0.0.1 /base/index.php/admin/index/left.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000776s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001515s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0068s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 AND `role_status` = 1  [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 and is_menu = 1 ) ORDER BY auth_order asc  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000142s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000293s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021146s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021256s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000752s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000826s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000910s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000993s ]
+
+[ 2015-08-26T14:48:21+08:00 ] 127.0.0.1 /base/index.php/admin/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000724s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001565s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001724s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0067s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000091s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000236s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010654s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010791s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000815s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000915s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001289s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001383s ]
+
+[ 2015-08-26T14:48:23+08:00 ] 127.0.0.1 /base/index.php/admin/Auth/auth_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000934s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001109s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001233s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0060s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000271s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018504s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018676s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000777s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000846s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000817s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000908s ]
+
+[ 2015-08-26T14:48:32+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000718s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001065s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001251s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0041s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 15,15   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000250s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016621s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016758s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000563s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000666s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000797s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000880s ]
+
+[ 2015-08-26T14:48:36+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000595s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001056s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001185s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0039s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 30,15   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000097s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000227s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016194s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016318s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000590s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000667s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000799s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000890s ]
+
+[ 2015-08-26T14:48:50+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000527s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001065s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001178s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0040s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 45,15   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000093s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000234s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017116s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017228s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000581s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000655s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000825s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000917s ]
+
+[ 2015-08-26T14:49:12+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/5.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000581s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000768s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000853s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0065s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 60,15   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000135s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000294s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016922s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017035s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000690s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000999s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001093s ]
+
+[ 2015-08-26T14:49:28+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/4.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000971s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001172s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001317s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0042s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 45,15   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000247s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017326s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017475s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000644s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000712s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001045s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001149s ]
+
+[ 2015-08-26T14:49:38+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000670s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000813s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000913s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0039s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 30,15   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000093s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000202s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016332s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016432s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000583s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000650s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000758s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000840s ]
+
+[ 2015-08-26T14:49:45+08:00 ] 127.0.0.1 /base/index.php/Admin/Auth/auth_list/p/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000617s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001202s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001279s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 15,15   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000202s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017085s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017200s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000780s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000848s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000880s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000962s ]
+
+[ 2015-08-26T14:50:02+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001066s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001221s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001352s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000183s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014413s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014529s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000652s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000729s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000939s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001012s ]
+
+[ 2015-08-26T14:50:03+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute/id/1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000511s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000993s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001098s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=0 )  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `base_auth` WHERE ( auth_level=1 )  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000095s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000226s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015638s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015740s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000629s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000706s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000870s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000949s ]
+
+[ 2015-08-26T14:50:12+08:00 ] 127.0.0.1 /base/index.php/admin/role/distribute_role.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000680s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000881s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000987s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_id` IN ('1','2','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','3','5','7','8','40','41','42','43','44','45','46','47','48','49','51','52','53','54','55','56','57','58','59','60','61','62','63','6','4','9','10','11','12','13','14','15','16','17','18','19','20','21','22')  [ RunTime:0.0018s ]
+SQL: update base_role set role_auth_ids='1,2,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,3,5,7,8,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,6,4,9,10,11,12,13,14,15,16,17,18,19,20,21,22',role_auth_ac='Member-admin_list,Auth-auth_search,System-update,Data-data_list,Data-add_show,Role-role_list,Role-role_add_show,Role-role_add,Role-role_edit_show,Role-role_update,Role-role_del,Role-distribute,Role-distribute_role,Auth-auth_list,Auth-auth_add_show,Auth-auth_add,Auth-auth_edit_show,Auth-auth_update,Auth-auth_del,Member-admin_add_show,Member-admin_add,Member-admin_edit_show,Member-admin_edit,Member-admin_del,Member-admin_role_show,Member-admin_role,Member-businessman_list,Member-businessman_del,Member-businessman_edit_show,Member-businessman_edit,Member-businessman_verify_show,Member-business_verify,Member-member_list,Member-member_del,Member-member_edit_show,Member-member_edit,System-saveorupdate,Data-data_add,Data-editor_show,Data-data_update,Data-data_del,Dictionary-dictionary_list,Dictionary-add_show,Dictionary-dictionary_add,Dictionary-edit_show,Dictionary-dictionary_update,Advice-advice_list,Advice-advice_del,Backup-backup_list,Backup-backup_all,Backup-backup_table,Log-log_list,Log-log_del,Log-log_select_del,Message-message_list,Message-add_show,Message-message_add,Message-look_show,Message-message_del' where role_id='1' [ RunTime:0.0011s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000256s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011993s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012142s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000671s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000745s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000980s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001118s ]
+
+[ 2015-08-26T14:50:13+08:00 ] 127.0.0.1 /base/index.php/admin/role/role_list.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000821s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000957s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001048s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000223s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013569s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013670s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001631s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001724s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000843s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000917s ]
+
+[ 2015-08-26T14:50:15+08:00 ] 127.0.0.1 /base/index.php/admin/Auth/auth_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000741s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001475s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001634s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000097s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000218s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016359s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016480s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000840s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000933s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001356s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001491s ]
+
+[ 2015-08-26T14:50:25+08:00 ] 127.0.0.1 /base/index.php/admin/auth/auth_search.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001954s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001065s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001175s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0593s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: auth_count D:\amp\apache\htdocs\base\Application\Admin\Controller\AuthController.class.php 第 154 行.
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_name` LIKE '%权限%' ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000087s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000178s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012568s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012669s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000759s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000827s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000837s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000917s ]
+
+[ 2015-08-26T14:50:35+08:00 ] 127.0.0.1 /base/index.php/admin/Role/role_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000602s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000849s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000945s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0066s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_role` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_role` LIMIT 0,8   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0069s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_add_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'role_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Role' AND `auth_a` = 'distribute'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000213s ]
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+NOTIC: [8] Undefined index: auth_level D:\amp\apache\htdocs\base\Runtime\Cache\Admin\7cd8edac8a181811ed9bd62253325189.php 第 49 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013867s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013996s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000651s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000718s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001073s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001166s ]
+
+[ 2015-08-26T14:50:36+08:00 ] 127.0.0.1 /base/index.php/admin/Auth/auth_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000579s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000988s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001077s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0044s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_auth` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` ORDER BY auth_path asc LIMIT 0,15   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_add_show'  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_edit_show'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_del'  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Auth' AND `auth_a` = 'auth_search'  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000103s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000226s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017571s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017685s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000602s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000673s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000845s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000927s ]
+
+[ 2015-08-26T14:51:42+08:00 ] 127.0.0.1 /base/index.php/admin/Message/message_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001051s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000956s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001089s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_message` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_message` LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_message` LIMIT 0,15   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Message' AND `auth_a` = 'add_show'  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Message' AND `auth_a` = 'look_show'  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Message' AND `auth_a` = 'message_del'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000086s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000181s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014748s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014854s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000835s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000903s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001152s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001257s ]
+
+[ 2015-08-26T14:51:46+08:00 ] 127.0.0.1 /base/index.php/admin/Advice/advice_list
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000703s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001128s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001215s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_advice` [ RunTime:0.0044s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `base_advice` LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `base_advice` LIMIT 0,8   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'Advice' AND `auth_a` = 'advice_del'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000168s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012942s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013080s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000782s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000846s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001038s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001106s ]
+
+[ 2015-08-26T14:51:48+08:00 ] 127.0.0.1 /base/index.php/admin/System/update
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000923s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000998s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_sysconfig` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `base_sysconfig` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'saveorupdate'  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000199s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012397s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012487s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000607s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000670s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000868s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000934s ]
+
+[ 2015-08-26T14:53:01+08:00 ] 127.0.0.1 /base/index.php/admin/system/saveorupdate.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000621s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000938s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001051s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `base_sysconfig` [ RunTime:0.0047s ]
+NOTIC: [8] Undefined index: accesspr D:\amp\apache\htdocs\base\Application\Admin\Controller\SystemController.class.php 第 46 行.
+SQL: UPDATE `base_sysconfig` SET `statename`='HNE管理平台',`simplename`='HNE',`des`='蜂鸟网络',`domains`='www.lanprod.com',`repath`='base',`tel`='400-000-1818',`email`='help@HNE.com',`record`='沪ICP背1402883号-1    京公网安备11010502',`address`='江苏省',`accesspr`=NULL WHERE `id` = 1 [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000175s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010935s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011049s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000696s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000762s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000978s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001046s ]
+
+[ 2015-08-26T14:53:02+08:00 ] 127.0.0.1 /base/index.php/admin/system/update.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000697s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001046s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001131s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_sysconfig` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `base_sysconfig` LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `base_auth` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `base_auth` WHERE `auth_c` = 'System' AND `auth_a` = 'saveorupdate'  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000130s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000227s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012878s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013047s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000728s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000791s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001141s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001227s ]
+
+[ 2015-08-26T14:53:11+08:00 ] 127.0.0.1 /base/index.php/admin/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000728s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001201s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001336s ]
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `base_user` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000222s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010208s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010330s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000758s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000823s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001257s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001326s ]
+
+[ 2015-08-26T14:53:12+08:00 ] 127.0.0.1 /base/index.php/admin/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001045s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002062s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002230s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 20 行.
+SQL: SHOW COLUMNS FROM `base_user` [ RunTime:0.0055s ]
+NOTIC: [8] Undefined index: admin_id D:\amp\apache\htdocs\base\Application\Admin\Common\AdminController.class.php 第 25 行.
+SQL: SELECT * FROM `base_user` LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `base_role` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `base_role` WHERE `role_id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000147s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009935s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010022s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000767s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000833s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000908s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000988s ]
+
+[ 2015-08-26T14:53:12+08:00 ] 127.0.0.1 /base/index.php/admin/login/images/light.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000785s ]
+

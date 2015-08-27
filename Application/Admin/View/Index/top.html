@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+<link href="__PUBLIC__/admin/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" data-cfasync="false" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){	
+	//顶部导航切换
+	$(".nav li a").click(function(){
+		$(".nav li a.selected").removeClass("selected")
+		$(this).addClass("selected");
+	})	
+})	
+</script>
+
+
+</head>
+
+<body style="background:url(__PUBLIC__/admin/images/topbg.gif) repeat-x;">
+
+    <div class="topleft">
+    <a href="" target=""><img src="__PUBLIC__/admin/images/logo.png" title="系统首页" /></a>
+    </div>
+        
+    <ul class="nav">
+    <li><a href="#"  class="selected"><img src="__PUBLIC__/admin/images/icon01.png" title="工作台" /><h2>首页</h2></a></li>
+   
+        <li><a href="{:U("admin/servers/servers_list")}" target="rightFrame"><img src="__PUBLIC__/admin/images/icon02.png" title="商品发布" /><h2>商品发布</h2></a></li>
+    
+    <li><a href={:U("admin/order/order_list")} target="rightFrame"><img src="__PUBLIC__/admin/images/icon03.png" title="订单管理" /><h2>订单管理</h2></a></li>
+    
+    <li><a href={:U("admin/content/content_list")} target="rightFrame"><img src="__PUBLIC__/admin/images/icon04.png" title="资讯中心" /><h2>资讯中心</h2></a></li>
+    
+    <li><a href={:U("admin/system/update")}  target="rightFrame"><img src="__PUBLIC__/admin/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
+    </ul>
+            
+    <div class="topright">    
+    <ul>
+    <!-- <li><span><img src="__PUBLIC__/admin/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li> -->
+	    <li><span><img class="helpimg"/></span><a href={:U('Home/Index/index')} target="_blank">网站首页</a></li>
+   <!--  <li><a href="#">关于</a></li> -->
+    <li><a href={:U("admin/login/logout")} target="_parent">退出</a></li>
+    </ul>
+     
+    <div class="user">
+    <span>{$_SESSION['admin_name']}</span>
+    
+    </div>    
+    
+    </div>
+</body>
+</html>

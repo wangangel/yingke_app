@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人注册</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+<script src="__PUBLIC__/home/js/area.js"></script>
+<script type="text/javascript">
+var Gid = document.getElementById;
+var showArea = function() {
+var province = Gid('s_province').value;
+var city = Gid('s_city').value;
+var county = Gid('s_county').value;
+if (province == city) {
+city = "";
+}
+}
+//Gid('s_county').setAttribute('onchange', 'showArea()');
+//
+//$(".sel_wrap").on("change", function() {
+//
+//
+ var s_province = $('#s_province option:selected').val();
+    var s_city = $('#s_city option:selected').text();
+    var s_country = $('#s_country option:selected').text();
+    var add = $("#add").val();
+//注册下一步
+function regist(){
+    $("#myform").submit();
+
+}
+function jump(){
+        window.location.href="{:U('Home/Regist/regist_success')}";
+
+}
+
+</script>
+
+</head>
+
+<body style="background:#fff;" onload="_init_area()">
+<!--logo1内容-->
+<div class="logo1">
+		<div class="basewidth">
+        		<a class="logo_pic" href="##"><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <h3>个人注册</h3>
+        </div>
+</div>
+<!--注册-->
+<div class="regist basewidth">
+		<div style="padding-bottom:40px;"></div>
+        <a class="link_skip" href="javascript:void(0)" onclick="jump(this)">跳过此步骤>></a>
+        <div class="progressbar">
+        		<center><img src="__PUBLIC__/home/img/progressbar_pic2.png"></center>
+        </div>
+        <div style="padding-bottom:25px;"></div>
+        <form action="{:U('Home/Regist/regist_success')}?status=1" method="post" id="myform">
+        <ul class="fm">
+        		<li class="shdz clearfix">
+                		<label class="lb1">收货所在地：</label>
+                		<!-- <input class="" name="" type="text" autocomplete="off" placeholder="请选择">
+                        <div class="shdz_dpd shdz_dpd1">
+                        		<a href="javascript:;">北京</a>
+                                <a href="javascript:;">上海</a>
+                                <a href="javascript:;">广州</a>
+                                <a href="javascript:;">深圳</a>
+                                <a href="javascript:;">拉萨</a>
+                                <a href="javascript:;">杭州</a>
+                                <a href="javascript:;">南京</a>
+                        </div>
+                        <input class="" name="" type="text" autocomplete="off" placeholder="请选择">
+                        <div class="shdz_dpd shdz_dpd2">
+                        		<a href="javascript:;">北京</a>
+                                <a href="javascript:;">上海</a>
+                                <a href="javascript:;">广州</a>
+                                <a href="javascript:;">深圳</a>
+                                <a href="javascript:;">拉萨</a>
+                                <a href="javascript:;">杭州</a>
+                                <a href="javascript:;">南京</a>
+                        </div>
+                        <input class="" name="" type="text" autocomplete="off" placeholder="请选择">
+                        <div class="shdz_dpd shdz_dpd3">
+                        		<a href="javascript:;">北京</a>
+                                <a href="javascript:;">上海</a>
+                                <a href="javascript:;">广州</a>
+                                <a href="javascript:;">深圳</a>
+                                <a href="javascript:;">拉萨</a>
+                                <a href="javascript:;">杭州</a>
+                                <a href="javascript:;">南京</a>
+                        </div> -->
+                         <select style="width: 80px"  ID="s_province" runat="server" name="s_province">
+                        </select> &nbsp;&nbsp;
+                        <select style="width: 80px" ID="s_city" runat="server" name="s_city">
+                        </select> &nbsp;&nbsp;
+                        <select style="width: 80px" ID="s_county" runat="server" name="s_county" onchange = "showArea()">
+                        </select>&nbsp;&nbsp;目前只支持北京地区
+                </li>
+                <li><label class="lb1">详细地址详情：</label><input class="ipt1" name="add" id="add" type="text" autocomplete="off"></li>
+                <li></li>
+                <li><label class="lb1"></label><input class="btn2" onclick="regist();" name="" type="button" value="立即注册"></li>
+                
+        </ul>
+        </form>
+        
+        
+        
+        <br><br><br><br><br><br><br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div style="padding-bottom:30px;"></div>
+<div class="bot_nav2 basewidth">
+		<a href="##">关于安居易</a> |
+        <a href="##">免责声明</a> |
+        <a href="##">隐私声明</a> |
+        <a href="##">版权声明</a> |
+        <a href="##">联系我们</a> |
+        <a href="##">帮助我们</a> |
+        <a href="##">网站联盟</a>
+</div>
+<!--版权-->
+<p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;沪ICP背1402883号-1&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101050201483&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+<div class="certificate basewidth">
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">数据字典</strong> / <small>Data Dictionary </small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+       
+
+      </div>
+
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" action={:U("admin/data/data_update")} method='post'>
+
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">数据类型 / Data Type</label>
+            <div class="am-u-sm-9">
+             <select name="dicid" id="dictypename" onchange="check(this)" >
+                    <option value="">请选择数据类型</option>
+                    <foreach name="dictype_list" item="vo" key="k" >
+                        <option value="{$vo.id}" >{$vo.dictionary}</option>
+                    </foreach>
+                </select>
+                <input type="hidden" id="dictype" value="" name="typename">
+                <input type="hidden" id="atype" value="{$data_info.dicid}">
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">字典名称 / Dictionary Name</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="data-name" placeholder="字典名称 / Name" name='dataname' value="{$data_info.dataname}">
+              <small>字典名称</small>
+            </div>
+          </div>
+          <input type="hidden"  name='id' value='{$data_info.id}'>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="submit" class="am-btn am-btn-primary">更新</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<include file="Index:footer"/>
+<script data-cfasync="false" type="text/javascript">
+
+  //下拉选框回显
+  function onload(){  
+        var atype=document.getElementById("atype").value;  
+        var s = document.getElementById("dictypename");  
+        var ops = s.options;  
+          for(var i=0;i<ops.length; i++){  
+              var tempValue = ops[i].value;  
+              if(tempValue == atype)   //这里是你要选的值  
+              {  
+                ops[i].selected = true;  
+                break;  
+              }  
+            }   
+      }  
+
+  window.onload=onload();
+  function check(myselect){
+     var name = myselect.options[myselect.selectedIndex].text;
+        if(name =="请选择数据类型"){
+            //不进行赋值
+            return false;
+        }else{
+            
+            document.getElementById("dictype").value=name;
+        }
+  }
+
+</script>

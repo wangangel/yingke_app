@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>绑定</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+
+</head>
+
+<body>
+<!--logo1内容-->
+<div class="logo1">
+		<div class="basewidth">
+        		<a class="logo_pic" href="##"><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <h3>绑定</h3>
+        </div>
+        
+</div>
+<!--登录-->
+<div class="login">
+		<div class="basewidth">
+        		<form action="{:U('Home/Regist/Regist_personal')}" method="get">
+                <ul class="fm">
+                	<li class="tit"><input class="btn1" name="" type="submit" value="新用户绑定"></li>
+                       <!--  <li><input class="ipt1 bg1" name="" type="text" autocomplete="off" placeholder="请输入用户名"></li>
+                        <li><input class="ipt1 bg2" name="" type="password" autocomplete="off" placeholder="请设置密码"></li>
+                        <li><input class="ipt1 bg2" name="" type="password" autocomplete="off" placeholder="请确认密码"></li>
+                        <li><input class="ipt1 bg3" name="" type="tel" autocomplete="off" placeholder="请输入手机号"></li>
+                        
+                        <li class="clearfix">
+                                <input class="ipt2" name="" type="text" autocomplete="off" placeholder="验证码">
+                                <input class="btn2 right" name="" type="button" value="获取短信验证码" style="font-size:14px;">
+                        </li>
+                        <li></li>
+                        <li><input class="btn1" name="" type="button" value="立即登录"></li> -->
+                        
+                </ul>
+                </form>
+                
+                <div class="left">
+                <form action="{:U('Home/Login/login')}?type=bind" method="post">
+                        <input type='hidden' name='openid' id='openid' value="{$openid}"/>
+                        <input type='hidden' name='leixing' id='leixing' value="{$type}"/>
+                		<ul class="fm">
+                        		<li class="tit">已注册用户绑定</li>
+                                <li><input class="ipt1 bg1" name="username" type="text" autocomplete="off" placeholder="用户名/已验证手机"></li>
+                                <li><input class="ipt1 bg2" name="password" type="password" autocomplete="off" placeholder="密码"></li>
+                                <li></li>
+                                <li><input class="btn1" name="" type="submit" value="立即登录"></li>
+                        </ul>
+                </form>
+                </div>
+                
+                <div class="clear"></div>
+        </div>
+</div>
+<div style="padding-bottom:30px;"></div>
+<div class="bot_nav2 basewidth">
+		<a href="##">关于安居易</a> |
+        <a href="##">免责声明</a> |
+        <a href="##">隐私声明</a> |
+        <a href="##">版权声明</a> |
+        <a href="##">联系我们</a> |
+        <a href="##">帮助我们</a> |
+        <a href="##">网站联盟</a>
+</div>
+<!--版权-->
+<p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;沪ICP背1402883号-1&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101050201483&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+<div class="certificate basewidth">
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+</div>
+
+
+
+
+</body>
+</html>

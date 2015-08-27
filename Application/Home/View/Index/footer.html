@@ -1,0 +1,98 @@
+<div style="padding-bottom:25px;"></div>
+<div class="idx_bottom">
+        <div style="padding-bottom:30px;"></div>
+        <!--底部导航-->
+        <div class="bot_nav basewidth">
+                <ul class="ul1">
+                    <li><a href="##"><img src="__PUBLIC__/home/img/logo2.png"></a></li>
+                    <li class="li2">{$_SESSION['tel']}</li>
+                    <li class="li3">{$_SESSION['email']}</li>
+                    <li class="li4">8:00-24:00</li>
+
+                </ul>
+
+                <ul class="ul2">
+                    <li class="tit">新手指南</li>
+                    <foreach name= "_SESSION['new_hand']" item="vo" key="k">
+                        <li><a href={:U('home/index/getcontent')}?id={$vo.id}     target="_blank">{$vo.title}</a></li>
+                    </foreach>
+                    <!-- <li><a href="##" target="_blank">新用户注册</a></li>
+                    <li><a href="##" target="_blank">购物流程</a></li>
+                    <li><a href="##" target="_blank">常见问题解答</a></li> -->
+                </ul>
+                <ul class="ul2">
+                    <li class="tit">付款方式</li>
+                    <foreach name="_SESSION['pay_type']" item="vo" key="k">
+                        <li><a href={:U('home/index/getcontent')}?id={$vo.id} target="_blank">{$vo.title}</a></li>
+                    </foreach>
+                   <!--  <li><a href="##" target="_blank">在线支付</a></li>
+                    <li><a href="##" target="_blank">货到付款</a></li>
+                    <li><a href="##" target="_blank">常见支付问题</a></li> -->
+                </ul>
+                <ul class="ul2">
+                    <li class="tit">配送安装方式</li>
+                    <foreach name="_SESSION['peisong']" item="vo" key="k">
+                        <li><a href={:U('home/index/getcontent')}?id={$vo.id} target="_blank">{$vo.title}</a></li>
+                    </foreach>
+                    <!-- <li><a href="##" target="_blank">配送时间及范围</a></li>
+                    <li><a href="##" target="_blank">配送服务费用标准</a></li>
+                    <li><a href="##" target="_blank">仓储服务费用标准</a></li> -->
+                </ul>
+                <ul class="ul2" style="padding-left:20px;">
+                    <li class="tit">商家合作</li>
+                    <foreach name="_SESSION['business']" item="vo" key="k">
+                        <li><a href={:U('home/index/getcontent')}?id={$vo.id} target="_blank">{$vo.title}</a></li>
+                    </foreach>
+                    <!-- <li><a href="##" target="_blank">商家服务</a></li>
+                    <li><a href="##" target="_blank">合作品牌</a></li>
+                    <li><a href="##" target="_blank">合作规则</a></li> -->
+                </ul>
+
+                <ul class="ul2">
+                    <li class="tit">安居易团队</li>
+                    <li></li>
+                </ul>
+                <ul class="ul3">
+                    <li class="tit">安居易微信服务号</li>
+                    <li><img src="__PUBLIC__/home/img/code.jpg"></li>
+                </ul>
+                <div class="clear"></div>
+        </div>
+        <!--版权-->
+        <p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;{$_SESSION['record']}&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+        <div class="certificate basewidth">
+                <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+                <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+                <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+                <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+        </div>
+        <div style="padding-bottom:20px;"></div>
+</div>
+
+<script TYPE="text/javascript">
+setInterval("setCoupon()",800000);
+ /**
+  * 优惠券失效轮询
+  */
+ function setCoupon(){
+        $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('home/index/setcoupon')}",
+                dataType:"json",
+                data:{userid:""},
+                timeout:80000,
+                success:function(data){
+                    //alert(data);
+                  }
+                }/*,
+                complete : function(){
+                    if (error){}
+                        setTimeout(function(){connect();}, 10000); 
+                    }else{
+                        connect(); 
+                    }   
+                }*/); 
+
+ }
+</script>

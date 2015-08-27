@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>支付</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+</head>
+
+<body style="background:#fff;">
+<include file="Index:header"/>
+
+
+<!--支付-->
+
+<div class="order_check">
+	<div class="basewidth">
+    		<div class="progressbar"><img src="__PUBLIC__/home/img/progressbar_pic4.png"></div>
+            <div class="title1">支付</div>
+            <div class="pay_title1 clearfix">
+            		<span class="right price">￥{$acount}</span>
+                    <div class="left">
+                    		<p style="font-size:16px; font-weight:bold;">订单提交成功，请您尽快付款！订单号：{$ordernum}</p>
+                            <p>请您在提交订单后24小时内完成支付，否则订单会自动取消</p>
+                    </div>
+            </div>
+            <form action={:U("Home/Pay/userspay")} method="post">
+            <input type='hidden' name='jine' value="{$acount}">
+            <input type='hidden' name='ordernum' value="{$ordernum}">
+            <input type='hidden' name='goodsname' value="{$orderdetail_data.goodsname}">
+            <div class="pay">
+            		<div class="pay_list1">
+                    		<input id="paytype_kik" name="paytype" type="radio" value="0">
+                            <label for="paytype_kik" class="lb1">微信支付</label>
+                            <label for="paytype_kik"><img src="__PUBLIC__/home/img/ico_weixin2.png"></label>
+                    </div>
+                    <div class="pay_list1">
+                    		<input id="paytype_alipay" name="paytype" type="radio" value="1">
+                            <label for="paytype_alipay" class="lb1">支付宝支付</label>
+                            <label for="paytype_alipay"><img src="__PUBLIC__/home/img/logo_zfb1.png"></label>
+                    </div>
+                    <div class="pay_list1">
+                    		<input id="paytype_Unionpay" name="paytype" type="radio" value="">
+                            <label for="" class="lb1">银联</label>
+                            <div class="Unionpays clearfix">
+                            		<label class="sel" for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay1.png"></label>
+                                    <label for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay2.png"></label>
+                                    <label for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay3.png"></label>
+                                    <label for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay4.png"></label>
+                                    <label for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay5.png"></label>
+                                    <label for="paytype_Unionpay"><img src="__PUBLIC__/home/img/logo_Unionpay6.png"></label>
+                            </div>
+                    </div>
+                    <div style="padding-bottom:30px;"></div>
+                    <p class="text_right"><input class="pay_sbm" name="querenzhifu" type="submit"  value="确认支付"></p>
+            </div>
+            </form>
+            
+            
+    </div>
+</div>
+
+
+<div style="padding-bottom:60px;"></div>
+<include file="Index:footer" />
+
+</body>
+</html>
+

@@ -1,0 +1,1119 @@
+
+
+
+用户模块
+
+一.获取手机验证码
+接口链接：
+http://www.edeco.cc/index.php/api/user/getphonecode?phone=13310142323&optype=1
+
+接口参数：
+phone : 手机号
+optype : 操作类型（1：注册时获取验证码；2：重置密码时候获取验证码）
+
+返回值：
+"errresult":true|false 执行成功返回true，执行失败返回false
+datas : phone->号码 phonecode->验证码  optype:1->注册时获取的验证码 2->重置密码时候获取验证码
+
+
+
+
+
+二.第三方登录
+接口链接：
+http://www.edeco.cc/index.php/api/user/third_login?type=qq
+接口参数：
+type:qq/sinna/weixin
+
+返回值：
+"errresult":true|false 执行成功返回true，执行失败返回false
+datas : 
+
+
+
+
+三、用户注册
+    请求地址：http://www.edeco.cc/index.php/api/user/register?username=老王&phonenumber=13310142323&password=laowang&attribute=2&phonecode=809695
+
+    接口参数：：
+        username->昵称 
+        phonenumber->手机号码 
+        password->密码 
+        phonecode->手机验证码
+        attribute->0:管、1:企业、2:个人
+
+    返回值：
+    "errresult":true|false 执行成功返回true，执行失败返回false
+    datas:
+        error:错误描述，执行成功没有该字段，执行失败是有该字段
+
+        userid:用户id  
+        username：用户名
+        phone:手机号码
+        key:加密信息
+
+
+
+
+四、用户登录
+    请求地址：http://www.edeco.cc/index.php/api/user/login?username=老王&password=laowang&client=2
+
+    接口参数：：
+        username->用户名 
+        password->密码
+        client->设备：1->安卓，2->ios
+
+    返回值：
+    "errresult":true|false 执行成功返回true，执行失败返回false
+    datas:
+        error:错误描述，执行成功没有该字段
+        userid:用户id  
+        username：用户名------------昵称就是用户名
+        phone:手机号码
+        key:加密信息
+        headurl:头像地址
+
+
+
+
+五、用户退出登录
+    请求地址：http://www.edeco.cc/index.php/api/user/logout?key=185cec097453bec9799cc683e61e34d9&userid=85&client=2
+
+    接口参数：：
+        key->秘钥 
+        userid->用户id
+        client->设备：1->安卓，2->ios
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+            error:错误描述，执行成功没有该字段
+          
+            msg->"退出成功"
+
+
+
+
+六、忘记密码
+     请求地址：http://www.edeco.cc/index.php/api/user/forget_password?phonenum=18651551916&password=123123&code=819871
+
+    接口参数：：
+        phonenum->手机号码 
+        password->密码
+        code->手机验证码
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+            error:错误描述，执行成功没有该字段
+            datas: msg->"修改成功，请登录"
+
+
+
+七、获取首页优惠
+     请求地址：http://www.edeco.cc/index.php/api/index/coupon?ps=10
+
+    接口参数：：
+        ps->获取几条优惠信息展示，不传默认是6条
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: array（
+                    0=>
+                        id:优惠信息id
+                        picurl=>优惠信息图片
+                        price=>价格
+                        detail=>详情
+                        createtime=>发布时间
+                        attr=>0:现金券，1：优惠券
+                    1=>
+                        .......
+
+                ）
+
+
+
+
+八、图片轮播
+    请求地址：http://www.edeco.cc/index.php/api/index/banner?ps=5
+
+    接口参数：：
+        ps->获取几条轮播图片展示，不传默认是5条
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: array（
+                    0=>
+                        id=>图片轮播id
+                        bannername=>图片轮播名
+                        bannerlink=>图片轮播链接
+                        picurl=>优惠信息图片
+                        releasetime=>发布时间
+                    1=>
+                        .......
+
+                ）
+
+
+
+
+九、好评服务(根据好评的数量来获取服务首页展示)
+    请求地址：http://www.edeco.cc/index.php/api/index/goodcomment_service?ps=4&page=1
+
+    接口参数：：
+        ps->获取几条服务展示，不传默认是4条
+        page->第几页
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+            error:错误描述，执行成功没有该字段
+            datas: 
+                content
+                    haopinginfo(好评信息)
+                          "commentid": 
+                        "goodsid": 
+                        "userid": ,
+                        "content": 
+                        "comefrom": 
+                        "replycount": 回复数
+                        "prasiecount": 赞数
+                        "grade": 好评
+                        "com_picurl": 评论图片
+                        "commenttime": 评论时间
+                        "star_num": 星级
+                    userinfo（评论发布人信息）
+                        "userid": 
+                        "username": 
+                        "headurl": 
+
+                          
+十、分享(未做)
+     请求地址：http://www.edeco.cc/index.php/api/index/dianzan?id=4
+
+    接口参数：：
+        ps->获取几条轮播图片展示，不传默认是4条
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+
+
+十一、点赞
+    请求地址：http://www.edeco.cc/index.php/api/index/dianzan?commentid=4&userid=54&key=
+74253df69ebba8b7f22906e06e35f227
+    接口参数：：
+        commentid->对应评论的id
+        userid->用户id
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id: -1=>已经点过赞了
+                    id>0 点赞记录的id
+
+
+
+十二、用户评论列表(根据商品id)
+     请求地址：http://www.edeco.cc/index.php/api/index/comment_list?goodsid=13&ps=10&page=1
+    接口参数：：
+        goodsid->商品id
+        ps->每页显示的条数
+        page->第几页
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   array（
+                    0=>
+                        id=>评论id
+                        goodsid=>商品id
+                        user_info:
+                                    username:用户名
+                                    userid: 用户id
+                                    herdurl: 头像地址
+                        content=>评论内容
+                        comefrom=>来自
+                        serverlist=>服务项
+                        replycount=>回复数
+                        prasiecount=>赞的数量
+                        grade=>0:差评  1:中评 2:好评
+                        picurl=>评论图片url
+                        commenttime=>评论时间
+                        star_num=>星级
+                        
+                    1=>
+                        .......
+
+                    badcomment_num=>差评数量
+                    zhongpingcomment_num=>差评数量
+                    goodcomment_num=>好评数量
+                ）
+
+
+
+
+十三、上传图片
+    请求地址：http://www.edeco.cc/index.php/api/index/add_pic
+    接口参数：：
+        userid->用户id
+        photo->图片
+        key->秘钥
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   picurl:图片url
+
+
+
+十四、发布评论
+    请求地址：http://www.edeco.cc/index.php/api/index/add_comment?userid=85&goodsid=16&content=东西实在太好了&grade=2&key=4eecb92ec1d98a63ab9000f760ae80a0&comefrom=上海&picurl=2015-06-28/558f49bf685c2.jpg&star_num=4
+    接口参数：：
+        userid->用户id
+        goodsid->商品id
+        content->评论内容
+        grade->0:差评,1:中评,2:好评
+        key:秘钥
+        comefrom->来源,不传默认来源北京
+        serverlist->服务项,针对服务进行评价的时候需要传递,没有不传递
+        picurl->图片地址,没有图片不传
+        star_num->星级,不传默认是5星
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:评论成功返回数据id
+
+
+
+十五、回复评论
+     请求地址：http://www.edeco.cc/index.php/api/index/reply_comment?userid=54&goodsid=13&content=东西实在太好了&key=74253df69ebba8b7f22906e06e35f227&picurl=2015-06-28/558f49bf685c2.jpg&comment_id=17
+
+      接口参数：：
+        userid->用户id
+        key:秘钥
+        goodsid->商品id
+        content->评论内容
+        picurl->图片地址,没有图片不传
+        comment_id->评论id
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:评论成功返回数据id
+
+
+
+
+
+
+
+
+
+
+模块二.安居活动
+
+十六、活动列表
+    请求地址：http://www.edeco.cc/index.php/api/activity/activity_list?ps=10&page=1
+    接口参数：：
+        ps->获取每页的条数,不传默认每页显示8条
+        page->第几页,不传默认是第一页
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:数据id
+                   channelid:所属栏目id
+                   channelname:所属栏目名
+                   title:标题
+                   picurl:图片url
+                   author:作者
+                   releasedate:发布时间
+                   content:活动内容
+
+
+
+十七、活动详情
+    请求地址：http://www.edeco.cc/index.php/api/activity/activity_detail?act_id=18
+    接口参数：：
+        act_id=18->活动id
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:数据id
+                   channelid:所属栏目id
+                   channelname:所属栏目名
+                   title:标题
+                   picurl:图片url
+                   author:作者
+                   releasedate:发布时间
+                   content:活动内容
+
+
+
+
+
+
+
+
+
+模块三.商家资讯
+
+十八、资讯列表
+    请求地址：http://www.edeco.cc/index.php/api/zixun/zixun_list?ps=10&page=1
+    接口参数：：
+        ps->获取每页的条数,不传默认每页显示8条
+        page->第几页,不传默认是第一页
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:数据id
+                   channelid:所属栏目id
+                   channelname:所属栏目名
+                   title:标题
+                   picurl:图片url
+                   author:作者
+                   releasedate:发布时间
+                   content:活动内容
+
+
+
+
+十九、资讯详情
+    请求地址：http://www.edeco.cc/index.php/api/zixun/zixun_detail?zixun_id=23
+    接口参数：：
+        zixun_id=23->资讯id
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:数据id
+                   channelid:所属栏目id
+                   channelname:所属栏目名
+                   title:标题
+                   picurl:图片url
+                   author:作者
+                   releasedate:发布时间
+                   content:活动内容
+
+
+
+
+二十、优惠券列表
+    请求地址：http://www.edeco.cc/index.php/api/zixun/coupon_list?ps=10&page=1
+    接口参数：：
+        ps->获取每页的条数,不传默认每页显示8条
+        page->第几页,不传默认是第一页
+       
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:数据id
+                   is_receive:是否领取
+                   userid:优惠券发布人id
+                   picurl:图片url
+                   price:价格
+                   detail:优惠详情
+                   createtime:发布时间
+                   attr:0->现金券,1->优惠券
+                   status:0->生效,1->失效
+                   morecash:超额现金
+
+
+
+
+二十一、领取优惠券
+    请求地址：http://www.edeco.cc/index.php/api/zixun/receive_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227&coupon_id=1
+    接口参数：：
+        userid->用户id
+        key->秘钥
+        coupon_id->优惠券id
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id->数据在数据表中的id
+
+
+
+二十二、我的优惠券
+    请求地址：http://www.edeco.cc/index.php/api/zixun/my_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227
+    接口参数：：
+        userid->用户id
+        key->秘钥
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    is_use:优惠券是否使用
+                    use_time:优惠券使用时间
+                    id:数据id
+                   userid:优惠券发布人id
+                   picurl:图片url
+                   price:价格
+                   detail:优惠详情
+                   createtime:发布时间
+                   attr:0->现金券,1->优惠券
+                   status:0->生效,1->失效
+                   morecash:超额现金
+
+
+
+
+二十三、城市仓库
+    请求地址：http://www.edeco.cc/index.php/api/index/city_kufang?ps=4&page=1
+    接口参数：：
+        ps->每页显示的条数,默认每页显示4条
+        page->第几页
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id:数据id
+                    province:省份
+                    city:城市
+                    address:地址
+                    getuser:收货人
+                    tel:电话
+                    phone:手机
+                    sort:排序
+                    serverrule :服务范围
+                    
+
+
+
+
+二十四、商品详情
+    请求地址：http://www.edeco.cc/index.php/api/goods/goods_detail?goodsid=35&attr=1
+    接口参数：：
+        goodsid->商品id
+        attr:0->服务;1->商品
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id:商品id
+                    serverid:服务分类id
+                    servernum:商品编号
+                    goodsname:商品名称
+                    faceurl:正面图片
+                    ceurl:侧面图片
+                    goodsprice1:商品价格
+                    goodsprice2:安装费
+                    goodsprice3:配送费
+                    goodsprice4:超高费
+                    goodsprice5:折旧费
+                    attr:0->服务;1->商品
+                    kg:
+                    sale_count:销售数量
+                    comment_num:评论数量
+                    
+                   
+
+
+
+
+
+二十五、服务详情
+    请求地址：http://www.edeco.cc/index.php/api/goods/server_detail?serverid=32&attr=0
+    接口参数：：
+        serverid->服务id
+        attr:0->服务;1->商品
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id:商品id
+                    serverid:服务分类id
+                    servernum:商品编号
+                    goodsname:商品名称
+                    faceurl:正面图片
+                    ceurl:侧面图片
+                    goodsprice1:商品价格
+                    goodsprice2:安装费
+                    goodsprice3:配送费
+                    goodsprice4:超高费
+                    goodsprice5:折旧费
+                    attr:0->服务;1->商品
+                    kg:
+                    sale_count:销售数量
+                    comment_num:评论数量
+                    
+
+
+
+
+
+二十六、我的购物车
+    请求地址：http://www.edeco.cc/index.php/api/goods/my_shoppingcart?userid=1&key=b94b3af0db5e920231d9d84bd8980991&page=1&ps=10
+    接口参数：：
+        userid->用户id
+        key:秘钥
+        page:
+        ps:
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id:商品id
+                    userid:用户id
+                    goodsid:商品id
+                    servernum:商品编号
+                    areaid:区域id
+                    goodsname:商品名称
+                    goodspicurll:商品图片
+                    goodsprice:商品价格
+                    goodscount:商品数量
+                    acount:小结
+                    goodsprice2:安装费
+                    goodsprice3:配送费
+                    goodsprice4:超高费
+                    goodsprice5:折旧费
+                    colorname:颜色
+                    specname:规格
+                    cart_category:0为服务安装，1为基础建材，2安装+配送
+                    attr:0->服务;1->商品
+                    
+
+
+
+
+
+
+二十七、提交订单
+    请求地址：http://www.edeco.cc/index.php/api/goods/add_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&addid=14&totalprice=3000&orderstatus=0&billtype=工程款&billhead=0&billcontent=宿迁蜂鸟网络科技有限公司&expresstype=0&address=泗阳县&istoked=0&isurgent=0&urgentshuom=速度快点&attribute=1&goodsid=24&goodscount=2
+    接口参数：
+        必需参数:
+            userid->用户id
+            key:秘钥
+            addid:收货地址id
+            totalprice:订单总价
+            orderstatus:0:未支付，1:待收货，3:已入库
+            attribute:0为服务安装，1为基础建材，2安装+配送
+            goodsid:商品id
+            goodscount:商品数量
+        非必需参数:
+            areaid:代收地址地区id
+            billtype:发票类型
+            billhead:0:公司；1：个人
+            billcontent:发票内容
+            expresstype:0:快递；1为投递
+            address:投递地址
+            istoked:0:代收，1:不代收
+            isurgent:0:加急，1：不加急
+            urgentshuom:加急说明
+            isorder:0:未预约，1:到货预约
+            ordertime:预约时间------时间戳
+            ordershuom:预约说明
+            isstore:是否仓储 0:仓储，1:不仓储
+            storestart:仓储开始时间 ------时间戳
+            storeend:仓储结束时间 ------时间戳
+            remark:备注
+            facepic:订单到库,管理员拍的正面照
+            cepic:订单到库,管理员拍的侧面照
+            flag:0->未删除预约,1->已删除预约
+            buyerwords:买家留言
+
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                  order_id->订单数据表中的id
+                  orderdetail_id->订单详情数据表中的id
+
+
+
+
+
+
+
+二十八、服务/商品列表
+    请求地址：http://www.edeco.cc/index.php/api/goods/goods_list?ps=10&page=1
+    接口参数：：
+        ps->获取每页的条数,不传默认每页显示8条
+        page->第几页,不传默认是第一页
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:商品id
+                    serverid:服务分类id
+                    servernum:商品编号
+                    goodsname:商品名称
+                    faceurl:正面图片
+                    ceurl:侧面图片
+                    goodsprice1:商品价格
+                    goodsprice2:安装费
+                    goodsprice3:配送费
+                    goodsprice4:超高费
+                    goodsprice5:折旧费
+                    attr:0->服务;1->商品
+                    kg:
+                    sale_count:销售数量
+                    comment_num:评论数量
+
+
+
+
+
+
+
+二十九、我的个人信息
+    请求地址：http://www.edeco.cc/index.php/api/user/my_info?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    接口参数：：
+       userid
+       key
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:商品id
+                    serverid:服务分类id
+                    servernum:商品编号
+                    goodsname:商品名称
+                    faceurl:正面图片
+                    ceurl:侧面图片
+                    goodsprice1:商品价格
+                    goodsprice2:安装费
+                    goodsprice3:配送费
+                    goodsprice4:超高费
+                    goodsprice5:折旧费
+                    attr:0->服务;1->商品
+                    kg:
+                    sale_count:销售数量
+                    comment_num:评论数量
+
+
+
+
+
+三十、获取我的收货地址
+    请求地址：http://www.edeco.cc/index.php/api/user/my_address?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    接口参数：：
+        userid
+        key
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:
+                   userid:
+                    userpro:省
+                   usercity:市
+                   usertown:县
+                   userstr:街道
+                   consigner:收货人
+                   attribute:默认为0,1为公司地址
+                   isdefault:默认为0,1为默认地址
+                   phone:联系电话
+                   youbian:邮编
+
+
+
+
+
+
+三十一、修改我的收货地址
+    请求地址：http://www.edeco.cc/index.php/api/user/edit_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=小明&attribute=1&isdefault=1&phone=13355446688&youbian=223221&id=13
+    接口参数：：
+        userid
+        key
+         pro:省----------------------必需
+       city:市-----------------------必需
+       town:县-----------------------必需
+       str:街道-----------------------必需
+       consigner:收货人-------------------必需
+       attribute:默认为0,1为公司地址
+       isdefault:默认为0,1为默认地址
+       phone:联系电话--------------------必需
+       youbian:邮编
+       id:收货地址id------------------必需
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:收货地址id
+                   
+
+
+
+三十二、增加我的收货地址
+    请求地址：http://www.edeco.cc/index.php/api/user/add_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=老王&attribute=0&isdefault=0&phone=13355448888&youbian=223221
+    接口参数：：
+        userid
+        key
+         pro:省----------------------必需
+       city:市-----------------------必需
+       town:县-----------------------必需
+       str:街道-----------------------必需
+       consigner:收货人-------------------必需
+       attribute:默认为0,1为公司地址
+       isdefault:默认为0,1为默认地址
+       phone:联系电话--------------------必需
+       youbian:邮编
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:收货地址id
+                   
+
+
+
+
+
+三十二、删除我的收货地址
+    请求地址：http://www.edeco.cc/index.php/api/user/del_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&add_id=14
+    接口参数：：
+        userid
+        key
+        add_id:收货地址id
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:1----删除成功
+                   
+
+
+
+
+
+
+
+三十三、修改昵称
+    请求地址：http://www.edeco.cc/index.php/api/user/edit_nickname?key=2d43290ba0c52a49c5ddff6bc1adf1be&userid=54&username=老王新昵称
+    接口参数：：
+        userid
+        key
+        username:用户名
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:用户id
+                   
+
+
+
+
+
+三十四、我的订单列表
+    请求地址：http://www.edeco.cc/index.php/api/user/my_orderlist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    接口参数：：
+        userid
+        key
+        ps
+        page
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   参照添加订单所需参数
+
+
+
+
+
+
+三十五、删除订单
+    请求地址：http://www.edeco.cc/index.php/api/user/del_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ordernum=D011507010001
+    接口参数：：
+        userid
+        key
+        ordernum:订单号
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   1->订单删除成功
+
+
+
+
+
+
+
+三十六、已取消的订单列表
+    请求地址：http://www.edeco.cc/index.php/api/user/my_cancellist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    接口参数：：
+        userid
+        key
+        ps
+        page
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   参照添加订单所需参数
+
+
+
+
+
+
+
+
+三十七、已完成的订单列表
+    请求地址：http://www.edeco.cc/index.php/api/user/my_completelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    接口参数：：
+        userid
+        key
+        ps
+        page
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   参照添加订单所需参数
+
+
+
+
+
+
+三十八、待收货的订单列表
+    请求地址：http://www.edeco.cc/index.php/api/user/my_shouhuolist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    接口参数：：
+        userid
+        key
+        ps
+        page
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   参照添加订单所需参数
+
+
+
+
+
+
+三十九、我的预约
+    请求地址：http://www.edeco.cc/index.php/api/user/my_yuyuelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&isorder=0&flag=0
+    接口参数：：
+        userid
+        key
+        ps
+        page
+        isorder:0->未预约,1->已预约
+        flag:0->未删除预约,1->已删除预约,不传默认是0
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   
+
+
+
+
+
+
+
+四十、我的收藏
+    请求地址：http://www.edeco.cc/index.php/api/user/my_store?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    接口参数：：
+        userid
+        key
+        ps
+        page
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   
+
+
+
+
+
+四十一、我的消息
+    请求地址：http://www.edeco.cc/index.php/api/user/my_message?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&message_type=0
+    接口参数：：
+        userid
+        key
+        ps
+        page
+        message_type:0->系统信息,1->个人信息,不传默认是0
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    id:
+                    userid
+                    sendname:发送者
+                    title:
+                    messcontent:
+                    messtype:
+                    messagetime:消息生成时间
+
+
+
+
+
+
+四十二、条件搜索
+    请求地址：http://www.edeco.cc/index.php/api/goods/tiaojian_search?ps=10&page=1&attr=0&keywords=进&channelid=4&price=flag1&order=sale_count
+    接口参数：：
+        ps
+        page
+        attr:0->服务,1->商品,不传默认是0
+        keywords:关键字,没有不传
+        channelid:所属分类id
+        price:100~299->flag1;300-499->flag2;500以上->flag3
+        order:sale_count->销量;goodsprice1->商品价格;comment_num->评论数量
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                    
+
+
+
+
+
+后添加的接口文档
+
+1.上传头像接口
+请求地址：http://www.edeco.cc/index.php/api/user/add_headpic?userid=85&key=89e47eefef73109834ede398850e871b&photo=2015-06-28/558f49bf685c2.jpg
+参数：
+       userid:
+       key:
+       photo:图片url,
+  返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+         datas:
+         error:错误描述，执行成功没有该字段
+            datas: 
+                   picurl:图片url
+
+
+
+
+
+
+ 2、修改用户信息接口
+ 请求地址：http://www.edeco.cc/index.php/api/user/editor_userinfo?userid=85&key=89e47eefef73109834ede398850e871b&phone=18012345678&username=老王
+  参数：
+       必须参数：
+       userid:
+       key:
+       可添加参数：
+       phone:电话号码
+       username:
+       sex:性别------------------------------这个字段数据库中没有，暂时保留
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+        error:错误描述，执行成功没有该字段
+            datas: 
+                   id:用户id
+
+
+
+
+3、添加收藏接口 
+请求地址：http://www.edeco.cc/index.php/api/user/add_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+   参数：  
+       userid:
+       key:
+       goodsid:
+       返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+        error:错误描述，执行成功没有该字段
+            datas: 
+                    goodsid
+
+
+
+
+
+
+
+4、加入购物车接口:
+请求地址：http://www.edeco.cc/index.php/api/user/add_shoppingcart?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11&goodscount=3&acount=150
+    参数：
+       userid:
+       key:
+       goodsid:
+       areaid:待收货地址的id，如果没有选择待收货，则不传该字段
+       goodscount:商品数量
+       acount:商品小结
+       goodsprice2:安装费
+       goodsprice3:配送费
+       specname：规格，商品为基础建材的时候，需要传递该字段信息
+       colorname：颜色，商品为基础建材的时候，需要传递该字段信息
+
+       返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+        error:错误描述，执行成功没有该字段
+        datas: 
+                  goodsid
+
+
+
+
+
+
+ 5、取消收藏接口
+ 请求地址：http://www.edeco.cc/index.php/api/user/cancel_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+    参数：  
+       userid:
+       key:
+       goodsid:
+       返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+        error:错误描述，执行成功没有该字段
+            datas: 
+                    goodsid

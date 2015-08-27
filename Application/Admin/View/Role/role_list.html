@@ -1,0 +1,91 @@
+
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+<include file="Index:css"/>
+  <!-- sidebar start -->
+ <div class="am-cf admin-main">
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">角色列表</strong> / <small>Admin List</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-md-6 am-cf">
+        <div class="am-fl am-cf">
+          <div class="am-btn-toolbar am-fl">
+            <div class="am-btn-group am-btn-group-xs">
+            <in name="role_add_show" value="$hava_authids">
+              <a href={:U("admin/role/role_add_show")}><button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button></a>
+            </in>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">序号</th>
+                <th class="table-title">角色名称</th>
+                <th class="table-author">添加时间</th>
+                <th class="table-date">是否启动</th>
+                
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="info" item="vo" key="k" >
+            <!-- <if condition="$vo.auth_level eq '0'">
+            </if> -->
+              <tr>
+                <td>{$k+1}</td>
+                <td>{$vo.role_name}</td>
+                <td>{$vo.role_time}</td>
+                <if condition="$vo.role_status eq 0">
+                  <td>否</td>
+                  <else/>
+                  <td>是</td>
+                </if>
+                <td>
+                  <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                    <in name="distribute" value="$hava_authids">
+                      <a href={:U('admin/role/distribute',array('id'=>$vo['role_id']),'')}><span class="am-icon-pencil-square-o"></span>分配权限</a>|&nbsp;
+                    </in>
+                    <in name="role_edit_show" value="$hava_authids">
+                      <a href={:U('admin/role/role_edit_show',array('id'=>$vo['role_id']))}><span class="am-icon-pencil-square-o"></span>编辑</a>|&nbsp;
+                    </in>
+                    <in name="role_del" value="$hava_authids">
+                      <a href={:U('admin/role/role_del',array('id'=>$vo['role_id']))}><span class="am-icon-trash-o"></span> 删除</a>
+                    </in>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </foreach>
+            
+          </tbody>
+        </table>
+     
+    {$page}
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+<include file="Index:footer"/>

@@ -1,0 +1,70 @@
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">消息内容</strong> / <small>Message Content</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+      </div>
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form id="myform" class="am-form am-form-horizontal" action={:U("admin/message/message_add")} method='post'>
+
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">发布者 / Sender</label>
+            <div class="am-u-sm-9">
+              <input type="text" value="{$message_info['sendname']}" placeholder="发布者 / Sender" name='sendname'>
+              <small>发布者</small>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">消息标题 / Message Title</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="title" placeholder="消息标题 / Message Title" name='title' value="{$message_info['title']}">
+              <small>消息标题</small>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">消息内容 / Message Content</label>
+            <div class="am-u-sm-9">
+              <textarea rows="3" cols="20" id="messcontent" name='messcontent' >
+                {$message_info['messcontent']}
+              </textarea>
+              <small>消息内容</small>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">消息类型 / Message Type</label>
+            <div class="am-u-sm-9">
+              <select name="messtype" id="messtype">
+                <if condition="$message_info['messtype'] eq '0'">
+                  <option value="0">系统通知</option>
+                  <else/>
+                  <option value="1">订单通知</option>
+                </if>
+              </select>
+              <small>消息类型</small>
+            </div>
+          </div>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" onclick="javascript:history.back(-1);" class="am-btn am-btn-primary">返回</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+
+<include file="Index:footer"/>

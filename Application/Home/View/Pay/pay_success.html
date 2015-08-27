@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>支付成功</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+</head>
+
+<body>
+<!--支付成功-->
+<div class="pay_success basewidth">
+		<div class="title1 text_right">
+        		<a href={:U('Home/Index/index')}>返回首页</a> |
+                <a href="{:U('Home/Pay/succrsspage')}?ordernum={$ordernum}">订单详情</a>
+        </div>
+        <div style="padding-bottom:50px;"></div>
+        <div class="c1">
+        		<img src="__PUBLIC__/home/img/ico_success.png">&nbsp;&nbsp;支付成功
+        </div>
+        <div class="c1">请填写物流信息以完成订单</div>
+        <div class="c1"><a href="{:U('Home/Pay/Write_express')}?ordernum={$ordernum}">请填写物流信>></a></div>
+        
+        <br><br>
+</div>
+
+
+
+</body>
+</html>

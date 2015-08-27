@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>企业注册</title>
+<link href="__PUBLIC__/home/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/home/css/others.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/home/js/jquery-1.11.2.min.js"></script>
+<script src="__PUBLIC__/home/js/js.js"></script>
+<script src="__PUBLIC__/home/js/area.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/uploadify/uploadify.css">
+<js file='__PUBLIC__/uploadify/jquery.uploadify.min.js'/>
+
+
+
+<script type="text/javascript">
+var Gid = document.getElementById;
+var showArea = function() {
+var province = Gid('s_province').value;
+var city = Gid('s_city').value;
+var county = Gid('s_county').value;
+if (province == city) {
+city = "";
+}
+}
+//Gid('s_county').setAttribute('onchange', 'showArea()');
+//
+//$(".sel_wrap").on("change", function() {
+//
+//
+ var s_province = $("#s_province").val();
+    var s_city = $("#s_city").val();
+    var s_country = $("#s_country").val();
+    var add = $("#add").val();
+
+
+
+
+
+
+
+     $(function() {
+    $('#file_upload').uploadify({
+        'swf'      : '__PUBLIC__/uploadify/uploadify.swf',
+        'uploader' : '{:U("Home/Regist/uploadify")}',
+        'buttonText' : '缩略图上传',
+        'onUploadSuccess' : function(file, data, response) {
+            $('#img').attr('src','__ROOT__/Uploads/'+ data);
+            $('#images').val(data);
+            $('#image_0').val($("#img").attr("src"));
+        },
+    });
+    $('#file_upload1').uploadify({
+        'swf'      : '__PUBLIC__/uploadify/uploadify.swf',
+        'uploader' : '{:U("Home/Regist/uploadify")}',
+        'buttonText' : '缩略图上传',
+        'onUploadSuccess' : function(file, data, response) {
+            $('#img1').attr('src','__ROOT__/Uploads/'+ data);
+            $('#images').val(data);
+             $('#image_1').val($("#img1").attr("src"));
+
+        },
+    });$('#file_upload2').uploadify({
+        'swf'      : '__PUBLIC__/uploadify/uploadify.swf',
+        'uploader' : '{:U("Home/Regist/uploadify")}',
+        'buttonText' : '缩略图上传',
+        'onUploadSuccess' : function(file, data, response) {
+            $('#img2').attr('src','__ROOT__/Uploads/'+ data);
+            $('#images').val(data);
+             $('#image_2').val($("#img2").attr("src"));
+        },
+    });$('#file_upload3').uploadify({
+        'swf'      : '__PUBLIC__/uploadify/uploadify.swf',
+        'uploader' : '{:U("Home/Regist/uploadify")}',
+        'buttonText' : '缩略图上传',
+        'onUploadSuccess' : function(file, data, response) {
+            $('#img3').attr('src','__ROOT__/Uploads/'+ data);
+            $('#images').val(data);
+        $('#image_3').val($("#img3").attr("src"));
+        },
+    });
+});
+
+
+
+
+function next_Regist_company() {
+ var company_name = $("#company_name").val();
+ var company_address = $("#company_address").val();
+ var str_data=$("#company_form input").map(function(){
+  return ($(this).attr("name")+'='+$(this).val());
+}).get().join("&") ;
+  //var agree = document.getElementById("check_agree").checked;
+      if(''== company_name){
+            alert('公司名称不能为空!');
+            return false;
+     }else if(''==company_address){
+            alert('公司地址不能为空!');
+            return false;
+     }else{
+             window.location.href="{:U('Home/Regist/Regist_company_success')}?status=1&"+str_data;
+       
+     }
+
+}
+</script>
+</head>
+
+<body style="background:#fff;" onload="_init_area()">
+<!--logo1内容-->
+<div class="logo1">
+		<div class="basewidth">
+        		<a class="logo_pic" href="##"><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <h3>企业注册</h3>
+        </div>
+</div>
+<!--注册-->
+<div class="regist basewidth">
+		<div style="padding-bottom:40px;"></div>
+        <div class="progressbar">
+        		<span class="tip">欢迎注册成为企业用户</span><center><img src="__PUBLIC__/home/img/progressbar_pic2.png"></center>
+        </div>
+        <div style="padding-bottom:25px;"></div>
+        <form action="" name="form1" id="form1" method="post">
+		<div class="title1 clearfix">
+        		<span class="sp1">公司信息</span>
+                <span class="sp2"></span>
+        </div>
+        <ul class="fm">
+                <li><label class="lb1">公司名称：</label><input class="ipt1" name="" id="company_name" type="text" autocomplete="off"></li>
+                <li class="shdz clearfix">
+                		<label class="lb1">公司所在地：</label>
+                		 <select ID="s_province" runat="server" name="s_province">
+                        </select> &nbsp;&nbsp;
+                        <select ID="s_city" runat="server" name="s_city">
+                        </select> &nbsp;&nbsp;
+                        <select ID="s_county" runat="server" name="s_county" onchange = "showArea()">
+                        </select>
+                        目前只支持北京地区
+                </li>
+                <li><label class="lb1">公司地址：</label><input class="ipt1" name="" id="company_address" type="text" autocomplete="off"></li>
+                <li class="department"><label class="lb1">企业人数：</label><input class="ipt1" name="" type="text" autocomplete="off" value="请选择">
+                		<div class="dropdown">
+                                <a href="##">请选择</a>
+                        		<a href="##">1-49</a>
+                                <a href="##">50-99</a>
+                                <a href="##">100-499</a>
+                                <a href="##">500-999</a>
+                                <a href="##">1000以上</a>
+                        </div><label>&nbsp;可不填写</label>
+                </li>
+                <li class="business"><label class="lb1">主营业务：</label>
+                		<div class="list">
+                        	<label><input name="" type="checkbox" value="">卫浴五金</label><label><input name="" type="checkbox" value="">灯饰电器</label>
+                                <label><input name="" type="checkbox" value="">智能家居</label><label><input name="" type="checkbox" value="">门窗地板</label>
+                                <label><input name="" type="checkbox" value="">壁纸涂刷</label><label><input name="" type="checkbox" value="">瓷砖石材</label>
+                                <label><input name="" type="checkbox" value="">吊顶窗帘</label><label><input name="" type="checkbox" value="">家具拼装</label>
+                        </div>
+                </li>
+                <li class="business"><label class="lb1">主营业务：</label>
+                		<div class="list">
+                        		<!-- <a href="##"><img src="__PUBLIC__/home/img/pic_bg1.png"></a> -->
+                                <img id="img" src="__PUBLIC__/home/img/pic_bg1.png" width="130" height="130" border="0" />
+    <input id="file_upload" name="file_upload" type="file" multiple="true" value="" />
+
+                        </div>
+                </li>
+                <li class="business"><label class="lb1">上传营业执照：</label>
+                		<div class="list">
+                        		<img id="img1" src="__PUBLIC__/home/img/pic_bg1.png" width="130" height="130" border="0" />
+                                         <input id="file_upload1" name="file_upload1" type="file" multiple="true" value="" />
+                                          <input id="image_1" type="hidden" value=""/>
+                        </div>
+                </li>
+                <li class="business"><label class="lb1">税务登记证：</label>
+                		<div class="list">
+                        		<img id="img2" src="__PUBLIC__/home/img/pic_bg1.png" width="130" height="130" border="0" />
+                                         <input id="file_upload2" name="file_upload2" type="file" multiple="true" value="" />
+                                          <input id="image_2" type="hidden" value=""/>
+                        </div>
+                </li>
+                <li class="business"><label class="lb1">法人授权：</label>
+                		<div class="list">
+                        		<img id="img3" src="__PUBLIC__/home/img/pic_bg1.png" width="130" height="130" border="0" />
+                                         <input id="file_upload3" name="file_upload3" type="file" multiple="true" value="" />
+                                          <input id="image_3" type="hidden" value=""/>
+                        </div>
+                </li>
+                <li><br><br></li>
+                <li><label class="lb1"></label><input class="btn2" name=""  onclick='next_Regist_company()' type="button"  value="立即注册"></li>
+        </ul>
+        </form>
+        
+        
+        
+        <br><br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div style="padding-bottom:30px;"></div>
+<div class="bot_nav2 basewidth">
+		<a href="##">关于安居易</a> |
+        <a href="##">免责声明</a> |
+        <a href="##">隐私声明</a> |
+        <a href="##">版权声明</a> |
+        <a href="##">联系我们</a> |
+        <a href="##">帮助我们</a> |
+        <a href="##">网站联盟</a>
+</div>
+<!--版权-->
+<p class="copyright basewidth">Copyright 2008-2014 AnJuyi.com All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;沪ICP背1402883号-1&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101050201483&nbsp;&nbsp;&nbsp;&nbsp;<a href="##">营业执照</a></p>
+<div class="certificate basewidth">
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic1.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic2.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic3.png"></a>
+        <a href="##"><img src="__PUBLIC__/home/img/hz_pic4.png"></a>
+</div>
+
+
+</body>
+</html>

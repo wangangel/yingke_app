@@ -1,0 +1,91 @@
+
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+
+
+
+  <!-- sidebar start -->
+ <div class="am-cf admin-main">
+<include file="Index:css"/>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商户列表</strong> / <small>Business List</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-md-6 am-cf">
+        <div class="am-fl am-cf">
+          <div class="am-btn-toolbar am-fl">
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">ID</th>
+                <th class="table-title">企业名</th>
+                <th class="table-title">企业电话</th>
+                <th class="table-author">企业邮箱</th>
+                <th class="table-author">审核状态</th>
+                <th class="table-date">登录日期</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="businessman_list" item="vo" key="k" >
+            <tr>
+              <td>{$vo.id}</td>
+              <td><a href="#">{$vo.username}</a></td>
+              <td>{$vo.phone}</td>
+              <td>{$vo.email}</td>
+              <td>
+              <if condition="$vo['status'] eq '0'">待审核
+                <else />已通过</if>
+              </td>
+              <td>{$vo.logintime|date="Y-m-d H:m",###}</td>   
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                  <in name="businessman_verify_show" value="$hava_authids">
+                <a href= {:U('admin/member/businessman_verify_show',array('id'=>$vo['id']))}><span class="am-icon-check"></span> 审核</a> |&nbsp;
+                </in>
+                <in name="businessman_edit_show" value="$hava_authids">
+                    <a href={:U('admin/member/businessman_edit_show',array('id'=>$vo['id']))}><span class="am-icon-pencil-square-o"></span> 编辑</a> |&nbsp;
+                </in>
+                  <in name="businessman_del" value="$hava_authids">
+                    <a href={:U('admin/member/businessman_del',array('id'=>$vo['id']))}>
+                      <span class="am-icon-trash-o"></span> 删除</a>
+                  </in>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </foreach>
+            
+          </tbody>
+        </table>
+
+    {$page}
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+<include file="Index:footer"/>

@@ -1,0 +1,261 @@
+
+<div class="top">
+        <div class="basewidth">
+                <div class="right">
+                        <span class="span_pictext">
+                                <img src="__PUBLIC__/home/img/ico_order.png"> <a href={:U('Home/Myspace/myorder_dfk_show')}>我的订单</a>
+                        </span>
+                        <span class="span_pictext">
+                                <img src="__PUBLIC__/home/img/ico_shopcar.png"> <a class="shoppingcar" href={:U('Home/shoppingcar/myshoppingcar')}>我的购物车<span class="num" id="cart_num">{$_SESSION['cart_count']}</span></a>
+                        </span>
+                        <span class="span_pictext">
+                                <img src="__PUBLIC__/home/img/ico_phone.png"> <a href={:U("home/download/download")}>下载安居易</a>
+                        </span>
+                </div>
+                
+                <span class="span_pictext">
+                        <img src="__PUBLIC__/home/img/star1.png"> <a href="javascript:AddFavorite(window.location,document.title);">收藏安居易</a>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                欢迎来到安居易&nbsp;
+             
+               <input type="hidden" id="user_name" value="{$usr['username']}"/>
+               <input type="hidden" id="user_id" value="{$usr['id']}"/>
+                        <if condition="$usr['username'] eq  NULL"> 
+      <span class="">
+                        <a class="color1" href={:U('Home/Login/login_show')}> 请登录</a>&nbsp;
+                        <a class="color1" href={:U('Home/Regist/regist_personal')}>注册</a>&nbsp;
+                        <a class="color1" href={:U('Admin/Login/login')}>管理中心</a>
+                </span>
+    <else/>
+     <span class="">
+
+                  
+                        <a class="color1" href={:U('Home/Myspace/myspace_show')}>{$_SESSION['username']}</a>
+                        <a class="color1" href={:U('Home/Login/logout')}>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        您有<a class="color1" href={:U('Home/Myspace/message_show')}>
+                        <if condition="$_SESSION['message_count'] eq ''">
+                             <span id="mess_count"  style="font-family:华文中宋; color:red; font-size:20px;">0</span>
+                        <else/>
+                        <span id="mess_count"  style="font-family:华文中宋; color:red; font-size:20px;">{$_SESSION['message_count']}</span>
+                        </if>
+                        </a>条消息未读！
+                        
+                  
+                    </span>
+    </if>
+              
+                
+                
+        </div>
+</div>
+
+<div class="logo1">
+        <div class="basewidth">
+                <a class="logo_pic" href={:U("home/index/index")}><img src="__PUBLIC__/home/img/logo1.png"></a>
+                <div class="search clearfix">
+                <form action="" method="get">
+                        <input class="ipt1 bg1" id="keywords" value="{$keywords}" type="text" placeholder="请输入关键字" autocomplete="off">
+                        <input class="ipt1 bg2" id="express" type="text" placeholder="物流动态" autocomplete="off">
+                        <input class="btn1" name="" onclick="search2()" type="button" value="搜索">
+                </form>
+                </div>
+        </div>
+</div>
+<!--导航-->
+
+<!--导航-->
+<nav>
+        <div class="basewidth">
+                <ul>
+                    <eq name="status" value="1">
+                <li><a class="sel" href={:U("home/index/index")}>首页</a></li>
+  <else/>
+<li><a  href={:U("home/index/index")}>首页</a></li></eq>
+                          <eq name="status" value="6">
+                 <li><a href="##" class="sel"  onmouseover="show1()";>配装服务</a>
+                                 <div class="nav_dpn" id="show">
+                                      <!--<a href="##">卫浴五金</a>
+                                        <a href="##">灯饰电器</a>
+                                        <a href="##">智能家居</a>
+                                        <a href="##">门窗地板</a>
+                                        <a href="##">壁纸涂刷</a>
+                                        <a href="##">瓷砖石材</a>
+                                        <a href="##">吊顶窗帘</a>
+                                        <a href="##">家具拼装</a>
+                                        <a href="##">测量服务</a> -->
+                                </div> 
+                        </li>
+            <else/>
+                 <li><a href="##"  onmouseover="show1()";>配装服务</a>
+                                 <div class="nav_dpn" id="show">
+                                      <!--   <a href="##">卫浴五金</a>
+                                        <a href="##">灯饰电器</a>
+                                        <a href="##">智能家居</a>
+                                        <a href="##">门窗地板</a>
+                                        <a href="##">壁纸涂刷</a>
+                                        <a href="##">瓷砖石材</a>
+                                        <a href="##">吊顶窗帘</a>
+                                        <a href="##">家具拼装</a>
+                                        <a href="##">测量服务</a> -->
+                                </div> 
+                        </li>
+            </eq>
+                        <eq name="status" value="7">
+               <li><a href="##" class="sel" onmouseover="show2()">基础建材</a>
+                                <div class="nav_dpn" id="show3">
+                                       <!--  <a href="##">瓦工辅材</a>
+                                        <a href="##">木工辅材</a>
+                                        <a href="##">水工辅材</a>
+                                        <a href="##">电工辅材</a>
+                                        <a href="##">油工辅材</a> -->
+                                </div> 
+                        </li>
+            <else/>
+               <li><a href="##" onmouseover="show2()">基础建材</a>
+                                <div class="nav_dpn" id="show3">
+                                       <!--  <a href="##">瓦工辅材</a>
+                                        <a href="##">木工辅材</a>
+                                        <a href="##">水工辅材</a>
+                                        <a href="##">电工辅材</a>
+                                        <a href="##">油工辅材</a> -->
+                                </div> 
+                        </li>
+            </eq>
+                        
+            <eq name="status" value="2">
+                <li><a class='sel' href={:U("home/shop/shop")}>商家资讯</a></li>
+            <else/>
+                <li><a href={:U("home/shop/shop")}>商家资讯</a></li>
+            </eq>
+
+            <eq name="status" value="3">
+                 <li><a class="sel" href={:U("home/activity/activity")}>安居活动</a></li>
+            <else/>
+                <li><a href={:U("home/activity/activity")}?time=90>安居活动</a></li>
+            </eq>
+            <eq name="status" value="4">
+                 <li><a  class="sel" href={:U("home/contact/contact")}>联系我们</a></li>
+            <else/>
+                <li><a href={:U("home/contact/contact")}>联系我们</a></li>
+            </eq>
+            <eq name="status" value="5">
+                  <li><a  class="sel" href={:U("home/about/about")}>关于我们</a></li>
+            <else/>
+                 <li><a href={:U("home/about/about")}>关于我们</a></li>
+            </eq>
+                        
+                       
+                        
+                       
+                </ul>  
+                <a class="warehouse" href={:U("home/address/address")}>安居城市仓库地址</a>    
+        </div>  
+</nav>
+
+
+
+
+<!-- <nav>
+        <ul class="basewidth">
+           
+                <li><a class="sel" href="##">首页</a></li>
+                <li><a class="sel" href="##">配装服务</a></li>
+                <li><a class="sel" href="##">基础建材</a></li>
+                <li><a class="sel" href="##">商家资讯</a></li>
+                <li><a class="sel" href="##">安居活动</a></li>
+                <li><a class="sel" href="##">联系我们</a></li>
+                <li><a href="##">关于我们</a></li>
+                 <volist name="channel_info" id="vo">
+                <li><a href="##">{$vo.name}</a>
+                        <div class="nav_dpn">
+                                <a href="##">卫浴五金</a>
+                                <a href="##">灯饰电器</a>
+                                <a href="##">智能家居</a>
+                                <a href="##">门窗地板</a>
+                                <a href="##">壁纸涂刷</a>
+                                <a href="##">瓷砖石材</a>
+                                <a href="##">吊顶窗帘</a>
+                                <a href="##">家具拼装</a>
+                                <a href="##">测量服务</a>
+                        </div>
+                </li>
+            </volist>
+        </ul>
+        <a class="warehouse" href="##">安居城市仓库地址</a>            
+</nav> -->
+<div style="padding-bottom:10px;"></div>
+
+
+
+ <script type="text/javascript">
+
+
+//ajax进行轮询
+ function getcount(){
+    var name = $("#user_name").val(); 
+    var user_id = $("#user_id").val();
+    if(name !="" && user_id != ""){
+         $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('home/login/getcount')}",
+                dataType:"json",
+                data:{userid:user_id},
+                timeout:80000,
+                success:function(data){
+                    //alert(data);
+                    $("#mess_count").empty()
+                     $("#mess_count").text(data);
+                  }
+                }/*,
+                complete : function(){
+                    if (error){}
+                        setTimeout(function(){connect();}, 10000); 
+                    }else{
+                        connect(); 
+                    }   
+                }*/); 
+    }
+        
+ }
+ setInterval("getcount()",300000);
+
+function search2(){
+    var keywords = $('#keywords').val();
+    var express = $('#express').val();
+    if(''==keywords && ''!= express){
+        window.location.href="{:U('Home/Express/express_show')}";
+    }else if(''!=keywords && ''==express ){
+        var url = "{:U('Home/search/tiaojiansearch')}?keywords="+keywords+"&lastid=&serverid=&order=id";
+        window.location.href=url;
+    }else if(''==keywords && express== ''){
+        alert("请输入关键字查询");
+    }else{
+        alert("物流查询不能和商品服务一起搜索哦！");
+    }
+}
+
+function show1(){
+     var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                document.getElementById('show').innerHTML=xhr.responseText; 
+            }
+        }
+        var url = "{:U('home/category/peizhuang_category')}";
+        xhr.open('get',url,true);
+        xhr.send(null);
+}
+function show2(){
+     var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                document.getElementById('show3').innerHTML=xhr.responseText; 
+            }
+        }
+        var url = "{:U('home/category/jiancai_category')}";
+        xhr.open('get',url,true);
+        xhr.send(null);
+}
+
+</script>
