@@ -251,9 +251,10 @@ class IndexController extends MobileController{
         if( $_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
-        //验证秘钥是否正确
+        //验证秘钥是否正确,用客户端唯一标识
         $token_model = M('usertoken');
         $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
@@ -280,7 +281,9 @@ class IndexController extends MobileController{
             }
             //这里是设置文件的url注意使用.不是+  
             $imgurl1 = $info1['savepath'].$info1['savename'];
-            output_data(array('picurl'=>$imgurl1));
+            $data = array();
+            $data['picurl'] = "http://localhost/chutao/Upload/" . $imgurl1;
+            output_data($data);
             
         }else{
              output_error("未选择图片上传");

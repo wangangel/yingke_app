@@ -13,25 +13,25 @@ class UserController extends MobileController{
    
     
     /**
-     * 登陆生成token
+     * 注册生成token,一个账号和设备一个token
      */
-    private function _get_token($id, $phone, $client) {
+    private function _get_token($id,$phone,$client_id) {
         $user_token = M('usertoken');
         //重新登陆后以前的令牌失效,删除之前的token
         $condition = array();
-        $condition['member_id'] = $id;
+        $condition['userid'] = $id;
         //下面这句可以开启多设备登录
-        $condition['client_type'] = $client;
+        $condition['client_id'] = $client_id;
         $user_token->where($condition)->delete();
-    
+
         //生成新的token
         $mb_user_token_info = array();
         $token = md5($phone . strval(NOW_TIME) . strval(rand(0,999999)));
         $mb_user_token_info['userid'] = $id;
         $mb_user_token_info['phone'] = $phone;
         $mb_user_token_info['token'] = $token;
-        $mb_user_token_info['login_time'] = NOW_TIME;
-        $mb_user_token_info['client_type'] = $client;
+        $mb_user_token_info['client_id'] = $client_id;
+        $mb_user_token_info['effect_time'] = NOW_TIME;
         $result = $user_token->add($mb_user_token_info);
         
         if($result) {
@@ -43,14 +43,14 @@ class UserController extends MobileController{
 
 
     /*
-     * 用户名注册
+     * 用户注册
      */
 	public function register(){
-        if($_REQUEST['username'] == NULL || $_REQUEST['password'] == NULL || $_REQUEST['attribute'] == NULL){
+        if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['phonecode'] == NULL || $_REQUEST['client_id'] == NULL){
              output_error('参数不全');
         }
-		$model_member	= M('user');
-		$result = $model_member->where(array('phone'=>$_REQUEST['phonenumber']))->find();
+		$user_model	= M('user');
+		$result = $user_model->where(array('phone'=>$_REQUEST['phonenumber']))->find();
 		if($result != NULL){
 		    output_error('已经存在该手机用户了！');
 		}
@@ -63,22 +63,33 @@ class UserController extends MobileController{
 		//接收数据
         $register_info = array();
         $register_info['password'] = md5($_REQUEST['password']);
-        $register_info['username'] = $_REQUEST['username'];
         $register_info['phone'] = $_REQUEST['phonenumber'];
-        $register_info['attribute'] = $_REQUEST['attribute'];
-        $register_info['isdelete'] = 0;
-        $member_info = $model_member->add($register_info);
-        if($member_info) {
-            $token = $this->_get_token($member_info, $register_info['phone'], $_REQUEST['client']);
+        //随机分配用户名,长度为6
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&-_~`/|';
+        $length = 6;
+        for ( $i = 0; $i < $length; $i++ )
+        {
+            // 这里提供两种字符获取方式
+            // 第一种是使用substr 截取$chars中的任意一位字符；
+            // 第二种是取字符数组$chars 的任意元素
+            // $password .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+            $username .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+        }
+
+        $register_info['nickname'] = $username;
+        $register_info['register_time'] = time();
+        $user_info = $user_model->add($register_info);
+        if($user_info) {
+            $token = $this->_get_token($user_info,$register_info['phone'],$_REQUEST['client_id']);
             if($token) {
                 output_data(array(
-                'userid' => $member_info,
+                'userid' => $user_info,
                 'phone'=>$register_info['phone'],
-                'username' => $register_info['username'],
+                'username' => $username,
                 'key' => $token
                 ));
             } else {
-                output_error('祝贺您成功注册安居易，请尝试登录');
+                output_error('祝贺您成功注册出淘，请尝试登录');
             }
         } else {
 			output_error("对不起，注册失败！");
@@ -96,29 +107,29 @@ class UserController extends MobileController{
         $intCode = rand(1,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
         $intPhone = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
         $intOptype = intval($_REQUEST['optype']);
-        $strSql = "select * from ajy_phonecode where phone=$intPhone and optype=$intOptype and status='0' and dateline>'".(time()-60)."'";
+        $strSql = "select * from ct_phonecode where phonenum=$intPhone and optype=$intOptype and status='0' and dateline>'".(time()-60)."'";
         $phonecode_model =  M('phonecode');
         $phonecode_info = $phonecode_model->query($strSql);
         $count = count($phonecode_info);
         if($count>0){
-            //数据库中有未失效的验证码
+            //数据库中有未失效的验证码,有效期为60秒
             output_error("您的验证码已经发送，请不要重复发送");
         }else{
             $arr = array();
-            $arr['phone'] = $intPhone;
-            $arr['phonecode'] = $intCode;
+            $arr['phonenum'] = $intPhone;
+            $arr['code'] = $intCode;
             $arr['optype'] = $intOptype;
             $arr['dateline'] = time();
             $arr['status'] = 0;
             $result = $phonecode_model->add($arr);
             if($result>0){
                 //向手机发送验证码
-                $post_data = "action=send&userid=&account=ajywangluokeji&password=200005&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【安居易网络科技】");
+                $post_data = "action=send&userid=&account=ajywangluokeji&password=200005&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【出淘客户端】");
                 $target = "http://sms.chanzor.com:8001/sms.aspx";
                 $arrResu = $this->Post_1($post_data,$target);
                 output_data(array(
-                'phone' => $intPhone,
-                'phonecode'=>$intCode,
+                'phonenum' => $intPhone,
+                'code'=>$intCode,
                 'optype' => $intOptype
                 
                 ));
@@ -157,14 +168,14 @@ class UserController extends MobileController{
     
 
     /*
-     *验证验证码
+     *验证验证码,验证后手机验证码失效
      */
     public function checkphonecode($phone,$code){
         // $intPhone = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
         // $intCode = intval($_REQUEST['code']);
         $intPhone =$phone;
         $intCode = $code;
-        $strSql = "update ajy_phonecode set status='1' where phone='$intPhone' and phonecode='$intCode'";
+        $strSql = "update ct_phonecode set status='1' where phonenum='$intPhone' and code='$intCode'";
         $phonecode_model =  M('phonecode');
         $result = $phonecode_model->execute($strSql);
         if($result == 0){
@@ -187,33 +198,62 @@ class UserController extends MobileController{
      * 登录
      */
     public function login(){
-        if($_REQUEST['username'] == null || $_REQUEST['password'] == null) {
-            output_error('用户名或密码错误！');
+        if($_REQUEST['username'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
+            output_error('参数不全！');
         }
-        $model_member = M('user');
+        $user_model = M('user');
+        //用户昵称登录的情况
         $arr = array();
-        $arr['username'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
+        $arr['nickname'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
         $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
         $arr['password']  = md5($arr['password']);
-        $member_info = $model_member->where($arr)->select();
-        if(!empty($member_info)) {
+        $user_info = $user_model->where($arr)->select();
+        if(!empty($user_info)) {
+            $token = $this->_get_token($user_info[0]['id'], $user_info[0]['phone'], $_REQUEST['client_id']);
+            if($token){
+                //更新登录时间
+                $res = $user_model->where($arr)->save(array('logtime'=>time()));
 
-            $token = $this->_get_token($member_info[0]['id'], $member_info[0]['phone'], $_REQUEST['client']);
-            if($token) {
-                
-                output_data(array(
-                'id' => $member_info[0]['id'],
-                'phone'=>$member_info[0]['phone'],
-                'username' => $member_info[0]['username'],
-                'headurl' => $member_info[0]['headurl'],
-                'key' => $token
-                ));
-            } else {
-                output_error('登陆失败');
+                $data = array();
+                $data['id'] = $user_info[0]['id'];
+                $data['phone'] = $user_info[0]['phone'];
+                $data['nickname'] = $user_info[0]['nickname'];
+                $data['headurl'] = $user_info[0]['headurl'];
+                $data['key'] = $token;
+                output_data($data);
+            }else{
+                output_error('登录失败');
             }
+           
         } else {
-            output_error('用户名密码错误');
+            //拿着手机号登录的情况
+            $arr = array();
+            $arr['phone'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
+            $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
+            $arr['password']  = md5($arr['password']);
+            $user_info1 = $user_model->where($arr)->select();
+            if(!empty($user_info1)){
+                $token = $this->_get_token($user_info[0]['id'], $user_info[0]['phone'], $_REQUEST['client_id']);
+                if($token){
+                    //更新登录时间
+                     $res = $user_model->where($arr)->save(array('logtime'=>time()));
+                     $data = array();
+                    $data['id'] = $user_info1[0]['id'];
+                    $data['phone'] = $user_info1[0]['phone'];
+                    $data['nickname'] = $user_info1[0]['nickname'];
+                    $data['headurl'] = $user_info1[0]['headurl'];
+                    $data['key'] = $token;
+                    output_data($data); 
+                }else{
+                    output_error('登陆失败');
+                }
+              
+            }else{
+                 output_error('登陆失败,账号或密码错误');
+            }
+           
         }
+        
     }
 
 
@@ -276,11 +316,9 @@ class UserController extends MobileController{
         $array = array();
         $array['token'] = $_REQUEST['key'];
         $array['userid'] = $_REQUEST['userid'];
-        $array['client_type'] = $_REQUEST['client'];
-
+        $array['client_id'] = $_REQUEST['client_id'];
         $model_user_token = M('usertoken');
         $result = $model_user_token->where($array)->delete();
-        //$result = $model_mb_user_token->delMbUserToken($array);
         if($result){
             $datas = array();
             $datas['msg'] = '退出成功！';
@@ -295,32 +333,26 @@ class UserController extends MobileController{
      * 忘记密码
      */
     public function forget_password(){
-        if($_REQUEST['phonenum'] == null){
-            output_error('请输入手机号码！');
+        if($_REQUEST['phonenum'] == null || $_REQUEST['password'] == null || $_REQUEST['code'] == null){
+            output_error('参数不全');
         }
-        if($_REQUEST['password'] == null){
-            output_error('请输入密码！');
-        }
-        if($_REQUEST['code'] == null){
-            output_error('请输入验证码！');
-        }
-        $model_user = M('user');
-        $member_info = $model_user->where(array('phone'=>$_REQUEST['phonenum']))->find();
-        if($member_info == null){
+
+        $user_model = M('user');
+        $user_info = $user_model->where(array('phone'=>$_REQUEST['phonenum']))->find();
+        if($user_info == null){
             output_error('不存在该用户！');
         }
         //如果原密码和现在的修改密码相同则直接提示密码修改成功
-        if($member_info['password'] == md5($_REQUEST['password'])){
+        if($user_info['password'] == md5($_REQUEST['password'])){
             $datas = array();
             $datas['msg'] = '修改成功，请登陆！';
             output_data($datas);
         }
         $model_code = M('phonecode');
         $array = array();
-        $array['phone'] = $_REQUEST['phonenum'];
-        $array['phonecode'] = $_REQUEST['code'];
+        $array['phonenum'] = $_REQUEST['phonenum'];
+        $array['code'] = $_REQUEST['code'];
         $codes = $model_code->where($array)->find();
-        
         //删除所有超过240秒的验证码
         $array = array();
         $array['dateline'] = array('LT',NOW_TIME-240);
@@ -331,10 +363,8 @@ class UserController extends MobileController{
         
         $array = array();
         $array['password'] = md5($_REQUEST['password']);
-        
         //将密码更新
-        $result = $model_user->where(array('phone'=>$_REQUEST['phonenum']))->save($array);
-
+        $result = $user_model->where(array('phone'=>$_REQUEST['phonenum']))->save($array);
         if($result){
             $datas = array();
             $datas['msg'] = '修改成功，请登陆！';
@@ -352,7 +382,7 @@ class UserController extends MobileController{
      /*
      * 获取个人信息
      */
-    public function my_info(){
+    public function user_info(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
              output_error('请先登录');
         }
@@ -360,6 +390,7 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
@@ -368,37 +399,313 @@ class UserController extends MobileController{
 
         $array = array();
         $array['userid'] = $_REQUEST['userid'];
-
         $model_user = M('user');
         $result = $model_user->where($array)->find();
-        //$result = $model_mb_user_token->delMbUserToken($array);
         if($result != NULL){
             $datas = array();
             $datas['userid'] = $result['id'];
-            $datas['username'] = $result['username'];
+            $datas['nickname'] = $result['nickname'];
             $datas['phone'] = $result['phone'];
-            $datas['telphone'] = $result['telphone'];
-            $datas['linkman'] = $result['linkman'];
-            $datas['department'] = $result['department'];
-            $datas['email'] = $result['email'];
-            $datas['coname'] = $result['coname'];
-            $datas['pcount'] = $result['pcount'];
-            $datas['logincount'] = $result['logincount'];
-            $datas['logintime'] = $result['logintime'];
-            $datas['status'] = $result['status'];
-            $datas['attribute'] = $result['attribute'];
-            $datas['headurl'] = $result['headurl'];
-            $datas['accounturl'] = $result['accounturl'];
-            $datas['bussinessurl'] = $result['bussinessurl'];
-            $datas['taxurl'] = $result['taxurl'];
-            $datas['empowerurl'] = $result['empowerurl'];
-            $datas['isdelete'] = $result['isdelete'];
-
+            $datas['logtime'] = $result['logtime'];
+            $datas['longitude'] = $result['longitude'];
+            $datas['latitude'] = $result['latitude'];
+            $datas['headpic'] = $result['headpic'];
+            $datas['income'] = $result['income'];
+            $datas['cost'] = $result['cost'];
+            $datas['attr'] = $result['attr'];
+            $datas['sex'] = $result['sex'];
+            $datas['goodspub_num'] = $result['goodspub_num'];
+            $datas['birthday'] = $result['birthday'];
+            $datas['role_ischange'] = $result['role_ischange'];
+            $datas['role_changetime'] = $result['role_changetime'];
+            $datas['register_time'] = $result['register_time'];
             output_data($datas);
         }else{
             output_error('没有该用户信息');
         }
     }
+
+
+    /*
+     *买家或卖家身份互换
+     */
+    public function role_change(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        if($_REQUEST['client_id'] == NULL || $_REQUEST['attr'] == NULL){
+            output_error('参数不全');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $user_model = M('user');
+        $arr = array();
+        $arr['attr'] = $_REQUEST['attr'];
+        $arr['role_ischange'] = 1;
+        $arr['role_changetime'] = time();
+        $result = $user_model->where(array('id'=>$_REQUEST['userid']))->save($arr);
+        if($result){
+            //角色变化成功
+            output_data(array('id'=>$result));
+        }else{
+            output_error('角色变化失败');
+        }
+
+    }
+
+
+
+
+
+
+    /*
+     *获取我的发布信息
+     */
+    public function mypublic_info(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }
+        //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //判断用户是买家还是卖家
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        if($user_info['attr'] == 0){
+            //买家
+            //获取我的发布,是在热卖商品订单里面
+            $hotorder_model = M('hotorder');
+            $hotorder_info = $hotorder_model->where(array('buyer_id'=>$_REQUEST['userid']))->select();
+            //获取我的发布的个数
+            $count = count($hotorder_info);
+            foreach ($hotorder_info as $k => $v) {
+                //再根据goodsid获取热卖商品详情
+                $hotgoods_model = M('hotgoods');
+                $hotgoods_info = $hotgoods_model->where(array('id'=>$v['goodsid']))->find();
+                $data = array();
+                $data['goodsinfo'][$k]['goodsid'] = $hotgoods_info['id'];
+                $data['goodsinfo'][$k]['goodsname'] = $hotgoods_info['goodsname'];
+                $data['goodsinfo'][$k]['goodprice'] = $hotgoods_info['goodprice'];
+                //根据服务区域的id获取国旗展示
+                $area_model = M('servicearea');
+                $arr['id'] = $hotgoods_info['area'];
+                $area_info = $area_model->where($arr)->find();
+                $data['goodsinfo'][$k]['country_pic'] = $area_info['country_picurl'];
+
+            }
+            $data['public_count'] = $count;
+            output_data($data);
+        }elseif($user_info['attr'] == 1){
+            //卖家
+            //获取我的发布,是在计时购商品中
+            $timegoods_model = M('timegoods');
+            $timegoods_info = $timegoods_model->where(array('userid'=>$_REQUEST['userid']))->select();
+            $data = array();
+            $count = count($timegoods_info);
+            foreach ($timegoods_info as $k => $v) {
+                $data['goodsinfo'][$k]['goodsid'] = $v['id'];
+                $data['goodsinfo'][$k]['goodsname'] = $v['goodsname'];
+                $data['goodsinfo'][$k]['goodsprice'] = $v['goodsprice'];
+                //根据服务区域的id获取国旗展示
+                $area_model = M('servicearea');
+                $arr['id'] = $v['area'];
+                $area_info = $area_model->where($arr)->find();
+                $data['goodsinfo'][$k]['country_pic'] = $area_info['country_picurl'];
+            }
+            $data['public_count'] = $count;
+            output_data($data);
+        }
+    }
+
+
+
+
+    /*
+     *获取用户可提现金额
+     */
+    public function user_tixian(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        //用户可提现金额=收入-消费
+        $tixian = $user_info['income'] - $user_info['cost'];
+        output_data(array('tixian'=>$tixian));
+    }
+
+
+
+
+    /*
+     *获取用户绑定银行卡的信息
+     *
+     */
+    public function user_bindcard(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $bindcard_model = M('bandcard');
+        $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
+
+        if(empty($bankcard_info)){
+            //该用户没有绑定银行卡信息
+            output_error("无绑定银行卡信息");
+        }else{
+
+            $data['userid'] = $bankcard_info['userid'];
+            $data['bankname'] = $bankcard_info['bankname'];
+            $data['card_username'] = $bankcard_info['card_username'];
+            $data['card_num'] = $bankcard_info['card_num'];
+            $data['phone'] = $bankcard_info['phone'];
+            output_data($data);
+        }
+
+    }
+
+
+
+
+    /*
+     * 用户绑定银行卡
+     * 
+     */
+    public function bind_bankcard(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+
+        if($_REQUEST['card_username'] == NULL || $_REQUEST['bankname'] == NULL || $_REQUEST['card_num'] == NULL || $_REQUEST['phone'] == NULL){
+            output_error('参数不全');
+        }
+        //先去查询该用户是否已经绑定过银行卡
+        $bindcard_model = M('bandcard');
+        $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
+        if(empty($bankcard_info)){
+            //该用户没有绑定银行卡信息
+            $opt['card_username'] = $_REQUEST['card_username'];
+            $opt['bankname'] = $_REQUEST['bankname'];
+            $opt['card_num'] = $_REQUEST['card_num'];
+            $opt['phone'] = $_REQUEST['phone'];
+            $opt['userid'] = $_REQUEST['userid'];
+            $res = $bindcard_model->add($opt);
+            if($res){
+                //绑定成功
+                output_data(array('id'=>$res));
+            }else{
+                output_error('银行卡绑定失败');
+            }
+        }else{
+            //该用户已经绑定银行卡了,执行更新操作
+            $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
+            $opt['card_username'] = $_REQUEST['card_username'];
+            $opt['bankname'] = $_REQUEST['bankname'];
+            $opt['card_num'] = $_REQUEST['card_num'];
+            $opt['phone'] = $_REQUEST['phone'];
+            $opt['userid'] = $_REQUEST['userid'];
+            $res = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->save($opt);
+            if($res){
+                //绑定成功
+                output_data(array('id'=>$res));
+            }else{
+                output_error('银行卡绑定失败');
+            }
+        }
+
+
+    }
+
+
+    /*
+     *余额提现
+     */
+    public function cash_tixian(){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['bankcard_id'] == NULL || $_REQUEST['money'] == NULL){
+            output_error('参数不全');
+        }
+        //判断用户的提现金额是否大于余额
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        //用户可提现金额=收入-消费
+        $tixian = $user_info['income'] - $user_info['cost'];
+        if($_REQUEST['money'] > $tixian){
+            output_error('提现金额大于余额');
+        }else{
+            $opt['userid'] = $_REQUEST['userid'];
+            $opt['outcash'] = $_REQUEST['money'];
+            $opt['card_id'] = $_REQUEST['bankcard_id'];
+            $opt['apply_time'] = time();
+            $cashout_model = M('cashout');
+            $res = $cashout_model->add($opt);
+            if($res){
+                output_data(array('id'=>$res));
+            }else{
+                output_error('提现申请失败');
+            }
+        }
+
+    }
+
+
+
 
 
 
@@ -414,6 +721,7 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
@@ -423,24 +731,17 @@ class UserController extends MobileController{
         $array = array();
         $array['userid'] = $_REQUEST['userid'];
 
-        $model_address = M('address');
+        $model_address = M('receivingaddr');
         $result = $model_address->where($array)->select();
-        //$result = $model_mb_user_token->delMbUserToken($array);
         $datas = array();
         if($result[0] != NULL){
             foreach ($result as $k => $v) {
                $datas[$k]['id'] = $v['id'];
                $datas[$k]['userid'] = $v['userid'];
-               $datas[$k]['userpro'] = $v['userpro'];
-               $datas[$k]['usercity'] = $v['usercity'];
-               $datas[$k]['usertown'] = $v['usertown'];
-               $datas[$k]['userstr'] = $v['userstr'];
-               $datas[$k]['consigner'] = $v['consigner'];
-               $datas[$k]['attribute'] = $v['attribute'];
-               $datas[$k]['isdefault'] = $v['isdefault'];
+               $datas[$k]['username'] = $v['username'];
                $datas[$k]['phone'] = $v['phone'];
-               $datas[$k]['youbian'] = $v['youbian'];
-               
+               $datas[$k]['address'] = $v['address'];
+               $datas[$k]['is_default'] = $v['is_default'];      
             }
            
 
@@ -466,32 +767,27 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['pro'] == NULL ||$_REQUEST['city'] == NULL || $_REQUEST['town'] == NULL || $_REQUEST['str'] == NULL || $_REQUEST['consigner'] == NULL || $_REQUEST['phone'] == NULL || $_REQUEST['id'] == NULL ){
+
+        if($_REQUEST['address'] == NULL ||$_REQUEST['username'] == NULL || $_REQUEST['phone'] == NULL){
             output_error('参数缺失');
         }
         $array = array();
         $tiaojian = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $tiaojian['id'] = $_REQUEST['id'];
-        $array['userpro'] = $_REQUEST['pro'];
-        $array['usercity'] = $_REQUEST['city'];
-        $array['usertown'] = $_REQUEST['town'];
-        $array['userstr'] = $_REQUEST['str'];
-        $array['consigner'] = $_REQUEST['consigner'];
+        $array['address'] = $_REQUEST['address'];
+        $array['username'] = $_REQUEST['username'];
         $array['phone'] = $_REQUEST['phone'];
-        $array['youbian'] = $_REQUEST['youbian'];
-        $array['attribute'] = intval($_REQUEST['attribute'])>0?intval($_REQUEST['attribute']):0;
-        $array['isdefault'] = intval($_REQUEST['isdefault'])>0?intval($_REQUEST['isdefault']):0;
-        $model_address = M('address');
-        $result = $model_address->where($tiaojian)->save($array);
+        $array['is_default'] = intval($_REQUEST['is_default'])>0?intval($_REQUEST['is_default']):0;
+        $model_address = M('receivingaddr');
+        $result = $model_address->where(array('userid'=>$_REQUEST['userid']))->save($array);
         if($result>0){
             $data = array();
-            $data['id'] = $tiaojian['id'];
+            $data['id'] = $result;
             output_data($data);
         }else{
             output_error('没有该用户的收货地址信息');
@@ -511,26 +807,22 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['pro'] == NULL ||$_REQUEST['city'] == NULL || $_REQUEST['town'] == NULL || $_REQUEST['str'] == NULL || $_REQUEST['consigner'] == NULL || $_REQUEST['phone'] == NULL ){
+        if($_REQUEST['address'] == NULL ||$_REQUEST['username'] == NULL || $_REQUEST['phone'] == NULL){
             output_error('参数缺失');
         }
         $array = array();
         $array['userid'] = $_REQUEST['userid'];
-        $array['userpro'] = $_REQUEST['pro'];
-        $array['usercity'] = $_REQUEST['city'];
-        $array['usertown'] = $_REQUEST['town'];
-        $array['userstr'] = $_REQUEST['str'];
-        $array['consigner'] = $_REQUEST['consigner'];
+        $array['address'] = $_REQUEST['address'];
+        $array['username'] = $_REQUEST['username'];
         $array['phone'] = $_REQUEST['phone'];
-        $array['youbian'] = $_REQUEST['youbian'];
-        $array['attribute'] = intval($_REQUEST['attribute'])>0?intval($_REQUEST['attribute']):0;
-        $array['isdefault'] = intval($_REQUEST['isdefault'])>0?intval($_REQUEST['isdefault']):0;
-        $model_address = M('address');
+        $array['is_default'] = intval($_REQUEST['is_default'])>0?intval($_REQUEST['is_default']):0;
+        $model_address = M('receivingaddr');
         $result = $model_address->add($array);
         if($result>0){
             $data = array();
@@ -1200,27 +1492,35 @@ class UserController extends MobileController{
         //验证秘钥是否正确
         $token_model = M('usertoken');
         $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['phone'] == NULL && $_REQUEST['username'] == NULL){
+        if($_REQUEST['birthday'] == NULL && $_REQUEST['nickname'] == NULL && $_REQUEST['sex'] == NULL && $_REQUEST['headpic'] == NULL){
             output_error("没有需要修改的参数");
         }
         $arrOpt = array();
-        $arrOpt['username'] = $_REQUEST['username'];
-        $arrOpt['phone'] = $_REQUEST['phone'];
-        
+        $arrOpt['nickname'] = $_REQUEST['nickname'];
+        $arrOpt['birthday'] = $_REQUEST['birthday'];
+        $arrOpt['sex'] = $_REQUEST['sex'];
+        $arrOpt['headpic'] = $_REQUEST['headpic'];
         $user_model = M("user");
         //先去数据库查询出该用户数据
         $result = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
-        if($arrOpt['username'] == NULL){
-            $arrOpt['username'] = $result['username'];
+        if($arrOpt['nickname'] == NULL){
+            $arrOpt['nickname'] = $result['nickname'];
         }
-        if($arrOpt['phone'] == NULL){
-            $arrOpt['phone'] = $result['phone'];
+        if($arrOpt['birthday'] == NULL){
+            $arrOpt['birthday'] = $result['birthday'];
+        }
+        if($arrOpt['sex'] == NULL){
+            $arrOpt['sex'] = $result['sex'];
+        }
+        if($arrOpt['headpic'] == NULL){
+            $arrOpt['headpic'] = $result['headpic'];
         }
         $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($arrOpt);
         if($res){

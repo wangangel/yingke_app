@@ -5,7 +5,7 @@
 
 一.获取手机验证码
 接口链接：
-http://www.edeco.cc/index.php/api/user/getphonecode?phone=13310142323&optype=1
+http://localhost/chutao/index.php/api/user/getphonecode?phone=18651551916&optype=1
 
 接口参数：
 phone : 手机号
@@ -13,15 +13,19 @@ optype : 操作类型（1：注册时获取验证码；2：重置密码时候获取验证码）
 
 返回值：
 "errresult":true|false 执行成功返回true，执行失败返回false
-datas : phone->号码 phonecode->验证码  optype:1->注册时获取的验证码 2->重置密码时候获取验证码
+datas : 
+    phonenum->号码 
+    code->验证码  
+    optype:1->注册时获取的验证码 
+    2->重置密码时候获取验证码
 
 
 
 
 
-二.第三方登录
+二.第三方登录------未完成
 接口链接：
-http://www.edeco.cc/index.php/api/user/third_login?type=qq
+http://localhost/chutao/index.php/api/user/third_login?type=qq
 接口参数：
 type:qq/sinna/weixin
 
@@ -33,15 +37,13 @@ datas :
 
 
 三、用户注册
-    请求地址：http://www.edeco.cc/index.php/api/user/register?username=老王&phonenumber=13310142323&password=laowang&attribute=2&phonecode=809695
+    请求地址：http://localhost/chutao/index.php/api/user/register?phonenumber=18651551916&password=juping&phonecode=711360&client_id=qwert
 
     接口参数：：
-        username->昵称 
         phonenumber->手机号码 
         password->密码 
         phonecode->手机验证码
-        attribute->0:管、1:企业、2:个人
-
+        client_id->客户端设备唯一标识,不同设备的标识不同
     返回值：
     "errresult":true|false 执行成功返回true，执行失败返回false
     datas:
@@ -56,12 +58,14 @@ datas :
 
 
 四、用户登录
-    请求地址：http://www.edeco.cc/index.php/api/user/login?username=老王&password=laowang&client=2
+    请求地址：http://localhost/chutao/index.php/api/user/login?username=,@iiVb&password=juping&client_id=qwert&longitude=&latitude=
 
     接口参数：：
-        username->用户名 
+        username->用户名或手机号码
         password->密码
-        client->设备：1->安卓，2->ios
+        client_id->客户端设备唯一标识
+        longitude->经度
+        latitude->纬度
 
     返回值：
     "errresult":true|false 执行成功返回true，执行失败返回false
@@ -77,12 +81,12 @@ datas :
 
 
 五、用户退出登录
-    请求地址：http://www.edeco.cc/index.php/api/user/logout?key=185cec097453bec9799cc683e61e34d9&userid=85&client=2
+    请求地址：http://localhost/chutao/index.php/api/user/logout?key=8880ad588a0e3feb0cab71feffa76049&userid=1&client_id=qwert
 
     接口参数：：
         key->秘钥 
         userid->用户id
-        client->设备：1->安卓，2->ios
+        client->设备唯一标识
 
     返回值：
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -95,7 +99,7 @@ datas :
 
 
 六、忘记密码
-     请求地址：http://www.edeco.cc/index.php/api/user/forget_password?phonenum=18651551916&password=123123&code=819871
+     请求地址：http://localhost/chutao/index.php/api/user/forget_password?phonenum=18651551916&password=123123&code=985671
 
     接口参数：：
         phonenum->手机号码 
@@ -110,8 +114,276 @@ datas :
 
 
 
+
+七.获取用户个人信息
+    请求地址：http://localhost/chutao/index.php/api/user/user_info?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&client_id=qwert
+    接口参数:
+        userid:
+        key:
+        client_id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+        "userid": ,
+        "nickname": ,
+        "phone": ,
+        "logtime": ,
+        "longitude": 登录经度,
+        "latitude": 登录纬度,
+        "headpic": 头像,
+        "income": 收入,
+        "cost": 消费,
+        "attr": 0---买家,1----卖家
+        "sex": 性别,
+        "goodspub_num": 发布商品数量,
+        "birthday": 生日,
+        "role_ischange": 0----未变换,1------已变换
+        "role_changetime": 变换时间,
+        "register_time": 注册时间
+    }
+
+
+
+
+
+八.修改个人信息接口
+请求地址：http://localhost/chutao/index.php/api/user/editor_userinfo?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&nickname=久居&sex=男&birthday=十二月三十日&client_id=qwert
+  参数：
+       必须参数：
+       userid:
+       key:
+       client_id->客户端唯一标识
+       可添加参数：
+       nickname:
+       sex:性别
+       birthday:生日
+       headpic:http://localhost/chutao/Upload/2015-08-27/55deb6edcb2e2.jpg
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+        error:错误描述，执行成功没有该字段
+            datas: 
+                   id:用户id
+
+
+
+
+
+九.上传图片接口
+  请求地址：http://localhost/chutao/index.php/api/index/add_pic
+    接口参数：：
+        userid->用户id
+        photo->图片
+        key->秘钥
+        client_id->客户端唯一标识
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   picurl:图片url
+
+
+
+
+
+十.买家或卖家身份互换接口
+ 请求地址：http://localhost/chutao/index.php/api/user/role_change?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&attr=1&client_id=qwert
+    接口参数：：
+        userid->用户id
+        key->秘钥
+        attr->0:买家,1:卖家
+        client_id->客户端唯一标识
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id
+
+
+
+
+十一.获取我的发布接口
+ 请求地址：http://localhost/chutao/index.php/api/user/mypublic_info?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    接口参数：：
+        userid->用户id
+        key->秘钥
+        client_id->客户端唯一标识
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id
+
+
+
+
+十二.获取用户可提现金额
+请求地址：http://localhost/chutao/index.php/api/user/user_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    接口参数:
+        userid:
+        key:
+        client_id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          tixian
+    }
+
+
+
+
+十三.获取用户绑定银行卡信息
+请求地址：http://localhost/chutao/index.php/api/user/user_bindcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    接口参数:
+        userid:
+        key:
+        client_id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+    }
+
+
+
+
+十四.绑定银行卡
+请求地址：http://localhost/chutao/index.php/api/user/bind_bankcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&card_username=久居&bankname=工商银行&card_num=123456789&phone=789456123
+    接口参数:
+        userid:
+        key:
+        client_id
+        card_username-----持卡人姓名
+        bankname-----开户行
+        card_num-------卡号
+        phone--------预留手机号
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          id
+    }
+
+
+
+
+
+十五.余额提现
+请求地址：http://localhost/chutao/index.php/api/user/cash_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&bankcard_id=1&money=300
+ 接口参数:
+        userid:
+        key:
+        client_id
+        bankcard_id-------绑定的银行卡id
+        money---------提现金额
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          id
+    }
+
+
+
+
+十六.获取我的收获地址
+请求地址：http://localhost/chutao/index.php/api/user/my_address?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    接口参数：：
+        userid
+        key
+        client_id
+        
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:
+                   userid:
+                   username:收货人
+                   is_default:默认为0,1为默认地址
+                   phone:联系电话
+                   address:收货地址
+
+
+
+十七.修改我的收获地址
+请求地址：http://localhost/chutao/index.php/api/user/edit_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=江苏省宿迁市泗阳县西康创业园302宿迁蜂鸟科技网络有限公司&username=小明&is_default=0&phone=18815551888
+    接口参数：：
+        userid
+        key
+        client_id
+        address
+       is_default:默认为0,1为默认地址
+       phone:联系电话--------------------必需
+       username
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:收货地址id
+
+
+
+
+十八.添加我的收获地址
+ 请求地址：http://localhost/chutao/index.php/api/user/add_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=江苏省宿迁市泗阳县西康创业园&username=老陈&phone=18888888888&is_default=1
+    接口参数：：
+        userid
+        key
+       address
+       username
+      is_default
+       phone
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                   id:收货地址id
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    
+
+
 七、获取首页优惠
-     请求地址：http://www.edeco.cc/index.php/api/index/coupon?ps=10
+     请求地址：http://localhost/chutao/index.php/api/index/coupon?ps=10
 
     接口参数：：
         ps->获取几条优惠信息展示，不传默认是6条
@@ -136,7 +408,7 @@ datas :
 
 
 八、图片轮播
-    请求地址：http://www.edeco.cc/index.php/api/index/banner?ps=5
+    请求地址：http://localhost/chutao/index.php/api/index/banner?ps=5
 
     接口参数：：
         ps->获取几条轮播图片展示，不传默认是5条
@@ -160,7 +432,7 @@ datas :
 
 
 九、好评服务(根据好评的数量来获取服务首页展示)
-    请求地址：http://www.edeco.cc/index.php/api/index/goodcomment_service?ps=4&page=1
+    请求地址：http://localhost/chutao/index.php/api/index/goodcomment_service?ps=4&page=1
 
     接口参数：：
         ps->获取几条服务展示，不传默认是4条
@@ -190,7 +462,7 @@ datas :
 
                           
 十、分享(未做)
-     请求地址：http://www.edeco.cc/index.php/api/index/dianzan?id=4
+     请求地址：http://localhost/chutao/index.php/api/index/dianzan?id=4
 
     接口参数：：
         ps->获取几条轮播图片展示，不传默认是4条
@@ -202,7 +474,7 @@ datas :
 
 
 十一、点赞
-    请求地址：http://www.edeco.cc/index.php/api/index/dianzan?commentid=4&userid=54&key=
+    请求地址：http://localhost/chutao/index.php/api/index/dianzan?commentid=4&userid=54&key=
 74253df69ebba8b7f22906e06e35f227
     接口参数：：
         commentid->对应评论的id
@@ -218,7 +490,7 @@ datas :
 
 
 十二、用户评论列表(根据商品id)
-     请求地址：http://www.edeco.cc/index.php/api/index/comment_list?goodsid=13&ps=10&page=1
+     请求地址：http://localhost/chutao/index.php/api/index/comment_list?goodsid=13&ps=10&page=1
     接口参数：：
         goodsid->商品id
         ps->每页显示的条数
@@ -258,7 +530,7 @@ datas :
 
 
 十三、上传图片
-    请求地址：http://www.edeco.cc/index.php/api/index/add_pic
+    请求地址：http://localhost/chutao/index.php/api/index/add_pic
     接口参数：：
         userid->用户id
         photo->图片
@@ -273,7 +545,7 @@ datas :
 
 
 十四、发布评论
-    请求地址：http://www.edeco.cc/index.php/api/index/add_comment?userid=85&goodsid=16&content=东西实在太好了&grade=2&key=4eecb92ec1d98a63ab9000f760ae80a0&comefrom=上海&picurl=2015-06-28/558f49bf685c2.jpg&star_num=4
+    请求地址：http://localhost/chutao/index.php/api/index/add_comment?userid=85&goodsid=16&content=东西实在太好了&grade=2&key=4eecb92ec1d98a63ab9000f760ae80a0&comefrom=上海&picurl=2015-06-28/558f49bf685c2.jpg&star_num=4
     接口参数：：
         userid->用户id
         goodsid->商品id
@@ -294,7 +566,7 @@ datas :
 
 
 十五、回复评论
-     请求地址：http://www.edeco.cc/index.php/api/index/reply_comment?userid=54&goodsid=13&content=东西实在太好了&key=74253df69ebba8b7f22906e06e35f227&picurl=2015-06-28/558f49bf685c2.jpg&comment_id=17
+     请求地址：http://localhost/chutao/index.php/api/index/reply_comment?userid=54&goodsid=13&content=东西实在太好了&key=74253df69ebba8b7f22906e06e35f227&picurl=2015-06-28/558f49bf685c2.jpg&comment_id=17
 
       接口参数：：
         userid->用户id
@@ -323,7 +595,7 @@ datas :
 模块二.安居活动
 
 十六、活动列表
-    请求地址：http://www.edeco.cc/index.php/api/activity/activity_list?ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/activity/activity_list?ps=10&page=1
     接口参数：：
         ps->获取每页的条数,不传默认每页显示8条
         page->第几页,不传默认是第一页
@@ -344,7 +616,7 @@ datas :
 
 
 十七、活动详情
-    请求地址：http://www.edeco.cc/index.php/api/activity/activity_detail?act_id=18
+    请求地址：http://localhost/chutao/index.php/api/activity/activity_detail?act_id=18
     接口参数：：
         act_id=18->活动id
     返回值：
@@ -372,7 +644,7 @@ datas :
 模块三.商家资讯
 
 十八、资讯列表
-    请求地址：http://www.edeco.cc/index.php/api/zixun/zixun_list?ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/zixun/zixun_list?ps=10&page=1
     接口参数：：
         ps->获取每页的条数,不传默认每页显示8条
         page->第几页,不传默认是第一页
@@ -394,7 +666,7 @@ datas :
 
 
 十九、资讯详情
-    请求地址：http://www.edeco.cc/index.php/api/zixun/zixun_detail?zixun_id=23
+    请求地址：http://localhost/chutao/index.php/api/zixun/zixun_detail?zixun_id=23
     接口参数：：
         zixun_id=23->资讯id
     返回值：
@@ -415,7 +687,7 @@ datas :
 
 
 二十、优惠券列表
-    请求地址：http://www.edeco.cc/index.php/api/zixun/coupon_list?ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/zixun/coupon_list?ps=10&page=1
     接口参数：：
         ps->获取每页的条数,不传默认每页显示8条
         page->第几页,不传默认是第一页
@@ -440,7 +712,7 @@ datas :
 
 
 二十一、领取优惠券
-    请求地址：http://www.edeco.cc/index.php/api/zixun/receive_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227&coupon_id=1
+    请求地址：http://localhost/chutao/index.php/api/zixun/receive_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227&coupon_id=1
     接口参数：：
         userid->用户id
         key->秘钥
@@ -455,7 +727,7 @@ datas :
 
 
 二十二、我的优惠券
-    请求地址：http://www.edeco.cc/index.php/api/zixun/my_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227
+    请求地址：http://localhost/chutao/index.php/api/zixun/my_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227
     接口参数：：
         userid->用户id
         key->秘钥
@@ -480,7 +752,7 @@ datas :
 
 
 二十三、城市仓库
-    请求地址：http://www.edeco.cc/index.php/api/index/city_kufang?ps=4&page=1
+    请求地址：http://localhost/chutao/index.php/api/index/city_kufang?ps=4&page=1
     接口参数：：
         ps->每页显示的条数,默认每页显示4条
         page->第几页
@@ -504,7 +776,7 @@ datas :
 
 
 二十四、商品详情
-    请求地址：http://www.edeco.cc/index.php/api/goods/goods_detail?goodsid=35&attr=1
+    请求地址：http://localhost/chutao/index.php/api/goods/goods_detail?goodsid=35&attr=1
     接口参数：：
         goodsid->商品id
         attr:0->服务;1->商品
@@ -536,7 +808,7 @@ datas :
 
 
 二十五、服务详情
-    请求地址：http://www.edeco.cc/index.php/api/goods/server_detail?serverid=32&attr=0
+    请求地址：http://localhost/chutao/index.php/api/goods/server_detail?serverid=32&attr=0
     接口参数：：
         serverid->服务id
         attr:0->服务;1->商品
@@ -567,7 +839,7 @@ datas :
 
 
 二十六、我的购物车
-    请求地址：http://www.edeco.cc/index.php/api/goods/my_shoppingcart?userid=1&key=b94b3af0db5e920231d9d84bd8980991&page=1&ps=10
+    请求地址：http://localhost/chutao/index.php/api/goods/my_shoppingcart?userid=1&key=b94b3af0db5e920231d9d84bd8980991&page=1&ps=10
     接口参数：：
         userid->用户id
         key:秘钥
@@ -604,7 +876,7 @@ datas :
 
 
 二十七、提交订单
-    请求地址：http://www.edeco.cc/index.php/api/goods/add_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&addid=14&totalprice=3000&orderstatus=0&billtype=工程款&billhead=0&billcontent=宿迁蜂鸟网络科技有限公司&expresstype=0&address=泗阳县&istoked=0&isurgent=0&urgentshuom=速度快点&attribute=1&goodsid=24&goodscount=2
+    请求地址：http://localhost/chutao/index.php/api/goods/add_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&addid=14&totalprice=3000&orderstatus=0&billtype=工程款&billhead=0&billcontent=宿迁蜂鸟网络科技有限公司&expresstype=0&address=泗阳县&istoked=0&isurgent=0&urgentshuom=速度快点&attribute=1&goodsid=24&goodscount=2
     接口参数：
         必需参数:
             userid->用户id
@@ -653,7 +925,7 @@ datas :
 
 
 二十八、服务/商品列表
-    请求地址：http://www.edeco.cc/index.php/api/goods/goods_list?ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/goods/goods_list?ps=10&page=1
     接口参数：：
         ps->获取每页的条数,不传默认每页显示8条
         page->第几页,不传默认是第一页
@@ -686,7 +958,7 @@ datas :
 
 
 二十九、我的个人信息
-    请求地址：http://www.edeco.cc/index.php/api/user/my_info?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    请求地址：http://localhost/chutao/index.php/api/user/my_info?userid=1&key=b94b3af0db5e920231d9d84bd8980991
     接口参数：：
        userid
        key
@@ -717,7 +989,7 @@ datas :
 
 
 三十、获取我的收货地址
-    请求地址：http://www.edeco.cc/index.php/api/user/my_address?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    请求地址：http://localhost/chutao/index.php/api/user/my_address?userid=1&key=b94b3af0db5e920231d9d84bd8980991
     接口参数：：
         userid
         key
@@ -745,7 +1017,7 @@ datas :
 
 
 三十一、修改我的收货地址
-    请求地址：http://www.edeco.cc/index.php/api/user/edit_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=小明&attribute=1&isdefault=1&phone=13355446688&youbian=223221&id=13
+    请求地址：http://localhost/chutao/index.php/api/user/edit_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=小明&attribute=1&isdefault=1&phone=13355446688&youbian=223221&id=13
     接口参数：：
         userid
         key
@@ -770,7 +1042,7 @@ datas :
 
 
 三十二、增加我的收货地址
-    请求地址：http://www.edeco.cc/index.php/api/user/add_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=老王&attribute=0&isdefault=0&phone=13355448888&youbian=223221
+    请求地址：http://localhost/chutao/index.php/api/user/add_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=江苏省&city=宿迁市&town=泗阳县&str=西康创业园302宿迁蜂鸟科技网络有限公司&consigner=老王&attribute=0&isdefault=0&phone=13355448888&youbian=223221
     接口参数：：
         userid
         key
@@ -797,7 +1069,7 @@ datas :
 
 
 三十二、删除我的收货地址
-    请求地址：http://www.edeco.cc/index.php/api/user/del_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&add_id=14
+    请求地址：http://localhost/chutao/index.php/api/user/del_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&add_id=14
     接口参数：：
         userid
         key
@@ -818,7 +1090,7 @@ datas :
 
 
 三十三、修改昵称
-    请求地址：http://www.edeco.cc/index.php/api/user/edit_nickname?key=2d43290ba0c52a49c5ddff6bc1adf1be&userid=54&username=老王新昵称
+    请求地址：http://localhost/chutao/index.php/api/user/edit_nickname?key=2d43290ba0c52a49c5ddff6bc1adf1be&userid=54&username=老王新昵称
     接口参数：：
         userid
         key
@@ -836,7 +1108,7 @@ datas :
 
 
 三十四、我的订单列表
-    请求地址：http://www.edeco.cc/index.php/api/user/my_orderlist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/user/my_orderlist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
     接口参数：：
         userid
         key
@@ -855,7 +1127,7 @@ datas :
 
 
 三十五、删除订单
-    请求地址：http://www.edeco.cc/index.php/api/user/del_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ordernum=D011507010001
+    请求地址：http://localhost/chutao/index.php/api/user/del_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ordernum=D011507010001
     接口参数：：
         userid
         key
@@ -874,7 +1146,7 @@ datas :
 
 
 三十六、已取消的订单列表
-    请求地址：http://www.edeco.cc/index.php/api/user/my_cancellist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/user/my_cancellist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
     接口参数：：
         userid
         key
@@ -895,7 +1167,7 @@ datas :
 
 
 三十七、已完成的订单列表
-    请求地址：http://www.edeco.cc/index.php/api/user/my_completelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/user/my_completelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
     接口参数：：
         userid
         key
@@ -914,7 +1186,7 @@ datas :
 
 
 三十八、待收货的订单列表
-    请求地址：http://www.edeco.cc/index.php/api/user/my_shouhuolist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/user/my_shouhuolist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
     接口参数：：
         userid
         key
@@ -933,7 +1205,7 @@ datas :
 
 
 三十九、我的预约
-    请求地址：http://www.edeco.cc/index.php/api/user/my_yuyuelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&isorder=0&flag=0
+    请求地址：http://localhost/chutao/index.php/api/user/my_yuyuelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&isorder=0&flag=0
     接口参数：：
         userid
         key
@@ -955,7 +1227,7 @@ datas :
 
 
 四十、我的收藏
-    请求地址：http://www.edeco.cc/index.php/api/user/my_store?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    请求地址：http://localhost/chutao/index.php/api/user/my_store?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
     接口参数：：
         userid
         key
@@ -974,7 +1246,7 @@ datas :
 
 
 四十一、我的消息
-    请求地址：http://www.edeco.cc/index.php/api/user/my_message?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&message_type=0
+    请求地址：http://localhost/chutao/index.php/api/user/my_message?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&message_type=0
     接口参数：：
         userid
         key
@@ -1000,7 +1272,7 @@ datas :
 
 
 四十二、条件搜索
-    请求地址：http://www.edeco.cc/index.php/api/goods/tiaojian_search?ps=10&page=1&attr=0&keywords=进&channelid=4&price=flag1&order=sale_count
+    请求地址：http://localhost/chutao/index.php/api/goods/tiaojian_search?ps=10&page=1&attr=0&keywords=进&channelid=4&price=flag1&order=sale_count
     接口参数：：
         ps
         page
@@ -1023,7 +1295,7 @@ datas :
 后添加的接口文档
 
 1.上传头像接口
-请求地址：http://www.edeco.cc/index.php/api/user/add_headpic?userid=85&key=89e47eefef73109834ede398850e871b&photo=2015-06-28/558f49bf685c2.jpg
+请求地址：http://localhost/chutao/index.php/api/user/add_headpic?userid=85&key=89e47eefef73109834ede398850e871b&photo=2015-06-28/558f49bf685c2.jpg
 参数：
        userid:
        key:
@@ -1041,7 +1313,7 @@ datas :
 
 
  2、修改用户信息接口
- 请求地址：http://www.edeco.cc/index.php/api/user/editor_userinfo?userid=85&key=89e47eefef73109834ede398850e871b&phone=18012345678&username=老王
+ 请求地址：http://localhost/chutao/index.php/api/user/editor_userinfo?userid=85&key=89e47eefef73109834ede398850e871b&phone=18012345678&username=老王
   参数：
        必须参数：
        userid:
@@ -1061,7 +1333,7 @@ datas :
 
 
 3、添加收藏接口 
-请求地址：http://www.edeco.cc/index.php/api/user/add_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+请求地址：http://localhost/chutao/index.php/api/user/add_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
    参数：  
        userid:
        key:
@@ -1080,7 +1352,7 @@ datas :
 
 
 4、加入购物车接口:
-请求地址：http://www.edeco.cc/index.php/api/user/add_shoppingcart?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11&goodscount=3&acount=150
+请求地址：http://localhost/chutao/index.php/api/user/add_shoppingcart?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11&goodscount=3&acount=150
     参数：
        userid:
        key:
@@ -1106,7 +1378,7 @@ datas :
 
 
  5、取消收藏接口
- 请求地址：http://www.edeco.cc/index.php/api/user/cancel_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+ 请求地址：http://localhost/chutao/index.php/api/user/cancel_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
     参数：  
        userid:
        key:
