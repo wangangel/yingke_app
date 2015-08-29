@@ -201,12 +201,14 @@ datas :
 
 
 
-十一.获取我的消息-----未完成
- 请求地址：http://localhost/yingke/index.php/api/user/my_message?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&client_id=qwert
+十一.获取我的消息(用户发送的)
+ 请求地址：http://localhost/yingke/index.php/api/user/my_message?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
         key->秘钥
         client_id->客户端唯一标识
+        ps
+        page
     返回值：
         "errresult":true|false 执行成功返回true，执行失败返回false
         datas:

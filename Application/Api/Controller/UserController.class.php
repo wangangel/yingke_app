@@ -1583,8 +1583,9 @@ class UserController extends MobileController{
         $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['messtype'] = intval($_REQUEST['message_type'])>0?$_REQUEST['message_type']:0;
+        $array['m_target'] = $_REQUEST['userid'];
+        $array['status'] = 'user';
+        $array['m_isdelete'] = 'no';
         $message_model = M('message');
         $result = $message_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
         if($result[0] == NULL){
@@ -1593,12 +1594,16 @@ class UserController extends MobileController{
             $data = array();
             foreach ($result as $k => $v) {
                 $data[$k]['id'] = $v['id'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['sendname'] = $v['sendname'];
-                $data[$k]['title'] = $v['title'];
-                $data[$k]['messcontent'] = htmlspecialchars($v['messcontent']);
-                $data[$k]['messtype'] = $v['messtype'];
-                $data[$k]['messagetime'] = $v['messagetime'];
+                $data[$k]['m_content'] = $v['m_content'];
+                $data[$k]['m_date'] = $v['m_date'];
+               //获取消息发送人的信息
+               $user_model = M('user');
+               $condition['id'] = $v['m_user'];
+               $sender_info = $user_model->where($condition)->find();
+               $data[$k]['sender_info']['id'] = $sender_info['id'];
+               $data[$k]['sender_info']['ni_name'] = $sender_info['ni_name'];
+               $data[$k]['sender_info']['head_url'] = $sender_info['head_url'];
+               $data[$k]['sender_info']['sex'] = $sender_info['sex'];
             }
             output_data($data);
         }   
