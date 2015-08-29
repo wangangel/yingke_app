@@ -10,7 +10,7 @@ return array(
     //'MODULE_ALLOW_LIST' => array('Api', 'Admin','Home'),
     // 设置禁止访问的模块列表
     'DB_TYPE'               =>  'mysql',                // 数据库类型
-    'DB_HOST'               =>  '127.0.0.1',        // 服务器地址
+    'DB_HOST'               =>  '42.123.87.205',        // 服务器地址
     'DB_NAME'               =>  'yingke',                   // 数据库名
     'DB_USER'               =>  'root',                 // 用户名
     'DB_PWD'                =>  'ZHANGZHAO608',                 // 密码

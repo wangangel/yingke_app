@@ -46,50 +46,52 @@ class UserController extends MobileController{
      * 用户注册
      */
 	public function register(){
-        if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['phonecode'] == NULL || $_REQUEST['client_id'] == NULL){
+        if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['client_id'] == NULL){
              output_error('参数不全');
         }
 		$user_model	= M('user');
-		$result = $user_model->where(array('phone'=>$_REQUEST['phonenumber']))->find();
+		$result = $user_model->where(array('phone_num'=>$_REQUEST['phonenumber']))->find();
 		if($result != NULL){
 		    output_error('已经存在该手机用户了！');
 		}
-        //验证手机验证码是否正确
-        $jieguo = $this->checkphonecode($_REQUEST['phonenumber'],$_REQUEST['phonecode']);
-        if($jieguo == -1){
-            //手机验证码不正确
-             output_error('手机验证码不正确');
-        }
 		//接收数据
         $register_info = array();
         $register_info['password'] = md5($_REQUEST['password']);
-        $register_info['phone'] = $_REQUEST['phonenumber'];
-        //随机分配用户名,长度为6
-        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&-_~`/|';
-        $length = 6;
-        for ( $i = 0; $i < $length; $i++ )
-        {
-            // 这里提供两种字符获取方式
-            // 第一种是使用substr 截取$chars中的任意一位字符；
-            // 第二种是取字符数组$chars 的任意元素
-            // $password .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
-            $username .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+        $register_info['phone_num'] = $_REQUEST['phonenumber'];
+        //注册后的用户名为手机号码
+        $register_info['ni_name'] = $_REQUEST['phonenumber'];
+        $register_info['reg_date'] = time();
+        $register_info['status'] = "start";
+        $register_info['reg_type'] = "注册";
+        //生成指定规则的userID
+        $str = uniqid(mt_rand(), true);
+        $str = substr($str,0,9);
+        $arr['focus_user'] = "18" . $str;
+        //插入数据库之需要查询数据库中是否存在
+        $res = $user_model->where($arr)->select();
+        $count = count($res);
+        if($count){
+            //数据库中该userid已经存在,需要重新生成      
+            $str = uniqid(mt_rand(), true);
+            $str = substr($str,0,9);
+            $register_info['user_id'] = "18" . $str;
+        }else{
+            //数据库中没有
+            $register_info['user_id'] = $arr['user_id'];
         }
 
-        $register_info['nickname'] = $username;
-        $register_info['register_time'] = time();
         $user_info = $user_model->add($register_info);
         if($user_info) {
-            $token = $this->_get_token($user_info,$register_info['phone'],$_REQUEST['client_id']);
+            $token = $this->_get_token($user_info,$register_info['phone_num'],$_REQUEST['client_id']);
             if($token) {
                 output_data(array(
                 'userid' => $user_info,
-                'phone'=>$register_info['phone'],
-                'username' => $username,
+                'phone'=>$register_info['phone_num'],
+                'nickname' => $register_info['ni_name'],
                 'key' => $token
                 ));
             } else {
-                output_error('祝贺您成功注册出淘，请尝试登录');
+                output_error('祝贺您成功注册映客，请尝试登录');
             }
         } else {
 			output_error("对不起，注册失败！");
@@ -107,7 +109,7 @@ class UserController extends MobileController{
         $intCode = rand(1,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
         $intPhone = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
         $intOptype = intval($_REQUEST['optype']);
-        $strSql = "select * from ct_phonecode where phonenum=$intPhone and optype=$intOptype and status='0' and dateline>'".(time()-60)."'";
+        $strSql = "select * from yk_phonecode where phonenum=$intPhone and optype=$intOptype and status='0' and dateline>'".(time()-60)."'";
         $phonecode_model =  M('phonecode');
         $phonecode_info = $phonecode_model->query($strSql);
         $count = count($phonecode_info);
@@ -170,26 +172,27 @@ class UserController extends MobileController{
     /*
      *验证验证码,验证后手机验证码失效
      */
-    public function checkphonecode($phone,$code){
-        // $intPhone = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
-        // $intCode = intval($_REQUEST['code']);
-        $intPhone =$phone;
-        $intCode = $code;
-        $strSql = "update ct_phonecode set status='1' where phonenum='$intPhone' and code='$intCode'";
+    public function checkphonecode(){
+        if($_REQUEST['phone'] == NULL || $_REQUEST['code'] == NULL){
+            output_error('参数不全');
+        }
+        $intPhone =$_REQUEST['phone'];
+        $intCode = $_REQUEST['code'];
+        $strSql = "update yk_phonecode set status='1' where phonenum='$intPhone' and code='$intCode'";
         $phonecode_model =  M('phonecode');
         $result = $phonecode_model->execute($strSql);
         if($result == 0){
             //验证失败
-           // output_error("验证码验证失败");
-           return -1;
+            output_error("验证码验证失败");
+          
         }else{
             //验证成功
-             // output_data(array(
-             //    'id' => $result
+             output_data(array(
+                'id' => $result
                 
                 
-             //    ));
-             return 1;
+                ));
+            
         }
     }
 
@@ -198,51 +201,40 @@ class UserController extends MobileController{
      * 登录
      */
     public function login(){
-        if($_REQUEST['username'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
+        if($_REQUEST['phone'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
             output_error('参数不全！');
         }
         $user_model = M('user');
-        //用户昵称登录的情况
-        $arr = array();
-        $arr['nickname'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
-        $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
-        $arr['password']  = md5($arr['password']);
-        $user_info = $user_model->where($arr)->select();
-        if(!empty($user_info)) {
-            $token = $this->_get_token($user_info[0]['id'], $user_info[0]['phone'], $_REQUEST['client_id']);
-            if($token){
-                //更新登录时间
-                $res = $user_model->where($arr)->save(array('logtime'=>time()));
-
-                $data = array();
-                $data['id'] = $user_info[0]['id'];
-                $data['phone'] = $user_info[0]['phone'];
-                $data['nickname'] = $user_info[0]['nickname'];
-                $data['headurl'] = $user_info[0]['headurl'];
-                $data['key'] = $token;
-                output_data($data);
-            }else{
-                output_error('登录失败');
-            }
-           
-        } else {
+      
             //拿着手机号登录的情况
             $arr = array();
-            $arr['phone'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
+            $arr['phone_num'] = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
             $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
             $arr['password']  = md5($arr['password']);
             $user_info1 = $user_model->where($arr)->select();
             if(!empty($user_info1)){
-                $token = $this->_get_token($user_info[0]['id'], $user_info[0]['phone'], $_REQUEST['client_id']);
+                $token = $this->_get_token($user_info1[0]['id'], $user_info1[0]['phone_num'], $_REQUEST['client_id']);
                 if($token){
-                    //更新登录时间
-                     $res = $user_model->where($arr)->save(array('logtime'=>time()));
-                     $data = array();
+                    $data = array();
                     $data['id'] = $user_info1[0]['id'];
-                    $data['phone'] = $user_info1[0]['phone'];
-                    $data['nickname'] = $user_info1[0]['nickname'];
-                    $data['headurl'] = $user_info1[0]['headurl'];
+                    $data['userid'] = $user_info1[0]['user_id'];
+                    $data['phone'] = $user_info1[0]['phone_num'];
+                    $data['nickname'] = $user_info1[0]['ni_name'];
+                    $data['headurl'] = $user_info1[0]['head_url'];
                     $data['key'] = $token;
+                    //根据id获取我关注的人的数量
+                    $focus_model = M('friends_focus');
+                    $opt['user_id'] = $user_info1[0]['id'];
+                    $opt['status'] = 'yes';
+                    $focus_info = $focus_model->where($opt)->select();
+                    $focus_num = count($focus_info);
+                    $data['focus_num'] = $focus_num;
+                    //根据id获取关注我的粉丝数量
+                    $opt['focus_user'] = $user_info1[0]['id'];
+                    $opt['status'] = 'yes';
+                    $focused_info = $focus_model->where($opt)->select();
+                    $focused_num = count($focused_info);
+                    $data['fans_num'] = $focused_num;
                     output_data($data); 
                 }else{
                     output_error('登陆失败');
@@ -252,7 +244,7 @@ class UserController extends MobileController{
                  output_error('登陆失败,账号或密码错误');
             }
            
-        }
+        
         
     }
 
@@ -333,12 +325,12 @@ class UserController extends MobileController{
      * 忘记密码
      */
     public function forget_password(){
-        if($_REQUEST['phonenum'] == null || $_REQUEST['password'] == null || $_REQUEST['code'] == null){
+        if($_REQUEST['phonenum'] == null || $_REQUEST['password'] == null){
             output_error('参数不全');
         }
 
         $user_model = M('user');
-        $user_info = $user_model->where(array('phone'=>$_REQUEST['phonenum']))->find();
+        $user_info = $user_model->where(array('phone_num'=>$_REQUEST['phonenum']))->find();
         if($user_info == null){
             output_error('不存在该用户！');
         }
@@ -348,19 +340,7 @@ class UserController extends MobileController{
             $datas['msg'] = '修改成功，请登陆！';
             output_data($datas);
         }
-        $model_code = M('phonecode');
-        $array = array();
-        $array['phonenum'] = $_REQUEST['phonenum'];
-        $array['code'] = $_REQUEST['code'];
-        $codes = $model_code->where($array)->find();
-        //删除所有超过240秒的验证码
-        $array = array();
-        $array['dateline'] = array('LT',NOW_TIME-240);
-        $model_code->where($array)->delete();
-        if($codes == false){
-            output_error('验证码错误！');
-        }
-        
+       
         $array = array();
         $array['password'] = md5($_REQUEST['password']);
         //将密码更新
@@ -398,27 +378,21 @@ class UserController extends MobileController{
         }
 
         $array = array();
-        $array['userid'] = $_REQUEST['userid'];
+        $array['id'] = $_REQUEST['userid'];
         $model_user = M('user');
         $result = $model_user->where($array)->find();
         if($result != NULL){
             $datas = array();
             $datas['userid'] = $result['id'];
-            $datas['nickname'] = $result['nickname'];
-            $datas['phone'] = $result['phone'];
-            $datas['logtime'] = $result['logtime'];
-            $datas['longitude'] = $result['longitude'];
-            $datas['latitude'] = $result['latitude'];
-            $datas['headpic'] = $result['headpic'];
-            $datas['income'] = $result['income'];
-            $datas['cost'] = $result['cost'];
-            $datas['attr'] = $result['attr'];
+            $datas['user_id'] = $result['user_id'];
+            $datas['ni_name'] = $result['ni_name'];
             $datas['sex'] = $result['sex'];
-            $datas['goodspub_num'] = $result['goodspub_num'];
-            $datas['birthday'] = $result['birthday'];
-            $datas['role_ischange'] = $result['role_ischange'];
-            $datas['role_changetime'] = $result['role_changetime'];
-            $datas['register_time'] = $result['register_time'];
+            $datas['birth_date'] = $result['birth_date'];
+            $datas['lable'] = $result['lable'];
+            $datas['head_url'] = $result['head_url'];
+            $datas['profession'] = $result['profession'];
+            $datas['per_sign'] = $result['per_sign'];
+            
             output_data($datas);
         }else{
             output_error('没有该用户信息');
@@ -427,14 +401,14 @@ class UserController extends MobileController{
 
 
     /*
-     *买家或卖家身份互换
+     *用户绑定
      */
-    public function role_change(){
+    public function user_bind(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
-        if($_REQUEST['client_id'] == NULL || $_REQUEST['attr'] == NULL){
-            output_error('参数不全');
+        if($_REQUEST['qq'] == NULL && $_REQUEST['weixin'] == NULL && $_REQUEST['weibo'] == NULL && $_REQUEST['renren'] == NULL){
+            output_error('没有需要绑定的参数');
         }
         //验证key是否正确,这边需要设备唯一标识
         $token_model = M('usertoken');
@@ -446,20 +420,214 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        $user_model = M('user');
+        $userbind_model = M('userbind');
         $arr = array();
-        $arr['attr'] = $_REQUEST['attr'];
-        $arr['role_ischange'] = 1;
-        $arr['role_changetime'] = time();
-        $result = $user_model->where(array('id'=>$_REQUEST['userid']))->save($arr);
-        if($result){
-            //角色变化成功
-            output_data(array('id'=>$result));
+        
+          //先判断该用户是否已经绑定
+        $opt['userid'] = $_REQUEST['userid'];
+        $bind_info = $userbind_model->where($opt)->find();
+        if(empty($bind_info)){
+            //没有绑定过
+            $arr['qq'] = $_REQUEST['qq'];
+            $arr['weixin'] = $_REQUEST['weixin'];
+            $arr['weibo'] = $_REQUEST['weibo'];
+            $arr['renren'] = $_REQUEST['renren'];
+            $arr['userid'] = $_REQUEST['userid'];
+            $res = $userbind_model->add($arr);
+            if($res){
+                output_data(array('id'=>$res));
+            }else{
+                output_error('绑定失败');
+            }
         }else{
-            output_error('角色变化失败');
+            //执行更新操作
+             $arr['qq'] = $_REQUEST['qq'];
+            $arr['weixin'] = $_REQUEST['weixin'];
+            $arr['weibo'] = $_REQUEST['weibo'];
+            $arr['renren'] = $_REQUEST['renren'];
+            $result = $userbind_model->where($opt)->save($arr);
+            if($result){
+                 output_data(array('id'=>$result));
+            }else{
+                output_error('绑定失败');
+            }
         }
 
     }
+
+
+
+
+
+    /*
+     *获取我关注的人的信息
+     */
+    public function my_focus(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $focus_model = M('friends_focus');
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $opt['user_id'] = $_REQUEST['userid'];
+        $opt['status'] = 'yes';
+        $focus_info = $focus_model->where($opt)->limit($start,$arrOpt['ps'])->select();
+        foreach ($focus_info as $k => $v) {
+            //根据focus_user获取被关注人的信息
+            $user_model = M('user');
+            $tiaojian['id'] = $v['focus_user'];
+            $foucs_userinfo = $user_model->where($tiaojian)->find();
+            $data['focus_userinfo'][$k]['id'] = $foucs_userinfo['id'];
+            $data['focus_userinfo'][$k]['ni_name'] = $foucs_userinfo['ni_name'];
+            $data['focus_userinfo'][$k]['head_url'] = $foucs_userinfo['head_url'];
+            $data['focus_userinfo'][$k]['sex'] = $foucs_userinfo['sex'];
+        }
+        output_data($data);
+    }
+
+
+
+
+
+
+     /*
+     *获取我的粉丝的信息
+     */
+    public function my_fans(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $focus_model = M('friends_focus');
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $opt['focus_user'] = $_REQUEST['userid'];
+        $opt['status'] = 'yes';
+        $fans_info = $focus_model->where($opt)->limit($start,$arrOpt['ps'])->select();
+        foreach ($fans_info as $k => $v) {
+            //根据user_id获取我的粉丝信息
+            $user_model = M('user');
+            $tiaojian['id'] = $v['user_id'];
+            $fans_userinfo = $user_model->where($tiaojian)->find();
+            $data['fans_userinfo'][$k]['id'] = $fans_userinfo['id'];
+            $data['fans_userinfo'][$k]['ni_name'] = $fans_userinfo['ni_name'];
+            $data['fans_userinfo'][$k]['head_url'] = $fans_userinfo['head_url'];
+            $data['fans_userinfo'][$k]['sex'] = $fans_userinfo['sex'];
+            //判断当前用户是否关注过该粉丝
+            $tiaojian['user_id'] = $_REQUEST['userid'];
+            $tiaojian['focus_user'] = $fans_userinfo['id'];
+            $tiaojian['status'] = "yes";
+            $is_focus = $focus_model->where($tiaojian)->find();
+            if(empty($is_focus)){
+                //没有关注过
+                $data['fans_userinfo'][$k]['is_focus'] = 0;
+            }else{
+                $data['fans_userinfo'][$k]['is_focus'] = 1;
+            }
+        }
+        output_data($data);
+    }
+
+
+
+
+    /*
+     *关注用户
+     */
+    public function focus_user(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //先判断被关注人是否存在
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['focus_user']))->find();
+        if(empty($user_info)){
+            output_error('被关注人不存在');
+        }else{
+            $focus_model = M('friends_focus');
+            $opt['user_id'] = $_REQUEST['userid'];
+            $opt['focus_user'] = $_REQUEST['focus_user'];
+            $opt['status'] = "yes";
+            //判断当前用户是否已经关注过该用户
+            $res = $focus_model->where($opt)->find();
+            if(empty($res)){
+                //没有关注过,判断曾经是否取消过对该用户的关注
+                $tiaojian['user_id'] = $_REQUEST['userid'];
+                $tiaojian['focus_user'] = $_REQUEST['focus_user'];
+                $tiaojian['status'] = "no";
+                $jieguo = $focus_model->where($tiaojian)->find();
+                if(empty($jieguo)){
+                    //没有,执行add
+                    $array['user_id'] = $_REQUEST['userid'];
+                    $array['focus_user'] = $_REQUEST['focus_user'];
+                    $array['status'] = "yes";
+                    $array['focus_date'] = time();
+                    $result = $focus_model->add($array);
+                    if($result){
+                        output_data(array('result'=>$result));
+                    }else{
+                         output_error("添加关注失败");
+                    }
+                }else{
+                    //执行save
+                    $condition['user_id'] = $_REQUEST['userid'];
+                    $condition['focus_user'] = $_REQUEST['focus_user'];
+                    $array['status'] = "yes";
+                    $array['focus_date'] = time();
+                    $result = $focus_model->where($condition)->save($array);
+                    if($result){
+                        output_data(array('result'=>$result));
+                    }else{
+                        output_error("添加关注失败");
+                    }
+                }
+            }else{
+                output_error("已经关注过该用户");
+            }
+        }
+        
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1403,6 +1571,7 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
@@ -1499,28 +1668,37 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['birthday'] == NULL && $_REQUEST['nickname'] == NULL && $_REQUEST['sex'] == NULL && $_REQUEST['headpic'] == NULL){
-            output_error("没有需要修改的参数");
-        }
         $arrOpt = array();
-        $arrOpt['nickname'] = $_REQUEST['nickname'];
-        $arrOpt['birthday'] = $_REQUEST['birthday'];
+        $arrOpt['ni_name'] = $_REQUEST['ni_name'];
+        $arrOpt['birth_date'] = $_REQUEST['birth_date'];
         $arrOpt['sex'] = $_REQUEST['sex'];
-        $arrOpt['headpic'] = $_REQUEST['headpic'];
+        $arrOpt['head_url'] = $_REQUEST['head_url'];
+        $arrOpt['profession'] = $_REQUEST['profession'];
+        $arrOpt['per_sign'] = $_REQUEST['per_sign'];
+        $arrOpt['lable'] = $_REQUEST['lable'];
         $user_model = M("user");
         //先去数据库查询出该用户数据
         $result = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
-        if($arrOpt['nickname'] == NULL){
-            $arrOpt['nickname'] = $result['nickname'];
+        if($arrOpt['ni_name'] == NULL){
+            $arrOpt['ni_name'] = $result['ni_name'];
         }
-        if($arrOpt['birthday'] == NULL){
-            $arrOpt['birthday'] = $result['birthday'];
+        if($arrOpt['birth_date'] == NULL){
+            $arrOpt['birth_date'] = $result['birth_date'];
         }
         if($arrOpt['sex'] == NULL){
             $arrOpt['sex'] = $result['sex'];
         }
-        if($arrOpt['headpic'] == NULL){
-            $arrOpt['headpic'] = $result['headpic'];
+        if($arrOpt['head_url'] == NULL){
+            $arrOpt['head_url'] = $result['head_url'];
+        }
+         if($arrOpt['profession'] == NULL){
+            $arrOpt['profession'] = $result['profession'];
+        }
+         if($arrOpt['per_sign'] == NULL){
+            $arrOpt['per_sign'] = $result['per_sign'];
+        }
+        if($arrOpt['lable'] == NULL){
+            $arrOpt['lable'] = $result['lable'];
         }
         $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($arrOpt);
         if($res){

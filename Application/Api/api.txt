@@ -1,234 +1,312 @@
 
 
 
-ÓÃ»§Ä£¿é
+ç”¨æˆ·æ¨¡å—
 
-Ò».»ñÈ¡ÊÖ»úÑéÖ¤Âë
-½Ó¿ÚÁ´½Ó£º
-http://localhost/chutao/index.php/api/user/getphonecode?phone=18651551916&optype=1
+ä¸€.è·å–æ‰‹æœºéªŒè¯ç 
+æ¥å£é“¾æ¥ï¼š
+http://localhost/yingke/index.php/api/user/getphonecode?phone=18651551916&optype=1
 
-½Ó¿Ú²ÎÊı£º
-phone : ÊÖ»úºÅ
-optype : ²Ù×÷ÀàĞÍ£¨1£º×¢²áÊ±»ñÈ¡ÑéÖ¤Âë£»2£ºÖØÖÃÃÜÂëÊ±ºò»ñÈ¡ÑéÖ¤Âë£©
+æ¥å£å‚æ•°ï¼š
+phone : æ‰‹æœºå·
+optype : æ“ä½œç±»å‹ï¼ˆ1ï¼šæ³¨å†Œæ—¶è·å–éªŒè¯ç ï¼›2ï¼šé‡ç½®å¯†ç æ—¶å€™è·å–éªŒè¯ç ï¼‰
 
-·µ»ØÖµ£º
-"errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+è¿”å›å€¼ï¼š
+"errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
 datas : 
-    phonenum->ºÅÂë 
-    code->ÑéÖ¤Âë  
-    optype:1->×¢²áÊ±»ñÈ¡µÄÑéÖ¤Âë 
-    2->ÖØÖÃÃÜÂëÊ±ºò»ñÈ¡ÑéÖ¤Âë
+    phonenum->å·ç  
+    code->éªŒè¯ç   
+    optype:1->æ³¨å†Œæ—¶è·å–çš„éªŒè¯ç  
+    2->é‡ç½®å¯†ç æ—¶å€™è·å–éªŒè¯ç 
 
 
 
 
 
-¶ş.µÚÈı·½µÇÂ¼------Î´Íê³É
-½Ó¿ÚÁ´½Ó£º
-http://localhost/chutao/index.php/api/user/third_login?type=qq
-½Ó¿Ú²ÎÊı£º
-type:qq/sinna/weixin
+äºŒ.éªŒè¯æ‰‹æœºéªŒè¯ç 
+æ¥å£é“¾æ¥ï¼š
+http://localhost/yingke/index.php/api/user/checkphonecode?phone=18651551916&code=368830
+æ¥å£å‚æ•°ï¼š
+phpne
+code
 
-·µ»ØÖµ£º
-"errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+è¿”å›å€¼ï¼š
+"errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
 datas : 
 
 
 
 
-Èı¡¢ÓÃ»§×¢²á
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/register?phonenumber=18651551916&password=juping&phonecode=711360&client_id=qwert
+ä¸‰ã€ç”¨æˆ·æ³¨å†Œ
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/register?phonenumber=18651551916&password=juping&client_id=qwert
 
-    ½Ó¿Ú²ÎÊı£º£º
-        phonenumber->ÊÖ»úºÅÂë 
-        password->ÃÜÂë 
-        phonecode->ÊÖ»úÑéÖ¤Âë
-        client_id->¿Í»§¶ËÉè±¸Î¨Ò»±êÊ¶,²»Í¬Éè±¸µÄ±êÊ¶²»Í¬
-    ·µ»ØÖµ£º
-    "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        phonenumber->æ‰‹æœºå·ç  
+        password->å¯†ç  
+        client_id->å®¢æˆ·ç«¯è®¾å¤‡å”¯ä¸€æ ‡è¯†,ä¸åŒè®¾å¤‡çš„æ ‡è¯†ä¸åŒ
+    è¿”å›å€¼ï¼š
+    "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
     datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î£¬Ö´ĞĞÊ§°ÜÊÇÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µï¼Œæ‰§è¡Œå¤±è´¥æ˜¯æœ‰è¯¥å­—æ®µ
 
-        userid:ÓÃ»§id  
-        username£ºÓÃ»§Ãû
-        phone:ÊÖ»úºÅÂë
-        key:¼ÓÃÜĞÅÏ¢
-
-
+        userid:ç”¨æˆ·id  
+        usernameï¼šç”¨æˆ·å
+        phone:æ‰‹æœºå·ç 
+        key:åŠ å¯†ä¿¡æ¯
 
 
-ËÄ¡¢ÓÃ»§µÇÂ¼
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/login?username=,@iiVb&password=juping&client_id=qwert&longitude=&latitude=
 
-    ½Ó¿Ú²ÎÊı£º£º
-        username->ÓÃ»§Ãû»òÊÖ»úºÅÂë
-        password->ÃÜÂë
-        client_id->¿Í»§¶ËÉè±¸Î¨Ò»±êÊ¶
-        longitude->¾­¶È
-        latitude->Î³¶È
 
-    ·µ»ØÖµ£º
-    "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+å››ã€ç”¨æˆ·ç™»å½•
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/login?phone=18651551916&password=juping&client_id=qwert
+
+    æ¥å£å‚æ•°ï¼šï¼š
+        phone->ç”¨æˆ·åæˆ–æ‰‹æœºå·ç 
+        password->å¯†ç 
+        client_id->å®¢æˆ·ç«¯è®¾å¤‡å”¯ä¸€æ ‡è¯†
+
+    è¿”å›å€¼ï¼š
+    "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
     datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-        userid:ÓÃ»§id  
-        username£ºÓÃ»§Ãû------------êÇ³Æ¾ÍÊÇÓÃ»§Ãû
-        phone:ÊÖ»úºÅÂë
-        key:¼ÓÃÜĞÅÏ¢
-        headurl:Í·ÏñµØÖ·
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+        userid:ç”¨æˆ·id  
+        usernameï¼šç”¨æˆ·å------------æ˜µç§°å°±æ˜¯ç”¨æˆ·å
+        phone:æ‰‹æœºå·ç 
+        key:åŠ å¯†ä¿¡æ¯
+        headurl:å¤´åƒåœ°å€
 
 
 
 
-Îå¡¢ÓÃ»§ÍË³öµÇÂ¼
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/logout?key=8880ad588a0e3feb0cab71feffa76049&userid=1&client_id=qwert
+äº”ã€ç”¨æˆ·é€€å‡ºç™»å½•
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/logout?key=ea5b00dac64674ba50746705ab22be8f&userid=6&client_id=qwert
 
-    ½Ó¿Ú²ÎÊı£º£º
-        key->ÃØÔ¿ 
-        userid->ÓÃ»§id
-        client->Éè±¸Î¨Ò»±êÊ¶
+    æ¥å£å‚æ•°ï¼šï¼š
+        key->ç§˜é’¥ 
+        userid->ç”¨æˆ·id
+        client->è®¾å¤‡å”¯ä¸€æ ‡è¯†
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-            error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+            error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
           
-            msg->"ÍË³ö³É¹¦"
+            msg->"é€€å‡ºæˆåŠŸ"
 
 
 
 
-Áù¡¢Íü¼ÇÃÜÂë
-     ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/forget_password?phonenum=18651551916&password=123123&code=985671
+å…­ã€å¿˜è®°å¯†ç 
+     è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/forget_password?phonenum=18651551916&password=123123
 
-    ½Ó¿Ú²ÎÊı£º£º
-        phonenum->ÊÖ»úºÅÂë 
-        password->ÃÜÂë
-        code->ÊÖ»úÑéÖ¤Âë
+    æ¥å£å‚æ•°ï¼šï¼š
+        phonenum->æ‰‹æœºå·ç  
+        password->å¯†ç 
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-            error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: msg->"ĞŞ¸Ä³É¹¦£¬ÇëµÇÂ¼"
+            error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: msg->"ä¿®æ”¹æˆåŠŸï¼Œè¯·ç™»å½•"
 
 
 
 
-Æß.»ñÈ¡ÓÃ»§¸öÈËĞÅÏ¢
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/user_info?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&client_id=qwert
-    ½Ó¿Ú²ÎÊı:
+ä¸ƒ.è·å–ç”¨æˆ·ä¸ªäººä¿¡æ¯
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/user_info?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&client_id=qwert
+    æ¥å£å‚æ•°:
         userid:
         key:
         client_id
-    ·µ»ØÖµ:
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼:
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         "datas": {
-        "userid": ,
-        "nickname": ,
-        "phone": ,
-        "logtime": ,
-        "longitude": µÇÂ¼¾­¶È,
-        "latitude": µÇÂ¼Î³¶È,
-        "headpic": Í·Ïñ,
-        "income": ÊÕÈë,
-        "cost": Ïû·Ñ,
-        "attr": 0---Âò¼Ò,1----Âô¼Ò
-        "sex": ĞÔ±ğ,
-        "goodspub_num": ·¢²¼ÉÌÆ·ÊıÁ¿,
-        "birthday": ÉúÈÕ,
-        "role_ischange": 0----Î´±ä»»,1------ÒÑ±ä»»
-        "role_changetime": ±ä»»Ê±¼ä,
-        "register_time": ×¢²áÊ±¼ä
+            "userid": æ•°æ®è®°å½•id,
+            "user_id": ç³»ç»Ÿè§„åˆ™ç”Ÿæˆçš„userID,
+            "ni_name": æ˜µç§°,
+            "sex": æ€§åˆ«,
+            "birth_date": ç”Ÿæ—¥,
+            "lable": æ ‡ç­¾,
+            "head_url": å¤´åƒ,
+            "profession": èŒä¸š,
+            "per_sign": ä¸ªæ€§ç­¾å
     }
 
 
 
 
 
-°Ë.ĞŞ¸Ä¸öÈËĞÅÏ¢½Ó¿Ú
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/editor_userinfo?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&nickname=¾Ã¾Ó&sex=ÄĞ&birthday=Ê®¶şÔÂÈıÊ®ÈÕ&client_id=qwert
-  ²ÎÊı£º
-       ±ØĞë²ÎÊı£º
+å…«.ä¿®æ”¹ä¸ªäººä¿¡æ¯æ¥å£
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/editor_userinfo?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&ni_name=ä¹…å±…&sex=ç”·&birth_date=åäºŒæœˆä¸‰åæ—¥&head_url=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&profession=ç¨‹åºçŒ¿&per_sign=æˆ‘çš„ä¸–ç•Œé‡Œåªæœ‰ä»£ç &lable=å±Œä¸.ç¨‹åºçŒ¿&client_id=qwert
+  å‚æ•°ï¼š
+       å¿…é¡»å‚æ•°ï¼š
        userid:
        key:
-       client_id->¿Í»§¶ËÎ¨Ò»±êÊ¶
-       ¿ÉÌí¼Ó²ÎÊı£º
+       client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+       å¯æ·»åŠ å‚æ•°ï¼š
        nickname:
-       sex:ĞÔ±ğ
-       birthday:ÉúÈÕ
-       headpic:http://localhost/chutao/Upload/2015-08-27/55deb6edcb2e2.jpg
+       sex:æ€§åˆ«
+       birthday:ç”Ÿæ—¥
+       head_url:http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
+       ......
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÓÃ»§id
+                   id:ç”¨æˆ·id
 
 
 
 
 
-¾Å.ÉÏ´«Í¼Æ¬½Ó¿Ú
-  ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/add_pic
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        photo->Í¼Æ¬
-        key->ÃØÔ¿
-        client_id->¿Í»§¶ËÎ¨Ò»±êÊ¶
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+ä¹.ä¸Šä¼ å›¾ç‰‡æ¥å£
+  è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/add_pic
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        photo->å›¾ç‰‡
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   picurl:Í¼Æ¬url
+                   picurl:å›¾ç‰‡url
 
 
 
 
 
-Ê®.Âò¼Ò»òÂô¼ÒÉí·İ»¥»»½Ó¿Ú
- ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/role_change?userid=1&key=f2c9e682c7e55858eb2de2fbb7a3e4a5&attr=1&client_id=qwert
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key->ÃØÔ¿
-        attr->0:Âò¼Ò,1:Âô¼Ò
-        client_id->¿Í»§¶ËÎ¨Ò»±êÊ¶
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+å.ç”¨æˆ·ç»‘å®šæ¥å£
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/user_bind?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&qq=1550010428&weixin=jiuju2015&weibo=jiujusinna&renren=renren&client_id=qwert
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+        qq
+        weixin
+        weibo 
+        renren
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   id
-
-
-
-
-Ê®Ò».»ñÈ¡ÎÒµÄ·¢²¼½Ó¿Ú
- ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/mypublic_info?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key->ÃØÔ¿
-        client_id->¿Í»§¶ËÎ¨Ò»±êÊ¶
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                    id
 
 
 
 
-Ê®¶ş.»ñÈ¡ÓÃ»§¿ÉÌáÏÖ½ğ¶î
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/user_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
-    ½Ó¿Ú²ÎÊı:
+
+
+åä¸€.è·å–æˆ‘çš„æ¶ˆæ¯-----æœªå®Œæˆ
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_message?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&client_id=qwert
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   id
+
+
+
+
+
+
+åäºŒ.è·å–æˆ‘å…³æ³¨äººçš„ä¿¡æ¯
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_focus?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   id
+
+
+
+
+åä¸‰.è·å–æˆ‘çš„ç²‰ä¸ä¿¡æ¯
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                "id": ç”¨æˆ·id,
+                "ni_name": 
+                "head_url": 
+                "sex": 
+                "is_focus": 0---æœªå…³æ³¨,1:å·²å…³æ³¨
+
+
+
+
+
+åå››.å…³æ³¨ç”¨æˆ·
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/focus_user?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&focus_user=7
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        client_id->å®¢æˆ·ç«¯å”¯ä¸€æ ‡è¯†
+       focus_user->å…³æ³¨ç”¨æˆ·çš„id
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                "id": ç”¨æˆ·id,
+                "ni_name": 
+                "head_url": 
+                "sex": 
+                "is_focus": 0---æœªå…³æ³¨,1:å·²å…³æ³¨
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+åäºŒ.è·å–ç”¨æˆ·å¯æç°é‡‘é¢
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/user_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    æ¥å£å‚æ•°:
         userid:
         key:
         client_id
-    ·µ»ØÖµ:
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼:
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         "datas": {
           tixian
     }
@@ -236,14 +314,14 @@ datas :
 
 
 
-Ê®Èı.»ñÈ¡ÓÃ»§°ó¶¨ÒøĞĞ¿¨ĞÅÏ¢
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/user_bindcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
-    ½Ó¿Ú²ÎÊı:
+åä¸‰.è·å–ç”¨æˆ·ç»‘å®šé“¶è¡Œå¡ä¿¡æ¯
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/user_bindcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    æ¥å£å‚æ•°:
         userid:
         key:
         client_id
-    ·µ»ØÖµ:
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼:
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         "datas": {
           
     }
@@ -251,18 +329,18 @@ datas :
 
 
 
-Ê®ËÄ.°ó¶¨ÒøĞĞ¿¨
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/bind_bankcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&card_username=¾Ã¾Ó&bankname=¹¤ÉÌÒøĞĞ&card_num=123456789&phone=789456123
-    ½Ó¿Ú²ÎÊı:
+åå››.ç»‘å®šé“¶è¡Œå¡
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/bind_bankcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&card_username=ä¹…å±…&bankname=å·¥å•†é“¶è¡Œ&card_num=123456789&phone=789456123
+    æ¥å£å‚æ•°:
         userid:
         key:
         client_id
-        card_username-----³Ö¿¨ÈËĞÕÃû
-        bankname-----¿ª»§ĞĞ
-        card_num-------¿¨ºÅ
-        phone--------Ô¤ÁôÊÖ»úºÅ
-    ·µ»ØÖµ:
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+        card_username-----æŒå¡äººå§“å
+        bankname-----å¼€æˆ·è¡Œ
+        card_num-------å¡å·
+        phone--------é¢„ç•™æ‰‹æœºå·
+    è¿”å›å€¼:
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         "datas": {
           id
     }
@@ -271,16 +349,16 @@ datas :
 
 
 
-Ê®Îå.Óà¶îÌáÏÖ
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/cash_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&bankcard_id=1&money=300
- ½Ó¿Ú²ÎÊı:
+åäº”.ä½™é¢æç°
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/cash_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&bankcard_id=1&money=300
+ æ¥å£å‚æ•°:
         userid:
         key:
         client_id
-        bankcard_id-------°ó¶¨µÄÒøĞĞ¿¨id
-        money---------ÌáÏÖ½ğ¶î
-    ·µ»ØÖµ:
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+        bankcard_id-------ç»‘å®šçš„é“¶è¡Œå¡id
+        money---------æç°é‡‘é¢
+    è¿”å›å€¼:
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         "datas": {
           id
     }
@@ -288,50 +366,50 @@ datas :
 
 
 
-Ê®Áù.»ñÈ¡ÎÒµÄÊÕ»ñµØÖ·
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_address?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
-    ½Ó¿Ú²ÎÊı£º£º
+åå…­.è·å–æˆ‘çš„æ”¶è·åœ°å€
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_address?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
         client_id
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                    id:
                    userid:
-                   username:ÊÕ»õÈË
-                   is_default:Ä¬ÈÏÎª0,1ÎªÄ¬ÈÏµØÖ·
-                   phone:ÁªÏµµç»°
-                   address:ÊÕ»õµØÖ·
+                   username:æ”¶è´§äºº
+                   is_default:é»˜è®¤ä¸º0,1ä¸ºé»˜è®¤åœ°å€
+                   phone:è”ç³»ç”µè¯
+                   address:æ”¶è´§åœ°å€
 
 
 
-Ê®Æß.ĞŞ¸ÄÎÒµÄÊÕ»ñµØÖ·
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/edit_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=½­ËÕÊ¡ËŞÇ¨ÊĞãôÑôÏØÎ÷¿µ´´ÒµÔ°302ËŞÇ¨·äÄñ¿Æ¼¼ÍøÂçÓĞÏŞ¹«Ë¾&username=Ğ¡Ã÷&is_default=0&phone=18815551888
-    ½Ó¿Ú²ÎÊı£º£º
+åä¸ƒ.ä¿®æ”¹æˆ‘çš„æ”¶è·åœ°å€
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/edit_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=æ±Ÿè‹çœå®¿è¿å¸‚æ³—é˜³å¿è¥¿åº·åˆ›ä¸šå›­302å®¿è¿èœ‚é¸Ÿç§‘æŠ€ç½‘ç»œæœ‰é™å…¬å¸&username=å°æ˜&is_default=0&phone=18815551888
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
         client_id
         address
-       is_default:Ä¬ÈÏÎª0,1ÎªÄ¬ÈÏµØÖ·
-       phone:ÁªÏµµç»°--------------------±ØĞè
+       is_default:é»˜è®¤ä¸º0,1ä¸ºé»˜è®¤åœ°å€
+       phone:è”ç³»ç”µè¯--------------------å¿…éœ€
        username
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÊÕ»õµØÖ·id
+                   id:æ”¶è´§åœ°å€id
 
 
 
 
-Ê®°Ë.Ìí¼ÓÎÒµÄÊÕ»ñµØÖ·
- ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/add_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=½­ËÕÊ¡ËŞÇ¨ÊĞãôÑôÏØÎ÷¿µ´´ÒµÔ°&username=ÀÏ³Â&phone=18888888888&is_default=1
-    ½Ó¿Ú²ÎÊı£º£º
+åå…«.æ·»åŠ æˆ‘çš„æ”¶è·åœ°å€
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/add_myaddress?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&address=æ±Ÿè‹çœå®¿è¿å¸‚æ³—é˜³å¿è¥¿åº·åˆ›ä¸šå›­&username=è€é™ˆ&phone=18888888888&is_default=1
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
        address
@@ -339,12 +417,12 @@ datas :
       is_default
        phone
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÊÕ»õµØÖ·id
+                   id:æ”¶è´§åœ°å€id
                    
 
 
@@ -382,206 +460,206 @@ datas :
     
 
 
-Æß¡¢»ñÈ¡Ê×Ò³ÓÅ»İ
-     ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/coupon?ps=10
+ä¸ƒã€è·å–é¦–é¡µä¼˜æƒ 
+     è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/coupon?ps=10
 
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡¼¸ÌõÓÅ»İĞÅÏ¢Õ¹Ê¾£¬²»´«Ä¬ÈÏÊÇ6Ìõ
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–å‡ æ¡ä¼˜æƒ ä¿¡æ¯å±•ç¤ºï¼Œä¸ä¼ é»˜è®¤æ˜¯6æ¡
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: array£¨
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: arrayï¼ˆ
                     0=>
-                        id:ÓÅ»İĞÅÏ¢id
-                        picurl=>ÓÅ»İĞÅÏ¢Í¼Æ¬
-                        price=>¼Û¸ñ
-                        detail=>ÏêÇé
-                        createtime=>·¢²¼Ê±¼ä
-                        attr=>0:ÏÖ½ğÈ¯£¬1£ºÓÅ»İÈ¯
+                        id:ä¼˜æƒ ä¿¡æ¯id
+                        picurl=>ä¼˜æƒ ä¿¡æ¯å›¾ç‰‡
+                        price=>ä»·æ ¼
+                        detail=>è¯¦æƒ…
+                        createtime=>å‘å¸ƒæ—¶é—´
+                        attr=>0:ç°é‡‘åˆ¸ï¼Œ1ï¼šä¼˜æƒ åˆ¸
                     1=>
                         .......
 
-                £©
+                ï¼‰
 
 
 
 
-°Ë¡¢Í¼Æ¬ÂÖ²¥
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/banner?ps=5
+å…«ã€å›¾ç‰‡è½®æ’­
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/banner?ps=5
 
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡¼¸ÌõÂÖ²¥Í¼Æ¬Õ¹Ê¾£¬²»´«Ä¬ÈÏÊÇ5Ìõ
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–å‡ æ¡è½®æ’­å›¾ç‰‡å±•ç¤ºï¼Œä¸ä¼ é»˜è®¤æ˜¯5æ¡
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: array£¨
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: arrayï¼ˆ
                     0=>
-                        id=>Í¼Æ¬ÂÖ²¥id
-                        bannername=>Í¼Æ¬ÂÖ²¥Ãû
-                        bannerlink=>Í¼Æ¬ÂÖ²¥Á´½Ó
-                        picurl=>ÓÅ»İĞÅÏ¢Í¼Æ¬
-                        releasetime=>·¢²¼Ê±¼ä
+                        id=>å›¾ç‰‡è½®æ’­id
+                        bannername=>å›¾ç‰‡è½®æ’­å
+                        bannerlink=>å›¾ç‰‡è½®æ’­é“¾æ¥
+                        picurl=>ä¼˜æƒ ä¿¡æ¯å›¾ç‰‡
+                        releasetime=>å‘å¸ƒæ—¶é—´
                     1=>
                         .......
 
-                £©
+                ï¼‰
 
 
 
 
-¾Å¡¢ºÃÆÀ·şÎñ(¸ù¾İºÃÆÀµÄÊıÁ¿À´»ñÈ¡·şÎñÊ×Ò³Õ¹Ê¾)
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/goodcomment_service?ps=4&page=1
+ä¹ã€å¥½è¯„æœåŠ¡(æ ¹æ®å¥½è¯„çš„æ•°é‡æ¥è·å–æœåŠ¡é¦–é¡µå±•ç¤º)
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/goodcomment_service?ps=4&page=1
 
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡¼¸Ìõ·şÎñÕ¹Ê¾£¬²»´«Ä¬ÈÏÊÇ4Ìõ
-        page->µÚ¼¸Ò³
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–å‡ æ¡æœåŠ¡å±•ç¤ºï¼Œä¸ä¼ é»˜è®¤æ˜¯4æ¡
+        page->ç¬¬å‡ é¡µ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-            error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+            error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                 content
-                    haopinginfo(ºÃÆÀĞÅÏ¢)
+                    haopinginfo(å¥½è¯„ä¿¡æ¯)
                           "commentid": 
                         "goodsid": 
                         "userid": ,
                         "content": 
                         "comefrom": 
-                        "replycount": »Ø¸´Êı
-                        "prasiecount": ÔŞÊı
-                        "grade": ºÃÆÀ
-                        "com_picurl": ÆÀÂÛÍ¼Æ¬
-                        "commenttime": ÆÀÂÛÊ±¼ä
-                        "star_num": ĞÇ¼¶
-                    userinfo£¨ÆÀÂÛ·¢²¼ÈËĞÅÏ¢£©
+                        "replycount": å›å¤æ•°
+                        "prasiecount": èµæ•°
+                        "grade": å¥½è¯„
+                        "com_picurl": è¯„è®ºå›¾ç‰‡
+                        "commenttime": è¯„è®ºæ—¶é—´
+                        "star_num": æ˜Ÿçº§
+                    userinfoï¼ˆè¯„è®ºå‘å¸ƒäººä¿¡æ¯ï¼‰
                         "userid": 
                         "username": 
                         "headurl": 
 
                           
-Ê®¡¢·ÖÏí(Î´×ö)
-     ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/dianzan?id=4
+åã€åˆ†äº«(æœªåš)
+     è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/dianzan?id=4
 
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡¼¸ÌõÂÖ²¥Í¼Æ¬Õ¹Ê¾£¬²»´«Ä¬ÈÏÊÇ4Ìõ
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–å‡ æ¡è½®æ’­å›¾ç‰‡å±•ç¤ºï¼Œä¸ä¼ é»˜è®¤æ˜¯4æ¡
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
 
 
-Ê®Ò»¡¢µãÔŞ
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/dianzan?commentid=4&userid=54&key=
+åä¸€ã€ç‚¹èµ
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/dianzan?commentid=4&userid=54&key=
 74253df69ebba8b7f22906e06e35f227
-    ½Ó¿Ú²ÎÊı£º£º
-        commentid->¶ÔÓ¦ÆÀÂÛµÄid
-        userid->ÓÃ»§id
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    æ¥å£å‚æ•°ï¼šï¼š
+        commentid->å¯¹åº”è¯„è®ºçš„id
+        userid->ç”¨æˆ·id
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id: -1=>ÒÑ¾­µã¹ıÔŞÁË
-                    id>0 µãÔŞ¼ÇÂ¼µÄid
+                    id: -1=>å·²ç»ç‚¹è¿‡èµäº†
+                    id>0 ç‚¹èµè®°å½•çš„id
 
 
 
-Ê®¶ş¡¢ÓÃ»§ÆÀÂÛÁĞ±í(¸ù¾İÉÌÆ·id)
-     ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/comment_list?goodsid=13&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        goodsid->ÉÌÆ·id
-        ps->Ã¿Ò³ÏÔÊ¾µÄÌõÊı
-        page->µÚ¼¸Ò³
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åäºŒã€ç”¨æˆ·è¯„è®ºåˆ—è¡¨(æ ¹æ®å•†å“id)
+     è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/comment_list?goodsid=13&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        goodsid->å•†å“id
+        ps->æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°
+        page->ç¬¬å‡ é¡µ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   array£¨
+                   arrayï¼ˆ
                     0=>
-                        id=>ÆÀÂÛid
-                        goodsid=>ÉÌÆ·id
+                        id=>è¯„è®ºid
+                        goodsid=>å•†å“id
                         user_info:
-                                    username:ÓÃ»§Ãû
-                                    userid: ÓÃ»§id
-                                    herdurl: Í·ÏñµØÖ·
-                        content=>ÆÀÂÛÄÚÈİ
-                        comefrom=>À´×Ô
-                        serverlist=>·şÎñÏî
-                        replycount=>»Ø¸´Êı
-                        prasiecount=>ÔŞµÄÊıÁ¿
-                        grade=>0:²îÆÀ  1:ÖĞÆÀ 2:ºÃÆÀ
-                        picurl=>ÆÀÂÛÍ¼Æ¬url
-                        commenttime=>ÆÀÂÛÊ±¼ä
-                        star_num=>ĞÇ¼¶
+                                    username:ç”¨æˆ·å
+                                    userid: ç”¨æˆ·id
+                                    herdurl: å¤´åƒåœ°å€
+                        content=>è¯„è®ºå†…å®¹
+                        comefrom=>æ¥è‡ª
+                        serverlist=>æœåŠ¡é¡¹
+                        replycount=>å›å¤æ•°
+                        prasiecount=>èµçš„æ•°é‡
+                        grade=>0:å·®è¯„  1:ä¸­è¯„ 2:å¥½è¯„
+                        picurl=>è¯„è®ºå›¾ç‰‡url
+                        commenttime=>è¯„è®ºæ—¶é—´
+                        star_num=>æ˜Ÿçº§
                         
                     1=>
                         .......
 
-                    badcomment_num=>²îÆÀÊıÁ¿
-                    zhongpingcomment_num=>²îÆÀÊıÁ¿
-                    goodcomment_num=>ºÃÆÀÊıÁ¿
-                £©
+                    badcomment_num=>å·®è¯„æ•°é‡
+                    zhongpingcomment_num=>å·®è¯„æ•°é‡
+                    goodcomment_num=>å¥½è¯„æ•°é‡
+                ï¼‰
 
 
 
 
-Ê®Èı¡¢ÉÏ´«Í¼Æ¬
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/add_pic
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        photo->Í¼Æ¬
-        key->ÃØÔ¿
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åä¸‰ã€ä¸Šä¼ å›¾ç‰‡
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/add_pic
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        photo->å›¾ç‰‡
+        key->ç§˜é’¥
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   picurl:Í¼Æ¬url
+                   picurl:å›¾ç‰‡url
 
 
 
-Ê®ËÄ¡¢·¢²¼ÆÀÂÛ
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/add_comment?userid=85&goodsid=16&content=¶«Î÷ÊµÔÚÌ«ºÃÁË&grade=2&key=4eecb92ec1d98a63ab9000f760ae80a0&comefrom=ÉÏº£&picurl=2015-06-28/558f49bf685c2.jpg&star_num=4
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        goodsid->ÉÌÆ·id
-        content->ÆÀÂÛÄÚÈİ
-        grade->0:²îÆÀ,1:ÖĞÆÀ,2:ºÃÆÀ
-        key:ÃØÔ¿
-        comefrom->À´Ô´,²»´«Ä¬ÈÏÀ´Ô´±±¾©
-        serverlist->·şÎñÏî,Õë¶Ô·şÎñ½øĞĞÆÀ¼ÛµÄÊ±ºòĞèÒª´«µİ,Ã»ÓĞ²»´«µİ
-        picurl->Í¼Æ¬µØÖ·,Ã»ÓĞÍ¼Æ¬²»´«
-        star_num->ĞÇ¼¶,²»´«Ä¬ÈÏÊÇ5ĞÇ
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åå››ã€å‘å¸ƒè¯„è®º
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/add_comment?userid=85&goodsid=16&content=ä¸œè¥¿å®åœ¨å¤ªå¥½äº†&grade=2&key=4eecb92ec1d98a63ab9000f760ae80a0&comefrom=ä¸Šæµ·&picurl=2015-06-28/558f49bf685c2.jpg&star_num=4
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        goodsid->å•†å“id
+        content->è¯„è®ºå†…å®¹
+        grade->0:å·®è¯„,1:ä¸­è¯„,2:å¥½è¯„
+        key:ç§˜é’¥
+        comefrom->æ¥æº,ä¸ä¼ é»˜è®¤æ¥æºåŒ—äº¬
+        serverlist->æœåŠ¡é¡¹,é’ˆå¯¹æœåŠ¡è¿›è¡Œè¯„ä»·çš„æ—¶å€™éœ€è¦ä¼ é€’,æ²¡æœ‰ä¸ä¼ é€’
+        picurl->å›¾ç‰‡åœ°å€,æ²¡æœ‰å›¾ç‰‡ä¸ä¼ 
+        star_num->æ˜Ÿçº§,ä¸ä¼ é»˜è®¤æ˜¯5æ˜Ÿ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÆÀÂÛ³É¹¦·µ»ØÊı¾İid
+                   id:è¯„è®ºæˆåŠŸè¿”å›æ•°æ®id
 
 
 
-Ê®Îå¡¢»Ø¸´ÆÀÂÛ
-     ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/reply_comment?userid=54&goodsid=13&content=¶«Î÷ÊµÔÚÌ«ºÃÁË&key=74253df69ebba8b7f22906e06e35f227&picurl=2015-06-28/558f49bf685c2.jpg&comment_id=17
+åäº”ã€å›å¤è¯„è®º
+     è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/reply_comment?userid=54&goodsid=13&content=ä¸œè¥¿å®åœ¨å¤ªå¥½äº†&key=74253df69ebba8b7f22906e06e35f227&picurl=2015-06-28/558f49bf685c2.jpg&comment_id=17
 
-      ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key:ÃØÔ¿
-        goodsid->ÉÌÆ·id
-        content->ÆÀÂÛÄÚÈİ
-        picurl->Í¼Æ¬µØÖ·,Ã»ÓĞÍ¼Æ¬²»´«
-        comment_id->ÆÀÂÛid
+      æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key:ç§˜é’¥
+        goodsid->å•†å“id
+        content->è¯„è®ºå†…å®¹
+        picurl->å›¾ç‰‡åœ°å€,æ²¡æœ‰å›¾ç‰‡ä¸ä¼ 
+        comment_id->è¯„è®ºid
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÆÀÂÛ³É¹¦·µ»ØÊı¾İid
+                   id:è¯„è®ºæˆåŠŸè¿”å›æ•°æ®id
 
 
 
@@ -592,46 +670,46 @@ datas :
 
 
 
-Ä£¿é¶ş.°²¾Ó»î¶¯
+æ¨¡å—äºŒ.å®‰å±…æ´»åŠ¨
 
-Ê®Áù¡¢»î¶¯ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/activity/activity_list?ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡Ã¿Ò³µÄÌõÊı,²»´«Ä¬ÈÏÃ¿Ò³ÏÔÊ¾8Ìõ
-        page->µÚ¼¸Ò³,²»´«Ä¬ÈÏÊÇµÚÒ»Ò³
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åå…­ã€æ´»åŠ¨åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/activity/activity_list?ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–æ¯é¡µçš„æ¡æ•°,ä¸ä¼ é»˜è®¤æ¯é¡µæ˜¾ç¤º8æ¡
+        page->ç¬¬å‡ é¡µ,ä¸ä¼ é»˜è®¤æ˜¯ç¬¬ä¸€é¡µ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:Êı¾İid
-                   channelid:ËùÊôÀ¸Ä¿id
-                   channelname:ËùÊôÀ¸Ä¿Ãû
-                   title:±êÌâ
-                   picurl:Í¼Æ¬url
-                   author:×÷Õß
-                   releasedate:·¢²¼Ê±¼ä
-                   content:»î¶¯ÄÚÈİ
+                   id:æ•°æ®id
+                   channelid:æ‰€å±æ ç›®id
+                   channelname:æ‰€å±æ ç›®å
+                   title:æ ‡é¢˜
+                   picurl:å›¾ç‰‡url
+                   author:ä½œè€…
+                   releasedate:å‘å¸ƒæ—¶é—´
+                   content:æ´»åŠ¨å†…å®¹
 
 
 
-Ê®Æß¡¢»î¶¯ÏêÇé
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/activity/activity_detail?act_id=18
-    ½Ó¿Ú²ÎÊı£º£º
-        act_id=18->»î¶¯id
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åä¸ƒã€æ´»åŠ¨è¯¦æƒ…
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/activity/activity_detail?act_id=18
+    æ¥å£å‚æ•°ï¼šï¼š
+        act_id=18->æ´»åŠ¨id
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:Êı¾İid
-                   channelid:ËùÊôÀ¸Ä¿id
-                   channelname:ËùÊôÀ¸Ä¿Ãû
-                   title:±êÌâ
-                   picurl:Í¼Æ¬url
-                   author:×÷Õß
-                   releasedate:·¢²¼Ê±¼ä
-                   content:»î¶¯ÄÚÈİ
+                   id:æ•°æ®id
+                   channelid:æ‰€å±æ ç›®id
+                   channelname:æ‰€å±æ ç›®å
+                   title:æ ‡é¢˜
+                   picurl:å›¾ç‰‡url
+                   author:ä½œè€…
+                   releasedate:å‘å¸ƒæ—¶é—´
+                   content:æ´»åŠ¨å†…å®¹
 
 
 
@@ -641,165 +719,165 @@ datas :
 
 
 
-Ä£¿éÈı.ÉÌ¼Ò×ÊÑ¶
+æ¨¡å—ä¸‰.å•†å®¶èµ„è®¯
 
-Ê®°Ë¡¢×ÊÑ¶ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/zixun/zixun_list?ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡Ã¿Ò³µÄÌõÊı,²»´«Ä¬ÈÏÃ¿Ò³ÏÔÊ¾8Ìõ
-        page->µÚ¼¸Ò³,²»´«Ä¬ÈÏÊÇµÚÒ»Ò³
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åå…«ã€èµ„è®¯åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/zixun/zixun_list?ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–æ¯é¡µçš„æ¡æ•°,ä¸ä¼ é»˜è®¤æ¯é¡µæ˜¾ç¤º8æ¡
+        page->ç¬¬å‡ é¡µ,ä¸ä¼ é»˜è®¤æ˜¯ç¬¬ä¸€é¡µ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:Êı¾İid
-                   channelid:ËùÊôÀ¸Ä¿id
-                   channelname:ËùÊôÀ¸Ä¿Ãû
-                   title:±êÌâ
-                   picurl:Í¼Æ¬url
-                   author:×÷Õß
-                   releasedate:·¢²¼Ê±¼ä
-                   content:»î¶¯ÄÚÈİ
+                   id:æ•°æ®id
+                   channelid:æ‰€å±æ ç›®id
+                   channelname:æ‰€å±æ ç›®å
+                   title:æ ‡é¢˜
+                   picurl:å›¾ç‰‡url
+                   author:ä½œè€…
+                   releasedate:å‘å¸ƒæ—¶é—´
+                   content:æ´»åŠ¨å†…å®¹
 
 
 
 
-Ê®¾Å¡¢×ÊÑ¶ÏêÇé
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/zixun/zixun_detail?zixun_id=23
-    ½Ó¿Ú²ÎÊı£º£º
-        zixun_id=23->×ÊÑ¶id
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+åä¹ã€èµ„è®¯è¯¦æƒ…
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/zixun/zixun_detail?zixun_id=23
+    æ¥å£å‚æ•°ï¼šï¼š
+        zixun_id=23->èµ„è®¯id
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:Êı¾İid
-                   channelid:ËùÊôÀ¸Ä¿id
-                   channelname:ËùÊôÀ¸Ä¿Ãû
-                   title:±êÌâ
-                   picurl:Í¼Æ¬url
-                   author:×÷Õß
-                   releasedate:·¢²¼Ê±¼ä
-                   content:»î¶¯ÄÚÈİ
+                   id:æ•°æ®id
+                   channelid:æ‰€å±æ ç›®id
+                   channelname:æ‰€å±æ ç›®å
+                   title:æ ‡é¢˜
+                   picurl:å›¾ç‰‡url
+                   author:ä½œè€…
+                   releasedate:å‘å¸ƒæ—¶é—´
+                   content:æ´»åŠ¨å†…å®¹
 
 
 
 
-¶şÊ®¡¢ÓÅ»İÈ¯ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/zixun/coupon_list?ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡Ã¿Ò³µÄÌõÊı,²»´«Ä¬ÈÏÃ¿Ò³ÏÔÊ¾8Ìõ
-        page->µÚ¼¸Ò³,²»´«Ä¬ÈÏÊÇµÚÒ»Ò³
+äºŒåã€ä¼˜æƒ åˆ¸åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/zixun/coupon_list?ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–æ¯é¡µçš„æ¡æ•°,ä¸ä¼ é»˜è®¤æ¯é¡µæ˜¾ç¤º8æ¡
+        page->ç¬¬å‡ é¡µ,ä¸ä¼ é»˜è®¤æ˜¯ç¬¬ä¸€é¡µ
        
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:Êı¾İid
-                   is_receive:ÊÇ·ñÁìÈ¡
-                   userid:ÓÅ»İÈ¯·¢²¼ÈËid
-                   picurl:Í¼Æ¬url
-                   price:¼Û¸ñ
-                   detail:ÓÅ»İÏêÇé
-                   createtime:·¢²¼Ê±¼ä
-                   attr:0->ÏÖ½ğÈ¯,1->ÓÅ»İÈ¯
-                   status:0->ÉúĞ§,1->Ê§Ğ§
-                   morecash:³¬¶îÏÖ½ğ
+                   id:æ•°æ®id
+                   is_receive:æ˜¯å¦é¢†å–
+                   userid:ä¼˜æƒ åˆ¸å‘å¸ƒäººid
+                   picurl:å›¾ç‰‡url
+                   price:ä»·æ ¼
+                   detail:ä¼˜æƒ è¯¦æƒ…
+                   createtime:å‘å¸ƒæ—¶é—´
+                   attr:0->ç°é‡‘åˆ¸,1->ä¼˜æƒ åˆ¸
+                   status:0->ç”Ÿæ•ˆ,1->å¤±æ•ˆ
+                   morecash:è¶…é¢ç°é‡‘
 
 
 
 
-¶şÊ®Ò»¡¢ÁìÈ¡ÓÅ»İÈ¯
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/zixun/receive_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227&coupon_id=1
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key->ÃØÔ¿
-        coupon_id->ÓÅ»İÈ¯id
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+äºŒåä¸€ã€é¢†å–ä¼˜æƒ åˆ¸
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/zixun/receive_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227&coupon_id=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+        coupon_id->ä¼˜æƒ åˆ¸id
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id->Êı¾İÔÚÊı¾İ±íÖĞµÄid
+                    id->æ•°æ®åœ¨æ•°æ®è¡¨ä¸­çš„id
 
 
 
-¶şÊ®¶ş¡¢ÎÒµÄÓÅ»İÈ¯
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/zixun/my_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key->ÃØÔ¿
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+äºŒåäºŒã€æˆ‘çš„ä¼˜æƒ åˆ¸
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/zixun/my_coupon?userid=54&key=74253df69ebba8b7f22906e06e35f227
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key->ç§˜é’¥
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    is_use:ÓÅ»İÈ¯ÊÇ·ñÊ¹ÓÃ
-                    use_time:ÓÅ»İÈ¯Ê¹ÓÃÊ±¼ä
-                    id:Êı¾İid
-                   userid:ÓÅ»İÈ¯·¢²¼ÈËid
-                   picurl:Í¼Æ¬url
-                   price:¼Û¸ñ
-                   detail:ÓÅ»İÏêÇé
-                   createtime:·¢²¼Ê±¼ä
-                   attr:0->ÏÖ½ğÈ¯,1->ÓÅ»İÈ¯
-                   status:0->ÉúĞ§,1->Ê§Ğ§
-                   morecash:³¬¶îÏÖ½ğ
+                    is_use:ä¼˜æƒ åˆ¸æ˜¯å¦ä½¿ç”¨
+                    use_time:ä¼˜æƒ åˆ¸ä½¿ç”¨æ—¶é—´
+                    id:æ•°æ®id
+                   userid:ä¼˜æƒ åˆ¸å‘å¸ƒäººid
+                   picurl:å›¾ç‰‡url
+                   price:ä»·æ ¼
+                   detail:ä¼˜æƒ è¯¦æƒ…
+                   createtime:å‘å¸ƒæ—¶é—´
+                   attr:0->ç°é‡‘åˆ¸,1->ä¼˜æƒ åˆ¸
+                   status:0->ç”Ÿæ•ˆ,1->å¤±æ•ˆ
+                   morecash:è¶…é¢ç°é‡‘
 
 
 
 
-¶şÊ®Èı¡¢³ÇÊĞ²Ö¿â
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/index/city_kufang?ps=4&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->Ã¿Ò³ÏÔÊ¾µÄÌõÊı,Ä¬ÈÏÃ¿Ò³ÏÔÊ¾4Ìõ
-        page->µÚ¼¸Ò³
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+äºŒåä¸‰ã€åŸå¸‚ä»“åº“
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/index/city_kufang?ps=4&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°,é»˜è®¤æ¯é¡µæ˜¾ç¤º4æ¡
+        page->ç¬¬å‡ é¡µ
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id:Êı¾İid
-                    province:Ê¡·İ
-                    city:³ÇÊĞ
-                    address:µØÖ·
-                    getuser:ÊÕ»õÈË
-                    tel:µç»°
-                    phone:ÊÖ»ú
-                    sort:ÅÅĞò
-                    serverrule :·şÎñ·¶Î§
+                    id:æ•°æ®id
+                    province:çœä»½
+                    city:åŸå¸‚
+                    address:åœ°å€
+                    getuser:æ”¶è´§äºº
+                    tel:ç”µè¯
+                    phone:æ‰‹æœº
+                    sort:æ’åº
+                    serverrule :æœåŠ¡èŒƒå›´
                     
 
 
 
 
-¶şÊ®ËÄ¡¢ÉÌÆ·ÏêÇé
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/goods_detail?goodsid=35&attr=1
-    ½Ó¿Ú²ÎÊı£º£º
-        goodsid->ÉÌÆ·id
-        attr:0->·şÎñ;1->ÉÌÆ·
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+äºŒåå››ã€å•†å“è¯¦æƒ…
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/goods_detail?goodsid=35&attr=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        goodsid->å•†å“id
+        attr:0->æœåŠ¡;1->å•†å“
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id:ÉÌÆ·id
-                    serverid:·şÎñ·ÖÀàid
-                    servernum:ÉÌÆ·±àºÅ
-                    goodsname:ÉÌÆ·Ãû³Æ
-                    faceurl:ÕıÃæÍ¼Æ¬
-                    ceurl:²àÃæÍ¼Æ¬
-                    goodsprice1:ÉÌÆ·¼Û¸ñ
-                    goodsprice2:°²×°·Ñ
-                    goodsprice3:ÅäËÍ·Ñ
-                    goodsprice4:³¬¸ß·Ñ
-                    goodsprice5:ÕÛ¾É·Ñ
-                    attr:0->·şÎñ;1->ÉÌÆ·
+                    id:å•†å“id
+                    serverid:æœåŠ¡åˆ†ç±»id
+                    servernum:å•†å“ç¼–å·
+                    goodsname:å•†å“åç§°
+                    faceurl:æ­£é¢å›¾ç‰‡
+                    ceurl:ä¾§é¢å›¾ç‰‡
+                    goodsprice1:å•†å“ä»·æ ¼
+                    goodsprice2:å®‰è£…è´¹
+                    goodsprice3:é…é€è´¹
+                    goodsprice4:è¶…é«˜è´¹
+                    goodsprice5:æŠ˜æ—§è´¹
+                    attr:0->æœåŠ¡;1->å•†å“
                     kg:
-                    sale_count:ÏúÊÛÊıÁ¿
-                    comment_num:ÆÀÂÛÊıÁ¿
+                    sale_count:é”€å”®æ•°é‡
+                    comment_num:è¯„è®ºæ•°é‡
                     
                    
 
@@ -807,67 +885,67 @@ datas :
 
 
 
-¶şÊ®Îå¡¢·şÎñÏêÇé
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/server_detail?serverid=32&attr=0
-    ½Ó¿Ú²ÎÊı£º£º
-        serverid->·şÎñid
-        attr:0->·şÎñ;1->ÉÌÆ·
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+äºŒåäº”ã€æœåŠ¡è¯¦æƒ…
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/server_detail?serverid=32&attr=0
+    æ¥å£å‚æ•°ï¼šï¼š
+        serverid->æœåŠ¡id
+        attr:0->æœåŠ¡;1->å•†å“
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id:ÉÌÆ·id
-                    serverid:·şÎñ·ÖÀàid
-                    servernum:ÉÌÆ·±àºÅ
-                    goodsname:ÉÌÆ·Ãû³Æ
-                    faceurl:ÕıÃæÍ¼Æ¬
-                    ceurl:²àÃæÍ¼Æ¬
-                    goodsprice1:ÉÌÆ·¼Û¸ñ
-                    goodsprice2:°²×°·Ñ
-                    goodsprice3:ÅäËÍ·Ñ
-                    goodsprice4:³¬¸ß·Ñ
-                    goodsprice5:ÕÛ¾É·Ñ
-                    attr:0->·şÎñ;1->ÉÌÆ·
+                    id:å•†å“id
+                    serverid:æœåŠ¡åˆ†ç±»id
+                    servernum:å•†å“ç¼–å·
+                    goodsname:å•†å“åç§°
+                    faceurl:æ­£é¢å›¾ç‰‡
+                    ceurl:ä¾§é¢å›¾ç‰‡
+                    goodsprice1:å•†å“ä»·æ ¼
+                    goodsprice2:å®‰è£…è´¹
+                    goodsprice3:é…é€è´¹
+                    goodsprice4:è¶…é«˜è´¹
+                    goodsprice5:æŠ˜æ—§è´¹
+                    attr:0->æœåŠ¡;1->å•†å“
                     kg:
-                    sale_count:ÏúÊÛÊıÁ¿
-                    comment_num:ÆÀÂÛÊıÁ¿
+                    sale_count:é”€å”®æ•°é‡
+                    comment_num:è¯„è®ºæ•°é‡
                     
 
 
 
 
 
-¶şÊ®Áù¡¢ÎÒµÄ¹ºÎï³µ
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/my_shoppingcart?userid=1&key=b94b3af0db5e920231d9d84bd8980991&page=1&ps=10
-    ½Ó¿Ú²ÎÊı£º£º
-        userid->ÓÃ»§id
-        key:ÃØÔ¿
+äºŒåå…­ã€æˆ‘çš„è´­ç‰©è½¦
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/my_shoppingcart?userid=1&key=b94b3af0db5e920231d9d84bd8980991&page=1&ps=10
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid->ç”¨æˆ·id
+        key:ç§˜é’¥
         page:
         ps:
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                    id:ÉÌÆ·id
-                    userid:ÓÃ»§id
-                    goodsid:ÉÌÆ·id
-                    servernum:ÉÌÆ·±àºÅ
-                    areaid:ÇøÓòid
-                    goodsname:ÉÌÆ·Ãû³Æ
-                    goodspicurll:ÉÌÆ·Í¼Æ¬
-                    goodsprice:ÉÌÆ·¼Û¸ñ
-                    goodscount:ÉÌÆ·ÊıÁ¿
-                    acount:Ğ¡½á
-                    goodsprice2:°²×°·Ñ
-                    goodsprice3:ÅäËÍ·Ñ
-                    goodsprice4:³¬¸ß·Ñ
-                    goodsprice5:ÕÛ¾É·Ñ
-                    colorname:ÑÕÉ«
-                    specname:¹æ¸ñ
-                    cart_category:0Îª·şÎñ°²×°£¬1Îª»ù´¡½¨²Ä£¬2°²×°+ÅäËÍ
-                    attr:0->·şÎñ;1->ÉÌÆ·
+                    id:å•†å“id
+                    userid:ç”¨æˆ·id
+                    goodsid:å•†å“id
+                    servernum:å•†å“ç¼–å·
+                    areaid:åŒºåŸŸid
+                    goodsname:å•†å“åç§°
+                    goodspicurll:å•†å“å›¾ç‰‡
+                    goodsprice:å•†å“ä»·æ ¼
+                    goodscount:å•†å“æ•°é‡
+                    acount:å°ç»“
+                    goodsprice2:å®‰è£…è´¹
+                    goodsprice3:é…é€è´¹
+                    goodsprice4:è¶…é«˜è´¹
+                    goodsprice5:æŠ˜æ—§è´¹
+                    colorname:é¢œè‰²
+                    specname:è§„æ ¼
+                    cart_category:0ä¸ºæœåŠ¡å®‰è£…ï¼Œ1ä¸ºåŸºç¡€å»ºæï¼Œ2å®‰è£…+é…é€
+                    attr:0->æœåŠ¡;1->å•†å“
                     
 
 
@@ -875,48 +953,48 @@ datas :
 
 
 
-¶şÊ®Æß¡¢Ìá½»¶©µ¥
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/add_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&addid=14&totalprice=3000&orderstatus=0&billtype=¹¤³Ì¿î&billhead=0&billcontent=ËŞÇ¨·äÄñÍøÂç¿Æ¼¼ÓĞÏŞ¹«Ë¾&expresstype=0&address=ãôÑôÏØ&istoked=0&isurgent=0&urgentshuom=ËÙ¶È¿ìµã&attribute=1&goodsid=24&goodscount=2
-    ½Ó¿Ú²ÎÊı£º
-        ±ØĞè²ÎÊı:
-            userid->ÓÃ»§id
-            key:ÃØÔ¿
-            addid:ÊÕ»õµØÖ·id
-            totalprice:¶©µ¥×Ü¼Û
-            orderstatus:0:Î´Ö§¸¶£¬1:´ıÊÕ»õ£¬3:ÒÑÈë¿â
-            attribute:0Îª·şÎñ°²×°£¬1Îª»ù´¡½¨²Ä£¬2°²×°+ÅäËÍ
-            goodsid:ÉÌÆ·id
-            goodscount:ÉÌÆ·ÊıÁ¿
-        ·Ç±ØĞè²ÎÊı:
-            areaid:´úÊÕµØÖ·µØÇøid
-            billtype:·¢Æ±ÀàĞÍ
-            billhead:0:¹«Ë¾£»1£º¸öÈË
-            billcontent:·¢Æ±ÄÚÈİ
-            expresstype:0:¿ìµİ£»1ÎªÍ¶µİ
-            address:Í¶µİµØÖ·
-            istoked:0:´úÊÕ£¬1:²»´úÊÕ
-            isurgent:0:¼Ó¼±£¬1£º²»¼Ó¼±
-            urgentshuom:¼Ó¼±ËµÃ÷
-            isorder:0:Î´Ô¤Ô¼£¬1:µ½»õÔ¤Ô¼
-            ordertime:Ô¤Ô¼Ê±¼ä------Ê±¼ä´Á
-            ordershuom:Ô¤Ô¼ËµÃ÷
-            isstore:ÊÇ·ñ²Ö´¢ 0:²Ö´¢£¬1:²»²Ö´¢
-            storestart:²Ö´¢¿ªÊ¼Ê±¼ä ------Ê±¼ä´Á
-            storeend:²Ö´¢½áÊøÊ±¼ä ------Ê±¼ä´Á
-            remark:±¸×¢
-            facepic:¶©µ¥µ½¿â,¹ÜÀíÔ±ÅÄµÄÕıÃæÕÕ
-            cepic:¶©µ¥µ½¿â,¹ÜÀíÔ±ÅÄµÄ²àÃæÕÕ
-            flag:0->Î´É¾³ıÔ¤Ô¼,1->ÒÑÉ¾³ıÔ¤Ô¼
-            buyerwords:Âò¼ÒÁôÑÔ
+äºŒåä¸ƒã€æäº¤è®¢å•
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/add_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&addid=14&totalprice=3000&orderstatus=0&billtype=å·¥ç¨‹æ¬¾&billhead=0&billcontent=å®¿è¿èœ‚é¸Ÿç½‘ç»œç§‘æŠ€æœ‰é™å…¬å¸&expresstype=0&address=æ³—é˜³å¿&istoked=0&isurgent=0&urgentshuom=é€Ÿåº¦å¿«ç‚¹&attribute=1&goodsid=24&goodscount=2
+    æ¥å£å‚æ•°ï¼š
+        å¿…éœ€å‚æ•°:
+            userid->ç”¨æˆ·id
+            key:ç§˜é’¥
+            addid:æ”¶è´§åœ°å€id
+            totalprice:è®¢å•æ€»ä»·
+            orderstatus:0:æœªæ”¯ä»˜ï¼Œ1:å¾…æ”¶è´§ï¼Œ3:å·²å…¥åº“
+            attribute:0ä¸ºæœåŠ¡å®‰è£…ï¼Œ1ä¸ºåŸºç¡€å»ºæï¼Œ2å®‰è£…+é…é€
+            goodsid:å•†å“id
+            goodscount:å•†å“æ•°é‡
+        éå¿…éœ€å‚æ•°:
+            areaid:ä»£æ”¶åœ°å€åœ°åŒºid
+            billtype:å‘ç¥¨ç±»å‹
+            billhead:0:å…¬å¸ï¼›1ï¼šä¸ªäºº
+            billcontent:å‘ç¥¨å†…å®¹
+            expresstype:0:å¿«é€’ï¼›1ä¸ºæŠ•é€’
+            address:æŠ•é€’åœ°å€
+            istoked:0:ä»£æ”¶ï¼Œ1:ä¸ä»£æ”¶
+            isurgent:0:åŠ æ€¥ï¼Œ1ï¼šä¸åŠ æ€¥
+            urgentshuom:åŠ æ€¥è¯´æ˜
+            isorder:0:æœªé¢„çº¦ï¼Œ1:åˆ°è´§é¢„çº¦
+            ordertime:é¢„çº¦æ—¶é—´------æ—¶é—´æˆ³
+            ordershuom:é¢„çº¦è¯´æ˜
+            isstore:æ˜¯å¦ä»“å‚¨ 0:ä»“å‚¨ï¼Œ1:ä¸ä»“å‚¨
+            storestart:ä»“å‚¨å¼€å§‹æ—¶é—´ ------æ—¶é—´æˆ³
+            storeend:ä»“å‚¨ç»“æŸæ—¶é—´ ------æ—¶é—´æˆ³
+            remark:å¤‡æ³¨
+            facepic:è®¢å•åˆ°åº“,ç®¡ç†å‘˜æ‹çš„æ­£é¢ç…§
+            cepic:è®¢å•åˆ°åº“,ç®¡ç†å‘˜æ‹çš„ä¾§é¢ç…§
+            flag:0->æœªåˆ é™¤é¢„çº¦,1->å·²åˆ é™¤é¢„çº¦
+            buyerwords:ä¹°å®¶ç•™è¨€
 
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                  order_id->¶©µ¥Êı¾İ±íÖĞµÄid
-                  orderdetail_id->¶©µ¥ÏêÇéÊı¾İ±íÖĞµÄid
+                  order_id->è®¢å•æ•°æ®è¡¨ä¸­çš„id
+                  orderdetail_id->è®¢å•è¯¦æƒ…æ•°æ®è¡¨ä¸­çš„id
 
 
 
@@ -924,32 +1002,32 @@ datas :
 
 
 
-¶şÊ®°Ë¡¢·şÎñ/ÉÌÆ·ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/goods_list?ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        ps->»ñÈ¡Ã¿Ò³µÄÌõÊı,²»´«Ä¬ÈÏÃ¿Ò³ÏÔÊ¾8Ìõ
-        page->µÚ¼¸Ò³,²»´«Ä¬ÈÏÊÇµÚÒ»Ò³
+äºŒåå…«ã€æœåŠ¡/å•†å“åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/goods_list?ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        ps->è·å–æ¯é¡µçš„æ¡æ•°,ä¸ä¼ é»˜è®¤æ¯é¡µæ˜¾ç¤º8æ¡
+        page->ç¬¬å‡ é¡µ,ä¸ä¼ é»˜è®¤æ˜¯ç¬¬ä¸€é¡µ
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÉÌÆ·id
-                    serverid:·şÎñ·ÖÀàid
-                    servernum:ÉÌÆ·±àºÅ
-                    goodsname:ÉÌÆ·Ãû³Æ
-                    faceurl:ÕıÃæÍ¼Æ¬
-                    ceurl:²àÃæÍ¼Æ¬
-                    goodsprice1:ÉÌÆ·¼Û¸ñ
-                    goodsprice2:°²×°·Ñ
-                    goodsprice3:ÅäËÍ·Ñ
-                    goodsprice4:³¬¸ß·Ñ
-                    goodsprice5:ÕÛ¾É·Ñ
-                    attr:0->·şÎñ;1->ÉÌÆ·
+                   id:å•†å“id
+                    serverid:æœåŠ¡åˆ†ç±»id
+                    servernum:å•†å“ç¼–å·
+                    goodsname:å•†å“åç§°
+                    faceurl:æ­£é¢å›¾ç‰‡
+                    ceurl:ä¾§é¢å›¾ç‰‡
+                    goodsprice1:å•†å“ä»·æ ¼
+                    goodsprice2:å®‰è£…è´¹
+                    goodsprice3:é…é€è´¹
+                    goodsprice4:è¶…é«˜è´¹
+                    goodsprice5:æŠ˜æ—§è´¹
+                    attr:0->æœåŠ¡;1->å•†å“
                     kg:
-                    sale_count:ÏúÊÛÊıÁ¿
-                    comment_num:ÆÀÂÛÊıÁ¿
+                    sale_count:é”€å”®æ•°é‡
+                    comment_num:è¯„è®ºæ•°é‡
 
 
 
@@ -957,267 +1035,130 @@ datas :
 
 
 
-¶şÊ®¾Å¡¢ÎÒµÄ¸öÈËĞÅÏ¢
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_info?userid=1&key=b94b3af0db5e920231d9d84bd8980991
-    ½Ó¿Ú²ÎÊı£º£º
+äºŒåä¹ã€æˆ‘çš„ä¸ªäººä¿¡æ¯
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_info?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    æ¥å£å‚æ•°ï¼šï¼š
        userid
        key
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÉÌÆ·id
-                    serverid:·şÎñ·ÖÀàid
-                    servernum:ÉÌÆ·±àºÅ
-                    goodsname:ÉÌÆ·Ãû³Æ
-                    faceurl:ÕıÃæÍ¼Æ¬
-                    ceurl:²àÃæÍ¼Æ¬
-                    goodsprice1:ÉÌÆ·¼Û¸ñ
-                    goodsprice2:°²×°·Ñ
-                    goodsprice3:ÅäËÍ·Ñ
-                    goodsprice4:³¬¸ß·Ñ
-                    goodsprice5:ÕÛ¾É·Ñ
-                    attr:0->·şÎñ;1->ÉÌÆ·
+                   id:å•†å“id
+                    serverid:æœåŠ¡åˆ†ç±»id
+                    servernum:å•†å“ç¼–å·
+                    goodsname:å•†å“åç§°
+                    faceurl:æ­£é¢å›¾ç‰‡
+                    ceurl:ä¾§é¢å›¾ç‰‡
+                    goodsprice1:å•†å“ä»·æ ¼
+                    goodsprice2:å®‰è£…è´¹
+                    goodsprice3:é…é€è´¹
+                    goodsprice4:è¶…é«˜è´¹
+                    goodsprice5:æŠ˜æ—§è´¹
+                    attr:0->æœåŠ¡;1->å•†å“
                     kg:
-                    sale_count:ÏúÊÛÊıÁ¿
-                    comment_num:ÆÀÂÛÊıÁ¿
+                    sale_count:é”€å”®æ•°é‡
+                    comment_num:è¯„è®ºæ•°é‡
 
 
 
 
 
-ÈıÊ®¡¢»ñÈ¡ÎÒµÄÊÕ»õµØÖ·
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_address?userid=1&key=b94b3af0db5e920231d9d84bd8980991
-    ½Ó¿Ú²ÎÊı£º£º
+ä¸‰åã€è·å–æˆ‘çš„æ”¶è´§åœ°å€
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_address?userid=1&key=b94b3af0db5e920231d9d84bd8980991
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                    id:
                    userid:
-                    userpro:Ê¡
-                   usercity:ÊĞ
-                   usertown:ÏØ
-                   userstr:½ÖµÀ
-                   consigner:ÊÕ»õÈË
-                   attribute:Ä¬ÈÏÎª0,1Îª¹«Ë¾µØÖ·
-                   isdefault:Ä¬ÈÏÎª0,1ÎªÄ¬ÈÏµØÖ·
-                   phone:ÁªÏµµç»°
-                   youbian:ÓÊ±à
+                    userpro:çœ
+                   usercity:å¸‚
+                   usertown:å¿
+                   userstr:è¡—é“
+                   consigner:æ”¶è´§äºº
+                   attribute:é»˜è®¤ä¸º0,1ä¸ºå…¬å¸åœ°å€
+                   isdefault:é»˜è®¤ä¸º0,1ä¸ºé»˜è®¤åœ°å€
+                   phone:è”ç³»ç”µè¯
+                   youbian:é‚®ç¼–
 
 
 
 
 
 
-ÈıÊ®Ò»¡¢ĞŞ¸ÄÎÒµÄÊÕ»õµØÖ·
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/edit_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=½­ËÕÊ¡&city=ËŞÇ¨ÊĞ&town=ãôÑôÏØ&str=Î÷¿µ´´ÒµÔ°302ËŞÇ¨·äÄñ¿Æ¼¼ÍøÂçÓĞÏŞ¹«Ë¾&consigner=Ğ¡Ã÷&attribute=1&isdefault=1&phone=13355446688&youbian=223221&id=13
-    ½Ó¿Ú²ÎÊı£º£º
+ä¸‰åä¸€ã€ä¿®æ”¹æˆ‘çš„æ”¶è´§åœ°å€
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/edit_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=æ±Ÿè‹çœ&city=å®¿è¿å¸‚&town=æ³—é˜³å¿&str=è¥¿åº·åˆ›ä¸šå›­302å®¿è¿èœ‚é¸Ÿç§‘æŠ€ç½‘ç»œæœ‰é™å…¬å¸&consigner=å°æ˜&attribute=1&isdefault=1&phone=13355446688&youbian=223221&id=13
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
-         pro:Ê¡----------------------±ØĞè
-       city:ÊĞ-----------------------±ØĞè
-       town:ÏØ-----------------------±ØĞè
-       str:½ÖµÀ-----------------------±ØĞè
-       consigner:ÊÕ»õÈË-------------------±ØĞè
-       attribute:Ä¬ÈÏÎª0,1Îª¹«Ë¾µØÖ·
-       isdefault:Ä¬ÈÏÎª0,1ÎªÄ¬ÈÏµØÖ·
-       phone:ÁªÏµµç»°--------------------±ØĞè
-       youbian:ÓÊ±à
-       id:ÊÕ»õµØÖ·id------------------±ØĞè
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+         pro:çœ----------------------å¿…éœ€
+       city:å¸‚-----------------------å¿…éœ€
+       town:å¿-----------------------å¿…éœ€
+       str:è¡—é“-----------------------å¿…éœ€
+       consigner:æ”¶è´§äºº-------------------å¿…éœ€
+       attribute:é»˜è®¤ä¸º0,1ä¸ºå…¬å¸åœ°å€
+       isdefault:é»˜è®¤ä¸º0,1ä¸ºé»˜è®¤åœ°å€
+       phone:è”ç³»ç”µè¯--------------------å¿…éœ€
+       youbian:é‚®ç¼–
+       id:æ”¶è´§åœ°å€id------------------å¿…éœ€
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÊÕ»õµØÖ·id
+                   id:æ”¶è´§åœ°å€id
                    
 
 
 
-ÈıÊ®¶ş¡¢Ôö¼ÓÎÒµÄÊÕ»õµØÖ·
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/add_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=½­ËÕÊ¡&city=ËŞÇ¨ÊĞ&town=ãôÑôÏØ&str=Î÷¿µ´´ÒµÔ°302ËŞÇ¨·äÄñ¿Æ¼¼ÍøÂçÓĞÏŞ¹«Ë¾&consigner=ÀÏÍõ&attribute=0&isdefault=0&phone=13355448888&youbian=223221
-    ½Ó¿Ú²ÎÊı£º£º
+ä¸‰åäºŒã€å¢åŠ æˆ‘çš„æ”¶è´§åœ°å€
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/add_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&pro=æ±Ÿè‹çœ&city=å®¿è¿å¸‚&town=æ³—é˜³å¿&str=è¥¿åº·åˆ›ä¸šå›­302å®¿è¿èœ‚é¸Ÿç§‘æŠ€ç½‘ç»œæœ‰é™å…¬å¸&consigner=è€ç‹&attribute=0&isdefault=0&phone=13355448888&youbian=223221
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
-         pro:Ê¡----------------------±ØĞè
-       city:ÊĞ-----------------------±ØĞè
-       town:ÏØ-----------------------±ØĞè
-       str:½ÖµÀ-----------------------±ØĞè
-       consigner:ÊÕ»õÈË-------------------±ØĞè
-       attribute:Ä¬ÈÏÎª0,1Îª¹«Ë¾µØÖ·
-       isdefault:Ä¬ÈÏÎª0,1ÎªÄ¬ÈÏµØÖ·
-       phone:ÁªÏµµç»°--------------------±ØĞè
-       youbian:ÓÊ±à
+         pro:çœ----------------------å¿…éœ€
+       city:å¸‚-----------------------å¿…éœ€
+       town:å¿-----------------------å¿…éœ€
+       str:è¡—é“-----------------------å¿…éœ€
+       consigner:æ”¶è´§äºº-------------------å¿…éœ€
+       attribute:é»˜è®¤ä¸º0,1ä¸ºå…¬å¸åœ°å€
+       isdefault:é»˜è®¤ä¸º0,1ä¸ºé»˜è®¤åœ°å€
+       phone:è”ç³»ç”µè¯--------------------å¿…éœ€
+       youbian:é‚®ç¼–
 
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÊÕ»õµØÖ·id
-                   
-
-
-
-
-
-ÈıÊ®¶ş¡¢É¾³ıÎÒµÄÊÕ»õµØÖ·
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/del_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&add_id=14
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        add_id:ÊÕ»õµØÖ·id
-
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   id:1----É¾³ı³É¹¦
+                   id:æ”¶è´§åœ°å€id
                    
 
 
 
 
 
-
-
-ÈıÊ®Èı¡¢ĞŞ¸ÄêÇ³Æ
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/edit_nickname?key=2d43290ba0c52a49c5ddff6bc1adf1be&userid=54&username=ÀÏÍõĞÂêÇ³Æ
-    ½Ó¿Ú²ÎÊı£º£º
+ä¸‰åäºŒã€åˆ é™¤æˆ‘çš„æ”¶è´§åœ°å€
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/del_myaddress?userid=1&key=b94b3af0db5e920231d9d84bd8980991&add_id=14
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
-        username:ÓÃ»§Ãû
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+        add_id:æ”¶è´§åœ°å€id
+
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÓÃ»§id
-                   
-
-
-
-
-
-ÈıÊ®ËÄ¡¢ÎÒµÄ¶©µ¥ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_orderlist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ps
-        page
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   ²ÎÕÕÌí¼Ó¶©µ¥ËùĞè²ÎÊı
-
-
-
-
-
-
-ÈıÊ®Îå¡¢É¾³ı¶©µ¥
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/del_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ordernum=D011507010001
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ordernum:¶©µ¥ºÅ
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   1->¶©µ¥É¾³ı³É¹¦
-
-
-
-
-
-
-
-ÈıÊ®Áù¡¢ÒÑÈ¡ÏûµÄ¶©µ¥ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_cancellist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ps
-        page
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   ²ÎÕÕÌí¼Ó¶©µ¥ËùĞè²ÎÊı
-
-
-
-
-
-
-
-
-ÈıÊ®Æß¡¢ÒÑÍê³ÉµÄ¶©µ¥ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_completelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ps
-        page
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   ²ÎÕÕÌí¼Ó¶©µ¥ËùĞè²ÎÊı
-
-
-
-
-
-
-ÈıÊ®°Ë¡¢´ıÊÕ»õµÄ¶©µ¥ÁĞ±í
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_shouhuolist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ps
-        page
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
-                   ²ÎÕÕÌí¼Ó¶©µ¥ËùĞè²ÎÊı
-
-
-
-
-
-
-ÈıÊ®¾Å¡¢ÎÒµÄÔ¤Ô¼
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_yuyuelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&isorder=0&flag=0
-    ½Ó¿Ú²ÎÊı£º£º
-        userid
-        key
-        ps
-        page
-        isorder:0->Î´Ô¤Ô¼,1->ÒÑÔ¤Ô¼
-        flag:0->Î´É¾³ıÔ¤Ô¼,1->ÒÑÉ¾³ıÔ¤Ô¼,²»´«Ä¬ÈÏÊÇ0
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
-        datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
-            datas: 
+                   id:1----åˆ é™¤æˆåŠŸ
                    
 
 
@@ -1226,18 +1167,155 @@ datas :
 
 
 
-ËÄÊ®¡¢ÎÒµÄÊÕ²Ø
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_store?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
-    ½Ó¿Ú²ÎÊı£º£º
+ä¸‰åä¸‰ã€ä¿®æ”¹æ˜µç§°
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/edit_nickname?key=2d43290ba0c52a49c5ddff6bc1adf1be&userid=54&username=è€ç‹æ–°æ˜µç§°
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        username:ç”¨æˆ·å
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   id:ç”¨æˆ·id
+                   
+
+
+
+
+
+ä¸‰åå››ã€æˆ‘çš„è®¢å•åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_orderlist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   å‚ç…§æ·»åŠ è®¢å•æ‰€éœ€å‚æ•°
+
+
+
+
+
+
+ä¸‰åäº”ã€åˆ é™¤è®¢å•
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/del_order?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ordernum=D011507010001
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ordernum:è®¢å•å·
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   1->è®¢å•åˆ é™¤æˆåŠŸ
+
+
+
+
+
+
+
+ä¸‰åå…­ã€å·²å–æ¶ˆçš„è®¢å•åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_cancellist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   å‚ç…§æ·»åŠ è®¢å•æ‰€éœ€å‚æ•°
+
+
+
+
+
+
+
+
+ä¸‰åä¸ƒã€å·²å®Œæˆçš„è®¢å•åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_completelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   å‚ç…§æ·»åŠ è®¢å•æ‰€éœ€å‚æ•°
+
+
+
+
+
+
+ä¸‰åå…«ã€å¾…æ”¶è´§çš„è®¢å•åˆ—è¡¨
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_shouhuolist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ps
+        page
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   å‚ç…§æ·»åŠ è®¢å•æ‰€éœ€å‚æ•°
+
+
+
+
+
+
+ä¸‰åä¹ã€æˆ‘çš„é¢„çº¦
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_yuyuelist?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&isorder=0&flag=0
+    æ¥å£å‚æ•°ï¼šï¼š
+        userid
+        key
+        ps
+        page
+        isorder:0->æœªé¢„çº¦,1->å·²é¢„çº¦
+        flag:0->æœªåˆ é™¤é¢„çº¦,1->å·²åˆ é™¤é¢„çº¦,ä¸ä¼ é»˜è®¤æ˜¯0
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
+        datas:
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
+            datas: 
+                   
+
+
+
+
+
+
+
+å››åã€æˆ‘çš„æ”¶è—
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_store?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
         ps
         page
         
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                    
 
@@ -1245,46 +1323,46 @@ datas :
 
 
 
-ËÄÊ®Ò»¡¢ÎÒµÄÏûÏ¢
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/my_message?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&message_type=0
-    ½Ó¿Ú²ÎÊı£º£º
+å››åä¸€ã€æˆ‘çš„æ¶ˆæ¯
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/my_message?userid=1&key=b94b3af0db5e920231d9d84bd8980991&ps=10&page=1&message_type=0
+    æ¥å£å‚æ•°ï¼šï¼š
         userid
         key
         ps
         page
-        message_type:0->ÏµÍ³ĞÅÏ¢,1->¸öÈËĞÅÏ¢,²»´«Ä¬ÈÏÊÇ0
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+        message_type:0->ç³»ç»Ÿä¿¡æ¯,1->ä¸ªäººä¿¡æ¯,ä¸ä¼ é»˜è®¤æ˜¯0
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                     id:
                     userid
-                    sendname:·¢ËÍÕß
+                    sendname:å‘é€è€…
                     title:
                     messcontent:
                     messtype:
-                    messagetime:ÏûÏ¢Éú³ÉÊ±¼ä
+                    messagetime:æ¶ˆæ¯ç”Ÿæˆæ—¶é—´
 
 
 
 
 
 
-ËÄÊ®¶ş¡¢Ìõ¼şËÑË÷
-    ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/goods/tiaojian_search?ps=10&page=1&attr=0&keywords=½ø&channelid=4&price=flag1&order=sale_count
-    ½Ó¿Ú²ÎÊı£º£º
+å››åäºŒã€æ¡ä»¶æœç´¢
+    è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/goods/tiaojian_search?ps=10&page=1&attr=0&keywords=è¿›&channelid=4&price=flag1&order=sale_count
+    æ¥å£å‚æ•°ï¼šï¼š
         ps
         page
-        attr:0->·şÎñ,1->ÉÌÆ·,²»´«Ä¬ÈÏÊÇ0
-        keywords:¹Ø¼ü×Ö,Ã»ÓĞ²»´«
-        channelid:ËùÊô·ÖÀàid
-        price:100~299->flag1;300-499->flag2;500ÒÔÉÏ->flag3
-        order:sale_count->ÏúÁ¿;goodsprice1->ÉÌÆ·¼Û¸ñ;comment_num->ÆÀÂÛÊıÁ¿
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+        attr:0->æœåŠ¡,1->å•†å“,ä¸ä¼ é»˜è®¤æ˜¯0
+        keywords:å…³é”®å­—,æ²¡æœ‰ä¸ä¼ 
+        channelid:æ‰€å±åˆ†ç±»id
+        price:100~299->flag1;300-499->flag2;500ä»¥ä¸Š->flag3
+        order:sale_count->é”€é‡;goodsprice1->å•†å“ä»·æ ¼;comment_num->è¯„è®ºæ•°é‡
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-       error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+       error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                     
 
@@ -1292,56 +1370,56 @@ datas :
 
 
 
-ºóÌí¼ÓµÄ½Ó¿ÚÎÄµµ
+åæ·»åŠ çš„æ¥å£æ–‡æ¡£
 
-1.ÉÏ´«Í·Ïñ½Ó¿Ú
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/add_headpic?userid=85&key=89e47eefef73109834ede398850e871b&photo=2015-06-28/558f49bf685c2.jpg
-²ÎÊı£º
+1.ä¸Šä¼ å¤´åƒæ¥å£
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/add_headpic?userid=85&key=89e47eefef73109834ede398850e871b&photo=2015-06-28/558f49bf685c2.jpg
+å‚æ•°ï¼š
        userid:
        key:
-       photo:Í¼Æ¬url,
-  ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+       photo:å›¾ç‰‡url,
+  è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
          datas:
-         error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+         error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   picurl:Í¼Æ¬url
+                   picurl:å›¾ç‰‡url
 
 
 
 
 
 
- 2¡¢ĞŞ¸ÄÓÃ»§ĞÅÏ¢½Ó¿Ú
- ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/editor_userinfo?userid=85&key=89e47eefef73109834ede398850e871b&phone=18012345678&username=ÀÏÍõ
-  ²ÎÊı£º
-       ±ØĞë²ÎÊı£º
+ 2ã€ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯æ¥å£
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/editor_userinfo?userid=85&key=89e47eefef73109834ede398850e871b&phone=18012345678&username=è€ç‹
+  å‚æ•°ï¼š
+       å¿…é¡»å‚æ•°ï¼š
        userid:
        key:
-       ¿ÉÌí¼Ó²ÎÊı£º
-       phone:µç»°ºÅÂë
+       å¯æ·»åŠ å‚æ•°ï¼š
+       phone:ç”µè¯å·ç 
        username:
-       sex:ĞÔ±ğ------------------------------Õâ¸ö×Ö¶ÎÊı¾İ¿âÖĞÃ»ÓĞ£¬ÔİÊ±±£Áô
-    ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+       sex:æ€§åˆ«------------------------------è¿™ä¸ªå­—æ®µæ•°æ®åº“ä¸­æ²¡æœ‰ï¼Œæš‚æ—¶ä¿ç•™
+    è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
-                   id:ÓÃ»§id
+                   id:ç”¨æˆ·id
 
 
 
 
-3¡¢Ìí¼ÓÊÕ²Ø½Ó¿Ú 
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/add_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
-   ²ÎÊı£º  
+3ã€æ·»åŠ æ”¶è—æ¥å£ 
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/add_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+   å‚æ•°ï¼š  
        userid:
        key:
        goodsid:
-       ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+       è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                     goodsid
 
@@ -1351,24 +1429,24 @@ datas :
 
 
 
-4¡¢¼ÓÈë¹ºÎï³µ½Ó¿Ú:
-ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/add_shoppingcart?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11&goodscount=3&acount=150
-    ²ÎÊı£º
+4ã€åŠ å…¥è´­ç‰©è½¦æ¥å£:
+è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/add_shoppingcart?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11&goodscount=3&acount=150
+    å‚æ•°ï¼š
        userid:
        key:
        goodsid:
-       areaid:´ıÊÕ»õµØÖ·µÄid£¬Èç¹ûÃ»ÓĞÑ¡Ôñ´ıÊÕ»õ£¬Ôò²»´«¸Ã×Ö¶Î
-       goodscount:ÉÌÆ·ÊıÁ¿
-       acount:ÉÌÆ·Ğ¡½á
-       goodsprice2:°²×°·Ñ
-       goodsprice3:ÅäËÍ·Ñ
-       specname£º¹æ¸ñ£¬ÉÌÆ·Îª»ù´¡½¨²ÄµÄÊ±ºò£¬ĞèÒª´«µİ¸Ã×Ö¶ÎĞÅÏ¢
-       colorname£ºÑÕÉ«£¬ÉÌÆ·Îª»ù´¡½¨²ÄµÄÊ±ºò£¬ĞèÒª´«µİ¸Ã×Ö¶ÎĞÅÏ¢
+       areaid:å¾…æ”¶è´§åœ°å€çš„idï¼Œå¦‚æœæ²¡æœ‰é€‰æ‹©å¾…æ”¶è´§ï¼Œåˆ™ä¸ä¼ è¯¥å­—æ®µ
+       goodscount:å•†å“æ•°é‡
+       acount:å•†å“å°ç»“
+       goodsprice2:å®‰è£…è´¹
+       goodsprice3:é…é€è´¹
+       specnameï¼šè§„æ ¼ï¼Œå•†å“ä¸ºåŸºç¡€å»ºæçš„æ—¶å€™ï¼Œéœ€è¦ä¼ é€’è¯¥å­—æ®µä¿¡æ¯
+       colornameï¼šé¢œè‰²ï¼Œå•†å“ä¸ºåŸºç¡€å»ºæçš„æ—¶å€™ï¼Œéœ€è¦ä¼ é€’è¯¥å­—æ®µä¿¡æ¯
 
-       ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+       è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
         datas: 
                   goodsid
 
@@ -1377,15 +1455,15 @@ datas :
 
 
 
- 5¡¢È¡ÏûÊÕ²Ø½Ó¿Ú
- ÇëÇóµØÖ·£ºhttp://localhost/chutao/index.php/api/user/cancel_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
-    ²ÎÊı£º  
+ 5ã€å–æ¶ˆæ”¶è—æ¥å£
+ è¯·æ±‚åœ°å€ï¼šhttp://localhost/yingke/index.php/api/user/cancel_shouchang?userid=85&key=89e47eefef73109834ede398850e871b&goodsid=11
+    å‚æ•°ï¼š  
        userid:
        key:
        goodsid:
-       ·µ»ØÖµ£º
-        "errresult":true|false Ö´ĞĞ³É¹¦·µ»Øtrue£¬Ö´ĞĞÊ§°Ü·µ»Øfalse
+       è¿”å›å€¼ï¼š
+        "errresult":true|false æ‰§è¡ŒæˆåŠŸè¿”å›trueï¼Œæ‰§è¡Œå¤±è´¥è¿”å›false
         datas:
-        error:´íÎóÃèÊö£¬Ö´ĞĞ³É¹¦Ã»ÓĞ¸Ã×Ö¶Î
+        error:é”™è¯¯æè¿°ï¼Œæ‰§è¡ŒæˆåŠŸæ²¡æœ‰è¯¥å­—æ®µ
             datas: 
                     goodsid
