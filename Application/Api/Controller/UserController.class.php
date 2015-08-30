@@ -623,8 +623,32 @@ class UserController extends MobileController{
 
 
 
-
-
+    /*
+     *获取我的财富信息
+     */
+    public function my_moneyinfo(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //根据用户id获取用户信息 
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        $data['userid'] = $user_info['id'];
+        $data['income'] = $user_info['income'];
+        $data['yue'] = $user_info['income'] - $user_info['cost'];
+        $data['card_num'] = $user_info['card_num'];
+        output_data($data);
+    }
 
 
 
@@ -748,19 +772,17 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        $bindcard_model = M('bandcard');
-        $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
-
-        if(empty($bankcard_info)){
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        if($user_info['card_num'] == NULL){
             //该用户没有绑定银行卡信息
             output_error("无绑定银行卡信息");
         }else{
 
-            $data['userid'] = $bankcard_info['userid'];
-            $data['bankname'] = $bankcard_info['bankname'];
-            $data['card_username'] = $bankcard_info['card_username'];
-            $data['card_num'] = $bankcard_info['card_num'];
-            $data['phone'] = $bankcard_info['phone'];
+            $data['userid'] = $user_info['id'];
+            $data['card_bank'] = $user_info['card_bank'];
+            $data['card_name'] = $user_info['card_name'];
+            $data['card_num'] = $user_info['card_num'];
             output_data($data);
         }
 
@@ -788,20 +810,18 @@ class UserController extends MobileController{
              output_error('秘钥key不正确');
         }
 
-        if($_REQUEST['card_username'] == NULL || $_REQUEST['bankname'] == NULL || $_REQUEST['card_num'] == NULL || $_REQUEST['phone'] == NULL){
+        if($_REQUEST['card_username'] == NULL || $_REQUEST['bankname'] == NULL || $_REQUEST['card_num'] == NULL){
             output_error('参数不全');
         }
         //先去查询该用户是否已经绑定过银行卡
-        $bindcard_model = M('bandcard');
-        $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
-        if(empty($bankcard_info)){
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        if($user_info['card_num'] == NULL){
             //该用户没有绑定银行卡信息
-            $opt['card_username'] = $_REQUEST['card_username'];
-            $opt['bankname'] = $_REQUEST['bankname'];
+            $opt['card_name'] = $_REQUEST['card_username'];
+            $opt['card_bank'] = $_REQUEST['bankname'];
             $opt['card_num'] = $_REQUEST['card_num'];
-            $opt['phone'] = $_REQUEST['phone'];
-            $opt['userid'] = $_REQUEST['userid'];
-            $res = $bindcard_model->add($opt);
+            $res = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->save($opt);
             if($res){
                 //绑定成功
                 output_data(array('id'=>$res));
@@ -810,13 +830,10 @@ class UserController extends MobileController{
             }
         }else{
             //该用户已经绑定银行卡了,执行更新操作
-            $bankcard_info = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->find();
-            $opt['card_username'] = $_REQUEST['card_username'];
-            $opt['bankname'] = $_REQUEST['bankname'];
+            $opt['card_name'] = $_REQUEST['card_username'];
+            $opt['card_bank'] = $_REQUEST['bankname'];
             $opt['card_num'] = $_REQUEST['card_num'];
-            $opt['phone'] = $_REQUEST['phone'];
-            $opt['userid'] = $_REQUEST['userid'];
-            $res = $bindcard_model->where(array('userid'=>$_REQUEST['userid']))->save($opt);
+            $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($opt);
             if($res){
                 //绑定成功
                 output_data(array('id'=>$res));
@@ -846,7 +863,7 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['bankcard_id'] == NULL || $_REQUEST['money'] == NULL){
+        if($_REQUEST['money'] == NULL){
             output_error('参数不全');
         }
         //判断用户的提现金额是否大于余额
@@ -857,12 +874,16 @@ class UserController extends MobileController{
         if($_REQUEST['money'] > $tixian){
             output_error('提现金额大于余额');
         }else{
-            $opt['userid'] = $_REQUEST['userid'];
-            $opt['outcash'] = $_REQUEST['money'];
-            $opt['card_id'] = $_REQUEST['bankcard_id'];
-            $opt['apply_time'] = time();
-            $cashout_model = M('cashout');
-            $res = $cashout_model->add($opt);
+            $opt['apply_date'] = time();
+            $opt['apply_user'] = $user_info['ni_name'];
+            $opt['apply_phone'] = $user_info['phone_num'];
+            $opt['wd_money'] = $_REQUEST['money'];
+            $opt['card_bank'] = $user_info['card_bank'];
+            $opt['card_name'] = $user_info['card_name'];
+            $opt['card_num'] = $user_info['card_num'];
+            $opt['status'] = "no";
+            $withdrawals_model = M('withdrawals');
+            $res = $withdrawals_model->add($opt);
             if($res){
                 output_data(array('id'=>$res));
             }else{
@@ -1560,7 +1581,7 @@ class UserController extends MobileController{
 
 
     /*
-     *我的消息
+     *我的消息(分为系统消息和提醒通知)
      */
     public function my_message(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
@@ -1582,32 +1603,57 @@ class UserController extends MobileController{
         $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
         $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['m_target'] = $_REQUEST['userid'];
-        $array['status'] = 'user';
-        $array['m_isdelete'] = 'no';
+        //先获取系统发送给用户的消息
         $message_model = M('message');
-        $result = $message_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['m_content'] = $v['m_content'];
-                $data[$k]['m_date'] = $v['m_date'];
-               //获取消息发送人的信息
-               $user_model = M('user');
-               $condition['id'] = $v['m_user'];
-               $sender_info = $user_model->where($condition)->find();
-               $data[$k]['sender_info']['id'] = $sender_info['id'];
-               $data[$k]['sender_info']['ni_name'] = $sender_info['ni_name'];
-               $data[$k]['sender_info']['head_url'] = $sender_info['head_url'];
-               $data[$k]['sender_info']['sex'] = $sender_info['sex'];
+        $sys_message = $message_model->where(array('m_isdelete'=>'no'))->where(array('status'=>'user'))->select();
+        //判断系统消息的接收者是否包含当前用户
+        $data = array();
+        foreach ($sys_message as $k => $v) {
+            if($v['m_target'] == "all"){
+                //此条消息的接收者为全部用户
+                $data['system_message'][$k]['id'] = $v['id'];
+                $data['system_message'][$k]['m_content'] = $v['m_content'];
+                $data['system_message'][$k]['m_date'] = $v['m_date'];
+                $data['system_message'][$k]['m_user'] = $v['m_user'];
+            }else{
+                $receive_info = explode(',',$v['m_target']);
+                if(in_array($_REQUEST['userid'],$receive_info)){
+                    //当前用户在接收者行列
+                    $data['system_message'][$k]['id'] = $v['id'];
+                    $data['system_message'][$k]['m_content'] = $v['m_content'];
+                    $data['system_message'][$k]['m_date'] = $v['m_date'];
+                    $data['system_message'][$k]['m_user'] = $v['m_user'];
+                }else{
+                    $data['system_message'] = NULL;
+                }
             }
-            output_data($data);
+        }
+        //再获取提醒的消息
+        $array['user_id'] = $_REQUEST['userid'];
+        $array['isuser'] = "yes";
+        $remind_model = M('remind');
+        $result = $remind_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
+        if($result[0] == NULL){
+             $data['remind_message'] = NULL;
+        }else{
+            
+            foreach ($result as $k => $v) {
+                $data['remind_message'][$k]['id'] = $v['id'];
+                $data['remind_message'][$k]['re_name'] = $v['re_name'];
+                $data['remind_message'][$k]['re_content'] = $v['re_content'];
+                $data['remind_message'][$k]['re_date'] = $v['re_date'];
+            }
         }   
+
+        output_data($data);
+        
     }
+
+
+
+
+ 
+
 
 
 
@@ -1682,6 +1728,8 @@ class UserController extends MobileController{
         $arrOpt['per_sign'] = $_REQUEST['per_sign'];
         $arrOpt['lable'] = $_REQUEST['lable'];
         $user_model = M("user");
+        //先去数据库中查询是否一样昵称存在
+        
         //先去数据库查询出该用户数据
         $result = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
         if($arrOpt['ni_name'] == NULL){

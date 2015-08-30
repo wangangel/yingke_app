@@ -201,7 +201,7 @@ datas :
 
 
 
-十一.获取我的消息(用户发送的)
+十一.获取我的消息
  请求地址：http://localhost/yingke/index.php/api/user/my_message?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
@@ -284,40 +284,45 @@ datas :
 
 
 
+十五.获取我的财富信息
+ 请求地址：http://localhost/yingke/index.php/api/user/my_moneyinfo?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+    接口参数：：
+        userid->用户id
+        key->秘钥
+        client_id->客户端唯一标识
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                "id": 用户id,
+                "ni_name": 
+                "head_url": 
+                "sex": 
+                "is_focus": 0---未关注,1:已关注
 
 
 
 
-
-
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-十二.获取用户可提现金额
-请求地址：http://localhost/yingke/index.php/api/user/user_tixian?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+十六.绑定银行卡
+请求地址：http://localhost/yingke/index.php/api/user/bind_bankcard?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&card_username=久居&bankname=工商银行&card_num=123456789
     接口参数:
         userid:
         key:
         client_id
+        card_username-----持卡人姓名
+        bankname-----开户行
+        card_num-------卡号
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-          tixian
+          id
     }
 
 
 
-
-十三.获取用户绑定银行卡信息
-请求地址：http://localhost/yingke/index.php/api/user/user_bindcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert
+十七.用户获取绑定银行的信息
+请求地址：http://localhost/yingke/index.php/api/user/user_bindcard?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
     接口参数:
         userid:
         key:
@@ -331,22 +336,28 @@ datas :
 
 
 
-十四.绑定银行卡
-请求地址：http://localhost/yingke/index.php/api/user/bind_bankcard?userid=1&key=8880ad588a0e3feb0cab71feffa76049&client_id=qwert&card_username=久居&bankname=工商银行&card_num=123456789&phone=789456123
-    接口参数:
+
+十八.余额提现
+请求地址：http://localhost/yingke/index.php/api/user/cash_tixian?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&money=300
+ 接口参数:
         userid:
         key:
         client_id
-        card_username-----持卡人姓名
-        bankname-----开户行
-        card_num-------卡号
-        phone--------预留手机号
+        money---------提现金额
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
           id
     }
 
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
