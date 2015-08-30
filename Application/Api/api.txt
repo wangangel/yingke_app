@@ -357,6 +357,47 @@ datas :
 
 
 
+十九.获取我的店铺礼物
+请求地址：http://localhost/yingke/index.php/api/user/myshop_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+ 接口参数:
+        userid:
+        key:
+        client_id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": "1",
+            "gift_name": 礼物名
+            "gift_pic_url": 礼物图片url
+            "gift_price": 礼物价格
+            "gift_sign": 礼物发送人
+}
+
+
+
+
+
+二十.添加我的店铺礼物
+请求地址：http://localhost/yingke/index.php/api/user/add_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_pic_url=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&gift_name=怡宝&gift_price=20
+ 接口参数:
+        userid:
+        key:
+        client_id
+        gift_pic_url------礼物图片
+        gift_name-------礼物名称
+        gift_price-------礼物价格
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          id
+    }
+
+
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

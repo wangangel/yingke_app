@@ -895,6 +895,101 @@ class UserController extends MobileController{
 
 
 
+    /*
+     *获取我的店铺礼物
+     */
+    public function myshop_gift(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $gift_model = M('gift');
+        //现获取用户自定义的礼物
+        $gift_info = $gift_model->where(array('userid'=>$_REQUEST['userid']))->where(array('gift_sign'=>"user"))->where(array('status'=>"start"))->select();
+        if(empty($gift_info)){
+            $data['user_gift'] = NULL;
+        }else{
+            foreach ($gift_info as $k => $v) {
+                $data['user_gift'][$k]['id'] = $v['id'];
+                $data['user_gift'][$k]['gift_name'] = $v['gift_name'];
+                $data['user_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
+                $data['user_gift'][$k]['gift_price'] = $v['gift_price'];
+                $data['user_gift'][$k]['gift_sign'] = $v['gift_sign'];
+            }
+        }
+       
+        //获取系统礼物
+        $sysgift_info = $gift_model->where(array('gift_sign'=>"system"))->where(array('status'=>"start"))->select();
+        if(empty($sysgift_info)){
+            $data['system_gift'] = NULL;
+        }else{
+            foreach ($sysgift_info as $k => $v) {
+                $data['system_gift'][$k]['id'] = $v['id'];
+                $data['system_gift'][$k]['gift_name'] = $v['gift_name'];
+                $data['system_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
+                $data['system_gift'][$k]['gift_price'] = $v['gift_price'];
+                $data['system_gift'][$k]['gift_sign'] = $v['gift_sign'];
+            }
+        }
+       
+
+        output_data($data);
+    }
+
+
+
+    /*
+     *用户添加自定义礼物
+     */
+    public function add_gift(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['gift_name']==NULL || $_REQUEST['gift_price']==NULL){
+            output_error('参数不全');
+        }
+        //根据userid获取用户的手机号码
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        $user_phone = $user_info['phone_num'];
+        $condition['userid'] = $_REQUEST['userid'];
+        $condition['user_phone'] = $user_phone;
+        $condition['gift_name'] = $_REQUEST['gift_name'];
+        $condition['gift_price'] = $_REQUEST['gift_price'];
+        $condition['gift_pic_url'] = $_REQUEST['gift_pic_url'];
+        $condition['add_date'] = time();
+        $condition['gift_sign'] = "user";
+        $gift_model = M('gift');
+        $res = $gift_model->add($condition);
+        if($res){
+            output_data(array('id'=>$res));
+        }else{
+            output_error('礼物添加失败');
+        }
+    }
+
+
+
+
 
 
 
