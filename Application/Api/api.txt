@@ -397,6 +397,92 @@ datas :
 
 
 
+二十一.获取我的标签
+请求地址：http://localhost/yingke/index.php/api/user/mylabel?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+ 接口参数:
+        userid:
+        key:
+        client_id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            label
+}
+
+
+
+
+
+二十二.添加我的标签
+请求地址：http://localhost/yingke/index.php/api/user/add_mylabel?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&lable=帅哥
+ 接口参数:
+        userid:
+        key:
+        client_id
+        label------标签
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+}
+
+
+
+
+二十三.添加意见反馈
+请求地址：http://localhost/yingke/index.php/api/user/add_feedback?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&feedback=这个软件非常好哦
+ 接口参数:
+        userid:
+        key:
+        client_id
+        feedback------意见反馈
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+}
+
+
+
+二十四.获取系统推荐好友
+请求地址：http://localhost/yingke/index.php/api/user/recommend_info?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+ 接口参数:
+        userid:
+        key:
+        client_id
+        feedback------意见反馈
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+}
+
+
+
+
+二十五.条件搜索
+请求地址：http://localhost/yingke/index.php/api/user/tiaojian_search?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tiaojian=18456123789
+ 接口参数:
+        userid:
+        key:
+        client_id
+        tiaojian------搜索条件
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+}
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

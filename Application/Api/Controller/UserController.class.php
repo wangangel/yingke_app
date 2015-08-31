@@ -991,7 +991,248 @@ class UserController extends MobileController{
 
 
 
+    /*
+     *用户获取我的标签
+     */
+    public function mylabel(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $user_model = M('user');
+        $con['id'] = $_REQUEST['userid'];
+        $con['status'] = "start";
+        $user_info = $user_model->where($con)->find();
+        if($user_info['lable'] == NULL){
+            $data['label'] = NULL;
+        }else{
+            $label_info = explode(',',$user_info['lable']);
+            $data['label'] = $label_info;
+            output_data($data);
+        }
+    }
 
+
+
+
+    /*
+     *添加我的标签
+     */
+    public function add_mylabel(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['lable'] == NULL){
+            output_error('参数不全');
+        }
+        $user_model = M('user');
+        //获取当前用户的label
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        $lable_info = $user_info['lable'];
+        if($lable_info == NULL){
+            //之前没有标签
+            $lable = $_REQUEST['lable'];
+        }else{
+            $lable = $lable_info . "," . $_REQUEST['lable'];
+        }
+        $opt['lable'] = $lable;
+        $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($opt);
+        if($res){
+            output_data(array('id'=>$res));
+        }else{
+            output_error('添加标签失败');
+        }
+    }
+
+
+
+    /*
+     *添加意见反馈
+     */
+    public function add_feedback(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['feedback'] == NULL){
+            output_error('参数不全');
+        }
+        //获取用户信息
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        $opt['f_name'] = $user_info['ni_name'];
+        $opt['f_phone'] = $user_info['phone_num'];
+        $opt['f_date'] = time();
+        $opt['f_isdelete'] = "no";
+        $opt['f_content'] = $_REQUEST['feedback'];
+        $feedback_model = M('feedback');
+        $res = $feedback_model->add($opt);
+        if($res){
+            output_data(array('id'=>$res));
+        }else{
+            output_error('反馈消息失败');
+        }
+
+    }
+
+
+
+
+    /*
+     *获取系统推荐好友
+     */
+    public function recommend_info(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $recommend_model = M('recommend');
+        $sql = "select * from yk_recommend where re_batch=(select max(re_batch) from yk_recommend)";
+        $recommend_info = $recommend_model->query($sql);
+        //根据用户id获取推荐用户的信息
+        foreach ($recommend_info as $k => $v) {
+            $user_model = M('user');
+            $con['id'] = $v['user_id'];
+            $user_info = $user_model->where($con)->find();
+            $data['recommend'][$k]['userid'] = $user_info['id'];
+            $data['recommend'][$k]['head_url'] = $user_info['head_url'];
+            $data['recommend'][$k]['ni_name'] = $user_info['ni_name'];
+            $data['recommend'][$k]['sex'] = $user_info['sex'];
+            //再根据推荐好友的id与当前用户的id获取好友之前的关注状态
+            $opt['userid'] = $_REQUEST['userid'];
+            $opt['focus_user'] = $user_info['id'];
+            $opt['status'] = "yes";
+            $focus_model = M('friends_focus');
+            $focus_info = $focus_model->where($opt)->find();
+            if(empty($focus_info)){
+                //没有好友关系
+                $data['recommend'][$k]['is_focus'] = "no";
+            }else{
+                $data['recommend'][$k]['is_focus'] = "yes";
+            }
+
+        }
+        output_data($data);
+
+    }
+
+
+
+
+
+    /*
+     *条件搜素
+     */
+    public function tiaojian_search(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['tiaojian'] == NULL){
+            output_error("参数不全");
+        } 
+        //1.先拿条件做昵称模糊查询
+        $user_model = M('user');
+        $tiaojian = "%".$_REQUEST['tiaojian']."%";
+        $con['ni_name'] = array('like',$tiaojian);
+        $user_info = $user_model->where($con)->select();
+        if(!empty($user_info)){
+            foreach ($user_info as $k => $v) {
+               $data['tiaojian_search'][$k]['userid'] = $v['id'];
+               $data['tiaojian_search'][$k]['head_url'] = $v['head_url'];
+               $data['tiaojian_search'][$k]['ni_name'] = $v['ni_name'];
+               $data['tiaojian_search'][$k]['sex'] = $v['sex'];
+                //再根据推荐好友的id与当前用户的id获取好友之前的关注状态
+                $opt['userid'] = $_REQUEST['userid'];
+                $opt['focus_user'] = $v['id'];
+                $opt['status'] = "yes";
+                $focus_model = M('friends_focus');
+                $focus_info = $focus_model->where($opt)->find();
+                if(empty($focus_info)){
+                    //没有好友关系
+                    $data['tiaojian_search'][$k]['is_focus'] = "no";
+                }else{
+                    $data['tiaojian_search'][$k]['is_focus'] = "yes";
+                }
+
+            }
+        }else{
+            //为空,条件做userID查询
+            $user_info = $user_model->where(array('user_id'=>$_REQUEST['tiaojian']))->find();
+            if(empty($user_info)){
+                //也没有查询到用户
+                $data['tiaojian_search'] = NULL;
+            }else{
+                 $data['tiaojian_search'][$k]['userid'] = $user_info['id'];
+               $data['tiaojian_search'][$k]['head_url'] = $user_info['head_url'];
+               $data['tiaojian_search'][$k]['ni_name'] = $user_info['ni_name'];
+               $data['tiaojian_search'][$k]['sex'] = $user_info['sex'];
+                //再根据推荐好友的id与当前用户的id获取好友之前的关注状态
+                $opt['userid'] = $_REQUEST['userid'];
+                $opt['focus_user'] = $user_info['id'];
+                $opt['status'] = "yes";
+                $focus_model = M('friends_focus');
+                $focus_info = $focus_model->where($opt)->find();
+                if(empty($focus_info)){
+                    //没有好友关系
+                    $data['tiaojian_search'][$k]['is_focus'] = "no";
+                }else{
+                    $data['tiaojian_search'][$k]['is_focus'] = "yes";
+                }
+
+            }
+        }
+        output_data($data);
+    }
+
+
+###############################################################################################################
 
 
      /*
