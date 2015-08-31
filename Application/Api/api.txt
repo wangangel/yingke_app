@@ -483,6 +483,120 @@ datas :
 
 
 
+二十六.获取正在直播的房间(当前房间人数,还未完成)
+请求地址：http://localhost/yingke/index.php/api/user/live_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+        ps
+        page
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+             "liveroom_info": [
+            {
+                "id": 
+                "room_name": 直播间名
+                "room_pic_url": 直播封面
+                "isopen": 收费,公开,邀请好友
+                "fees": 收费标准
+                "praise": 赞数
+                "share_num": 分享数
+                "add_date": 创建时间
+                "user_info": {
+                    "userid": "6",
+                    "head_url": 头像
+                    "ni_name": 主播昵称
+                    "focus_num": 主播关注数
+                    "is_focus": 当前用户是否关注过主播
+                }
+            }
+          
+          }
+
+
+
+
+
+二十七.获取过去72小时的直播房间
+请求地址：http://localhost/yingke/index.php/api/user/past_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+        ps
+        page
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+          }
+
+
+
+
+
+
+二十八.创建直播间
+请求地址：http://localhost/yingke/index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20
+接口参数:
+        userid:
+        key:
+        client_id
+        room_name--------直播间名
+        room_pic_url--------------直播间封面
+        tags-------------标签id,多个用逗号隔开
+        isopen----------收费,公开,邀请好友
+        fees-----------收费标准
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+          }
+
+
+二十九.添加标签
+请求地址：http://localhost/yingke/index.php/api/user/add_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tag=帅哥
+接口参数:
+        userid:
+        key:
+        client_id
+        tag-------------标签名
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+          }
+
+
+
+三十.根据热度获取前五个标签展示
+请求地址：http://localhost/yingke/index.php/api/user/show_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+接口参数:
+        userid:
+        key:
+        client_id
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+          }
+
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -1232,6 +1232,294 @@ class UserController extends MobileController{
     }
 
 
+
+    /*
+     *获取正在直播的房间(当前房间人数,还未完成)
+     */
+    public function live_room(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+
+        $arrOpt = array();
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $live_model = M('live');
+        $liveroom_info = $live_model->where(array('status'=>'in'))->limit($start,$arrOpt['ps'])->select();
+        if(empty($liveroom_info)){
+            $data['liveroom_info'] = NULL;
+            output_data($data);
+        }else{
+            foreach ($liveroom_info as $k => $v) {
+                $data['liveroom_info'][$k]['id'] = $v['id'];
+                $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
+                $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
+                $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
+                $data['liveroom_info'][$k]['fees'] = $v['fees'];
+                $data['liveroom_info'][$k]['praise'] = $v['praise'];
+                $data['liveroom_info'][$k]['share_num'] = $v['share_num'];
+                $data['liveroom_info'][$k]['add_date'] = $v['add_date'];
+                 //根据标签id获取标签信息
+                $tiaojian['id'] = array('in',$v['tags']);
+                $tags_model = M('tags');
+                $tag_info = $tags_model->where($tiaojian)->select();
+                $tags = "";
+                foreach ($tag_info as $k => $v) {
+                    $tags .= $v['tag'] . " ";
+                }
+                $data['liveroom_info'][$k]['tags'] = $tags;
+                //根据房主id获取用户的信息
+                $con['id'] = $v['room_user'];
+                $con['status'] = "start";
+                $user_model = M('user');
+                $user_info = $user_model->where($con)->find();
+                $data['liveroom_info'][$k]['user_info']['userid'] = $user_info['id'];
+                $data['liveroom_info'][$k]['user_info']['head_url'] = $user_info['head_url'];
+                $data['liveroom_info'][$k]['user_info']['ni_name'] = $user_info['ni_name'];
+                //获取主播的关注数
+                $focus_model = M('friends_focus');
+                $opt['focus_user'] = $v['room_user'];
+                $opt['status'] = "yes";
+                $focus_info = $focus_model->where($opt)->select();
+                $focus_cound = count($focus_info);
+                $data['liveroom_info'][$k]['user_info']['focus_num'] = $focus_cound;
+                //获取当前用户是否关注过该主播
+                 $opt['focus_user'] = $v['room_user'];
+                 $opt['user_id'] = $_REQUEST['userid'];
+                 $opt['status'] = "yes";
+                 $is_focus = $focus_model->where($opt)->select();
+                 if(empty($is_focus)){
+                    //没有关注过
+                    $data['liveroom_info'][$k]['user_info']['is_focus'] = "yes";
+                 }else{
+                    $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
+                 }
+            }
+        }
+
+        output_data($data);
+    }
+
+
+
+
+    /*
+     *获取过去72小时的直播房间
+     */
+    public function past_room(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $arrOpt = array();
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        //获得72小时前的时间戳
+        $time = strtotime("-3 day");
+        $cond['add_date'] = array('egt',$time);
+        $live_model = M('live');
+        $live_info = $live_model->where($cond)->limit($start,$arrOpt['ps'])->select();
+        foreach ($live_info as $k => $v) {
+                $data['pastroom_info'][$k]['id'] = $v['id'];
+                $data['pastroom_info'][$k]['room_name'] = $v['room_name'];
+                $data['pastroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
+                $data['pastroom_info'][$k]['isopen'] = $v['isopen'];
+                $data['pastroom_info'][$k]['fees'] = $v['fees'];
+                $data['pastroom_info'][$k]['praise'] = $v['praise'];
+                $data['pastroom_info'][$k]['share_num'] = $v['share_num'];
+                $data['pastroom_info'][$k]['add_date'] = $v['add_date'];
+                //根据标签id获取标签信息
+                $tiaojian['id'] = array('in',$v['tags']);
+                $tags_model = M('tags');
+                $tag_info = $tags_model->where($tiaojian)->select();
+                $tags = "";
+                foreach ($tag_info as $k => $v) {
+                    $tags .= $v['tag'] . " ";
+                }
+                $data['pastroom_info'][$k]['tags'] = $tags;
+                //根据房主id获取用户的信息
+                $con['id'] = $v['room_user'];
+                $con['status'] = "start";
+                $user_model = M('user');
+                $user_info = $user_model->where($con)->find();
+                $data['pastroom_info'][$k]['user_info']['userid'] = $user_info['id'];
+                $data['pastroom_info'][$k]['user_info']['head_url'] = $user_info['head_url'];
+                $data['pastroom_info'][$k]['user_info']['ni_name'] = $user_info['ni_name'];
+                //获取主播的关注数
+                $focus_model = M('friends_focus');
+                $opt['focus_user'] = $v['room_user'];
+                $opt['status'] = "yes";
+                $focus_info = $focus_model->where($opt)->select();
+                $focus_cound = count($focus_info);
+                $data['pastroom_info'][$k]['user_info']['focus_num'] = $focus_cound;
+                //获取当前用户是否关注过该主播
+                 $opt['focus_user'] = $v['room_user'];
+                 $opt['user_id'] = $_REQUEST['userid'];
+                 $opt['status'] = "yes";
+                 $is_focus = $focus_model->where($opt)->select();
+                 if(empty($is_focus)){
+                    //没有关注过
+                    $data['pastroom_info'][$k]['user_info']['is_focus'] = "yes";
+                 }else{
+                    $data['pastroom_info'][$k]['user_info']['is_focus'] = "no";
+                 }
+        }
+        output_data($data);
+    }
+
+
+
+
+    /*
+     *创建直播间
+     */
+    public function add_liveroom(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['room_name'] == NULL || $_REQUEST['room_pic_url'] == NULL || $_REQUEST['tags'] == NULL || $_REQUEST['isopen'] == NULL){
+             output_error('参数不全');
+        }
+        $live_model = M('live');
+        $opt['room_name'] = $_REQUEST['room_name'];
+        $opt['room_pic_url'] = $_REQUEST['room_pic_url'];
+        $opt['room_user'] = $_REQUEST['userid'];
+        $opt['isopen'] = $_REQUEST['isopen'];
+        $opt['fees'] = $_REQUEST['fees'];
+        $opt['status'] = "in";
+        $opt['add_date'] = time();
+        $tags = explode(',', $_REQUEST['tags']);
+        if(empty($tags)){
+            $opt['tags'] = NULL;
+        }else{
+            $tag = '';
+            foreach ($tags as $k => $v) {
+                $tag .= "#" . $v . "," ;
+            }
+        }
+
+        $opt['tags'] = $tag;
+        $res = $live_model->add($opt);
+        if($res){
+            output_data(array('id'=>$res));
+        }else{
+            output_data('创建直播间失败');
+        }
+    }
+
+
+
+
+    /*
+     * 添加标签
+     */
+    public function add_tags(){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['tag'] == NULL){
+            output_error('参数不全');
+        }
+        $tags_model = M('tags');
+        //先判断数据库中是否存在了该标签
+        $opt['tag'] = "#" . $_REQUEST['tag'];
+        $tags_info = $tags_model->where($opt)->find();
+        if(empty($tags_info)){
+            //数据库中没有该标签
+            $cond['tag'] = "#" . $_REQUEST['tag'];
+            $cond['add_date'] = time();
+            $res = $tags_model->add($cond);
+            if($res){
+                output_data(array('id'=>$res));
+            }else{
+                output_error('添加标签失败');
+            }
+        }else{
+            //数据库中已经存在,则该标签的添加次数加一
+            $res = $tags_model->where($opt)->setInc('add_num',1);
+            if($res){
+                $data['id'] = $tags_info['id'];
+                output_data($data);
+            }else{
+                output_error('添加标签失败');
+            }
+        }
+    }
+
+
+
+    /*
+     *根据热度获取前五个标签展示
+     */
+    public function show_tags(){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $tags_model = M('tags');
+        $tag_info = $tags_model->where()->order('add_num desc')->limit(5)->select();
+        foreach ($tag_info as $k => $v) {
+            $data['tags_info'][$k]['id'] = $v['id'];
+            $data['tags_info'][$k]['tag_name'] = $v['tag'];
+        }
+        output_data($data);
+    }
+
+
+
+
+
+
 ###############################################################################################################
 
 
