@@ -9,10 +9,9 @@ class MemberController extends AdminController{
      * 管理员展示
      */
     public function admin_list() {
-        $model_user = M('user');
+        $model_user = M('account');
         $arr = array();
-        $arr['attribute'] = 0;
-        $arr['isdelete'] = 0;
+        $arr['status'] = 'start';
         //获取总数
         $admin_count = $model_user->where($arr)->count();
         //倒入分页类
@@ -112,118 +111,7 @@ class MemberController extends AdminController{
             $this->error('操作失败',U("admin/member/admin_list"));
         }
     }
-    /*
-     * 商家展示
-     */
-    public function businessman_list(){
-        $model_businessman = M('user');
-        $arr = array();
-        $arr['attribute'] = 1;
-        $arr['isdelete'] = 0;
-        $businessman_count = $model_businessman->where($arr)->count();
-        import('Think.Page');
-        $page_class = new Page($businessman_count,10);
-        $page_class->setConfig('prev', '«');
-        $page_class->setConfig('next', '»');
-        $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
-        
-        $page = $page_class->show();
-        $businessman_list = $model_businessman->where($arr)->limit($page_class->firstRow.','.$page_class->listRows)->select();
-
-        //为权限加上
-        $actionName1["auth_a"]="businessman_del";
-        $businessman_del = $this->checkAuth($actionName1);
-        $actionName2["auth_a"]="businessman_edit_show";
-        $businessman_edit_show = $this->checkAuth($actionName2);
-        $actionName3["auth_a"]="businessman_verify_show";
-        $businessman_verify_show = $this->checkAuth($actionName3);
-
-        $this->assign('businessman_del',$businessman_del);
-        $this->assign('businessman_edit_show',$businessman_edit_show);
-        $this->assign('businessman_verify_show',$businessman_verify_show);
-        $this->assign('page',$page);
-        $this->assign('businessman_list',$businessman_list);
-        $this->display();
-        
-    }
-    /*
-     * 商家删除
-     */
-    public function businessman_del(){
-        $model_admin = M('user');
-        
-        $result = $model_admin->where(array('id'=>$_GET['id']))->save(array("isdelete"=>"0"));
-        if($result){
-            $this->success('操作成功！',U("admin/member/businessman_list"));
-        }else{
-            $this->error('操作失败',U("admin/member/businessman_list"));
-        }
-    }
-    /*
-     * 商家修改密码展示
-     */
-    public function businessman_edit_show(){
-        $array = array();
-        $array['id'] = $_GET['id'];
-        $model_businessman = M('user');
-        $businessman_info = $model_businessman->where(array('id'=>$_GET['id']))->find();
-        $this->assign('businessman_info',$businessman_info);
-        $this->display();
-    }
-    /*
-     * 商家信息修改
-     */
-    public function businessman_edit(){
-        $model_businessman = M('user');
-        $_POST['password'] = md5($_POST['password']);
-        $result = $model_businessman->save($_POST);
-        if($result){
-            $this->success('修改成功',U("admin/member/businessman_list"));
-        }else{
-            $this->error('修改失败',U("admin/member/businessman_edit_show") . $_POST['businessman_id']);
-        }
-    }
-    /**
-     * 商家信息审核展示
-     */
-    public function businessman_verify_show(){
-        $array['id'] = $_GET['id'];
-        $model_businessman = M('user');
-        $businessman_info = $model_businessman->where(array('id'=>$_GET['id']))->find();
-        //查出对应的公司地址
-        $model_address = M('address');
-        $address_info = $model_address->where(array('userid'=>$_GET['id'],'attribute'=>"1"))->find();
-        //查出主营业务
-        $model_servercategory = M('servercategory');
-        $servercategory_info = $model_servercategory->where(array('bussinessId'=>$_GET['id']))->select();
-        $this->assign('businessman_info',$businessman_info);
-        $this->assign('address_info',$address_info);
-        $this->assign('servercategory_info',$servercategory_info);
-        $this->display();
-    }
-    /**
-     * 商家信息审核
-     */
-    public function business_verify(){
-        $model_member = M('user');
-        $index = $_POST['verifystatus'];
-        if ($index == 2) {
-            $index = 1;
-        }else{
-            $index = 0;
-        }
-        $id = $_POST['id'];
-        //$result = $model_member->where(array('id'=>$_POST['id']))->save(array("status"=>$index));
-        $sql = "update ajy_user set status ='".$index."' where id='".$id."'";
-        $result = $model_member->execute($sql);
-        echo $result;
-        if($result){
-            $this->success('操作成功！',U("admin/member/businessman_list"));
-        }else{
-            $this->error('操作失败',U("admin/member/businessman_list"));
-        }
-    }
-
+   
 
     /*
      * 普通用户展示

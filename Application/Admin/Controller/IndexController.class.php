@@ -7,8 +7,8 @@ class IndexController extends  AdminController{
         //获得当前管理员的权限信息
         //① 获得管理员的记录信息
         $data["id"] = $_SESSION['admin_id'];
-        $user =  M('user')->where($data)->find();
-        $role_id = $user['roleid']; //角色id信息
+        $user =  M('account')->where($data)->find();
+        $role_id = $user['role']; //角色id信息
         //② 获得角色记录信息
         $roledata['role_id'] = $role_id;
         $roledata['role_status'] = 1;
@@ -46,7 +46,7 @@ class IndexController extends  AdminController{
      * @return [type] [description]
      */
     public function top(){
-        $actionName1["auth_a"]="servers_list";
+       /* $actionName1["auth_a"]="servers_list";
         $conName1["auth_c"] = "Servers";
         $servers_list = $this->getAuth($actionName1,$conName1);
         $actionName2["auth_a"]="order_list";
@@ -61,7 +61,7 @@ class IndexController extends  AdminController{
         $this->assign('servers_list',$servers_list);
         $this->assign('order_list',$order_list);
         $this->assign('content_list',$content_list);
-        $this->assign('update',$update);
+        $this->assign('update',$update);*/
         $this->display();
     }
     public function footer(){

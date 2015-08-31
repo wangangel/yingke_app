@@ -30,14 +30,14 @@
           <foreach name="list" item="vo" >
           
             <tr>
-              <td><input type="checkbox" name="items" value="{$vo.tables_in_anjuyi}"/></td>
+              <td><input type="checkbox" name="items" value="{$vo.tables_in_yingke}"/></td>
               <td>{$key+1}</td>
-              <td>{$vo.tables_in_anjuyi}</td>
+              <td>{$vo.tables_in_yingke}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                     <in name="backup_table" value="$hava_authids">
-                    <a href={:U('admin/backup/backup_table',array('table'=>$vo['tables_in_anjuyi']))}><span class="am-icon-pencil-square-o"></span> 备份  </a>
+                    <a href={:U('admin/backup/backup_table',array('table'=>$vo['tables_in_yingke']))}><span class="am-icon-pencil-square-o"></span> 备份  </a>
                     </in>
                   </div>
                 </div>

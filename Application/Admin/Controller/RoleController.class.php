@@ -120,7 +120,7 @@ class RoleController extends AdminController{
         $s = rtrim($s,',');
         //echo $s;//Goods-showlist,Goods-tianjia,Goods-brand
         //④ 更新角色信息
-        $sql = "update base_role set role_auth_ids='$authinfo',role_auth_ac='$s' where role_id='$roleid'";
+        $sql = "update yk_role set role_auth_ids='$authinfo',role_auth_ac='$s' where role_id='$roleid'";
         return M("role") -> execute($sql);
     }
 

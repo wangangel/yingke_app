@@ -98,7 +98,7 @@ class AuthController extends AdminController{
             //③ 处理等级
             $level = substr_count($path,'-');
             //④ 更新语句
-            $sql = "update base_auth set auth_path='$path',auth_level='$level',is_menu='$is_menu' where auth_id='$auth_id'";
+            $sql = "update yk_auth set auth_path='$path',auth_level='$level',is_menu='$is_menu' where auth_id='$auth_id'";
             $rst = M('auth') -> execute($sql);
             $this -> success('更新权限成功!',U("admin/auth/auth_list"));
             /*if($rst){
@@ -126,7 +126,7 @@ class AuthController extends AdminController{
         //③ 处理等级
         $level = substr_count($path,'-');
         //④ 更新语句
-        $sql = "update ajy_auth set auth_path='$path',auth_level='$level' where auth_id='$newid'";
+        $sql = "update yk_auth set auth_path='$path',auth_level='$level' where auth_id='$newid'";
         return M('auth') -> execute($sql);
     }
 

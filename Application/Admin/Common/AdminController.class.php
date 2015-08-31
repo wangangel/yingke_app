@@ -22,8 +22,8 @@ class AdminController extends Controller{
             $this->error('请登陆！',U("admin/login/login"));
 
         }else{
-            $manager = M('user')->find($_SESSION['admin_id']);
-            $role_id['role_id'] = $manager['roleid'];
+            $manager = M('account')->find($_SESSION['admin_id']);
+            $role_id['role_id'] = $manager['role'];
             $role_info = M('role')->where($role_id)->find();
             $role_ac = $role_info['role_auth_ac'];
             $role_auth_ids = $role_info['role_auth_ids'];
@@ -60,7 +60,13 @@ class AdminController extends Controller{
         return $this->add($type, $title, $viewurl, $username);
     }
 
-
+    /**
+     * [add description]添加日志
+     * @param [type] $type     [description]
+     * @param [type] $title    [description]
+     * @param [type] $viewurl  [description]
+     * @param [type] $username [description]
+     */
     public function add($type, $title, $viewurl, $username) {
 
         if ($this->close || $debug_mode) return false;
@@ -74,16 +80,12 @@ class AdminController extends Controller{
         $r["addtime"] = time();
         $model_syslog = M('syslog');
         $res = $model_syslog->add($r);
-
         // 过期日志删除:
-
-        
         if (mt_rand(1, 1000) <= 10) {
 
             $this->log_clear();
 
         }
-
         return $res;
 
     }
