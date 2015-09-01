@@ -4,12 +4,12 @@ use Admin\Common\AdminController;
 use Think\Controller;
 
 class LoginController extends AdminController{
-    
+  
     /*
      * 登录
      */
     public function login(){
-        
+        //dump($_POST);
         if($_POST){
             if(empty($_POST['username'])||empty($_POST['password'])){
                $this->error('账号或者密码不能为空！'); 

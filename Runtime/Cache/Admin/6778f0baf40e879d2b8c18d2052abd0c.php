@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
-<link href="/base/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="/base/Public/admin/js/jquery.js"></script>
+<link href="/yingke/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="/yingke/Public/admin/js/jquery.js"></script>
 
 <script type="text/javascript">
 $(function(){	
@@ -38,7 +38,7 @@ $(function(){
 
         <?php if(is_array($auth_infoA)): foreach($auth_infoA as $k=>$vo): ?><dd>
                 <div class="title">
-                <span><img src="/base/Public/admin/images/leftico0<?php echo ($k+1); ?>.png" /></span><?php echo ($vo["auth_name"]); ?>
+                <span><img src="/yingke/Public/admin/images/leftico0<?php echo ($k+1); ?>.png" /></span><?php echo ($vo["auth_name"]); ?>
                 </div>
                 <ul class="menuson" style="display: none">
                     <?php if(is_array($auth_infoB)): foreach($auth_infoB as $k=>$vv): if($vv['auth_pid'] == $vo['auth_id']): ?><li><cite></cite>
@@ -50,7 +50,7 @@ $(function(){
 
    <!--  <dd>
     <div class="title">
-    <span><img src="/base/Public/admin/images/leftico01.png" /></span>系统管理
+    <span><img src="/yingke/Public/admin/images/leftico01.png" /></span>系统管理
     </div>
     	<ul class="menuson" style="display: none">
         <li><cite></cite><a href=<?php echo U("admin/system/update");?> target="rightFrame">系统设置</a><i></i></li>
@@ -65,7 +65,7 @@ $(function(){
         
     <dd>
     <div class="title">
-    <span><img src="/base/Public/admin/images/leftico02.png" /></span>用户管理
+    <span><img src="/yingke/Public/admin/images/leftico02.png" /></span>用户管理
     </div>
     <ul class="menuson">
         <li><cite></cite><a href=<?php echo U("admin/member/admin_list");?> target="rightFrame">管理员用户</a><i></i></li>
@@ -75,14 +75,14 @@ $(function(){
     </dd> 
      <dd>
     <div class="title">
-    <span><img src="/base/Public/admin/images/leftico02.png" /></span>权限管理
+    <span><img src="/yingke/Public/admin/images/leftico02.png" /></span>权限管理
     </div>
         <ul class="menuson">
             <li><cite></cite><a href=<?php echo U("admin/role/role_list");?> target="rightFrame">角色列表</a><i></i></li>
             <li><cite></cite><a href=<?php echo U("admin/auth/auth_list");?> target="rightFrame">权限列表</a><i></i></li>
         </ul>     
     </dd> 
-    <dd><div class="title"><span><img src="/base/Public/admin/images/leftico03.png" /></span>商品服务管理</div>
+    <dd><div class="title"><span><img src="/yingke/Public/admin/images/leftico03.png" /></span>商品服务管理</div>
     <ul class="menuson">
         <li><cite></cite><a href="<?php echo U("admin/category/category_list");?>" target="rightFrame">服务(商品)分类</a><i></i></li>
         <li><cite></cite><a href="<?php echo U("admin/servers/servers_list");?>" target="rightFrame">服务（商品）列表</a><i></i></li>
@@ -92,7 +92,7 @@ $(function(){
     </ul>    
     </dd>  
     
-    <dd><div class="title"><span><img src="/base/Public/admin/images/leftico04.png" /></span>订单管理</div>
+    <dd><div class="title"><span><img src="/yingke/Public/admin/images/leftico04.png" /></span>订单管理</div>
     <ul class="menuson">
         <li><cite></cite><a href=<?php echo U("admin/order/order_list");?> target="rightFrame">订单列表</a><i></i></li>
         <li><cite></cite><a href=<?php echo U("admin/order/order_appolist");?> target="rightFrame">预约列表</a><i></i></li>
@@ -101,7 +101,7 @@ $(function(){
     </dd>  
 
 
-    <dd><div class="title"><span><img src="/base/Public/admin/images/leftico04.png" /></span>内容管理</div>
+    <dd><div class="title"><span><img src="/yingke/Public/admin/images/leftico04.png" /></span>内容管理</div>
     <ul class="menuson">
         <li><cite></cite><a href=<?php echo U("admin/channel/channel_list");?> target="rightFrame">栏目列表</a><i></i></li>
         <li><cite></cite><a href=<?php echo U("admin/content/content_list");?> target="rightFrame">内容列表</a><i></i></li>

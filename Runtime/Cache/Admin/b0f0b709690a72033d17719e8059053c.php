@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
-<link href="/base/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/base/Public/admin/js/jquery.js"></script>
+<link href="/yingke/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/yingke/Public/admin/js/jquery.js"></script>
 
 </head>
 
@@ -22,12 +22,12 @@
     
     
     <div class="welinfo">
-    <span><img src="/base/Public/admin/images/sun.png" alt="天气" /></span>
+    <span><img src="/yingke/Public/admin/images/sun.png" alt="天气" /></span>
     <b><?php echo ($_SESSION['admin_name']); ?>&nbsp;您好，欢迎使用安居易信息管理系统</b>
     </div>
     
     <div class="welinfo">
-    <span><img src="/base/Public/admin/images/time.png" alt="时间" /></span>
+    <span><img src="/yingke/Public/admin/images/time.png" alt="时间" /></span>
     <i>您上次登录的时间：<?php echo ($_SESSION['login_time']); ?></i>
     </div>
 

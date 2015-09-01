@@ -33,12 +33,12 @@ define('URL', 'http://' . $_SERVER['HTTP_HOST']);
 define('URL_PUB', URL . '/Public/');
 //定义公共模块的目录，放到应用目录外
 define('COMMON_PATH', './Common/');
-
 //关闭目录安全文件的生成
 define('BUILD_DIR_SECURE', false);
 // 定义应用目录
+$_GET['m'] = 'Admin'; // 绑定Home模块到当前入口文件
+$_GET['c'] = 'Login'; // 绑定Index控制器到当前入口文件
 define('APP_PATH', './Application/');
-
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 

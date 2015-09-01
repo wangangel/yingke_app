@@ -2,7 +2,9 @@
 namespace Admin\Controller;
 use Admin\Common\AdminController;
 class IndexController extends  AdminController{
-    
+    public function index(){
+        $this->display();
+    }
     public function left(){
         //获得当前管理员的权限信息
         //① 获得管理员的记录信息
@@ -35,9 +37,7 @@ class IndexController extends  AdminController{
         $this->display();
     }
 
-    public function index(){
-        $this->display();
-    }
+    
     /*public function sidebar(){
         $this->display();
     }*/

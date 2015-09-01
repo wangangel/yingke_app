@@ -7,10 +7,10 @@
 
   <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-  <link rel="apple-touch-icon-precomposed" href="/base/Public/assets/i/app-icon72x72@2x.png">
+  <link rel="apple-touch-icon-precomposed" href="/yingke/Public/assets/i/app-icon72x72@2x.png">
 
-  <link rel="stylesheet" href="/base/Public/assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/base/Public/assets/css/admin.css">
+  <link rel="stylesheet" href="/yingke/Public/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/yingke/Public/assets/css/admin.css">
 </head>
 <body>
 
