@@ -579,7 +579,77 @@ datas :
 
 
 
-三十.根据热度获取前五个标签展示
+三十.根据热门标签获取直播房间信息
+请求地址：http://localhost/yingke/index.php/api/user/liveroom_bytag?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tagid=1&ps=5&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+           
+          
+          }
+
+
+
+
+
+三十一.获取排行首页展示
+请求地址：http://localhost/yingke/index.php/api/user/show_paihang?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+              "tags_info": [
+            {
+                "id": 
+                "tag_name":
+            },
+            {
+                "id":
+                "tag_name": 
+            }
+        ],
+        "liveroom_info": [
+            {
+                "id": 
+                "room_name": 
+                "room_pic_url": 
+                "isopen": 
+                "fees": 
+                "praise": 
+                "share_num":
+                "add_date": 
+            },
+            {
+                "tags": 
+                "user_info": {
+                    "userid": 
+                    "head_url":
+                    "ni_name": 
+                    "focus_num":
+                    "is_focus": 
+                }
+            }
+        ]
+   
+          
+          }
+
+
+
+
+
+三十二.获取热门标签(默认取5条标签)
 请求地址：http://localhost/yingke/index.php/api/user/show_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 接口参数:
         userid:
@@ -590,9 +660,96 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-            "id": 
+              "tags_info": [
+            {
+                "id": 
+                "tag_name": 
+            },
+            {
+                "id": 
+                "tag_name": 
+            }
+        ]
           
           }
+
+
+
+
+
+三十三.购买礼物
+
+请求地址：http://localhost/yingke/index.php/api/user/buy_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&giftname=玫瑰花&giftprice=10&number=2&paytype=微信支付&roomuserid=7
+接口参数:
+        userid:
+        key:
+        client_id
+       giftname---------------礼物名称
+       giftprice--------------礼物单价
+       number---------------购买数量
+       paytype---------------微信支付
+       roomuserid-------------房主id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            id
+          }
+
+
+
+
+三十四.付费观看
+请求地址：http://localhost/yingke/index.php/api/user/buy_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomname=脱衣舞哦&roomprice=20&paytype=微信支付&roomuserid=7
+接口参数:
+        userid:
+        key:
+        client_id
+       roomname---------------房间名称
+       roomprice--------------房间价格
+       paytype---------------微信支付
+       roomuserid-------------房主id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+三十五.对房间点赞
+请求地址：http://localhost/yingke/index.php/api/user/room_dianzan?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=1
+接口参数:
+        userid:
+        key:
+        client_id
+      roomid---------房间id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+三十六.举报房间
+请求地址：http://localhost/yingke/index.php/api/user/add_jubao?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=1&content=色情主播&roomusername=鬼鬼
+接口参数:
+        userid:
+        key:
+        client_id
+      roomid---------房间id
+      content-------举报内容
+      roomusername--------房主
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
 
 
 
