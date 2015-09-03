@@ -19,8 +19,9 @@
         <div class="am-fl am-cf">
           <div class="am-btn-toolbar am-fl">
             <div class="am-btn-group am-btn-group-xs">
+              <input type="button" value="批量删除" onclick="getAll()"/>
             <in name="add_show" value="$hava_authids">
-              <a href={:U("admin/message/add_show")}><button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button></a>
+              <a href={:U("admin/message/add_show")}><button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 发送信息</button></a>
             </in>
             </div>
           </div>
@@ -35,31 +36,30 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-title">类型ID</th>
-                <th class="table-title">消息标题</th>
-                <th class="table-author">发送者</th>
-                <th class="table-author">消息类型</th>
+                <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/>全选</th>
+                <th class="table-title">序号</th>
+                <th class="table-title">内容</th>
+                <th class="table-author">发送目标</th>
                 <th class="table-author">发送时间</th>
+                <th class="table-author">发送人</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody>
           <foreach name="message_list" item="vo" key="k" >
             <tr>
-              <td>{$vo.id}</td>
-              <td>{$vo.title}</td>
-              <td>{$vo.sendname}</td>
-              <if condition="$vo.messtype eq '0'">
-                  <td>系统通知</td>
-                <else/>
-                  <td>订单通知</td>
-              </if>
-              <td>{$vo.messagetime|date='Y-m-d',###}</td>
+              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
+              <td>{$k+1}</td>
+              <td>{$vo.m_content|msubstr=0,12,'utf-8',true}
+              </td>
+              <td><if condition="$vo.m_target eq 'all'">全体用户<else/>多个用户</if></td>
+              <td>{$vo.m_date|date='Y-m-d',###}</td>
+              <td>{$vo.m_user}</td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
                   <in name="look_show" value="$hava_authids">
-                    <a href={:U('Admin/message/look_show',array('id'=>$vo['id']))}><span class="am-icon-pencil-square-o"></span> 查看  </a>|&nbsp;
+                    <!-- <a href={:U('Admin/message/look_show',array('id'=>$vo['id']))}><span class="am-icon-pencil-square-o"></span> 查看  </a>|&nbsp; -->
                   </in>
                   <in name="message_del" value="$hava_authids">
                     <a href={:U('Admin/message/message_del',array('id'=>$vo['id']))}><span class="am-icon-trash-o"></span> 删除</a>
@@ -83,3 +83,31 @@
   <!-- content end -->
 </div>
 <include file="Index:footer"/>
+<script type="text/javascript">
+  /*
+     *全选按钮，prop方法，是给ipnut框添加属性的
+    */
+    function checkall(obj){
+      if(obj.checked){
+        $("input[name='ids']").prop("checked", true);
+      }else{
+        $("input[name='ids']").prop("checked", false);
+      }
+    }
+
+    function getAll(){
+      if($("input[name='ids']:checked").val() == null){
+        alert("请选择要删除的列表！");
+        return false;
+      }else{
+        var checked = [];
+        $('input[name="ids"]:checked').each(function(){
+              checked.push($(this).val());
+          });
+        var checkStr = checked.join(",");
+        var url = "{:U('admin/message/del_all')}?ids="+checkStr;
+        window.location.href=url;
+      }
+    }
+
+</script>

@@ -31,6 +31,14 @@
             </div>
           </div>
           <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">描述 / role_remark</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="role-remark" placeholder="描述 / role_remark" name='role_remark' 
+              value="{$role_info.role_remark}">
+              
+            </div>
+          </div>
+          <div class="am-form-group">
             <label for="user-email" class="am-u-sm-3 am-form-label">是否启用 / role_status</label>
             <div class="am-u-sm-9">
               <select  name="role_status" >
@@ -64,9 +72,13 @@
 <script data-cfasync="false" type="text/javascript">
   function check(){
     var rolename = $("#role-name").val();
+    var rolemark = $("#role-remark").val();
     if(trim(rolename).length == 0 ){
         alert("请填写角色名称！");
         return false;   
+    }else if(trim(rolemark).length == 0){
+        alert("请填写描述信息！");
+        return false; 
     }else{
         $("#myForm").submit();
     }

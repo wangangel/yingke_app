@@ -12,7 +12,7 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">管理员列表</strong> / <small>Admin List</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">管理员列表</strong> / <small>Account List</small></div>
     </div>
     <div class="am-g">
       <div class="am-u-md-6 am-cf">
@@ -35,10 +35,14 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-id">ID</th>
-                <th class="table-title">用户名</th>
-                <th class="table-author">电话</th>
-                <th class="table-date">邮箱</th>
+                <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/>全选</th>
+                <th class="table-id">序号</th>
+                <th class="table-title">账号</th>
+                <th class="table-author">角色</th>
+                <th class="table-date">员工姓名</th>
+                <th class="table-date">添加人</th>
+                <th class="table-date">添加时间</th>
+                <th class="table-date">状态</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -46,11 +50,14 @@
           <foreach name="admin_list" item="vo" key="k" >
           
             <tr>
-              <td>{$vo.id}</td>
-              <td>{$vo.username}</td>
-              
-              <td>{$vo.phone}</td>
-              <td>{$vo.email}</td>
+              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
+              <td>{$k+1}</td>
+              <td>{$vo.account}</td>
+              <td>{$vo.account}</td>
+              <td>{$vo.employee}</td>
+              <td>{$vo.add_person}</td>
+              <td>{$vo.add_date|date='Y-m-d',###}</td>
+              <td><if condition="$vo.status eq 'start'">启用<else/>停用</if></td>
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">

@@ -44,6 +44,7 @@ class RoleController extends AdminController{
     public function role_add(){
         $data['role_name'] = $_POST["role_name"];
         $data["role_status"] = $_POST["role_status"];
+        $data["role_remark"] = $_POST["role_remark"];
         $data["role_time"] = date("Y-m-d H:i:s");
         $rst = M("role")->add($data);
         if($rst){

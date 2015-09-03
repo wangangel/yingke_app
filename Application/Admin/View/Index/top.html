@@ -4,8 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 
-<link href="__PUBLIC__/admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/new/css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" data-cfasync="false" src="__PUBLIC__/admin/js/jquery.js"></script>
+<link href="__PUBLIC__/new/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/new/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/new/js/select-ui.min.js"></script>
+<!-- <script type="text/javascript" src="editor/kindeditor.js"></script> -->
+<link href="__PUBLIC__/new/css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/new/js/lyz.calendar.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){	
 	//顶部导航切换
@@ -14,6 +20,24 @@ $(function(){
 		$(this).addClass("selected");
 	})	
 })	
+
+function reset(){
+    alert("请修改密码");
+}
+ $(function () {
+        $("#txtBeginDate").calendar({
+            controlId: "divDate",                                 // 弹出的日期控件ID，默认: $(this).attr("id") + "Calendar"
+            speed: 200,                                           // 三种预定速度之一的字符串("slow", "normal", or "fast")或表示动画时长的毫秒数值(如：1000),默认：200
+            complement: true,                                     // 是否显示日期或年空白处的前后月的补充,默认：true
+            readonly: true,                                       // 目标对象是否设为只读，默认：true
+            upperLimit: new Date(),                               // 日期上限，默认：NaN(不限制)
+            lowerLimit: new Date("2011/01/01"),                   // 日期下限，默认：NaN(不限制)
+            callback: function () {                               // 点击选择日期后的回调函数
+                alert("您选择的日期是：" + $("#txtBeginDate").val());
+            }
+        });
+        $("#txtEndDate").calendar();
+    });
 </script>
 
 
@@ -25,7 +49,7 @@ $(function(){
     <a href="" target=""><img src="__PUBLIC__/admin/images/logo.png" title="系统首页" /></a>
     </div>
         
-    <ul class="nav">
+ <!--    <ul class="nav">
     <li><a href="#"  class="selected"><img src="__PUBLIC__/admin/images/icon01.png" title="工作台" /><h2>首页</h2></a></li>
    
         <li><a href="{:U("admin/servers/servers_list")}" target="rightFrame"><img src="__PUBLIC__/admin/images/icon02.png" title="商品发布" /><h2>商品发布</h2></a></li>
@@ -35,12 +59,12 @@ $(function(){
     <li><a href={:U("admin/content/content_list")} target="rightFrame"><img src="__PUBLIC__/admin/images/icon04.png" title="资讯中心" /><h2>资讯中心</h2></a></li>
     
     <li><a href={:U("admin/system/update")}  target="rightFrame"><img src="__PUBLIC__/admin/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
-    </ul>
+    </ul> -->
             
     <div class="topright">    
     <ul>
     <!-- <li><span><img src="__PUBLIC__/admin/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li> -->
-	    <li><span><img class="helpimg"/></span><a href={:U('Home/Index/index')} target="_blank">网站首页</a></li>
+	    <li><span><img class="helpimg"/></span><a href="" onclick="reset()">修改密码</a></li>
    <!--  <li><a href="#">关于</a></li> -->
     <li><a href={:U("admin/login/logout")} target="_parent">退出</a></li>
     </ul>

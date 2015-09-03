@@ -1,4 +1,22 @@
+<script type="text/javascript">
 
+ $(function () {
+        $("#txtBeginDate").calendar({
+            controlId: "divDate",                                 // 弹出的日期控件ID，默认: $(this).attr("id") + "Calendar"
+            speed: 200,                                           // 三种预定速度之一的字符串("slow", "normal", or "fast")或表示动画时长的毫秒数值(如：1000),默认：200
+            complement: true,                                     // 是否显示日期或年空白处的前后月的补充,默认：true
+            readonly: true,                                       // 目标对象是否设为只读，默认：true
+            upperLimit: new Date(),                               // 日期上限，默认：NaN(不限制)
+            lowerLimit: new Date("2011/01/01"),                   // 日期下限，默认：NaN(不限制)
+            callback: function () {                               // 点击选择日期后的回调函数
+                alert("您选择的日期是：" + $("#txtBeginDate").val());
+            }
+        });
+        $("#txtEndDate").calendar();
+    });
+
+
+</script>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
   以获得更好的体验！</p>
@@ -14,13 +32,16 @@
     <div class="am-cf am-padding">
       <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">反馈列表</strong> / <small>Feedback List</small></div>
     </div>
-
+    起<input id="txtBeginDate" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+  至<input id="txtEndDate" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
     <div class="am-g">
       <div class="am-u-sm-12">
+        <input type="button" value="批量删除" onclick="getAll()"/>
         <form class="am-form">
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
+                <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/>全选</th>
                 <th class="table-id">序号</th>
                 <th class="table-title">意见分类</th>
                 <th class="table-title">内容</th>                 
@@ -34,6 +55,7 @@
           <foreach name="feedback_list" item="vo" key="k" >
           
             <tr>
+              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
               <td>{$k+1}</td>
               <if condition="$vo.f_classify eq null">
                 <td>无</td>
@@ -47,9 +69,9 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <in name="advice_del" value="$hava_authids">
+                    <in name="feedback_del" value="$hava_authids"> 
                     <a href={:U('admin/feedback/feedback_del',array('id'=>$vo['id']))}><span class="am-icon-trash-o"></span> 删除</a>
-                    </in>
+                   </in>
                   </div>
                 </div>
               </td>
@@ -67,3 +89,31 @@
   <!-- content end -->
 </div>
 <include file="Index:footer"/>
+<script type="text/javascript">
+  /*
+     *全选按钮，prop方法，是给ipnut框添加属性的
+    */
+    function checkall(obj){
+      if(obj.checked){
+        $("input[name='ids']").prop("checked", true);
+      }else{
+        $("input[name='ids']").prop("checked", false);
+      }
+    }
+
+    function getAll(){
+      if($("input[name='ids']:checked").val() == null){
+        alert("请选择要删除的列表！");
+        return false;
+      }else{
+        var checked = [];
+        $('input[name="ids"]:checked').each(function(){
+              checked.push($(this).val());
+          });
+        var checkStr = checked.join(",");
+        var url = "{:U('admin/feedback/del_all')}?ids="+checkStr;
+        window.location.href=url;
+      }
+    }
+
+</script>

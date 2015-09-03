@@ -24,31 +24,15 @@ class FeedbackController extends AdminController{
         $feedback_list = $model_advice->limit($page_class->firstRow.','.$page_class->listRows)->select();
 
          //为权限加上
-        $actionName1["auth_a"]="advice_del";
-        $advice_del = $this->checkAuth($actionName1);
+        $actionName1["auth_a"]="feedback_del";
+        $feedback_del = $this->checkAuth($actionName1);
 
-        $this->assign('advice_del',$advice_del);
+        $this->assign('feedback_del',$feedback_del);
         $this->assign('page',$page);
         $this->assign('feedback_list',$feedback_list);
       	$this->display();
     }
-   /**
-    * 根据id进行删除
-    */
    
-   public function feedback_del(){
-
-   		$model_feedback = M('feedback');
-        
-        $result = $model_feedback->where(array('id'=>$_GET['id']))->delete();
-        if($result){
-            $this->success('操作成功！',U("admin/feedback/feedback_list"));
-        }else{
-            $this->error('操作失败',U("admin/feedback/feedback_list"));
-        }
-
-
-   }
 
 
 }

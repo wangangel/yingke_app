@@ -11,7 +11,7 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">字典类型列表</strong> / <small>Dictionary List</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">数据字典列表</strong> / <small>Data List</small></div>
     </div>
 
     <div class="am-g">
@@ -36,7 +36,7 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-title">类型ID</th>
+                <th class="table-title">序号</th>
                 <th class="table-title">字典名称</th>
                 <th class="table-author">字典类型</th>
                 <th class="table-set">操作</th>
@@ -46,7 +46,7 @@
           <foreach name="data_list" item="vo" key="k" >
           
             <tr>
-              <td>{$vo.id}</td>
+              <td>{$k+1}</td>
               <td>{$vo.dataname}</td>
               <td>{$vo.typename}</td>
               <td>

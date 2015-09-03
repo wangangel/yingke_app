@@ -38,9 +38,9 @@
               <tr>
                 <th class="table-id">序号</th>
                 <th class="table-title">角色名称</th>
+                <th class="table-type">描述</th>
                 <th class="table-author">添加时间</th>
                 <th class="table-date">是否启动</th>
-                
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -51,6 +51,7 @@
               <tr>
                 <td>{$k+1}</td>
                 <td>{$vo.role_name}</td>
+                <td>{$vo.role_remark}</td>
                 <td>{$vo.role_time}</td>
                 <if condition="$vo.role_status eq 0">
                   <td>否</td>

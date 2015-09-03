@@ -35,7 +35,7 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-type">类型ID</th>
+                <th class="table-type">序号</th>
                 <th class="table-author">字典类型</th>
                 <th class="table-set">操作</th>
               </tr>
@@ -44,7 +44,7 @@
           <foreach name="dictype_list" item="vo" key="k" >
           
             <tr>
-              <td>{$vo.id}</td>
+              <td>{$k+1}</td>
               <td>{$vo.dictionary}</td>
               <td>
                 <div class="am-btn-toolbar">
