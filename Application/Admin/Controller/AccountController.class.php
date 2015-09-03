@@ -1,4 +1,3 @@
-
 <?php
 namespace Admin\Controller;
 use Admin\Common\AdminController;
