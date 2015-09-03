@@ -1,14 +1,14 @@
+
 <?php
 namespace Admin\Controller;
 use Admin\Common\AdminController;
 use Think\Page;
-class MemberController extends AdminController{
-    /////////////////////////////////////////
+class AccountController extends AdminController{
     //管理员用户
     /*
      * 管理员展示
      */
-    public function admin_list() {
+    public function account_list() {
         $model_user = M('account');
         $arr = array();
         $arr['status'] = 'start';
@@ -44,13 +44,13 @@ class MemberController extends AdminController{
     /*
      * 管理员添加展示
      */
-    public function admin_add_show(){
+    public function account_add_show(){
         $this->display();
     }
     /*
      * 管理员添加动作
      */
-    public function admin_add(){
+    public function account_add(){
         $arr = array();
         $arr['username'] = $_POST['username'];
         $arr['attribute'] = 0;
@@ -73,7 +73,7 @@ class MemberController extends AdminController{
     /*
      * 管理员修改页面展示
      */
-    public function admin_edit_show(){
+    public function account_edit_show(){
         $array = array();
         $array['id'] = $_GET['id'];
         $model_admin = M('user');
@@ -85,7 +85,7 @@ class MemberController extends AdminController{
     /*
      * 管理员信息修改
      */
-    public function admin_edit(){
+    public function account_edit(){
         $model_admin = M('user');
         $_POST['password'] = md5($_POST['password']);
         $result = $model_admin->save($_POST);
@@ -98,7 +98,7 @@ class MemberController extends AdminController{
     /*
      * 管理员删除
      */
-    public function admin_del(){
+    public function account_del(){
         $model_admin = M('user');
         if($_GET['id'] == 1){
             $this->error('该账号无法删除！',U("admin/member/admin_list"));
@@ -183,7 +183,7 @@ class MemberController extends AdminController{
     /**
      * 授予角色前
      */
-    public function admin_role_show(){
+    public function account_role_show(){
         $member['id'] = $_GET['id'];
         $memberInfo = M("user")->where($member)->find();
         $roleInfo = M("role")->select();
@@ -196,7 +196,7 @@ class MemberController extends AdminController{
     /**
      * 正式授予角色
      */
-    public function admin_role(){
+    public function account_role(){
         $user['id'] = $_POST['id'];
         $user['roleid'] = $_POST['roleid'];
         $res = M('user')->save($user);
