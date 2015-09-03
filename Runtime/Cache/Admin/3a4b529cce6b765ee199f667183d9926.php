@@ -3,7 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
-<link href="/yingke/Public/new/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/yingke/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/yingke/Public/admin/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/yingke/Public/admin/js/jquery.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/js/select-ui.min.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/editor/kindeditor.js"></script>
+<link href="/yingke/Public/admin/css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<script src="/yingke/Public/admin/js/lyz.calendar.min.js" type="text/javascript"></script>
 </head>
 
 <body>

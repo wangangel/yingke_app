@@ -2,10 +2,14 @@
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
   以获得更好的体验！</p>
 <![endif]-->
- <link rel="stylesheet" href="/base/Public/assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/base/Public/assets/css/admin.css">
-    <link rel="stylesheet" href="/base/Public/assets/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/base/Public/assets/css/y-css.css">
+<link href="/yingke/Public/admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/yingke/Public/admin/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/yingke/Public/admin/js/jquery.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/js/select-ui.min.js"></script>
+<script type="text/javascript" src="/yingke/Public/admin/editor/kindeditor.js"></script>
+<link href="/yingke/Public/admin/css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<script src="/yingke/Public/admin/js/lyz.calendar.min.js" type="text/javascript"></script>
   <!-- sidebar start -->
  <div class="am-cf admin-main">
   <!-- sidebar end -->
@@ -14,7 +18,7 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">字典类型列表</strong> / <small>Dictionary List</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">数据字典列表</strong> / <small>Data List</small></div>
     </div>
 
     <div class="am-g">
@@ -37,7 +41,7 @@
           <table class="am-table am-table-striped am-table-hover table-main">
             <thead>
               <tr>
-                <th class="table-title">类型ID</th>
+                <th class="table-title">序号</th>
                 <th class="table-title">字典名称</th>
                 <th class="table-author">字典类型</th>
                 <th class="table-set">操作</th>
@@ -45,7 +49,7 @@
           </thead>
           <tbody>
           <?php if(is_array($data_list)): foreach($data_list as $k=>$vo): ?><tr>
-              <td><?php echo ($vo["id"]); ?></td>
+              <td><?php echo ($k+1); ?></td>
               <td><?php echo ($vo["dataname"]); ?></td>
               <td><?php echo ($vo["typename"]); ?></td>
               <td>
@@ -85,12 +89,12 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script data-cfasync="false" src="/base/Public/assets/js/jquery.min.js"></script>
-<script data-cfasync="false" src="/base/Public/assets/js/amazeui.min.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/jquery.min.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<script data-cfasync="false" src="/base/Public/assets/js/app.js"></script>
-<script data-cfasync="false" src="/base/Public/assets/js/bootstrap.min.js"></script>
-<script data-cfasync="false" src="/base/Public/assets/js/jquery.superslide.2.1.1.js"></script>
-<script data-cfasync="false" src="/base/Public/assets/js/jquery-1.11.2.min.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/app.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/bootstrap.min.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/jquery.superslide.2.1.1.js"></script>
+<script data-cfasync="false" src="/yingke/Public/assets/js/jquery-1.11.2.min.js"></script>
 </body>
 </html>

@@ -3,26 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
+<include file="Index:css"/>
 
-<link href="__PUBLIC__/new/css/style.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" data-cfasync="false" src="__PUBLIC__/admin/js/jquery.js"></script>
-<link href="__PUBLIC__/new/css/select.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="__PUBLIC__/new/js/jquery.idTabs.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/new/js/select-ui.min.js"></script>
-<!-- <script type="text/javascript" src="editor/kindeditor.js"></script> -->
-<link href="__PUBLIC__/new/css/lyz.calendar.css" rel="stylesheet" type="text/css" />
-<script src="__PUBLIC__/new/js/lyz.calendar.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-$(function(){	
-	//顶部导航切换
-	$(".nav li a").click(function(){
-		$(".nav li a.selected").removeClass("selected")
-		$(this).addClass("selected");
-	})	
-})	
 
 function reset(){
-    alert("请修改密码");
+   alert('ssss');
+   $('.tip').css('display':'block')
 }
  $(function () {
         $("#txtBeginDate").calendar({
@@ -39,41 +26,51 @@ function reset(){
         $("#txtEndDate").calendar();
     });
 </script>
+<script type="text/javascript">
 
+</script>
 
 </head>
+
+
 
 <body style="background:url(__PUBLIC__/admin/images/topbg.gif) repeat-x;">
 
     <div class="topleft">
     <a href="" target=""><img src="__PUBLIC__/admin/images/logo.png" title="系统首页" /></a>
     </div>
-        
- <!--    <ul class="nav">
-    <li><a href="#"  class="selected"><img src="__PUBLIC__/admin/images/icon01.png" title="工作台" /><h2>首页</h2></a></li>
-   
-        <li><a href="{:U("admin/servers/servers_list")}" target="rightFrame"><img src="__PUBLIC__/admin/images/icon02.png" title="商品发布" /><h2>商品发布</h2></a></li>
-    
-    <li><a href={:U("admin/order/order_list")} target="rightFrame"><img src="__PUBLIC__/admin/images/icon03.png" title="订单管理" /><h2>订单管理</h2></a></li>
-    
-    <li><a href={:U("admin/content/content_list")} target="rightFrame"><img src="__PUBLIC__/admin/images/icon04.png" title="资讯中心" /><h2>资讯中心</h2></a></li>
-    
-    <li><a href={:U("admin/system/update")}  target="rightFrame"><img src="__PUBLIC__/admin/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
-    </ul> -->
             
     <div class="topright">    
-    <ul>
+  <ul>
     <!-- <li><span><img src="__PUBLIC__/admin/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li> -->
-	    <li><span><img class="helpimg"/></span><a href="" onclick="reset()">修改密码</a></li>
+        <li><span><img class="helpimg"/></span><a href="" onclick="reset()">修改密码</a></li>
    <!--  <li><a href="#">关于</a></li> -->
     <li><a href={:U("admin/login/logout")} target="_parent">退出</a></li>
     </ul>
      
-    <div class="user">
+   <div class="user">
     <span>{$_SESSION['admin_name']}</span>
     
     </div>    
     
     </div>
+<div class="tip" >
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="__PUBLIC__/admin/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
 </body>
+
 </html>
