@@ -7,10 +7,6 @@
 
 <script type="text/javascript">
 
-function reset(){
-   alert('ssss');
-   $('.tip').css('display':'block')
-}
  $(function () {
         $("#txtBeginDate").calendar({
             controlId: "divDate",                                 // 弹出的日期控件ID，默认: $(this).attr("id") + "Calendar"
@@ -43,7 +39,7 @@ function reset(){
     <div class="topright">    
   <ul>
     <!-- <li><span><img src="__PUBLIC__/admin/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li> -->
-        <li><span><img class="helpimg"/></span><a href="" onclick="reset()">修改密码</a></li>
+      <!--   <li><span><img class="helpimg"/></span><a href="javascript:void(0)" onclick="reset()">修改密码</a></li> -->
    <!--  <li><a href="#">关于</a></li> -->
     <li><a href={:U("admin/login/logout")} target="_parent">退出</a></li>
     </ul>
@@ -54,23 +50,7 @@ function reset(){
     </div>    
     
     </div>
-<div class="tip" >
-        <div class="tiptop"><span>提示信息</span><a></a></div>
-        
-      <div class="tipinfo">
-        <span><img src="__PUBLIC__/admin/images/ticon.png" /></span>
-        <div class="tipright">
-        <p>是否确认对信息的修改 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-        </div>
-        </div>
-        
-        <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
-        </div>
-    
-    </div>
+  
 </body>
 
 </html>

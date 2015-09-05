@@ -6,26 +6,14 @@
 <link href="__PUBLIC__/admin/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-  $(".click").click(function(){
-  $(".tip").fadeIn(200);
-  });
-  
-  $(".tiptop a").click(function(){
-  $(".tip").fadeOut(200);
-});
+function reset(){
+    $("#tip").css('display','block');
+}
+function cancel(){
+    $("#tip").css('display','none');
+}
 
-  $(".sure").click(function(){
-  $(".tip").fadeOut(100);
-});
-
-  $(".cancel").click(function(){
-  $(".tip").fadeOut(100);
-});
-
-});
 </script>
-
 </head>
 
 
@@ -43,13 +31,29 @@ $(document).ready(function(){
     
     <div class="welinfo">
     <span><img src="__PUBLIC__/admin/images/sun.png" alt="天气" /></span>
-    <b>{$_SESSION['admin_name']}&nbsp;您好，欢迎使用安居易信息管理系统</b>
+    <b>{$_SESSION['admin_name']}<a href="javascript:void(0)" onclick="reset()" style="color:red;">【修改登录密码】</a>您好，欢迎使用安居易信息管理系统</b>
     </div>
     
     <div class="welinfo">
     <span><img src="__PUBLIC__/admin/images/time.png" alt="时间" /></span>
     <i>您上次登录的时间：{$_SESSION['login_time']}</i>
     </div>
-
+<div class="tip" id="tip">
+        <div class="tiptop"><span>提示信息</span><a  onclick="cancel()" ></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="__PUBLIC__/admin/images/ticon.png"/></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" onclick="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
 </body>
 </html>
