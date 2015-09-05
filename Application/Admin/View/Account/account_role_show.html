@@ -22,18 +22,17 @@
       </div>
 
        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form class="am-form am-form-horizontal" action={:U("admin/member/admin_role")} method='post'>
+        <form class="am-form am-form-horizontal" action={:U("admin/account/account_role")} method='post'>
           
       
       <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">用户名 / Admin_name</label>
+            <label for="user-email" class="am-u-sm-3 am-form-label">用户名 / Account_name</label>
             <div class="am-u-sm-9">
-              <if condition="$admin_info['username'] eq 'admin'">
-                  <input type="text"  placeholder="输入用户名 / Admin_name" name='userName' disabled="disabled" value='{$admin_info.username}'>
+              <if condition="$account_info['account'] eq 'admin'">
+                  <input type="text"  placeholder="输入账户名 / Account_name" name='account' disabled="disabled" value='{$account_info.account}'>
                   <else/>
-                  <input type="text"  placeholder="输入用户名 / Admin_name" name='userName'  value='{$admin_info.username}'>
+                  <input type="text"  placeholder="输入账户名 / Account_name" name='account'  value='{$account_info.account}'>
               </if>
-             
               <small>用户名</small>
             </div>
           </div>
@@ -41,8 +40,8 @@
           <div class="am-form-group">
             <label for="user-email" class="am-u-sm-3 am-form-label">角色 / Role</label>
             <div class="am-u-sm-9">
-              <select  name="roleid" >
-                  <if condition="$admin_info.roleid eq ''">
+              <select  name="role" >
+                  <if condition="$account_info.role eq ''">
                       <option value="0"  selected="selected">请选择角色</option>
                       <foreach name="roleInfo" item="vo" key="k" >  
                             <option value="{$vo.role_id}" >{$vo.role_name}</option>
@@ -50,7 +49,7 @@
                       <else/>
                       <option value="0">请选择角色</option>
                       <foreach name="roleInfo" item="vo" key="k" >  
-                        <if condition="$vo.role_id eq $admin_info['roleid']">
+                        <if condition="$vo.role_id eq $account_info['role']">
                             <option value="{$vo.role_id}" selected="selected">{$vo.role_name}</option>
                           <else/>
                             <option value="{$vo.role_id}" >{$vo.role_name}</option>
@@ -65,7 +64,7 @@
           </div>
       
         
-          <input type="hidden"  name='id' value='{$admin_info.id}'>
+          <input type="hidden"  name='id' value='{$account_info.id}'>
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
               <button type="submit" class="am-btn am-btn-primary">授予角色</button>

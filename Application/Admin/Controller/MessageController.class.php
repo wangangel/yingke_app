@@ -39,7 +39,9 @@ class MessageController extends AdminController{
         $look_show = $this->checkAuth($actionName2);
         $actionName3["auth_a"]="message_del";
         $message_del = $this->checkAuth($actionName3);
-
+        $actionName4["auth_a"]="del_all";
+        $del_all = $this->checkAuth($actionName4);
+        $this->assign('del_all',$del_all);
         $this->assign('add_show',$add_show);
         $this->assign('look_show',$look_show);
         $this->assign('message_del',$message_del);

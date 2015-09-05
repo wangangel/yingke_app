@@ -22,20 +22,27 @@ class AccountController extends AdminController{
         $page = $page_class->show();
         //获取列表
         $admin_list = $model_user->where($arr)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+        //查询角色名称
+        $rolelist = array();
+        $role_model = M("role");
+        for ($i=0; $i < count($admin_list) ; $i++) { 
+            $data["role_id"] = $admin_list[$i]["role"];
+            $rolelist[$i] = $role_model->where($data)->find();
+        }
         //为权限加上
-        $actionName1["auth_a"]="admin_add_show";
-        $admin_add_show = $this->checkAuth($actionName1);
-        $actionName2["auth_a"]="admin_edit_show";
-        $admin_edit_show = $this->checkAuth($actionName2);
-        $actionName3["auth_a"]="admin_del";
-        $admin_del = $this->checkAuth($actionName3);
-        $actionName4["auth_a"]="admin_role_show";
-        $admin_role_show = $this->checkAuth($actionName4);
-
-        $this->assign('admin_add_show',$admin_add_show);
-        $this->assign('admin_edit_show',$admin_edit_show);
-        $this->assign('admin_del',$admin_del);
-        $this->assign('admin_role_show',$admin_role_show);
+        $actionName1["auth_a"]="account_add_show";
+        $account_add_show = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="account_edit_show";
+        $account_edit_show = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="account_del";
+        $account_del = $this->checkAuth($actionName3);
+        $actionName4["auth_a"]="account_role_show";
+        $account_role_show = $this->checkAuth($actionName4);
+        $this->assign('rolelist',$rolelist);
+        $this->assign('account_add_show',$account_add_show);
+        $this->assign('account_edit_show',$account_edit_show);
+        $this->assign('account_del',$account_del);
+        $this->assign('account_role_show',$account_role_show);
         $this->assign('page',$page);
         $this->assign('admin_list',$admin_list);
         $this->display();
@@ -47,26 +54,27 @@ class AccountController extends AdminController{
         $this->display();
     }
     /*
-     * 管理员添加动作
+     * 账户添加动作
      */
     public function account_add(){
         $arr = array();
-        $arr['username'] = $_POST['username'];
-        $arr['attribute'] = 0;
-        $arr['isdelete'] = 0;
-        $model_admin = M('user');
-        $result = $model_admin->where($arr)->find();
+        $arr['account'] = $_POST['account'];
+        $arr['password'] = md5($_POST['password']);
+        $model_account = M('account');
+        $result = $model_account->where($arr)->find();
         if($result){
-            $this->error('已存在该用户',U("admin/member/admin_add_show"));
+            $this->error('已存在该账户',U("admin/account/account_add_show"));
         }
-        $_POST['password'] = md5($_POST['password']);
-        $_POST['attribute'] = 0;
-        $_POST['isdelete'] = 0;
-        $result = $model_admin->add($_POST);
+        $arr['password'] = md5($_POST['password']);
+        $arr['employee'] = $_POST['employee'];
+        $arr['add_person'] = $_POST['add_person'];
+        $arr['status'] = $_POST['status'];
+        $arr['add_date'] = time();
+        $result = $model_account->add($arr);
         if($result){
-            $this->success('添加成功',U("admin/member/admin_list"));
+            $this->success('添加成功',U("admin/account/account_list"));
         }else{
-            $this->error('添加失败',U("admin/member/admin_add_show"));
+            $this->error('添加失败',U("admin/account/account_add_show"));
         }
     }
     /*
@@ -75,43 +83,45 @@ class AccountController extends AdminController{
     public function account_edit_show(){
         $array = array();
         $array['id'] = $_GET['id'];
-        $model_admin = M('user');
-        $admin_info = $model_admin->where(array('id'=>$_GET['id']))->find();
-
-        $this->assign('admin_info',$admin_info);
+        $model_account = M('account');
+        $account_info = $model_account->where(array('id'=>$_GET['id']))->find();
+        $this->assign('account_info',$account_info);
         $this->display();
     }
     /*
      * 管理员信息修改
      */
     public function account_edit(){
-        $model_admin = M('user');
-        $_POST['password'] = md5($_POST['password']);
-        $result = $model_admin->save($_POST);
+        $model_account = M('account');
+        $arr['id'] = $_POST['id'];
+        $arr['password'] = md5($_POST['password']);
+        $arr['employee'] = $_POST['employee'];
+        $arr['add_person'] = $_POST['add_person'];
+        $arr['status'] = $_POST['status'];
+        $arr['add_date'] = time();
+        $result = $model_account->save($arr);
         if($result){
-            $this->success('修改成功',U("admin/member/admin_list"));
+            $this->success('修改成功',U("admin/account/account_list"));
         }else{
-            $this->error('修改失败',"/anjuyi/index.php?m=admin&c=member&a=admin_edit_show&id=" . $_POST['admin_id']);
+            $this->error('修改失败',"/anjuyi/index.php?m=admin&c=account&a=account_edit_show&id=" . $_POST['id']);
         }
     }
     /*
      * 管理员删除
      */
     public function account_del(){
-        $model_admin = M('user');
+        $model_account = M('account');
         if($_GET['id'] == 1){
-            $this->error('该账号无法删除！',U("admin/member/admin_list"));
+            $this->error('该账号无法删除！',U("admin/account/account_list"));
             die;
         }
-        $result = $model_admin->where(array('id'=>$_GET['id']))->save(array("isdelete"=>"1"));
+        $result = $model_account->where(array('id'=>$_GET['id']))->delete();
         if($result){
-            $this->success('操作成功！',U("admin/member/admin_list"));
+            $this->success('操作成功！',U("admin/account/account_list"));
         }else{
-            $this->error('操作失败',U("admin/member/admin_list"));
+            $this->error('操作失败',U("admin/account/account_list"));
         }
     }
-   
-
     /*
      * 普通用户展示
      */
@@ -178,31 +188,28 @@ class AccountController extends AdminController{
             $this->error('修改失败','admin/member/member_edit_show&id=' . $_POST['id']);
         }
     }
-   
     /**
      * 授予角色前
      */
     public function account_role_show(){
         $member['id'] = $_GET['id'];
-        $memberInfo = M("user")->where($member)->find();
+        $memberInfo = M("account")->where($member)->find();
         $roleInfo = M("role")->select();
-        $this->assign('admin_info',$memberInfo);
+        $this->assign('account_info',$memberInfo);
         $this->assign('roleInfo',$roleInfo);
         $this->display();
-
     }
-
     /**
      * 正式授予角色
      */
     public function account_role(){
-        $user['id'] = $_POST['id'];
-        $user['roleid'] = $_POST['roleid'];
-        $res = M('user')->save($user);
+        $account['id'] = $_POST['id'];
+        $account['role'] = $_POST['role'];
+        $res = M('account')->save($account);
         if($res){
-            $this->success('操作成功！',U("admin/member/admin_list"));
+            $this->success('操作成功！',U("admin/account/account_list"));
         }else{
-            $this->error('操作失败！',U("admin/member/admin_list"));
+            $this->error('操作失败！',U("admin/account/account_list"));
         }
     }
     

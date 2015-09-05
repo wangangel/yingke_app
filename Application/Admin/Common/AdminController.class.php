@@ -122,14 +122,13 @@ class AdminController extends Controller{
         $nowac = CONTROLLER_NAME;
         $ids = $_GET['ids'];
         $action = $nowac."_list";
-        /*$result = M("$nowac")->delete($ids);
+        $result = M("$nowac")->delete($ids);
         if($result){
             $this->success('操作成功！',U("admin/$nowac/$action"));
         }else{
             $this->error('操作失败',U("admin/$nowac/$nowac_list"));
-        }*/
+        }
 
-        $this->success('操作成功！',U("admin/$nowac/$action"));
     }
-
+  
 }

@@ -15,7 +15,9 @@
         <div class="am-fl am-cf">
           <div class="am-btn-toolbar am-fl">
             <div class="am-btn-group am-btn-group-xs">
+            <in name="del_all" value="$hava_authids">
               <input type="button" value="批量删除" onclick="getAll()"/>
+            </in>
             <in name="add_show" value="$hava_authids">
               <a href={:U("admin/message/add_show")}><button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 发送信息</button></a>
             </in>

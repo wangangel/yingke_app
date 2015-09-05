@@ -21,43 +21,45 @@
       </div>
 
        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form class="am-form am-form-horizontal" action={:U('admin/member/admin_add')} method='post'>
+        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/account/account_add')} method='post'>
           <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">用户名 / username</label>
+            <label for="user-name" class="am-u-sm-3 am-form-label">账户名 / account</label>
             <div class="am-u-sm-9">
-              <input type="text" id="user-name" placeholder="姓名 / Name" name='username'>
-              <small>登录用户名</small>
+              <input type="text" id="account-name" placeholder="账户名 / account" name='account'>
             </div>
           </div>
-		  
-		 
-          
           <div class="am-form-group">
             <label for="user-email" class="am-u-sm-3 am-form-label">密码 / password</label>
             <div class="am-u-sm-9">
-              <input type="password" id="user-email" placeholder="输入密码 / Password" name='password'>
-              <small>登录用的密码</small>
+              <input type="password" id="account-password" placeholder="输入密码 / Password" name='password'>
             </div>
           </div>
 		  
           <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / email</label>
+            <label for="user-email" class="am-u-sm-3 am-form-label">员工姓名 / employee</label>
             <div class="am-u-sm-9">
-              <input type="email" id="user-email" placeholder="输入你的电子邮件 / Email" name='email'>
-              <small>邮箱</small>
+              <input type="text" id="user-employee" placeholder="员工姓名 / employee" name='employee'>
             </div>
           </div>
 
           <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / phone</label>
+            <label for="user-phone" class="am-u-sm-3 am-form-label">添加人 / add_person</label>
             <div class="am-u-sm-9">
-              <input type="text" id="pr_psw_tel" placeholder="输入你的电话号码 / Telephone" name='phone' onblur='VeriftyPhone();' onkeyup="this.value=this.value.replace(/[, ]/g,'')">
+              <input type="text" id="pr_psw_tel" placeholder="添加人 / add_person" name='add_person' value="{$_SESSION['admin_name']}"/>
             </div>
           </div>
-
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">是否启用 / status</label>
+            <div class="am-u-sm-9">
+              <select  name="status" >
+                <option value="stop">否</option>
+                <option value="start" selected="true">是</option>
+              </select>
+            </div>
+          </div>
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+              <button type="button" onclick="checkall()" class="am-btn am-btn-primary">保存修改</button>
             </div>
           </div>
         </form>
@@ -69,23 +71,22 @@
 </div>
 
 <include file="Index:footer"/>
-<script data-cfasync="false" type="text/javascript">
-function VeriftyPhone(){
-        var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/; //手机号码验证规则
-        var phone = $("#pr_psw_tel").val();   //获得用户填写的号码值 赋值给变量phone
-        if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
-            if("" == phone){
-                alert("手机号码不能为空,请正确填写电话号码!");
-                $('#pr_psw_tel').val("");
-             
+<script type="text/javascript">
+    function checkall(){
+          var account_name = $("#account-name").val();   //获得用户填写的号码值 赋值给变量phone
+          var account_password = $("#account-password").val(); 
+          var user_employee = $("#user-employee").val(); 
+          if(account_name == ""){ 
+              alert("请正确填写账户名！");
+              return false;     
+          }else if(account_password == ""){
+              alert("请正确填写密码!");
               return false;
-            }else{
-              alert("请正确填写手机号码，例如:13415764179");
-              $('#pr_psw_tel').val("");
-              return false; 
-            }       
-        }
-}
-
+          }else if(user_employee == ""){
+              alert("请填写员工姓名!");
+              return false;
+          }
+          $("#myForm").submit();
+  }
 
 </script>

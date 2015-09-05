@@ -1,0 +1,128 @@
+
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+<include file="Index:css"/>
+  <!-- sidebar start -->
+ <div class="am-cf admin-main">
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">评论列表</strong> / <small>Comment List</small></div>
+    </div>
+   
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <in name="del_all" value="$hava_authids"> 
+        <input type="button" value="批量删除" onclick="getAll()"/>
+       </in>
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/>全选</th>
+                <th class="table-id">序号</th>
+                <th class="table-title">房间</th>
+                <th class="table-title">评分</th>
+                <th class="table-title">评论内容</th>                 
+                <th class="table-type">评论人</th>
+                <th class="table-author">手机号</th>
+                <th class="table-data">时间</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          <foreach name="comment_list" item="vo" key="k" >
+          
+            <tr>
+              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
+              <td>{$k+1}</td>
+              <td>{$vo.room_name}</td>
+              <td>{$vo.score}</td>
+              <td>{$vo.com_content}</td>
+              <td>{$vo.com_user}</td>
+              <td>{$vo.com_phone}</td>
+              <td>{$vo.com_date|date='Y-m-d',###}</td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <in name="comment_del" value="$hava_authids"> 
+                    <a href="{:U('admin/comment/comment_del',array('id'=>$vo['id']))}"><span class="am-icon-trash-o"></span> 删除</a>|&nbsp;
+                   </in>
+                    <in name="comment_set" value="$hava_authids"> 
+                      <if condition="$vo.is_display eq 'no'">
+                        <a href="#" onclick="set({$vo['id']},'0')"> 显示</a>
+                        <else/>
+                        <a href="#" onclick="set({$vo['id']},'1')"> 不显示</a>
+                      </if>
+                    </in>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </foreach>
+            
+          </tbody>
+        </table>
+    {$page}
+        </form>
+      </div>
+注*评论满分为5分
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+<include file="Index:footer"/>
+<script type="text/javascript">
+  /*
+     *全选按钮，prop方法，是给ipnut框添加属性的
+    */
+    function checkall(obj){
+      if(obj.checked){
+        $("input[name='ids']").prop("checked", true);
+      }else{
+        $("input[name='ids']").prop("checked", false);
+      }
+    }
+
+    function getAll(){
+      if($("input[name='ids']:checked").val() == null){
+        alert("请选择要删除的列表！");
+        return false;
+      }else{
+        var checked = [];
+        $('input[name="ids"]:checked').each(function(){
+              checked.push($(this).val());
+          });
+        var checkStr = checked.join(",");
+        var url = "{:U('admin/comment/del_all')}?ids="+checkStr;
+        window.location.href=url;
+      }
+    }
+    //显示操作
+    function set(id_index,tag){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/comment/comment_set')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                error:function(data){
+                    alert("设置失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("设置成功！");
+                        window.location.reload();
+                    }else{
+                        alert("设置失败!");
+                    }
+                }
+            });
+    }
+</script>
