@@ -126,7 +126,7 @@ class UserController extends MobileController{
             $result = $phonecode_model->add($arr);
             if($result>0){
                 //向手机发送验证码
-                $post_data = "action=send&userid=&account=ajywangluokeji&password=200005&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【出淘客户端】");
+                $post_data = "action=send&userid=&account=ajywangluokeji&password=200005&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【映客客户端】");
                 $target = "http://sms.chanzor.com:8001/sms.aspx";
                 $arrResu = $this->Post_1($post_data,$target);
                 output_data(array(
@@ -896,6 +896,52 @@ class UserController extends MobileController{
 
 
     /*
+     * 获取当前用户提现记录表
+     */
+    public function tixian_record(){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //1.现获取当前用户的手机号
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        $user_phone = $user_info['phone_num'];
+        //2.根据手机号码获取当前用户的提现记录
+        $withdrawals_model = M('withdrawals');
+        $tixian_info = $withdrawals_model->where(array('apply_phone'=>$user_phone))->select();
+        foreach ($tixian_info as $k => $v) {
+            $data['tixian'][$k]['id'] = $v['id'];
+            $data['tixian'][$k]['apply_date'] = $v['apply_date'];
+            $data['tixian'][$k]['wd_money'] = $v['wd_money'];
+            if($v['status'] == "start"){
+                //提现完成
+                $data['tixian'][$k]['status'] = "已完成";
+            }else{
+                $data['tixian'][$k]['status'] = "已申请";
+            }
+        }
+        output_data($data);
+    }
+
+
+
+
+
+
+
+
+
+    /*
      *获取我的店铺礼物
      */
     public function myshop_gift(){
@@ -913,7 +959,7 @@ class UserController extends MobileController{
              output_error('秘钥key不正确');
         }
         $gift_model = M('gift');
-        //现获取用户自定义的礼物
+        //1.获取用户自定义的礼物
         $gift_info = $gift_model->where(array('userid'=>$_REQUEST['userid']))->where(array('gift_sign'=>"user"))->where(array('status'=>"start"))->select();
         if(empty($gift_info)){
             $data['user_gift'] = NULL;
@@ -1093,6 +1139,7 @@ class UserController extends MobileController{
         $opt['f_date'] = time();
         $opt['f_isdelete'] = "no";
         $opt['f_content'] = $_REQUEST['feedback'];
+        $opt['f_classify'] = '系统反馈';
         $feedback_model = M('feedback');
         $res = $feedback_model->add($opt);
         if($res){
@@ -1729,6 +1776,11 @@ class UserController extends MobileController{
             $con['trade_no'] = sprintf('%08s', $res);
             $result = $trade_model->where(array('id'=>$res))->save($con);
             if($result){
+                //1.对应买家的消费增加
+                $res = $user_model->where(array('id'=>$_REQUEST['userid']))->setInc('cost',$opt['trade_total']);
+                //2.对应卖家的收入增加
+                $saler_income = $opt['trade_total'] * 0.7;
+                $res = $user_model->where(array('id'=>$_REQUEST['roomuserid']))->setInc('income',$saler_income);
                 output_data(array('id'=>$res));
             }else{
                 output_error('交易编号生成失败');
@@ -1785,6 +1837,11 @@ class UserController extends MobileController{
             $con['trade_no'] = sprintf('%08s', $res);
             $result = $trade_model->where(array('id'=>$res))->save($con);
             if($result){
+                 //1.对应买家的消费增加
+                $res = $user_model->where(array('id'=>$_REQUEST['userid']))->setInc('cost',$_REQUEST['roomprice']);
+                //2.对应卖家的收入增加
+                $saler_income = $opt['trade_total'] * 0.7;
+                $res = $user_model->where(array('id'=>$_REQUEST['roomuserid']))->setInc('income',$saler_income);
                 output_data(array('id'=>$res));
             }else{
                 output_error('交易编号生成失败');
@@ -1884,6 +1941,79 @@ class UserController extends MobileController{
             output_error('举报失败');
         }
     }
+
+
+
+
+
+    /*
+     * 对房间进行反馈
+     */
+    Public function add_roomfeedback(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['feedback'] == NULL){
+             output_error('参数不全');
+        }
+         //获取用户信息
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        $opt['f_name'] = $user_info['ni_name'];
+        $opt['f_phone'] = $user_info['phone_num'];
+        $opt['f_date'] = time();
+        $opt['f_isdelete'] = "no";
+        $opt['f_content'] = $_REQUEST['feedback'];
+        $opt['f_classify'] = '直播间反馈';
+        $feedback_model = M('feedback');
+        $res = $feedback_model->add($opt);
+        if($res){
+            output_data(array('id'=>$res));
+        }else{
+            output_error('反馈消息失败');
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

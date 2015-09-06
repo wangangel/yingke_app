@@ -290,11 +290,7 @@ datas :
         datas:
        error:错误描述，执行成功没有该字段
             datas: 
-                "id": 用户id,
-                "ni_name": 
-                "head_url": 
-                "sex": 
-                "is_focus": 0---未关注,1:已关注
+                result
 
 
 
@@ -377,6 +373,32 @@ datas :
 
 
 
+
+十八(补).提现记录
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/tixian_record?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+ 接口参数:
+        userid:
+        key:
+        client_id
+       
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          id
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 十九.获取我的店铺礼物
 请求地址：http://api.skyeyeslive.com
 /index.php/api/user/myshop_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
@@ -399,8 +421,7 @@ datas :
 
 
 二十.添加我的店铺礼物
-请求地址：http://api.skyeyeslive.com
-/index.php/api/user/add_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_pic_url=http://api.skyeyeslive.com
+请求地址：http://api.skyeyeslive.com/index.php/api/user/add_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_pic_url=http://api.skyeyeslive.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg&gift_name=怡宝&gift_price=20
  接口参数:
         userid:
@@ -456,7 +477,7 @@ datas :
 
 
 
-二十三.添加意见反馈
+二十三.添加意见反馈(系统反馈)
 请求地址：http://api.skyeyeslive.com
 /index.php/api/user/add_feedback?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&feedback=这个软件非常好哦
  接口参数:
@@ -593,7 +614,7 @@ datas :
           }
 
 
-二十九.添加标签
+二十九.添加房间标签
 请求地址：http://api.skyeyeslive.com
 /index.php/api/user/add_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tag=帅哥
 接口参数:
@@ -789,6 +810,38 @@ datas :
         "datas": {
           
           }
+
+
+
+
+
+
+
+三十七.对房间进行反馈
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/add_roomfeedback?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&feedback=这个主播非常好哦
+ 接口参数:
+        userid:
+        key:
+        client_id
+        feedback------意见反馈
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": 
+          
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
