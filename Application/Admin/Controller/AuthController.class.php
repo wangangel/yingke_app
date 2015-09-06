@@ -6,6 +6,7 @@ use Think\Page;
 use Think\Controller;
 
 class AuthController extends AdminController{
+    
     //列表展示
     public function auth_list(){
         $data['auth_level'] = array('gt' => 0,);
@@ -15,13 +16,11 @@ class AuthController extends AdminController{
         $auth_count = M('auth')->count();
         import('Think.Page');
         $page_class = new Page($auth_count,15);
-        $page_class->setConfig('prev', '«');
-        $page_class->setConfig('next', '»');
-        $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
+        $page_class->setConfig('prev', '<<');
+        $page_class->setConfig('next', '>>');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
         $page = $page_class->show();
-
         $info = M('auth')->limit($page_class->firstRow.','.$page_class->listRows)->order('auth_path asc')->select();
-
         //为权限加上
         $actionName1["auth_a"]="auth_add_show";
         $auth_add_show = $this->checkAuth($actionName1);
@@ -31,7 +30,6 @@ class AuthController extends AdminController{
         $auth_del = $this->checkAuth($actionName3);
         $actionName4["auth_a"]="auth_search";
         $auth_search = $this->checkAuth($actionName4);
-
         $this->assign('auth_add_show',$auth_add_show);
         $this->assign('auth_edit_show',$auth_edit_show);
         $this->assign('auth_del',$auth_del);
@@ -157,6 +155,15 @@ class AuthController extends AdminController{
         $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
         $page = $page_class->show();
         $info = M('auth')->limit($page_class->firstRow.','.$page_class->listRows)->where($data)->order('auth_path asc')->select();
+        $actionName2["auth_a"]="auth_edit_show";
+        $auth_edit_show = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="auth_del";
+        $auth_del = $this->checkAuth($actionName3);
+        $actionName4["auth_a"]="auth_search";
+        $auth_search = $this->checkAuth($actionName4);
+        $this->assign('auth_search',$auth_search);
+        $this->assign('auth_edit_show',$auth_edit_show);
+        $this->assign('auth_del',$auth_del);
         $this->assign('auth_name',$auth_name);
         $this->assign('page',$page);
         $this->assign('info',$info);

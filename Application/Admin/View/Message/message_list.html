@@ -1,85 +1,91 @@
 <include file="Index:css"/>
-  <!-- sidebar start -->
- <div class="am-cf admin-main">
-  <!-- sidebar end -->
 
-  <!-- content start -->
-  <div class="admin-content">
+<body>
 
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">消息列表</strong> / <small>Message List</small></div>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">消息列表</a></li>
+    </ul>
     </div>
-
-    <div class="am-g">
-      <div class="am-u-md-6 am-cf">
-        <div class="am-fl am-cf">
-          <div class="am-btn-toolbar am-fl">
-            <div class="am-btn-group am-btn-group-xs">
-            <in name="del_all" value="$hava_authids">
-              <input type="button" value="批量删除" onclick="getAll()"/>
-            </in>
-            <in name="add_show" value="$hava_authids">
-              <a href={:U("admin/message/add_show")}><button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 发送信息</button></a>
-            </in>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="rightinfo">
+    
+    <div class="tools">
+      <ul class="toolbar">
+        <in name="del_all" value="$hava_authids">
+        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
+      </in>
+      </ul>
+      <ul class="toolbar">
+      <in name="add_show" value="$hava_authids">
+        <li class="click"><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/message/add_show")}>发送信息</a></li>
+      </in>
+      </ul>
+        
+    
     </div>
-
-    <div class="am-g">
-      <div class="am-u-sm-12">
-        <form class="am-form">
-          <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-              <tr>
-                <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/>全选</th>
-                <th class="table-title">序号</th>
-                <th class="table-title">内容</th>
-                <th class="table-author">发送目标</th>
-                <th class="table-author">发送时间</th>
-                <th class="table-author">发送人</th>
-                <th class="table-set">操作</th>
-              </tr>
-          </thead>
-          <tbody>
-          <foreach name="message_list" item="vo" key="k" >
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+       <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/></th>
+                <th>序号</th>
+                <th>内容</th>
+                <th>发送目标</th>
+                <th>发送时间</th>
+                <th>发送人</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="message_list" item="vo" key="k" >
+          
             <tr>
               <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
               <td>{$k+1}</td>
-              <td>{$vo.m_content|msubstr=0,12,'utf-8',true}
-              </td>
+              <td>{$vo.m_content|msubstr=0,12,'utf-8',true}</td>
               <td><if condition="$vo.m_target eq 'all'">全体用户<else/>多个用户</if></td>
               <td>{$vo.m_date|date='Y-m-d',###}</td>
               <td>{$vo.m_user}</td>
-              <td>
-                <div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                  <in name="look_show" value="$hava_authids">
-                    <!-- <a href={:U('Admin/message/look_show',array('id'=>$vo['id']))}><span class="am-icon-pencil-square-o"></span> 查看  </a>|&nbsp; -->
+              
+              <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
+                <in name="look_show" value="$hava_authids">
+                    <!-- <a href={:U('Admin/message/look_show',array('id'=>$vo['id']))}>查看  </a>|&nbsp; -->
                   </in>
                   <in name="message_del" value="$hava_authids">
-                    <a href={:U('Admin/message/message_del',array('id'=>$vo['id']))}><span class="am-icon-trash-o"></span> 删除</a>
+                    <a href={:U('Admin/message/message_del',array('id'=>$vo['id']))}> 删除</a>
                   </in>
-                  </div>
-                </div>
               </td>
             </tr>
             </foreach>
-            
-          </tbody>
-        </table>
+        </tbody>
+    </table>
 
-    {$page}
+     {$page}
 
-        </form>
-      </div>
-
+    <div class="tip">
+      <div class="tiptop"><span>提示信息</span><a></a></div>
+        <div class="tipinfo">
+          <span><img src="images/ticon.png" /></span>
+          <div class="tipright">
+          <p>是否确认对信息的修改 ？</p>
+          <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+          </div>
+          </div>
+          <div class="tipbtn">
+          <input name="" type="button"  class="sure" value="确定" />&nbsp;
+          <input name="" type="button"  class="cancel" value="取消" />
+        </div>
     </div>
-  </div>
-  <!-- content end -->
-</div>
+
+    
+    </div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
 <include file="Index:footer"/>
 <script type="text/javascript">
   /*

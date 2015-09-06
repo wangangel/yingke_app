@@ -17,7 +17,7 @@ class DataController extends AdminController{
         $page_class = new Page($data_count,8);
         $page_class->setConfig('prev', '«');
         $page_class->setConfig('next', '»');
-        $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
         $page = $page_class->show();
         //获取列表
         $data_list = $model_data->limit($page_class->firstRow.','.$page_class->listRows)->select();

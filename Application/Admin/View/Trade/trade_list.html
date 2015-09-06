@@ -1,42 +1,53 @@
-
-<!--[if lte IE 9]>
-<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
-<![endif]-->
 <include file="Index:css"/>
-  <!-- sidebar start -->
- <div class="am-cf admin-main">
-  <!-- sidebar end -->
+<body>
 
-  <!-- content start -->
-  <div class="admin-content">
-
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">交易列表</strong> / <small>Trade List</small></div>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">交易列表</a></li>
+    </ul>
     </div>
-   
-    <div class="am-g">
-      <div class="am-u-sm-12">
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
 
-        <form class="am-form">
-          <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-              <tr>
-                <th class="table-id">序号</th>
-                <th class="table-title">交易编号</th>
-                <th class="table-title">类型</th>
-                <th class="table-title">礼物/房间名称</th>                 
-                <th class="table-type">数量</th>
-                <th class="table-author">合计</th>
-                <th class="table-data">卖家</th>
-                <th class="table-phone">卖家手机号</th>
-                <th class="table-title">买家</th>                 
-                <th class="table-type">买家手机号</th>
-                <th class="table-author">支付方式</th>
-              </tr>
-          </thead>
-          <tbody>
-          <foreach name="trade_list" item="vo" key="k" >
+     <!--  <ul class="toolbar">
+        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
+      </ul>
+      
+      <ul class="toolbar">
+      <in name="account_add_show" value="$hava_authids">
+        <li ><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/account/account_add_show")}>新增</a></li>
+      </in>
+      </ul>
+        
+        
+      <ul class="toolbar1">
+        <li><span><img src="__PUBLIC__/admin/images/t05.png" /></span>设置</li>
+      </ul>
+     -->
+    </div>
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+                <th>序号</th>
+                <th>交易编号</th>
+                <th>类型</th>
+                <th>礼物/房间名称</th>
+                <th>数量</th>
+                <th>合计</th>
+                <th>卖家</th>
+                <th>卖家手机号</th>
+                <th>买家</th>
+                <th>买家手机号</th>
+                <th>支付方式</th>
+                
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="trade_list" item="vo" key="k" >
           
             <tr>
               <td>{$k+1}</td>
@@ -52,14 +63,15 @@
               <td>{$vo.pay_type}</td>
             </tr>
             </foreach>
-            
-          </tbody>
-        </table>
-    {$page}
-        </form>
-      </div>
-    </div>
+        </tbody>
+    </table>
+
+     {$page}
   </div>
-  <!-- content end -->
-</div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
 <include file="Index:footer"/>

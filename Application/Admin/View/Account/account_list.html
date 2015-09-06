@@ -1,10 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<include file="Index:css"/>
-
+﻿<include file="Index:css"/>
 <script type="text/javascript">
 $(document).ready(function(){
   $(".click").click(function(){
@@ -24,10 +18,32 @@ $(document).ready(function(){
 });
 
 });
+  //全选
+    function checkall(obj){
+        if(obj.checked){
+          $("input[name='ids']").prop("checked", true);
+        }else{
+          $("input[name='ids']").prop("checked", false);
+        }
+      }
+
+    function getAll(){
+      if($("input[name='ids']:checked").val() == null){
+        alert("请选择要删除的列表！");
+        return false;
+      }else{
+        var checked = [];
+        $('input[name="ids"]:checked').each(function(){
+              checked.push($(this).val());
+          });
+        var checkStr = checked.join(",");
+        var url = "{:U('admin/account/del_all')}?ids="+checkStr;
+        window.location.href=url;
+      }
+    }
+
 </script>
 
-
-</head>
 
 
 <body>
@@ -42,20 +58,23 @@ $(document).ready(function(){
     <div class="rightinfo">
     
     <div class="tools">
-    
-    	<ul class="toolbar">
-		
-        <li class="click"><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/account/account_add_show")}>新增</a></li>
 
-        </ul>
+      <ul class="toolbar">
+        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
+      </ul>
+      
+    	<ul class="toolbar">
+		  <in name="account_add_show" value="$hava_authids">
+        <li ><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/account/account_add_show")}>新增</a></li>
+      </in>
+      </ul>
         
         
-        <ul class="toolbar1">
+      <ul class="toolbar1">
         <li><span><img src="__PUBLIC__/admin/images/t05.png" /></span>设置</li>
-        </ul>
+      </ul>
     
     </div>
-    
     
     <table class="tablelist">
     	<thead>
@@ -75,7 +94,7 @@ $(document).ready(function(){
       <foreach name="admin_list" item="vo" key="k" >
           
             <tr>
-              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
+              <td><if condition="$vo.id neq 1"><input type="checkbox"  name="ids" value="{$vo.id}"/></if></td>
               <td>{$k+1}</td>
               <td>{$vo.account}</td>
               <td>{$rolelist[$k].role_name}</td>
@@ -91,7 +110,9 @@ $(document).ready(function(){
                    <a  href={:U('admin/account/account_edit_show',array('id'=>$vo['id']))}> 编辑  </a>&nbsp;|&nbsp;
                   </in>
                   <in name="account_del" value="$hava_authids">
-                   <a  href={:U('admin/account/account_del',array('id'=>$vo['id']))}> 删除</a>
+                   <if condition="$vo.id neq 1">
+                      <a  href={:U('admin/account/account_del',array('id'=>$vo['id']))}> 删除</a>
+                   </if>
                   </in>
               </td>
             </tr>
@@ -100,43 +121,28 @@ $(document).ready(function(){
     </table>
 
      {$page}
-   <!-- <div class="pagin"><div class="message">共<i class="blue">%TOTAL_ROW%</i>条记录</div>
-        <ul class="paginList">
-        <li class="paginItem"><a href="javascript:;"><span class="pagepre">%UP_PAGE%</span></a></li>
-        <li class="paginItem"><a href="javascript:;">%LINK_PAGE%</a></li>
-        <li class="paginItem"><a href="javascript:;"><span class="pagenxt">%DOWN_PAGE%</span></a></li>
-        </ul> 
-
-    </div>-->
-    
 
     <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
-        
-      <div class="tipinfo">
-        <span><img src="images/ticon.png" /></span>
-        <div class="tipright">
-        <p>是否确认对信息的修改 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        <div class="tipinfo">
+          <span><img src="images/ticon.png" /></span>
+          <div class="tipright">
+          <p>是否确认对信息的修改 ？</p>
+          <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+          </div>
+          </div>
+          <div class="tipbtn">
+          <input name="" type="button"  class="sure" value="确定" />&nbsp;
+          <input name="" type="button"  class="cancel" value="取消" />
         </div>
-        </div>
-        
-        <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
-        </div>
+    </div>
+
     
     </div>
     
-    
-    
-    
-    </div>
-    
-    <script type="text/javascript">
+  <script type="text/javascript">
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 
 </body>
-
-</html>
+<include file="Index:footer"/>

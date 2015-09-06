@@ -1,54 +1,41 @@
-
-<!--[if lte IE 9]>
-<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
-<![endif]-->
-
-
-
-
-  <!-- sidebar start -->
- <div class="am-cf admin-main">
 <include file="Index:css"/>
-  <!-- sidebar end -->
+<body>
 
-  <!-- content start -->
-  <div class="admin-content">
-
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">日志管理</strong> / <small>Log List</small></div>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">日志管理</a></li>
+    </ul>
     </div>
-
-    <div class="am-g">
-      <div class="am-u-md-6 am-cf">
-        <div class="am-fl am-cf">
-          <div class="am-btn-toolbar am-fl">
-            
-          </div>
-        </div>
-      </div>
-
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+       <form  id="myForm" action={:U("admin/log/log_select_del")}>
+      <in name="log_select_del" value="$hava_authids">
+      <ul class="toolbar">
+        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <input type="button" id="delete" value="批量删除" onclick="del()"></li>
+      </ul>
+      </in>
     </div>
-    <div class="am-g">
-      <div class="am-u-sm-12">
-        <form class="am-form" id="myForm" action={:U("admin/log/log_select_del")}>
-          <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-              <tr>
-                <th><input type="checkbox" id="chkMsgId" name="chkMsgId" onclick="doCheck(this)"/>全选/全不选<th>
-                <th class="table-author">操作类型</th>
-                <th class="table-date">访问地址</th>
-                <th class="table-title">操作人</th>
-                <th class="table-author">操作时间</th>
-                <th class="table-author">访问IP</th>
-                <th class="table-set">操作</th>
-              </tr>
-          </thead>
-          <tbody>
-          <foreach name="syslog_list" item="vo" key="k" >
+    <input type="hidden" id="selectAll" name="selectAll" value="">
+    <table class="tablelist">
+      <thead>
+      <tr>
+       <th><input type="checkbox" id="chkMsgId" name="chkMsgId" onclick="doCheck(this)"/></th>
+                <th>操作类型</th>
+                <th>访问地址</th>
+                <th>操作人</th>
+                <th>操作时间</th>
+                <th>访问IP</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="syslog_list" item="vo" key="k" >
+          
             <tr>
               <td><input type="checkbox" name="items" value="{$vo.id}"/></td>
-              <td></td>
               <td>
                   <if condition="$vo['logtype'] eq '0'">登录
                     <elseif condition="$vo['logtype'] eq '1'"/>添加
@@ -60,35 +47,26 @@
               <td>{$vo.username}</td>
               <td>{$vo.addtime|date='Y-m-d',###}</td>
               <td>{$vo.ip}</td>
-              <td>
-                <div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                    <in name="log_del" value="$hava_authids">
+              <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
+                  <in name="log_del" value="$hava_authids">
                     <a href={:U('admin/log/log_del',array('id'=>$vo['id']))}>
                       <span class="am-icon-trash-o"></span> 删除</a>
                     </in>
-                  </div>
-                </div>
               </td>
             </tr>
             </foreach>
-            
-          </tbody>
-        </table>
-        <input type="hidden" id="selectAll" name="selectAll" value="">
-        <in name="log_select_del" value="$hava_authids">
-          <input type="button" id="delete" value="批量删除"  onclick ="del()"/>
-        </in>
-        
-    {$page}
+        </tbody>
+    </table>
 
-        </form>
-      </div>
-
+     {$page}
+</form>
     </div>
-  </div>
-  <!-- content end -->
-</div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
 <include file="Index:footer"/>
 <script type="text/javascript">
       /**  

@@ -1,67 +1,62 @@
-
-<!--[if lte IE 9]>
-<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
-<![endif]-->
 <include file="Index:css"/>
-  <!-- sidebar start -->
- <div class="am-cf admin-main">
-  <!-- sidebar end -->
-  <!-- content start -->
-  <div class="admin-content">
+<body>
 
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">数据表列表</strong> / <small>Data List</small></div>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">数据表列表</a></li>
+    </ul>
     </div>
-    <div class="am-g">
-      <div class="am-u-sm-12">
-        <form class="am-form" id="myForm" action={:U("admin/backup/backup_all")}>
-          <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-              <tr>
-                
-                <th class="table-id"><input type="checkbox" id="chkMsgId" name="chkMsgId" onclick="doCheck(this)"/>全选</th>
-                <th class="table-title">序号</th>
-                <th class="table-title">表名称</th>
-                <th class="table-set">操作</th>
-              </tr>
-          </thead>
-          <tbody>
-          <foreach name="list" item="vo" >
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+      <form class="am-form" id="myForm" action={:U("admin/backup/backup_all")}>
+      <in name="backup_all" value="$hava_authids">
+        <ul class="toolbar">
+          <li ><span><img src="__PUBLIC__/admin/images/leftico01.png" /></span> <a href="#" onclick="backup()">批量备份</a></li>
+        </ul>
+      </in>
+    </div>
+    <input type="hidden" id="selectAll" name="selectAll" value="">
+    <table class="tablelist">
+      <thead>
+      <tr>
+       <th><input type="checkbox" id="chkMsgId" name="chkMsgId" onclick="doCheck(this)"/></th>
+                <th>序号</th>
+                <th>表名称</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="list" item="vo" key="k" >
           
             <tr>
               <td><input type="checkbox" name="items" value="{$vo.tables_in_yingke}"/></td>
-              <td>{$key+1}</td>
+              <td>{$k+1}</td>
               <td>{$vo.tables_in_yingke}</td>
-              <td>
-                <div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                    <in name="backup_table" value="$hava_authids">
-                    <a href={:U('admin/backup/backup_table',array('table'=>$vo['tables_in_yingke']))}><span class="am-icon-pencil-square-o"></span> 备份  </a>
+             
+              <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
+                  <in name="backup_table" value="$hava_authids">
+                    <a href={:U('admin/backup/backup_table',array('table'=>$vo['tables_in_yingke']))}> 备份  </a>
                     </in>
-                  </div>
-                </div>
               </td>
             </tr>
             </foreach>
-            
-          </tbody>
-        </table>
+        </tbody>
+    </table>
+  </form>
+     {$page}
 
-          <input type="hidden" id="selectAll" name="selectAll" value="">
-           <in name="backup_all" value="$hava_authids">
-          <input type="button" value="备份"  onclick ="backup()"/>
-          </in>
 
-          <hr />
-          <p  style="text-align:center"><a href="">蜂鸟科技,诚意为您</a></p>
-        </form>
-      </div>
-
+    
     </div>
-  </div>
-  <!-- content end -->
-</div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
 <include file="Index:footer"/>
 <script type="text/javascript">
    /**  
@@ -111,10 +106,5 @@
          
 
         }
-
-
-
-
-
 
 </script>
