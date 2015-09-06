@@ -40,21 +40,70 @@ function cancel(){
     <i>您上次登录的时间：{$_SESSION['login_time']}</i>
     </div>
 <div class="tip" id="tip">
-        <div class="tiptop"><span>提示信息</span><a  onclick="cancel()" ></a></div>
-        
-      <div class="tipinfo">
-        <span><img src="__PUBLIC__/admin/images/ticon.png"/></span>
-        <div class="tipright">
-        <p>是否确认对信息的修改 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-        </div>
-        </div>
-        
-        <div class="tipbtn">
+        <div class="tiptop"><span>修改密码</span><a  onclick="cancel()" ></a></div>
+        <input type="hidden" id="account_id" value="{$_SESSION['admin_id']}"/>
+    <div class="tipinfo">
+        <ul class="forminfo">
+            <li><label>原密码：</label><input class="scinput" id="re_password" type="password" name="re_password" /></li>
+            <li><label>新密码：</label><input class="scinput" id="new_password" type="password" name="new_password" /></li>
+            <li><label>密码确认：</label><input class="scinput" id="confirm_pass" type="password" name="confirm_pass" /></li>
+            <input name="" onclick="reset_password()" type="button"  class="sure" value="确定" />&nbsp;
+            <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
+        </ul>
+    </div>
+    <!-- <div class="tipbtn">
         <input name="" onclick="" type="button"  class="sure" value="确定" />&nbsp;
         <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
-        </div>
-    
+    </div> -->
     </div>
 </body>
 </html>
+<include file="Index:footer"/>
+<script type="text/javascript">
+    function reset_password(){
+        var re_password = $("#re_password").val();
+        var new_password = $("#new_password").val();
+        var confirm_pass = $("#confirm_pass").val();
+        var account_id = $("#account_id").val();
+        if(re_password ==""){
+            alert("请填写原密码!");
+            return false;
+        }
+        if(new_password ==""){
+            alert("请填写原密码!");
+            return false;
+        }
+        if(confirm_pass ==""){
+            alert("请填写原密码!");
+            return false;
+        }
+        if(new_password != confirm_pass){
+            alert("两次输入密码不一样!");
+        }
+        $.ajax({
+            cache:false,
+            type:"POST", 
+            url:"{:U('admin/account/account_setpass')}",
+            dataType:"json",
+            data:{id:account_id,password:re_password,confirm_pass:confirm_pass},
+            timeout:30000,
+            error:function(data){
+                alert("修改密码失败！")
+            },
+            success:function(data){
+                if(data == 1){
+                    alert("修改密码成功！");
+                     $("#tip").css('display','none');
+                }else if(data == 2){
+                    alert("原密码输入错误!");
+                }else{
+                     alert("新密码与旧密码一样！");
+                }
+            }
+
+        });
+    }
+
+
+
+</script>

@@ -212,5 +212,22 @@ class AccountController extends AdminController{
             $this->error('操作失败！',U("admin/account/account_list"));
         }
     }
-    
+    /**
+     * 修改密码
+     */
+    public function account_setpass(){
+        $data["id"] = $_POST['id'];
+        $data["password"] = md5($_POST['password']);
+
+        $account_model = M('account');
+        $account = $account_model->where($data)->find();
+        $res = "";
+        if($account){
+            $data["password"] = md5($_POST["confirm_pass"]);
+            $res = $account_model->save($data);
+        }else{
+           $res = 2; //原始密码错误!
+        }
+        $this->ajaxReturn($res,"JSON");
+    }
 }

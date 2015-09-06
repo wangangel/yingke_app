@@ -11,7 +11,7 @@
     <div class="rightinfo">
     
     <div class="tools">
-       <form  id="myForm" action={:U("admin/log/log_select_del")}>
+       <form  id="myForm" action={:U("admin/log/log_select_del")} method="post">
       <in name="log_select_del" value="$hava_authids">
       <ul class="toolbar">
         <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <input type="button" id="delete" value="批量删除" onclick="del()"></li>
