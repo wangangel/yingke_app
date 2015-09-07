@@ -188,7 +188,7 @@ class UserController extends MobileController{
         }else{
             //验证成功
              output_data(array(
-                'id' => $result
+                'ID' => $result
                 
                 
                 ));
@@ -216,7 +216,7 @@ class UserController extends MobileController{
                 $token = $this->_get_token($user_info1[0]['id'], $user_info1[0]['phone_num'], $_REQUEST['client_id']);
                 if($token){
                     $data = array();
-                    $data['id'] = $user_info1[0]['id'];
+                    $data['ID'] = $user_info1[0]['id'];
                     $data['userid'] = $user_info1[0]['user_id'];
                     $data['phone'] = $user_info1[0]['phone_num'];
                     $data['nickname'] = $user_info1[0]['ni_name'];
@@ -435,7 +435,7 @@ class UserController extends MobileController{
             $arr['userid'] = $_REQUEST['userid'];
             $res = $userbind_model->add($arr);
             if($res){
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('绑定失败');
             }
@@ -447,7 +447,7 @@ class UserController extends MobileController{
             $arr['renren'] = $_REQUEST['renren'];
             $result = $userbind_model->where($opt)->save($arr);
             if($result){
-                 output_data(array('id'=>$result));
+                 output_data(array('ID'=>$result));
             }else{
                 output_error('绑定失败');
             }
@@ -488,7 +488,7 @@ class UserController extends MobileController{
             $user_model = M('user');
             $tiaojian['id'] = $v['focus_user'];
             $foucs_userinfo = $user_model->where($tiaojian)->find();
-            $data['focus_userinfo'][$k]['id'] = $foucs_userinfo['id'];
+            $data['focus_userinfo'][$k]['userid'] = $foucs_userinfo['id'];
             $data['focus_userinfo'][$k]['ni_name'] = $foucs_userinfo['ni_name'];
             $data['focus_userinfo'][$k]['head_url'] = $foucs_userinfo['head_url'];
             $data['focus_userinfo'][$k]['sex'] = $foucs_userinfo['sex'];
@@ -530,7 +530,7 @@ class UserController extends MobileController{
             $user_model = M('user');
             $tiaojian['id'] = $v['user_id'];
             $fans_userinfo = $user_model->where($tiaojian)->find();
-            $data['fans_userinfo'][$k]['id'] = $fans_userinfo['id'];
+            $data['fans_userinfo'][$k]['userid'] = $fans_userinfo['id'];
             $data['fans_userinfo'][$k]['ni_name'] = $fans_userinfo['ni_name'];
             $data['fans_userinfo'][$k]['head_url'] = $fans_userinfo['head_url'];
             $data['fans_userinfo'][$k]['sex'] = $fans_userinfo['sex'];
@@ -836,7 +836,7 @@ class UserController extends MobileController{
             $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($opt);
             if($res){
                 //绑定成功
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('银行卡绑定失败');
             }
@@ -885,7 +885,7 @@ class UserController extends MobileController{
             $withdrawals_model = M('withdrawals');
             $res = $withdrawals_model->add($opt);
             if($res){
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('提现申请失败');
             }
@@ -920,7 +920,7 @@ class UserController extends MobileController{
         $withdrawals_model = M('withdrawals');
         $tixian_info = $withdrawals_model->where(array('apply_phone'=>$user_phone))->select();
         foreach ($tixian_info as $k => $v) {
-            $data['tixian'][$k]['id'] = $v['id'];
+            $data['tixian'][$k]['ID'] = $v['id'];
             $data['tixian'][$k]['apply_date'] = $v['apply_date'];
             $data['tixian'][$k]['wd_money'] = $v['wd_money'];
             if($v['status'] == "start"){
@@ -965,7 +965,7 @@ class UserController extends MobileController{
             $data['user_gift'] = NULL;
         }else{
             foreach ($gift_info as $k => $v) {
-                $data['user_gift'][$k]['id'] = $v['id'];
+                $data['user_gift'][$k]['gift_id'] = $v['id'];
                 $data['user_gift'][$k]['gift_name'] = $v['gift_name'];
                 $data['user_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
                 $data['user_gift'][$k]['gift_price'] = $v['gift_price'];
@@ -979,7 +979,7 @@ class UserController extends MobileController{
             $data['system_gift'] = NULL;
         }else{
             foreach ($sysgift_info as $k => $v) {
-                $data['system_gift'][$k]['id'] = $v['id'];
+                $data['system_gift'][$k]['gift_id'] = $v['id'];
                 $data['system_gift'][$k]['gift_name'] = $v['gift_name'];
                 $data['system_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
                 $data['system_gift'][$k]['gift_price'] = $v['gift_price'];
@@ -1027,7 +1027,7 @@ class UserController extends MobileController{
         $gift_model = M('gift');
         $res = $gift_model->add($condition);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_error('礼物添加失败');
         }
@@ -1103,7 +1103,7 @@ class UserController extends MobileController{
         $opt['lable'] = $lable;
         $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($opt);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_error('添加标签失败');
         }
@@ -1143,7 +1143,7 @@ class UserController extends MobileController{
         $feedback_model = M('feedback');
         $res = $feedback_model->add($opt);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_error('反馈消息失败');
         }
@@ -1309,7 +1309,7 @@ class UserController extends MobileController{
             output_data($data);
         }else{
             foreach ($liveroom_info as $k => $v) {
-                $data['liveroom_info'][$k]['id'] = $v['id'];
+                $data['liveroom_info'][$k]['room_id'] = $v['id'];
                 $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
                 $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
                 $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
@@ -1388,7 +1388,7 @@ class UserController extends MobileController{
         $live_model = M('live');
         $live_info = $live_model->where($cond)->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
-                $data['pastroom_info'][$k]['id'] = $v['id'];
+                $data['pastroom_info'][$k]['room_id'] = $v['id'];
                 $data['pastroom_info'][$k]['room_name'] = $v['room_name'];
                 $data['pastroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
                 $data['pastroom_info'][$k]['isopen'] = $v['isopen'];
@@ -1479,7 +1479,7 @@ class UserController extends MobileController{
         $opt['tags'] = $tag;
         $res = $live_model->add($opt);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_data('创建直播间失败');
         }
@@ -1518,7 +1518,7 @@ class UserController extends MobileController{
             $cond['add_date'] = time();
             $res = $tags_model->add($cond);
             if($res){
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('添加标签失败');
             }
@@ -1526,7 +1526,7 @@ class UserController extends MobileController{
             //数据库中已经存在,则该标签的添加次数加一
             $res = $tags_model->where($opt)->setInc('add_num',1);
             if($res){
-                $data['id'] = $tags_info['id'];
+                $data['ID'] = $tags_info['id'];
                 output_data($data);
             }else{
                 output_error('添加标签失败');
@@ -1556,7 +1556,7 @@ class UserController extends MobileController{
         $tags_model = M('tags');
         $tag_info = $tags_model->where()->order('add_num desc')->limit(5)->select();
         foreach ($tag_info as $k => $v) {
-            $data['tags_info'][$k]['id'] = $v['id'];
+            $data['tags_info'][$k]['tag_id'] = $v['id'];
             $data['tags_info'][$k]['tag_name'] = $v['tag'];
         }
         output_data($data);
@@ -1585,7 +1585,7 @@ class UserController extends MobileController{
         $tags_model = M('tags');
         $tag_info = $tags_model->where()->order('add_num desc')->limit(5)->select();
         foreach ($tag_info as $k => $v) {
-            $data['tags_info'][$k]['id'] = $v['id'];
+            $data['tags_info'][$k]['tag_id'] = $v['id'];
             $data['tags_info'][$k]['tag_name'] = $v['tag'];
         }
         //根据排行第一的标签,取出使用该标签的直播间展示
@@ -1599,7 +1599,7 @@ class UserController extends MobileController{
         $live_model = M('live');
         $live_info = $live_model->where($opt)->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
-             $data['liveroom_info'][$k]['id'] = $v['id'];
+             $data['liveroom_info'][$k]['room_id'] = $v['id'];
                 $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
                 $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
                 $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
@@ -1680,7 +1680,7 @@ class UserController extends MobileController{
         $live_model = M('live');
         $live_info = $live_model->where($opt)->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
-             $data['liveroom_info'][$k]['id'] = $v['id'];
+             $data['liveroom_info'][$k]['room_id'] = $v['id'];
                 $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
                 $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
                 $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
@@ -1781,7 +1781,7 @@ class UserController extends MobileController{
                 //2.对应卖家的收入增加
                 $saler_income = $opt['trade_total'] * 0.7;
                 $res = $user_model->where(array('id'=>$_REQUEST['roomuserid']))->setInc('income',$saler_income);
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('交易编号生成失败');
             }
@@ -1842,7 +1842,7 @@ class UserController extends MobileController{
                 //2.对应卖家的收入增加
                 $saler_income = $opt['trade_total'] * 0.7;
                 $res = $user_model->where(array('id'=>$_REQUEST['roomuserid']))->setInc('income',$saler_income);
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error('交易编号生成失败');
             }
@@ -1886,7 +1886,7 @@ class UserController extends MobileController{
             $opt['dateline'] = time();
             $res = $dianzan_model->add($opt);
             if($res){
-                output_data(array('id'=>$res));
+                output_data(array('ID'=>$res));
             }else{
                 output_error("点赞失败");
             }
@@ -1936,7 +1936,7 @@ class UserController extends MobileController{
         $report_model = M('report');
         $res = $report_model->add($con);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_error('举报失败');
         }
@@ -1978,7 +1978,7 @@ class UserController extends MobileController{
         $feedback_model = M('feedback');
         $res = $feedback_model->add($opt);
         if($res){
-            output_data(array('id'=>$res));
+            output_data(array('ID'=>$res));
         }else{
             output_error('反馈消息失败');
         }
