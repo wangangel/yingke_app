@@ -17,7 +17,6 @@ class IndexController extends  AdminController{
         $role = M('role')->where($roledata)->select();
         $auth_ids = $role[0]['role_auth_ids'];
         //③ 获得对应的权限信息
-        
         if($_SESSION['admin_name']=='admin'){
             //超级管理员admin获得全部的权限
             $auth_infoA = M('auth')->where("auth_level=0 and is_menu = 1")->order('auth_order asc')->select(); //顶级

@@ -32,13 +32,13 @@ function cancel(){
     
     <div class="welinfo">
     <span><img src="__PUBLIC__/admin/images/sun.png" alt="天气" /></span>
-    <b>{$_SESSION['admin_name']}您好，欢迎使用安居易信息管理系统</b>
+    <b>{$_SESSION['admin_name']}您好，欢迎使用SkyEyes直播管理系统</b>
     </div>
     
-    <div class="welinfo">
+    <!-- <div class="welinfo">
     <span><img src="__PUBLIC__/admin/images/time.png" alt="时间" /></span>
     <i>您上次登录的时间：{$_SESSION['login_time']}</i>
-    </div>
+    </div> -->
 <div class="tip" id="tip">
         <div class="tiptop"><span>修改密码</span><a  onclick="cancel()" ></a></div>
         <input type="hidden" id="account_id" value="{$_SESSION['admin_id']}"/>
