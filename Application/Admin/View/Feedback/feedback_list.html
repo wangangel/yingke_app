@@ -2,13 +2,25 @@
 
 
 </script>
-<!--[if lte IE 9]>
-<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
-<![endif]-->
+
 <include file="Index:css"/>
   <body>
-
+<script type="text/javascript">
+ $(function(){
+        $("#txtBeginDate").calendar({
+            controlId: "divDate", 
+            speed: 200, 
+            readonly: true, 
+            upperLimit: new Date(),                            
+            lowerLimit: new Date("2011/01/01"),                   
+            callback: function () {                               
+                alert("您选择的日期是：" + $("#txtBeginDate").val());
+            }
+        });
+        $("#txtEndDate").calendar();
+    });
+</script>
+</script>
   <div class="place">
     <span>位置：</span>
     <ul class="placeul">
@@ -120,5 +132,4 @@
         window.location.href=url;
       }
     }
-
 </script>

@@ -60,7 +60,7 @@ h2{font-weight:normal;}
 .yzm cite{float:right; width:114px; height:46px; line-height:46px; font-size:18px; color:#fff; text-align:center;}
 
 .loginbody1{background:url(../images/loginbg4.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
-.systemlogo{width:100%; height:71px; margin-top:120px; text-align:center;}
+.systemlogo{width:100%; height:71px; margin-top:70px; text-align:center;}
 .loginbox0{width:810px;margin-top:0px;height:252px;}
 .loginlist{width:810px; overflow:hidden;}
 .loginlist{margin-top:110px;}
@@ -217,7 +217,7 @@ h2{font-weight:normal;}
 .formtitle,.formtitle1{border-bottom:solid 1px #d0dee5; line-height:35px; position:relative; height:35px; margin-bottom:28px;}
 .formtitle1{margin-bottom:15px;}
 .formtitle span,.formtitle1 span{font-weight:bold;font-size:14px; border-bottom:solid 3px #66c9f3;float:left; position:absolute; z-index:100; bottom:-1px; padding:0 3px; height:30px; line-height:30px;}
-.forminfo{padding-left:23px;}
+.forminfo{padding-left:43px;}
 .forminfo li{margin-bottom:13px; clear:both;}
 .forminfo li label{width:86px;line-height:34px; display:block; float:left;}
 .forminfo li i{color:#7f7f7f; padding-left:20px; font-style:normal;}
@@ -238,7 +238,7 @@ h2{font-weight:normal;}
 .tipright{float:left;padding-top:15px; padding-left:10px;}
 .tipright p{font-size:14px; font-weight:bold; line-height:35px;}
 .tipright cite{color:#858686;}
-.tipbtn{margin-top:25px; margin-left:125px;}
+.tipbtn{margin-top:45px; margin-left:125px;}
 .sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(../images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
 .cancel{background:url(../images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
 
@@ -366,7 +366,7 @@ h2{font-weight:normal;}
 
 
 /*seachform1*/
-.seachform1,.seachform2{height:42px; width:720px;}
+.seachform1,.seachform2{float:right;}
 .seachform2{height:auto; overflow:hidden;display:none;}
 .seachform1 li,.seachform2 li{float:left; margin-right:15px;}
 .seachform2 li{margin-bottom:8px;}
