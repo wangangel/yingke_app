@@ -130,5 +130,34 @@ class AdminController extends Controller{
         }
 
     }
+
+
+
+    /*
+     * 条件查询
+     */
+    public function tiaojian_search($opt){
+        //$opt为一个条件数组,数组的键为条件,数组的值为条件的值
+        // foreach ($opt as $k => $v) {
+        //     if($k == "c"){
+        //         //则说明$v的值是控制器名或数据表名
+        //         $Controller = $v;
+        //         $model = M($Controller);
+        //     }
+        //     if($k == "phone"){
+
+        //     }
+
+
+        // }
+        
+
+
+    }
+
+
+
+
+
   
 }
