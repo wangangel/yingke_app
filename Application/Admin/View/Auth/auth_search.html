@@ -20,11 +20,12 @@
         
       <in name="auth_search" value="$hava_authids">
         <form role="form" id="searchForm" action={:U("admin/auth/auth_search")} method="post" >  
-        <ul class="toolbar1">
+        <ul class="seachform1">
           <li>
-          <input type="text" name="auth_name" placeholder="请输入权限全称！"/>
+          <input type="text" class="scinput1" name="auth_name" placeholder="请输入权限全称！"/>
+          
           <!-- <li><span><img src="__PUBLIC__/admin/images/t05.png" /></span>搜索</li> -->
-           <input type="submit" class="am-btn am-btn-default" value="筛选"/>
+           <input type="submit" class="scbtn" value="筛选"/>
           </li>
         </ul>
       </form>

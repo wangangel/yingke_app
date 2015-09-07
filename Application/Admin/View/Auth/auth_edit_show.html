@@ -1,56 +1,41 @@
-
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
 <include file="Index:css"/>
-  <!-- sidebar end -->
+</head>
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">权限资料</strong> / <small>Auth information</small></div>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>权限编辑</li>
+
+    </ul>
     </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-       
-
-      </div>
-
-       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/auth/auth_update')} method='post'>
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">权限名称 / authname</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="auth-name" placeholder="权限名称 / AuthName" name='auth_name' 
-              value="{$authinfo.auth_name}">
-              
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">是否为菜单 / Is_menu</label>
-            <div class="am-u-sm-9">
-              <select  name="is_menu" >
-                <if condition="$authinfo.is_menu eq 0">
+       <form id="myForm" action={:U('admin/auth/auth_update')} method='post'>
+    <div class="formbody">
+    <ul class="forminfo">
+  
+    <li><label>权限名称 </label> <input type="text" class='dfinput' id="auth-name" placeholder="权限名称" name='auth_name'  value="{$authinfo.auth_name}"></li>
+    <li><label>是否为菜单</label>
+     <div class="vocation">    
+    <select  name="is_menu" class="select3" >
+                 <if condition="$authinfo.is_menu eq 0">
                     <option value="0" selected="selected">否</option>
                     <option value="1">是</option>
                     <else/>
                     <option value="0" >否</option>
                     <option value="1" selected="selected">是</option>
                 </if>
-                
               </select>
-              
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">父级菜单 / auth_pid</label>
-            <div class="am-u-sm-9">
-              <select  name="auth_pid" >
-                <if condition="$authinfo.auth_pid eq 0">
+              </div></li>
+  <li><label>父级菜单</label>
+   <div class="vocation">   
+<select  name="auth_pid"  class="select3">
+                 <if condition="$authinfo.auth_pid eq 0">
                     <option value="0" selected="selected">无父级菜单</option>
                     <foreach name="info" item="vo" key="k" >  
                         <option value="{$vo.auth_id}" >{$vo.auth_name}</option>
@@ -66,31 +51,15 @@
                         
                       </foreach>
                 </if>
-
               </select>
-            </div>
-          </div>
-		  
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">模块 / model</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="auth-c" placeholder="输入模块 / Model" name='auth_c' 
-              value="{$authinfo.auth_c}" onblur="trimcheck(this);">
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">方法 / action</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="auth_a" placeholder="输入方法 / Action" name='auth_a' 
-              value="{$authinfo.auth_a}" onblur="trimcheck(this);" >
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">排序 / Order</label>
-            <div class="am-u-sm-9">
-              <select  name="auth_order" >
-                <if condition="$authinfo.auth_order eq 1">
+              </div>
+  </li> 
+  <li><label>模块</label> <input type="text" class="dfinput" id="auth-c" placeholder="输入模块名称" name='auth_c' onblur="trimcheck(this);" value="{$authinfo.auth_c}" ></li> 
+  <li><label>方法名称</label> <input type="text" id="auth_a" placeholder="输入方法名称" name='auth_a' value="{$authinfo.auth_a}" class="dfinput" onblur="trimcheck(this);" ></li> 
+  <li><label>排序</label> 
+  <div class="vocation">
+              <select  name="auth_order" class="select3" >
+               <if condition="$authinfo.auth_order eq 1">
                   <option value="1"selected="true">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -117,23 +86,18 @@
                   <option value="4">4</option>
                 </if>
               </select>
-            </div>
-          </div>
-          <input type="hidden" name="auth_id" value="{$authinfo.auth_id}"/>
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="button" onclick="check()" class="am-btn am-btn-primary">保存</button>
-            </div>
-          </div>
-        </form>
-      </div>
+            </div></li> 
+
+<input type="hidden" name="auth_id" value="{$authinfo.auth_id}"/>
+
+    <li><label>&nbsp;</label>
+        <button type="button" onclick="check()" class="btn">保存</button>
+    </li>
+    </ul>
+    
+    
     </div>
-  </div>
-  <!-- content end -->
-
-</div>
-
-<include file="Index:footer"/>
+</form>
 <script data-cfasync="false" type="text/javascript">
   function check(){
     var authname = $("#auth-name").val();
@@ -145,7 +109,7 @@
     }
    
   }
-   /**
+  /**
    * 去除左右两端空格
    */
   function trimcheck(obj){
@@ -158,4 +122,14 @@
 　　  return str.replace(/(^\s*)|(\s*$)/g, "");
 　　}
 
+
+$(document).ready(function(e) {
+
+  $(".select3").uedSelect({
+    width : 152
+  });
+});
 </script>
+</body>
+
+</html>
