@@ -22,6 +22,7 @@ class LoginController extends AdminController{
                 if($user_info){
                     $_SESSION['admin_name'] = $user_info['account'];
                     $_SESSION['admin_id'] = $user_info['id'];
+                    $_SESSION['employee'] = $user_info['employee'];
                     //增添的角色
                     $_SESSION['role_id'] = $user_info['role'];
                     //$_SESSION['login_time'] = date("Y-m-d H:i:s", time()) ; 

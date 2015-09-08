@@ -1,0 +1,136 @@
+<include file="Index:css"/>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">用户列表</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+      <in name="del_all" value="$hava_authids"> 
+        <ul class="toolbar">
+          <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
+        </ul>
+      </in>
+    </div>
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+       <th><input type="checkbox" name="all" id="all" onclick="checkall(this)"/></th>
+                <th>序号</th>
+                <th>手机号</th>
+                <th>ID</th>
+                <th>类型</th>
+                <th>昵称</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>出生日期</th>
+                <th>标签</th>
+                <th>职业</th>
+                <th>经验值</th>
+                <th>个性签名</th>
+                <th>注册时间</th>
+                <th>状态</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="user_list" item="vo" key="k" >
+            <tr>
+              <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
+              <td>{$k+1}</td>
+              <td>{$vo.phone_num}</td>
+              <td>{$vo.user_id}</td>
+              <td>{$vo.reg_type}</td>
+              <td>{$vo.ni_name}</td>
+              <td>{$vo.user_name}</td>
+              <td>{$vo.sex}</td>
+              <td>{$vo.birth_date|date='Y-m-d',###}</td>
+              <td>{$vo.lable}</td>
+              <td>{$vo.profession}</td>
+              <td>{$vo.experience}</td>
+              <td>{$vo.per_sign}</td>
+              <td>{$vo.reg_date|date='Y-m-d',###}</td>
+              <td><if condition="$vo.status eq 'start'">启用<else/>停用</td>
+              <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
+                  <in name="comment_del" value="$hava_authids"> 
+                    <a href="{:U('admin/comment/comment_del',array('id'=>$vo['id']))}">查看</a>|&nbsp;
+                   </in>
+                    <in name="comment_set" value="$hava_authids"> 
+                      <if condition="$vo.status eq 'start'">
+                        <a href="#" onclick="set({$vo['id']},'0')"> 停用</a>
+                        <else/>
+                        <a href="#" onclick="set({$vo['id']},'1')"> 启用</a>
+                      </if>
+                    </in>
+              </td>
+            </tr>
+            </foreach>
+        </tbody>
+    </table>
+
+     {$page}
+
+
+    </div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
+<include file="Index:footer"/>
+<script type="text/javascript">
+  /*
+     *全选按钮，prop方法，是给ipnut框添加属性的
+    */
+    function checkall(obj){
+      if(obj.checked){
+        $("input[name='ids']").prop("checked", true);
+      }else{
+        $("input[name='ids']").prop("checked", false);
+      }
+    }
+
+    function getAll(){
+      if($("input[name='ids']:checked").val() == null){
+        alert("请选择要删除的列表！");
+        return false;
+      }else{
+        var checked = [];
+        $('input[name="ids"]:checked').each(function(){
+              checked.push($(this).val());
+          });
+        var checkStr = checked.join(",");
+        var url = "{:U('admin/comment/del_all')}?ids="+checkStr;
+        window.location.href=url;
+      }
+    }
+    //显示操作
+    function set(id_index,tag){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/comment/comment_set')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                error:function(data){
+                    alert("设置失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("设置成功！");
+                        window.location.reload();
+                    }else{
+                        alert("设置失败!");
+                    }
+                }
+            });
+    }
+</script>

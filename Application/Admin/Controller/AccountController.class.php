@@ -123,70 +123,140 @@ class AccountController extends AdminController{
         }
     }
     /*
-     * 普通用户展示
+     * 当前推荐_搜索当天推荐的信息 以及历史推荐
      */
-    public function member_list(){
-        $model_member = M('user');
+    public function newrecomment_list(){
+        $model_reco = M('recommend');
         $arr = array();
-        $arr['attribute'] = 2;
-        $arr['isdelete'] = 0;
-        $member_count = $model_member->where($arr)->count();
+        if($_GET["flag"] == '1'){
+           //这个是历史推荐
+           $result = 1;
+        }else{
+            //获取当前时间 
+           $arr['re_date'] = date("Y-m-d",time()); 
+           $result = 0;
+        }
+        $arr['status'] = 'yes';
+        $reco_count = $model_reco->where($arr)->count();
         import('Think.Page');
-        $page_class = new Page($member_count,10);
-        $page_class->setConfig('prev', '«');
-        $page_class->setConfig('next', '»');
-        $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
-        
+        $page_class = new Page($reco_count,15);
+        $page_class->setConfig('prev', '<<');
+        $page_class->setConfig('next', '>>');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
         $page = $page_class->show();
-        $member_list = $model_member->where($arr)->limit($page_class->firstRow.','.$page_class->listRows)->select();
-        
-        //为权限加上
-        $actionName1["auth_a"]="member_del";
-        $member_del = $this->checkAuth($actionName1);
-        $actionName2["auth_a"]="member_edit_show";
-        $member_edit_show = $this->checkAuth($actionName2);
-
-        $this->assign('member_del',$member_del);
-        $this->assign('member_edit_show',$member_edit_show);
+        $reco_list = $model_reco->where($arr)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+        $user_list =  array();
+        $friends_list = array();
+        $model_user = M("user");
+        $model_friends_focus = M("friends_focus");
+        for ($i=0; $i < count($reco_list); $i++) { 
+            $data["id"] = $reco_list[$i]['user_id'];
+            $user_list[$i] = $model_user->where($data)->find();
+            $friends["user_id"] = $reco_list[$i]['user_id'];
+            $friends_list[$i] = $model_friends_focus->where($friends)->count();
+        }
+        //给权限加上
+        $actionName1["auth_a"]="cancel_recomment";
+        $cancel_recomment = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="newrecomment_list";
+        $newrecomment_list = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="add_recomment";
+        $add_recomment = $this->checkAuth($actionName3);
+        $actionName4["auth_a"]="past_search";
+        $past_search = $this->checkAuth($actionName4);
+        $this->assign('past_search',$past_search);
+        $this->assign('add_recomment',$add_recomment);
+        $this->assign('newrecomment_list',$newrecomment_list);
+        $this->assign('cancel_recomment',$cancel_recomment);
+        $this->assign('user_list',$user_list);
+        $this->assign('friends_list',$friends_list);
         $this->assign('page',$page);
-        $this->assign('member_list',$member_list);
+        $this->assign('reco_list',$reco_list);
+        $this->assign('result',$result);
         $this->display();
     }
     /*
-     * 普通用户删除 isdelete=1
+     * 取消推荐
      */
-    public function member_del(){
-        $model_member = M('user');
-        $result = $model_member->where(array('id'=>$_GET['id']))->save(array("isdelete"=>"1"));
-        if($result){
-            $this->success('操作成功！',U("admin/member/member_list"));
-        }else{
-            $this->error('操作失败',U("admin/member/member_list"));
-        }
+    public function cancel_recomment(){
+        $model_reco = M('recommend');
+        $result = $model_reco->where(array('id'=>$_POST['id']))->save(array("status"=>"no"));
+        $this->ajaxReturn($result,"JSON");
     }
     /*
-     * 普通用户修该展示
+     * 添加推荐
      */
-    public function member_edit_show(){
-        $array = array();
-        $array['id'] = $_GET['id'];
-        $model_member = M('user');
-        $member_info = $model_member->where(array('id'=>$_GET['id']))->find();
-        $this->assign('member_info',$member_info);
-        $this->display();
+    public function add_recomment(){
+        $arr = array();
+        $data["phone_num"] = $_POST["phone"];
+        $model_user = M("user");
+        $user = $model_user->where($data)->find();
+        $arr['re_date'] = date("Y-m-d",time());
+        $model_reco = M('recommend');
+        $member_recoinfo = $model_reco->where($arr)->find();
+        $arr["user_id"] = $user["id"];
+        $recoinfo = $model_reco->where($arr)->find();
+        if($member_recoinfo == null){
+            $reco_user = $model_reco->order('id desc')->select();   
+            $arr["re_batch"] = $reco_user[0]["re_batch"] + 1;
+            $arr["op_user"] = $_SESSION['employee'];
+            $arr["status"] = "yes";
+            $result = $model_reco->add($arr);
+        }else{
+            if($recoinfo == null){
+                $arr["re_batch"] = $member_recoinfo["re_batch"];
+                $arr["op_user"] = $_SESSION['employee'];
+                $arr["status"] = "yes";
+                $result = $model_reco->add($arr);
+            }else{
+                $result = 0;
+            }
+        }
+        $this->ajaxReturn($result,"JSON");
     }
     /*
-     * 用户修改
+     * 历史推荐——搜索
      */
-    public function member_edit(){
-        $model_member = M('user');
-        $_POST['password'] = md5($_POST['password']);
-        $result = $model_member->save($_POST);
-        if($result){
-            $this->success('修改成功',U("admin/member/member_list"));
-        }else{
-            $this->error('修改失败','admin/member/member_edit_show&id=' . $_POST['id']);
-        }
+    public function past_search(){
+        $model_recommend = M('recommend');
+        $data["phone_num"] = $_POST["phone_num"];
+        $model_user = M("user");
+        $user = $model_user->where($data)->select();
+        $arr["user_id"] = $user[0]["id"];
+        $arr["status"] = "yes";
+        $reco_count = $model_recommend->where($arr)->count();
+        import('Think.Page');
+        $page_class = new Page($reco_count,15);
+        $page_class->setConfig('prev', '<<');
+        $page_class->setConfig('next', '>>');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
+        $page = $page_class->show();
+        $reco_list = $model_recommend->where($arr)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+        $model_friends_focus = M("friends_focus");
+        $friends["user_id"] = $user[0]["id"];;
+        $friends_list = $model_friends_focus->where($friends)->count();
+
+         //给权限加上
+        $actionName1["auth_a"]="cancel_recomment";
+        $cancel_recomment = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="newrecomment_list";
+        $newrecomment_list = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="add_recomment";
+        $add_recomment = $this->checkAuth($actionName3);
+        $actionName4["auth_a"]="past_search";
+        $past_search = $this->checkAuth($actionName4);
+        $this->assign('past_search',$past_search);
+        $this->assign('add_recomment',$add_recomment);
+        $this->assign('newrecomment_list',$newrecomment_list);
+        $this->assign('cancel_recomment',$cancel_recomment);
+        $this->assign('user_list',$user);
+        $this->assign('friends_list',$friends_list);
+        $this->assign('reco_list',$reco_list);
+        $result = 1;
+        $this->assign('result',$result);
+        $flag="2";//是搜索
+        $this->assign('flag',$flag);
+        $this->display("Account/newrecomment_list");
     }
     /**
      * 授予角色前

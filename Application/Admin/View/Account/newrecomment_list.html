@@ -1,0 +1,169 @@
+<include file="Index:css"/>
+<body>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">推荐好友</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+      <in name="newrecomment_list" value="$hava_authids"> 
+      <ul class="toolbar">
+        <li ><span><img src="__PUBLIC__/admin/images/t04.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'0'))}" >当前推荐</a></li>
+      </ul>
+      
+      <ul class="toolbar">
+        <li ><span><img src="__PUBLIC__/admin/images/t04.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'1'))}">历史推荐</a></li>
+      </ul>
+      <in>
+      <if condition="$result eq '0'">
+        <ul class="toolbar1" >
+            <li>
+            <in name="add_recomment" value="$hava_authids">
+              <input type="text" id="phone" name="phone" class="scinput" placeholder="请输入手机号！" 
+              onkeyup="this.value=this.value.replace(/[, ]/g,'')" onblur="VeriftyPhone('phone');"/>
+               <input type="button" onclick="add_recomment()" value="添加推荐"/>
+            </in>
+            </li>
+        </ul>
+    </if>
+    <if condition="$result eq '1'">
+      <ul class="toolbar1" >
+          <li>
+            <in name="past_search" value="$hava_authids">
+            <form  id="searchForm" action={:U("admin/account/past_search")} method="post" >
+            <input type="text" id="phone_num" name="phone_num" class="scinput" placeholder="请输入手机号！" 
+            onkeyup="this.value=this.value.replace(/[, ]/g,'')" onblur="VeriftyPhone('phone_num');"/>
+             <input type="submit"  value="搜索"/>
+           </form>
+          </in>
+          </li>
+      </ul>
+    </if>
+    </div>
+    
+    <table class="tablelist" id="table">
+      <thead>
+      <tr>
+                <th>序号</th>
+                <th>手机号</th>
+                <th>姓名</th>
+                <th>已关注人数</th>
+                <th>推荐时间</th>
+                <th>操作人</th>
+                <th>操作</th>
+                
+        </tr>
+        </thead>
+        <tbody>
+          <if condition="$flag eq '2'">
+          <foreach name="reco_list" item="vo" key="k" >
+            <tr>
+              <td>{$k+1}</td>
+              <td>{$user_list[0].phone_num}</td>
+              <td>{$user_list[0].user_name}</td>
+              <td>{$friends_list[0]}</td>
+              <td>{$vo.re_date}</td>
+              <td>{$vo.op_user}</td>
+              <td>
+                  <in name="cancel_recomment" value="$hava_authids"> 
+                        <a href="#" onclick="set({$vo['id']})"> 取消推荐</a>
+                    </in>
+              </td>
+            </tr>
+            </foreach>
+            <else/>
+            <foreach name="reco_list" item="vo" key="k" >
+            <tr>
+              <td>{$k+1}</td>
+              <td>{$user_list[$k].phone_num}</td>
+              <td>{$user_list[$k].user_name}</td>
+              <td>{$friends_list[$k]}</td>
+              <td>{$vo.re_date}</td>
+              <td>{$vo.op_user}</td>
+              <td>
+                  <in name="cancel_recomment" value="$hava_authids"> 
+                        <a href="#" onclick="set({$vo['id']})"> 取消推荐</a>
+                    </in>
+              </td>
+            </tr>
+            </foreach>
+          </if>
+        </tbody>
+    </table>
+
+     {$page}
+  </div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
+<include file="Index:footer"/>
+<script type="text/javascript">
+  function set(id_index){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/account/cancel_recomment')}",
+                dataType:"json",
+                data:{id:id_index},
+                timeout:30000,
+                error:function(data){
+                    alert("取消失败!")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("取消成功！");
+                        window.location.reload();
+                    }else{
+                        alert("取消失败!");
+                    }
+                }
+            });
+    }
+    //验证号码
+    function VeriftyPhone(index){
+        var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/; //手机号码验证规则s
+        var phone = $("#"+index).val();   //获得用户填写的号码值 赋值给变量phone
+        if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
+            if("" == phone){
+                alert("手机号码不能为空,请正确填写电话号码!");
+                $('#phone').val("");
+              return false;
+            }else{
+              alert("请正确填写手机号码，例如:13415764179");
+              $('#phone').val("");
+              return false; 
+            }       
+        }
+} 
+  //添加推荐
+  function add_recomment(){
+    var number = $("#phone").val();
+    $.ajax({
+            cache:false,
+            type:"POST", 
+            url:"{:U('admin/account/add_recomment')}",
+            dataType:"json",
+            data:{phone:number},
+            timeout:30000,
+            error:function(data){
+                alert(data);
+            },
+            success:function(data){
+                if(data != 0){
+                    alert("推荐成功！");
+                    window.location.reload();
+                }else{
+                    alert("该用户今天已推荐!");
+                  }
+                }
+            });
+  }
+
+</script>
