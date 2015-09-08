@@ -145,8 +145,8 @@ datas :
 
 八.修改个人信息接口
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/editor_userinfo?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&ni_name=久居&sex=男&birth_date=十二月三十日&head_url=http://api.skyeyeslive.com
-/Upload/2015-08-27/55deb6edcb2e2.jpg&profession=程序猿&per_sign=我的世界里只有代码&lable=屌丝.程序猿&client_id=qwert
+/index.php/api/user/editor_userinfo?userid=6&key=265a410b0b950c14de9cfde7b5271f30&ni_name=久居&sex=男&birth_date=1992-12-30&head_url=http://api.skyeyeslive.com
+/Upload/2015-08-28/55deb6edcb2e2.jpg&profession=程序猿&per_sign=我的世界里只有代码&lable=屌丝,程序猿&client_id=qwert
   参数：
        必须参数：
        userid:
@@ -155,9 +155,10 @@ datas :
        可添加参数：
        nickname:
        sex:性别
-       birthday:生日
+       birthday:格式类似于1992-12-30
        head_url:http://api.skyeyeslive.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg
+        lable-------------------------------------------多个标签用逗号隔开
        ......
 
     返回值：

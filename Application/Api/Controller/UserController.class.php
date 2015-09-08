@@ -2844,7 +2844,7 @@ class UserController extends MobileController{
         }
         $arrOpt = array();
         $arrOpt['ni_name'] = $_REQUEST['ni_name'];
-        $arrOpt['birth_date'] = $_REQUEST['birth_date'];
+        $arrOpt['birth_date'] = strtotime($_REQUEST['birth_date']);
         $arrOpt['sex'] = $_REQUEST['sex'];
         $arrOpt['head_url'] = $_REQUEST['head_url'];
         $arrOpt['profession'] = $_REQUEST['profession'];

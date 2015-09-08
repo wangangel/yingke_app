@@ -282,7 +282,7 @@ class IndexController extends MobileController{
             //这里是设置文件的url注意使用.不是+  
             $imgurl1 = $info1['savepath'].$info1['savename'];
             $data = array();
-            $data['picurl'] = "http://localhost/chutao/Upload/" . $imgurl1;
+            $data['picurl'] = "http://api.skyeyeslive.com/Upload/" . $imgurl1;
             output_data($data);
             
         }else{
