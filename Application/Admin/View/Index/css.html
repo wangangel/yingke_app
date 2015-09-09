@@ -7,3 +7,22 @@
 <script type="text/javascript" src="__PUBLIC__/admin/editor/kindeditor.js"></script>
 <link href="__PUBLIC__/admin/css/lyz.calendar.css" rel="stylesheet" type="text/css" />
 <script src="__PUBLIC__/admin/js/lyz.calendar.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	  //验证号码
+    function VeriftyPhone(index){
+        var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/; //手机号码验证规则s
+        var phone = $("#"+index).val();   //获得用户填写的号码值 赋值给变量phone
+        if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
+            if("" == phone){
+                alert("手机号码不能为空,请正确填写电话号码!");
+                $('#phone').val("");
+              return false;
+            }else{
+              alert("请正确填写手机号码，例如:13415764179");
+              $('#phone').val("");
+              return false; 
+            }       
+        }
+} 
+
+</script>

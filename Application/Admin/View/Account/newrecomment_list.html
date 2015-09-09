@@ -24,7 +24,7 @@
             <li>
             <in name="add_recomment" value="$hava_authids">
               <input type="text" id="phone" name="phone" class="scinput" placeholder="请输入手机号！" 
-              onkeyup="this.value=this.value.replace(/[, ]/g,'')" onblur="VeriftyPhone('phone');"/>
+              onkeyup="value=value.replace(/[^\d]/g,'')" onblur="VeriftyPhone('phone');"/>
                <input type="button" onclick="add_recomment()" value="添加推荐"/>
             </in>
             </li>
@@ -126,22 +126,7 @@
                 }
             });
     }
-    //验证号码
-    function VeriftyPhone(index){
-        var isMobile=/^(?:13\d|17\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/; //手机号码验证规则s
-        var phone = $("#"+index).val();   //获得用户填写的号码值 赋值给变量phone
-        if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
-            if("" == phone){
-                alert("手机号码不能为空,请正确填写电话号码!");
-                $('#phone').val("");
-              return false;
-            }else{
-              alert("请正确填写手机号码，例如:13415764179");
-              $('#phone').val("");
-              return false; 
-            }       
-        }
-} 
+  
   //添加推荐
   function add_recomment(){
     var number = $("#phone").val();
