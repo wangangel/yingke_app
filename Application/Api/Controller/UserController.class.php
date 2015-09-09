@@ -1990,16 +1990,75 @@ class UserController extends MobileController{
 
 
 
+    /*
+     * 修改密码
+     *
+     */
+    public function edit_password(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['password'] == NULL){
+            output_error('密码不能为空');
+        }
+        $user_model = M('user');
+        $password = md5($_REQUEST['password']);
+        //先判断之前的密码和现在的密码是否相同
+        $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
+        if($user_info['password'] == $password){
+            //直接提示密码修改成功
+            output_data(array('userid'=>$_REQUEST['userid']));
+        }else{
+            $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save(array('password'=>$password));
+            if($res){
+                output_data(array('userid'=>$_REQUEST['userid']));
+            }else{
+                output_error('密码修改失败');
+            }
+        }
+        
+    }
 
 
 
 
 
 
-
-
-
-
+    /*
+     * 获取用户绑定的信息
+     */
+    public function band_info(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $userbind_model = M('userbind');
+        $userbind_info = $userbind_model->where(array('userid'=>$_REQUEST['userid']))->find();
+        $data['userbind_info']['qq'] = $userbind_info['qq'];
+        $data['userbind_info']['weixin'] = $userbind_info['weixin'];
+        $data['userbind_info']['weibo'] = $userbind_info['weibo'];
+        $data['userbind_info']['renren'] = $userbind_info['renren'];
+        output_data($data);
+    }
 
 
 
@@ -2734,7 +2793,7 @@ class UserController extends MobileController{
         foreach ($sys_message as $k => $v) {
             if($v['m_target'] == "all"){
                 //此条消息的接收者为全部用户
-                $data['system_message'][$k]['id'] = $v['id'];
+                $data['system_message'][$k]['ID'] = $v['id'];
                 $data['system_message'][$k]['m_content'] = $v['m_content'];
                 $data['system_message'][$k]['m_date'] = $v['m_date'];
                 $data['system_message'][$k]['m_user'] = $v['m_user'];
@@ -2742,7 +2801,7 @@ class UserController extends MobileController{
                 $receive_info = explode(',',$v['m_target']);
                 if(in_array($_REQUEST['userid'],$receive_info)){
                     //当前用户在接收者行列
-                    $data['system_message'][$k]['id'] = $v['id'];
+                    $data['system_message'][$k]['ID'] = $v['id'];
                     $data['system_message'][$k]['m_content'] = $v['m_content'];
                     $data['system_message'][$k]['m_date'] = $v['m_date'];
                     $data['system_message'][$k]['m_user'] = $v['m_user'];
@@ -2761,7 +2820,7 @@ class UserController extends MobileController{
         }else{
             
             foreach ($result as $k => $v) {
-                $data['remind_message'][$k]['id'] = $v['id'];
+                $data['remind_message'][$k]['ID'] = $v['id'];
                 $data['remind_message'][$k]['re_name'] = $v['re_name'];
                 $data['remind_message'][$k]['re_content'] = $v['re_content'];
                 $data['remind_message'][$k]['re_date'] = $v['re_date'];

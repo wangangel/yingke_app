@@ -839,6 +839,44 @@ datas :
 
 
 
+三十八.修改密码
+     请求地址：http://api.skyeyeslive.com
+/index.php/api/user/edit_password?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&password=123123
+
+    接口参数：：
+        userid
+        key
+        client
+        password->密码
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+            error:错误描述，执行成功没有该字段
+            datas: msg->"修改成功，请登录"
+
+
+
+
+三十九.获取用户的绑定信息
+  请求地址：http://api.skyeyeslive.com
+/index.php/api/user/band_info?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert
+
+    接口参数：：
+        userid
+        key
+        client
+
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+            error:错误描述，执行成功没有该字段
+            datas: msg->"修改成功，请登录"
+
+
+
+
+
 
 
 
