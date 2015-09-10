@@ -28,6 +28,9 @@ class FeedbackController extends AdminController{
         $feedback_del = $this->checkAuth($actionName1);
         $actionName2["auth_a"]="del_all";
         $del_all = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="search";
+        $search = $this->checkAuth($actionName3);
+        $this->assign('search',$search);
         $this->assign('feedback_del',$feedback_del);
         $this->assign('del_all',$del_all);
         $this->assign('page',$page);
@@ -48,5 +51,54 @@ class FeedbackController extends AdminController{
         }
 
     }
+    /**
+     * 组合条件筛选
+     */
+    public function search(){
+        $reg_date1 = strtotime($_POST["reg_date"]);
+        $reg_date2 = strtotime($_POST["reg_date2"]);
+        $phone_num = $_POST["f_phone"];
+        $f_content = $_POST["f_content"];
+        if($reg_date1 != "" && $reg_date2 !=""){
+            $map['f_date']  = array('between',array($reg_date1,$reg_date2));
+            $this->assign('reg_date',$_POST["reg_date"]);
+            $this->assign('reg_date2',$_POST["reg_date2"]);
+        }  
+        if($phone_num !=""){
+            $map["f_phone"] = $phone_num;
+            $this->assign('f_phone',$phone_num);
+        }
+        if($f_content != ""){
+            $map["f_content"] = array('like','%'.$f_content.'%');
+            $this->assign('f_content',$f_content);
+        }
+        $model_feedback = M("feedback");
+        //获取总数
+        $feedback_count = $model_feedback->where($map)->count();
+        //倒入分页类
+        import('Think.Page');
+        $page_class = new Page($feedback_count,15);
+        $page_class->setConfig('prev', '«');
+        $page_class->setConfig('next', '»');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
+        $page = $page_class->show();
+        //获取列表
+        $feedback_list = $model_feedback->where($map)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+         //为权限加上
+        $actionName1["auth_a"]="feedback_del";
+        $feedback_del = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="del_all";
+        $del_all = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="search";
+        $search = $this->checkAuth($actionName3);
+        $this->assign('search',$search);
+        $this->assign('feedback_del',$feedback_del);
+        $this->assign('del_all',$del_all);
+        $this->assign('page',$page);
+        $this->assign('feedback_list',$feedback_list);
+        $this->display("Feedback/feedback_list");
+    }
+
+
 
 }

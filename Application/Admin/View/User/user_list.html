@@ -37,22 +37,23 @@
         <li ><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/user/user_add_show")}>新增</a></li>
       </in>
       </ul>
-      <form id="mySearch" action="{:U('admin/user/search')}" method="post">
-        <ul class="toolbar">
-          <li><label>日期范围</label>
-          
-          起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
-          至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
-          </li>
-          <li>
-            <input type="text" class='scinput' id="phone_num" placeholder="手机号" value="{$phone_num}" onkeyup="value=value.replace(/[^\d]/g,'')"  name='phone_num' onblur="VeriftyPhone('phone_num');"/>
-          </li>
-          <li>
-            <input type="text" class='scinput' id="ni_name" placeholder="昵称" value="{$ni_name}" name='ni_name'>
-          </li>
-          <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
-        </ul>
-      </form>
+        <in name="search" value="$hava_authids">
+          <form id="mySearch" action="{:U('admin/user/search')}" method="post">
+            <ul class="toolbar">
+              <li><label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+              </li>
+              <li>
+                <input type="text" class='scinput' id="phone_num" placeholder="手机号" value="{$phone_num}" onkeyup="value=value.replace(/[^\d]/g,'')"  name='phone_num' onblur="VeriftyPhone('phone_num');"/>
+              </li>
+              <li>
+                <input type="text" class='scinput' id="ni_name" placeholder="昵称" value="{$ni_name}" name='ni_name'>
+              </li>
+              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
+            </ul>
+          </form>
+        </in>
     </div>
     
     <table class="tablelist">

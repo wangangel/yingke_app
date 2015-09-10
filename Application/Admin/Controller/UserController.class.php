@@ -30,6 +30,9 @@ class UserController extends AdminController{
         $user_set = $this->checkAuth($actionName3);
         $actionName4["auth_a"]="user_add_show";
         $user_add_show = $this->checkAuth($actionName4);
+        $actionName5["auth_a"]="search";
+        $search = $this->checkAuth($actionName5);
+        $this->assign('search',$search);
         $this->assign('user_add_show',$user_add_show);
         $this->assign('user_detail',$user_detail);
         $this->assign('user_set',$user_set);

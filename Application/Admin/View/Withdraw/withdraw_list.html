@@ -1,4 +1,27 @@
 <include file="Index:css"/>
+<script type="text/javascript">
+   //提交
+    function checkPost(){
+      var reg_date = $("#txtBeginDate").val();
+      var reg_date2 = $("#txtEndDate").val();
+      var f_phone = $("#apply_phone").val();
+      var status2 = $('input[name="status2"]:checked ').val();
+      $("#status").val(status2);
+
+      if(reg_date != "" && reg_date2 == ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 != ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 == "" && f_phone == "" && status2==""){
+          alert("请填写筛选条件!");
+          return false;
+      }
+      $("#mySearch").submit();
+    }
+
+</script>
 <body>
   <div class="place">
     <span>位置：</span>
@@ -10,22 +33,30 @@
     <div class="rightinfo">
     
     <div class="tools">
-
-     <!--  <ul class="toolbar">
-        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
-      </ul>
-      
-      <ul class="toolbar">
-      <in name="account_add_show" value="$hava_authids">
-        <li ><span><img src="__PUBLIC__/admin/images/t01.png" /></span> <a href={:U("admin/account/account_add_show")}>新增</a></li>
-      </in>
-      </ul>
-        
-        
-      <ul class="toolbar1">
-        <li><span><img src="__PUBLIC__/admin/images/t05.png" /></span>设置</li>
-      </ul>
-     -->
+      <in name="search" value="$hava_authids">
+          <form id="mySearch" action="{:U('admin/withdraw/search')}" method="post">
+            <ul class="toolbar">
+              <li><label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+              </li>
+              <li>
+                <input type="text" class='scinput' id="apply_phone" placeholder="手机号" value="{$apply_phone}" name='apply_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('apply_phone');">
+              </li>
+              <li>
+                <if condition="$status eq 'yes'">
+                  <cite><input  name="status2" type="radio" value="yes" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input  name="status2" type="radio" value="no" />否</cite>
+                  <else/>
+                  <cite><input  name="status2" type="radio" value="yes"  />是&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input  name="status2" type="radio" value="no" checked="checked" />否</cite>
+                </if>
+              </li>
+              <input name="status" type="hidden" id="status" value=""/>
+              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
+            </ul>
+          </form>
+        </in>
     </div>
     
     <table class="tablelist">
@@ -79,7 +110,6 @@
   </script>
 
 </body>
-<include file="Index:footer"/>
 <script type="text/javascript">
   function set(id_index){
       $.ajax({

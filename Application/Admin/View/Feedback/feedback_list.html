@@ -1,4 +1,25 @@
 <include file="Index:css"/>
+<script type="text/javascript">
+   //提交
+    function checkPost(){
+      var reg_date = $("#txtBeginDate").val();
+      var reg_date2 = $("#txtEndDate").val();
+      var f_content = $("#f_content").val();
+      var f_phone = $("#f_phone").val();
+      if(reg_date != "" && reg_date2 == ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 != ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 == "" && f_content == "" && f_phone == ""){
+          alert("请填写筛选条件!");
+          return false;
+      }
+      $("#mySearch").submit();
+    }
+
+</script>
 <body>
 
   <div class="place">
@@ -15,24 +36,23 @@
         <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <a href="#" onclick="getAll()">批量删除</a></li>
       </ul>
 
-
-      <form id="mySearch" action="{:U('admin/feedback/search')}" method="post">
-        <ul class="toolbar">
-          <li><label>日期范围</label>
-          
-          起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
-          至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
-          </li>
-          <li>
-            <input type="text" class='scinput' id="phone_num" placeholder="内容" value="{$phone_num}" name='phone_num'/>
-          </li>
-          <li>
-            <input type="text" class='scinput' id="ni_name" placeholder="手机号" value="{$ni_name}" name='ni_name' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('phone_num');">
-          </li>
-          <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
-        </ul>
-      </form>
-
+        <in name="search" value="$hava_authids">
+          <form id="mySearch" action="{:U('admin/feedback/search')}" method="post">
+            <ul class="toolbar">
+              <li><label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+              </li>
+              <li>
+                <input type="text" class='scinput' id="f_content" placeholder="内容" value="{$f_content}" name='f_content'/>
+              </li>
+              <li>
+                <input type="text" class='scinput' id="f_phone" placeholder="手机号" value="{$f_phone}" name='f_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('f_phone');">
+              </li>
+              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
+            </ul>
+          </form>
+        </in>
     </div>
     
     <table class="tablelist">

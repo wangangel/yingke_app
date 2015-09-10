@@ -15,16 +15,21 @@
         if(!isMobile.test(phone)){ //如果用户输入的值不同时满足手机号和座机号的正则
             if("" == phone){
                 alert("手机号码不能为空,请正确填写电话号码!");
-                $('#phone').val("");
+                $('#'+index).val("");
               return false;
             }else{
               alert("请正确填写手机号码，例如:13415764179");
-              $('#phone').val("");
+              $('#'+index).val("");
               return false; 
             }       
         }
 
 } 
+  $(document).ready(function(e){
+      $(".select3").uedSelect({
+        width : 152
+      });
+    });
 
     $(function () {
         $("#txtBeginDate").calendar({
@@ -40,4 +45,6 @@
         });
         $("#txtEndDate").calendar();                                            
    });
+
+    
 </script>

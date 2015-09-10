@@ -17,35 +17,37 @@
        <form id="myForm" action={:U('admin/auth/auth_add')} method='post'>
     <div class="formbody">
     <ul class="forminfo">
-    <li><label>权限名称 </label> <input type="text" class='dfinput' id="auth-name" placeholder="权限名称" name='auth_name'></li>
-    <li><label>是否为菜单</label>
-     <div class="vocation">    
-    <select  name="is_menu" class="select3" >
-                <option value="0" selected="selected">否</option>
-                <option value="1">是</option>
-              </select>
-              </div></li>
-  <li><label>父级菜单</label>
-   <div class="vocation">   
-<select  name="auth_pid"  class="select3">
-                <option value="0">无父级菜单</option>
-                <foreach name="info" item="vo" key="k" >
-                        <option value="{$vo.auth_id}">{$vo.auth_name}</option>
-                  </foreach>
-              </select>
-              </div>
-  </li> 
-  <li><label>模块</label> <input type="text" class="dfinput" id="auth-c" placeholder="输入模块名称" name='auth_c' onblur="trimcheck(this);"></li> 
-  <li><label>方法名称</label> <input type="text" id="auth_a" placeholder="输入方法名称" name='auth_a' class="dfinput" onblur="trimcheck(this);" ></li> 
-  <li><label>排序</label> 
-  <div class="vocation">
-              <select  name="auth_order" class="select3" >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div></li> 
+          <li><label>权限名称 </label> <input type="text" class='dfinput' id="auth-name" placeholder="权限名称" name='auth_name'></li>
+          <li><label>是否为菜单</label>
+           <div class="vocation">    
+                    <select  name="is_menu" class="select3" >
+                      <option value="0" selected="selected">否</option>
+                      <option value="1">是</option>
+                    </select>
+            </div>
+          </li>
+          <li><label>父级菜单</label>
+             <div class="vocation">   
+                        <select  name="auth_pid"  class="select3">
+                          <option value="0">无父级菜单</option>
+                          <foreach name="info" item="vo" key="k" >
+                                  <option value="{$vo.auth_id}">{$vo.auth_name}</option>
+                            </foreach>
+                        </select>
+                        </div>
+            </li> 
+            <li><label>模块</label> <input type="text" class="dfinput" id="auth-c" placeholder="输入模块名称" name='auth_c' onblur="trimcheck(this);"></li> 
+            <li><label>方法名称</label> <input type="text" id="auth_a" placeholder="输入方法名称" name='auth_a' class="dfinput" onblur="trimcheck(this);" ></li> 
+              <li><label>排序</label> 
+                    <div class="vocation">
+                        <select  name="auth_order" class="select3" >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                      </div>
+                    </li> 
 
 
 
@@ -57,7 +59,7 @@
     
     </div>
 </form>
-<script data-cfasync="false" type="text/javascript">
+<script type="text/javascript">
   function check(){
     var authname = $("#auth-name").val();
     if(trim(authname).length == 0 ){
@@ -80,14 +82,6 @@
   function trim(str){ 
 　　  return str.replace(/(^\s*)|(\s*$)/g, "");
 　　}
-
-
-$(document).ready(function(e) {
-
-  $(".select3").uedSelect({
-    width : 152
-  });
-});
 </script>
 </body>
 

@@ -38,11 +38,13 @@ class MessageController extends AdminController{
         $message_del = $this->checkAuth($actionName3);
         $actionName4["auth_a"]="del_all";
         $del_all = $this->checkAuth($actionName4);
+        $actionName5["auth_a"]="search";
+        $search = $this->checkAuth($actionName5);
+        $this->assign('search',$search);
         $this->assign('del_all',$del_all);
         $this->assign('add_show',$add_show);
         $this->assign('look_show',$look_show);
         $this->assign('message_del',$message_del);
-
         $this->assign('page',$page);
         $this->assign('message_list',$message_list);
       	$this->display();
@@ -156,6 +158,53 @@ class MessageController extends AdminController{
       }
 
    }
-
+   /**
+     * 组合条件筛选
+     */
+    public function search(){
+        $reg_date1 = strtotime($_POST["reg_date"]);
+        $reg_date2 = strtotime($_POST["reg_date2"]);
+        $m_content = $_POST["m_content"];
+        if($reg_date1 != "" && $reg_date2 !=""){
+            $map['m_date']  = array('between',array($reg_date1,$reg_date2));
+            $this->assign('reg_date',$_POST["reg_date"]);
+            $this->assign('reg_date2',$_POST["reg_date2"]);
+        }  
+        if($m_content != ""){
+            $map["m_content"] = array('like','%'.$m_content.'%');
+            $this->assign('m_content',$m_content);
+        }
+        $model_message = M("message");
+        //获取总数
+        $message_count = $model_message->where($map)->count();
+        //倒入分页类
+        import('Think.Page');
+        $page_class = new Page($message_count,15);
+        $page_class->setConfig('prev', '«');
+        $page_class->setConfig('next', '»');
+        $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
+        $page = $page_class->show();
+        //获取列表
+        $message_list = $model_message->where($map)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+         //为权限加上
+        $actionName1["auth_a"]="add_show";
+        $add_show = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="look_show";
+        $look_show = $this->checkAuth($actionName2);
+        $actionName3["auth_a"]="message_del";
+        $message_del = $this->checkAuth($actionName3);
+        $actionName4["auth_a"]="del_all";
+        $del_all = $this->checkAuth($actionName4);
+        $actionName5["auth_a"]="search";
+        $search = $this->checkAuth($actionName5);
+        $this->assign('search',$search);
+        $this->assign('del_all',$del_all);
+        $this->assign('add_show',$add_show);
+        $this->assign('look_show',$look_show);
+        $this->assign('message_del',$message_del);
+        $this->assign('page',$page);
+        $this->assign('message_list',$message_list);
+        $this->display("message/message_list");
+    }
 
 }
