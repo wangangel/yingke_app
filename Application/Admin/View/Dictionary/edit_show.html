@@ -1,47 +1,44 @@
-
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
 <include file="Index:css"/>
-  <!-- sidebar end -->
+</head>
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">字典类型</strong> / <small>Dictionary information</small></div>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>字典类型</li>
+    </ul>
     </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-       
-
-      </div>
-
-       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form class="am-form am-form-horizontal" action={:U("admin/dictionary/dictionary_update")} method='post'>
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">字典类型 / dictionary</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="dictionary-name" placeholder="类型名称 / Name" name='dictionary' 
-              value="{$dictionary_info.dictionary}">
-              <small>字典类型名称</small>
-            </div>
-          </div>
-          <input type="hidden"  name='id' value='{$dictionary_info.id}'>
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="submit" class="am-btn am-btn-primary">更新</button>
-            </div>
-          </div>
-        </form>
-      </div>
+       <form id="myForm" action={:U('admin/dictionary/dictionary_add')} method='post'>
+    <div class="formbody">
+    <ul class="forminfo">
+          <li><label>字典类型 </label> <input type="text" class='dfinput' id="dictionary-name" placeholder="类型名称 / Name" name='dictionary' value="{$dictionary_info.dictionary}"></li>
+    <li><label>&nbsp;</label>
+        <input type="hidden"  name='id' value='{$dictionary_info.id}'>
+        <button type="button" onclick="check()" class="btn">更新</button>
+    </li>
+    </ul>
+    
+    
     </div>
-  </div>
-  <!-- content end -->
+</form>
+<script data-cfasync="false" type="text/javascript">
+    function check(){
+      var chname = $("#dictionary-name").val();
+      if(chname == ""){
+        alert("类型名称不能为空！");
+        return false;
+      }
+      document.getElementById("myform").submit();
 
-</div>
+    }
 
-<include file="Index:footer"/>
+</script>
+</body>
+
+</html>

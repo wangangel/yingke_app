@@ -1,67 +1,42 @@
-
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
 <include file="Index:css"/>
-  <!-- sidebar end -->
+</head>
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">角色资料</strong> / <small>Personal information</small></div>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>增加角色</li>
+
+    </ul>
     </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-       
-
-      </div>
-
-       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/role/role_add')} method='post'>
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">角色名称 / rolename</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="role-name" placeholder="角色名称 / RoleName" name='role_name'>
-              
-            </div>
-          </div>
-           <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">描述 / role_remark</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="role-remark" placeholder="描述 / role_remark" name='role_remark' >
-              
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">是否启用 / role_status</label>
-            <div class="am-u-sm-9">
-              <select  name="role_status" >
-                <option value="0">否</option>
+       <form id="myForm" action={:U('admin/role/role_add')} method='post'>
+    <div class="formbody">
+    <ul class="forminfo">
+  
+    <li><label>角色名称 </label> <input type="text" class='dfinput'  id="role-name" placeholder="角色名称 / RoleName" name='role_name'></li>
+    <li><label>描述 </label> <input type="text" class='dfinput' id="role-remark" placeholder="描述 / role_remark" name='role_remark' ></li>
+    <li><label>是否启用</label>
+     <div class="vocation">    
+    <select  name="role_status" class="select3" >
+             <option value="0">否</option>
                 <option value="1" selected="true">是</option>
               </select>
-              <!-- <input type="hidden" id="auth_pid" placeholder="输入密码 / Password" name='auth_pid'> -->
-              
-            </div>
-          </div>
+              </div></li>
 
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="button" onclick="check()" class="am-btn am-btn-primary">保存</button>
-            </div>
-          </div>
-        </form>
-      </div>
+    <li><label>&nbsp;</label>
+        <button type="button" onclick="check()" class="btn">保存</button>
+    </li>
+    </ul>
+    
+    
     </div>
-  </div>
-  <!-- content end -->
-
-</div>
-
-<include file="Index:footer"/>
+</form>
 <script data-cfasync="false" type="text/javascript">
   function check(){
     var rolename = $("#role-name").val();
@@ -82,4 +57,13 @@
 　　  return str.replace(/(^\s*)|(\s*$)/g, "");
 　　}
 
+$(document).ready(function(e) {
+
+  $(".select3").uedSelect({
+    width : 152
+  });
+});
 </script>
+</body>
+
+</html>
