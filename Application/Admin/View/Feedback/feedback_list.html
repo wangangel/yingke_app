@@ -43,14 +43,10 @@
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
               </li>
-              <li>
-                <input type="text" class='scinput' id="f_content" placeholder="内容" value="{$f_content}" name='f_content'/>
-              </li>
-              <li>
-                <input type="text" class='scinput' id="f_phone" placeholder="手机号" value="{$f_phone}" name='f_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('f_phone');">
-              </li>
-              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
             </ul>
+            <input type="text" class='scinput' id="f_content" placeholder="内容" value="{$f_content}" name='f_content'/>
+            <input type="text" class='scinput' id="f_phone" placeholder="手机号" value="{$f_phone}" name='f_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('f_phone');">
+            <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
           </form>
         </in>
     </div>

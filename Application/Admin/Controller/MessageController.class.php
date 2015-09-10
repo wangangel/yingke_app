@@ -143,13 +143,7 @@ class MessageController extends AdminController{
    
    public function message_del(){
    		$model_message = M('message');
-      $model_usermessage = M('usermessage'); 
       $data['id'] = $_GET['id'];
-      $data2['messageid'] = $_GET['id'];
-      $usermessage_list = $model_usermessage->where($data2)->select();
-      if(count($usermessage_list) != 0){
-        $model_usermessage->where($data2)->delete();
-      }
       $result = $model_message->where($data)->delete();
       if($result){
             $this->success('操作成功！',U("admin/message/message_list"));
