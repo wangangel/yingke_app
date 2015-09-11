@@ -21,29 +21,30 @@ class ReportController extends AdminController{
         $page_class->setConfig('theme', '<div class="am-cf">%HEADER% <div class="am-fr"><ul class="am-pagination"><li class="am-disabled">%UP_PAGE%</li><li>%FIRST%</li> %LINK_PAGE% <li>%END%<li> <li>%DOWN_PAGE%</li></ul></div></div>');
         $page = $page_class->show();
         //获取列表
-        $feedback_list = $model_report->limit($page_class->firstRow.','.$page_class->listRows)->select();
-
+        $report_list = $model_report->limit($page_class->firstRow.','.$page_class->listRows)->select();
          //为权限加上
-       
-        $actionName3["auth_a"]="search";
-        $search = $this->checkAuth($actionName3);
+        $actionName1["auth_a"]="search";
+        $search = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="handle";
+        $handle = $this->checkAuth($actionName2);
+        $this->assign('handle',$handle);
         $this->assign('search',$search);
         $this->assign('page',$page);
-        $this->assign('feedback_list',$feedback_list);
+        $this->assign('report_list',$report_list);
       	$this->display();
     }
     /**
-     * 删除
+     * 举报人处理
      * @return [type] [description]
      */
-    public function feedback_del(){
-        $id = $_GET['id'];
+    public function handle(){
+      /*  $id = $_GET['id'];
         $result = M("feedback")->delete($id);
         if($result){
             $this->success('操作成功！',U("admin/feedback/feedback_list"));
         }else{
             $this->error('操作失败',U("admin/feedback/feedback_list"));
-        }
+        }*/
 
     }
     /**
