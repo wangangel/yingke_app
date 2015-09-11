@@ -1,4 +1,21 @@
 <include file="Index:css"/>
+<style type="text/css">
+/*tip*/
+.tip{width:650px; height:350px; position:absolute;top:10%; left:20%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.tiptop{height:40px; line-height:40px; background:url(__PUBLIC__/admin/images/tcbg.gif)  repeat-x; cursor:pointer;}
+.tiptop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
+.tiptop a{display:block; background:url(__PUBLIC__/admin/images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
+.tiptop a:hover{background:url(__PUBLIC__/admin/images/close1.png) no-repeat;}
+.tipinfo{padding-top:30px;margin-left:65px; height:95px;}
+.tipinfo span{width:95px; height:95px;float:left;}
+.tipright{float:left;padding-top:15px; padding-left:10px;}
+.tipright p{font-size:14px; font-weight:bold; line-height:35px;}
+.tipright cite{color:#858686;}
+.tipbtn{margin-top:45px; margin-left:125px;}
+.sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(__PUBLIC__/admin/images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
+.cancel{background:url(__PUBLIC__/admin/images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
+.forminfo{padding-left: 13px;}
+</style>
 <script type="text/javascript">
    //提交
     function checkPost(){
@@ -53,14 +70,10 @@
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
               </li>
-              <li>
-                <input type="text" class='scinput' id="re_phone" placeholder="举报人手机号" value="{$re_phone}" name='re_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('re_phone');">
-              </li>
-              <li>
-                <input type="text" class='scinput' id="re_reason" placeholder="举报原因" value="{$re_reason}" name='re_reason'/>
-              </li>
-              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
             </ul>
+             <input type="text" class='scinput' id="re_phone" placeholder="举报人手机号" value="{$re_phone}" name='re_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('re_phone');">
+                <input type="text" class='scinput' id="re_reason" placeholder="举报原因" value="{$re_reason}" name='re_reason'/>
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
           </form>
         </in>
     </div>
@@ -96,7 +109,7 @@
               <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
                   <in name="handle" value="$hava_authids"> 
                     <!-- <a href="{:U('admin/report/handle',array('id'=>$vo['id']))}">举报处理</a> -->
-                    <a onclick="reset()" >举报处理</a>
+                    <a href="javascript:;" onclick="reset()" >举报处理</a>
                    </in>
               </td>
             </tr>
