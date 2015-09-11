@@ -1,78 +1,46 @@
-
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
 <include file="Index:css"/>
-  <!-- sidebar end -->
+</head>
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>个人资料</li>
+    </ul>
     </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-       
-
-      </div>
-
-       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/account/account_add')} method='post'>
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">账户名 / account</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="account-name" placeholder="账户名 / account" name='account'>
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">密码 / password</label>
-            <div class="am-u-sm-9">
-              <input type="password" id="account-password" placeholder="输入密码 / Password" name='password'>
-            </div>
-          </div>
-		  
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">员工姓名 / employee</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="user-employee" placeholder="员工姓名 / employee" name='employee'>
-            </div>
-          </div>
-
-          <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">添加人 / add_person</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="pr_psw_tel" placeholder="添加人 / add_person" name='add_person' value="{$_SESSION['admin_name']}"/>
-            </div>
-          </div>
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">是否启用 / status</label>
-            <div class="am-u-sm-9">
-              <select  name="status" >
-                <option value="stop">否</option>
+       <form id="myForm" action={:U('admin/account/account_add')} method='post'>
+    <div class="formbody">
+    <ul class="forminfo">
+          <li><label>账户名 </label> <input type="text" class='dfinput' id="account-name" placeholder="账户名 / account" name='account'></li>
+           <li><label>密码 </label> <input type="password" class='dfinput' id="account-password" placeholder="输入密码 / Password" name='password'></li>
+            <li><label>员工姓名 </label> <input type="text" class='dfinput' id="user-employee" placeholder="员工姓名 / employee" name='employee'></li>
+             <li><label>添加人 </label> <input type="text" class='dfinput' id="pr_psw_tel" placeholder="添加人 / add_person" name='add_person' value="{$_SESSION['admin_name']}"></li>
+          <li><label>是否启用</label>
+           <div class="vocation">    
+                    <select  name="status" class="select3" >
+                      <option value="stop">否</option>
                 <option value="start" selected="true">是</option>
-              </select>
+                    </select>
             </div>
-          </div>
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="button" onclick="checkall()" class="am-btn am-btn-primary">保存修改</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </li>
+          
+
+    <li><label>&nbsp;</label>
+        <button type="button" onclick="checkall()" class="btn">保存修改</button>
+    </li>
+    </ul>
+    
+    
     </div>
-  </div>
-  <!-- content end -->
-
-</div>
-
-<include file="Index:footer"/>
+</form>
 <script type="text/javascript">
-    function checkall(){
+  function checkall(){
           var account_name = $("#account-name").val();   //获得用户填写的号码值 赋值给变量phone
           var account_password = $("#account-password").val(); 
           var user_employee = $("#user-employee").val(); 
@@ -88,5 +56,7 @@
           }
           $("#myForm").submit();
   }
-
 </script>
+</body>
+
+</html>

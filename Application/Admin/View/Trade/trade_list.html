@@ -41,17 +41,11 @@
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
               </li>
-              <li>
-                <input type="text" class='scinput' id="trade_name" placeholder="礼物/店铺" value="{$trade_name}" name='trade_name'/>
-              </li>
-              <li>
-                <input type="text" class='scinput' id="seller_phone" placeholder="卖家手机号" value="{$seller_phone}" name='seller_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('seller_phone');">
-              </li>
-              <li>
-                <input type="text" class='scinput' id="buyers_phone" placeholder="买家手机号" value="{$buyers_phone}" name='buyers_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('buyers_phone');">
-              </li>
-              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
             </ul>
+            <input type="text" class='scinput' id="trade_name" placeholder="礼物/店铺" value="{$trade_name}" name='trade_name'/>
+                <input type="text" class='scinput' id="seller_phone" placeholder="卖家手机号" value="{$seller_phone}" name='seller_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('seller_phone');">
+                <input type="text" class='scinput' id="buyers_phone" placeholder="买家手机号" value="{$buyers_phone}" name='buyers_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('buyers_phone');">
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
           </form>
         </in>
     </div>

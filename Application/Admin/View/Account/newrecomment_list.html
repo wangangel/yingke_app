@@ -12,13 +12,14 @@
     <div class="tools">
       <in name="newrecomment_list" value="$hava_authids"> 
       <ul class="toolbar">
-        <li ><span><img src="__PUBLIC__/admin/images/t04.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'0'))}" >当前推荐</a></li>
+        <li ><span><img  id="dqcss" src="__PUBLIC__/admin/images/t04.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'0'))}" onclick="getcss()">当前推荐</a></li>
       </ul>
       
       <ul class="toolbar">
-        <li ><span><img src="__PUBLIC__/admin/images/t04.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'1'))}">历史推荐</a></li>
+        <li ><span><img id="lscss" src="__PUBLIC__/admin/images/t04_old.png" /></span> <a href="{:U('admin/account/newrecomment_list',array('flag'=>'1'))}" onclick="getcss()">历史推荐</a></li>
       </ul>
       <in>
+      <input type="hidden" id="type" value="{$result}">
       <if condition="$result eq '0'">
         <ul class="toolbar1" >
             <li>
@@ -151,4 +152,17 @@
             });
   }
 
+
+function getcss(){
+var result = $("#type").val();
+if(result == '0'){
+  $("#dqcss").attr("src","__PUBLIC__/admin/images/t04_old.png");
+  $("#lscss").attr("src","__PUBLIC__/admin/images/t04.png");
+}else if(result == '1'){
+   $("#dqcss").attr("src","__PUBLIC__/admin/images/t04.png");
+  $("#lscss").attr("src","__PUBLIC__/admin/images/t04_old.png");
+ 
+}
+
+}
 </script>

@@ -40,10 +40,9 @@
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
               </li>
-              <li>
-                <input type="text" class='scinput' id="apply_phone" placeholder="手机号" value="{$apply_phone}" name='apply_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('apply_phone');">
-              </li>
-              <li>
+              <input name="status" type="hidden" id="status" value=""/>
+            </ul>
+            <input type="text" class='scinput' id="apply_phone" placeholder="手机号" value="{$apply_phone}" name='apply_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('apply_phone');">
                 <if condition="$status eq 'yes'">
                   <cite><input  name="status2" type="radio" value="yes" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;
                   <input  name="status2" type="radio" value="no" />否</cite>
@@ -51,10 +50,7 @@
                   <cite><input  name="status2" type="radio" value="yes"  />是&nbsp;&nbsp;&nbsp;&nbsp;
                   <input  name="status2" type="radio" value="no" checked="checked" />否</cite>
                 </if>
-              </li>
-              <input name="status" type="hidden" id="status" value=""/>
-              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
-            </ul>
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
           </form>
         </in>
     </div>

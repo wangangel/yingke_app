@@ -14,7 +14,9 @@
        <form  id="myForm" action={:U("admin/log/log_select_del")} method="post">
       <in name="log_select_del" value="$hava_authids">
       <ul class="toolbar">
-        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> <input type="button" id="delete" value="批量删除" onclick="del()"></li>
+        <li ><span><img src="__PUBLIC__/admin/images/t03.png" /></span> 
+<a href="javascript:void(0);" id="delete" onclick="del()">批量删除</a>
+        </li>
       </ul>
       </in>
     </div>

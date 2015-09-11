@@ -1,47 +1,31 @@
-
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
 <include file="Index:css"/>
+</head>
 
-  <!-- sidebar end -->
+<body>
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">授予角色</strong> / <small>Role show</small></div>
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>授予角色</li>
+    </ul>
     </div>
-
-    <hr/>
-
-    <div class="am-g">
-
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-        
-
-      </div>
-
-       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <form class="am-form am-form-horizontal" action={:U("admin/account/account_role")} method='post'>
-          
-      
-      <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">用户名 / Account_name</label>
-            <div class="am-u-sm-9">
-              <if condition="$account_info['account'] eq 'admin'">
-                  <input type="text"  placeholder="输入账户名 / Account_name" name='account' disabled="disabled" value='{$account_info.account}'>
+       <form id="myForm" action={:U('admin/account/account_role')} method='post'>
+    <div class="formbody">
+    <ul class="forminfo">
+             <li><label>用户名 </label> <if condition="$account_info['account'] eq 'admin'">
+                  <input type="text" class="dfinput"  placeholder="输入账户名 / Account_name" name='account' disabled="disabled" value='{$account_info.account}'>
                   <else/>
-                  <input type="text"  placeholder="输入账户名 / Account_name" name='account'  value='{$account_info.account}'>
-              </if>
-              <small>用户名</small>
-            </div>
-          </div>
-          
-          <div class="am-form-group">
-            <label for="user-email" class="am-u-sm-3 am-form-label">角色 / Role</label>
-            <div class="am-u-sm-9">
-              <select  name="role" >
-                  <if condition="$account_info.role eq ''">
+                  <input type="text" class="dfinput"  placeholder="输入账户名 / Account_name" name='account'  value='{$account_info.account}'>
+              </if></li>
+          <li><label>角色</label>
+           <div class="vocation"> 
+            <select  name="role" class="select3" >   
+                     <if condition="$account_info.role eq ''">
                       <option value="0"  selected="selected">请选择角色</option>
                       <foreach name="roleInfo" item="vo" key="k" >  
                             <option value="{$vo.role_id}" >{$vo.role_name}</option>
@@ -56,26 +40,20 @@
                         </if>
                       </foreach>
                     </if>
+                    </select>
+            </div>
+          </li>
+          
 
-              </select>
-              
-              <small>角色列表</small>
-            </div>
-          </div>
-      
-        
-          <input type="hidden"  name='id' value='{$account_info.id}'>
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="submit" class="am-btn am-btn-primary">授予角色</button>
-            </div>
-          </div>
-        </form>
-      </div>
+    <li><label>&nbsp;</label>
+    <input type="hidden"  name='id' value='{$account_info.id}'>
+       <button type="submit" class="btn">授予角色</button>
+    </li>
+    </ul>
+    
+    
     </div>
-  </div>
-  <!-- content end -->
+</form>
+</body>
 
-</div>
-
-<include file="Index:footer"/>
+</html>

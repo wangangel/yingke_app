@@ -10,7 +10,7 @@ class AccountController extends AdminController{
     public function account_list() {
         $model_user = M('account');
         $arr = array();
-        $arr['status'] = 'start';
+       // $arr['status'] = 'start';
         //获取总数
         $admin_count = $model_user->where($arr)->count();
         //倒入分页类
@@ -103,7 +103,7 @@ class AccountController extends AdminController{
         if($result){
             $this->success('修改成功',U("admin/account/account_list"));
         }else{
-            $this->error('修改失败',"/anjuyi/index.php?m=admin&c=account&a=account_edit_show&id=" . $_POST['id']);
+            $this->error('修改失败',U("admin/account/account_edit_show?id=".$_POST['id']));
         }
     }
     /*

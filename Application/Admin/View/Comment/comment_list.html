@@ -46,17 +46,11 @@
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
               </li>
-              <li>
-                <input type="text" class='scinput' id="room_name" placeholder="房间" value="{$room_name}" name='room_name'/>
-              </li>
-              <li>
-                <input type="text" class='scinput' id="com_content" placeholder="内容" value="{$com_content}" name='com_content'/>
-              </li>
-              <li>
-                <input type="text" class='scinput' id="com_phone" placeholder="手机号" value="{$com_phone}" name='com_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('com_phone');">
-              </li>
-              <li><label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/></li>
             </ul>
+            <input type="text" class='scinput' id="room_name" placeholder="房间" value="{$room_name}" name='room_name'/>
+                <input type="text" class='scinput' id="com_content" placeholder="内容" value="{$com_content}" name='com_content'/>
+                <input type="text" class='scinput' id="com_phone" placeholder="手机号" value="{$com_phone}" name='com_phone' onkeyup="value=value.replace(/[^\d]/g,'')"   onblur="VeriftyPhone('com_phone');">
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
           </form>
         </in>
 

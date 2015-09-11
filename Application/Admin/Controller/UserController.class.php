@@ -55,9 +55,9 @@ class UserController extends AdminController{
         $id = $_GET['id'];
         $result = M("comment")->delete($id);
         if($result){
-            $this->success('操作成功！',U("admin/comment/comment_list"));
+            $this->success('操作成功！',U("admin/user/user_list"));
         }else{
-            $this->error('操作失败',U("admin/comment/comment_list"));
+            $this->error('操作失败',U("admin/user/user_list"));
         }
 
     }
