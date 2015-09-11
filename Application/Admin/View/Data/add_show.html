@@ -30,14 +30,11 @@
          
             <li><label>字典名称</label> <input type="text" class="dfinput"  id="data-name" placeholder="字典名称 / Name" name='dataname' onblur="trimcheck(this);"></li> 
            
-
-
     <li><label>&nbsp;</label>
         <button type="submit" onclick="submitCheck()" class="btn">保存</button>
     </li>
     </ul>
-    
-    
+  
     </div>
 </form>
 <script type="text/javascript">
@@ -48,9 +45,9 @@
             //不进行赋值
             return false;
         }else{
-            
             document.getElementById("dictype").value=name;
         }
+
   }
   function trimcheck(obj){
     var trimvalue = trim(obj.value);
