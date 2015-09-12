@@ -38,14 +38,46 @@ class ReportController extends AdminController{
      * @return [type] [description]
      */
     public function handle(){
-      /*  $id = $_GET['id'];
-        $result = M("feedback")->delete($id);
-        if($result){
-            $this->success('操作成功！',U("admin/feedback/feedback_list"));
-        }else{
-            $this->error('操作失败',U("admin/feedback/feedback_list"));
-        }*/
-
+        $data["id"] = $_POST['id'];
+        $data["suggestion"] = $_POST["suggestion"];
+        if($_POST["status"] == "notreal"){
+            $data["result"] = "举报不实";
+        }elseif($_POST["status"] == "gag"){//停用房间，房主一周不能发言
+            $data["result"] = "查实禁言一周";
+            $live_arr["status"] = "stop";
+            $user_arr["deal_status"] = "gag";
+        }elseif($_POST["status"] == "dark"){//小黑屋是不能进别人的房间
+            $data["result"] = "查实小黑屋一周";
+            $user_arr["deal_status"] = "dark";
+        }elseif($_POST["status"] == "letter"){//房间停止，提现，停掉一切功能
+            $data["result"] = "查实封款账号";
+            $live_arr["status"] = "stop";
+            $user_arr["deal_status"] = "letter";
+        }
+        $report = M("report")->find($_POST['id']);
+        $report_list = M("report")->where($report["room_id"])->select();
+        for ($i=0; $i < count($report_list) ; $i++) { 
+            $data["id"] = $report_list[$i]["id"];
+            $report_res = M("report")->save($data);
+         } 
+        $record["room_id"] = $report["room_id"];
+        $record["change_reason"] = $data["suggestion"];
+        $record["change_date"] = time();
+        $record["change_user"] = $_SESSION['admin_name'];
+        $record["change_status"] = $data["result"];
+        $record_res = M("room_stop_record")->add($record);
+        if($_POST["status"] != "notreal"){
+            $live = M("live")->find($report["room_id"]);
+            $user_arr["id"] =  $live["room_user"];
+            $user_arr["deal_time"] = time();
+            $user_res = M("user")->save($user_arr);
+        }
+        if($_POST["status"] == "gag" || $_POST["status"] == "letter"){
+            $live_arr["id"] = $report["room_id"];
+            $live_res = M("live")->save($live_arr);
+        }
+        $res = "1";
+        $this->ajaxReturn($res,"JSON");
     }
     /**
      * 组合条件筛选
@@ -53,46 +85,43 @@ class ReportController extends AdminController{
     public function search(){
         $reg_date1 = strtotime($_POST["reg_date"]);
         $reg_date2 = strtotime($_POST["reg_date2"]);
-        $phone_num = $_POST["f_phone"];
-        $f_content = $_POST["f_content"];
+        $re_phone = $_POST["re_phone"];
+        $re_reason = $_POST["re_reason"];
         if($reg_date1 != "" && $reg_date2 !=""){
-            $map['f_date']  = array('between',array($reg_date1,$reg_date2));
+            $map['re_date']  = array('between',array($reg_date1,$reg_date2));
             $this->assign('reg_date',$_POST["reg_date"]);
             $this->assign('reg_date2',$_POST["reg_date2"]);
         }  
         if($phone_num !=""){
-            $map["f_phone"] = $phone_num;
-            $this->assign('f_phone',$phone_num);
+            $map["re_phone"] = $re_phone;
+            $this->assign('re_phone',$re_phone);
         }
-        if($f_content != ""){
-            $map["f_content"] = array('like','%'.$f_content.'%');
-            $this->assign('f_content',$f_content);
+        if($re_reason != ""){
+            $map["re_reason"] = array('like','%'.$re_reason.'%');
+            $this->assign('re_reason',$re_reason);
         }
-        $model_feedback = M("feedback");
+        $model_report = M("report");
         //获取总数
-        $feedback_count = $model_feedback->where($map)->count();
+        $report_count = $model_report->where($map)->count();
         //倒入分页类
         import('Think.Page');
-        $page_class = new Page($feedback_count,15);
+        $page_class = new Page($report_count,15);
         $page_class->setConfig('prev', '«');
         $page_class->setConfig('next', '»');
         $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
         $page = $page_class->show();
         //获取列表
-        $feedback_list = $model_feedback->where($map)->limit($page_class->firstRow.','.$page_class->listRows)->select();
+        $report_list = $model_report->where($map)->limit($page_class->firstRow.','.$page_class->listRows)->select();
          //为权限加上
-        $actionName1["auth_a"]="feedback_del";
-        $feedback_del = $this->checkAuth($actionName1);
-        $actionName2["auth_a"]="del_all";
-        $del_all = $this->checkAuth($actionName2);
-        $actionName3["auth_a"]="search";
-        $search = $this->checkAuth($actionName3);
+        $actionName1["auth_a"]="search";
+        $search = $this->checkAuth($actionName1);
+        $actionName2["auth_a"]="handle";
+        $handle = $this->checkAuth($actionName2);
+        $this->assign('handle',$handle);
         $this->assign('search',$search);
-        $this->assign('feedback_del',$feedback_del);
-        $this->assign('del_all',$del_all);
         $this->assign('page',$page);
-        $this->assign('feedback_list',$feedback_list);
-        $this->display("Feedback/feedback_list");
+        $this->assign('report_list',$report_list);
+        $this->display("Report/report_list");
     }
 
 

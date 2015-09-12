@@ -39,13 +39,59 @@
      * [reset description]弹出框
      * @return {[type]} [description]
      */
-    function reset(){
+    function reset(id){
+        $("#cloid").val(id);
         $("#tip").css('display','block');
     }
     function cancel(){
         $("#tip").css('display','none');
     }
-
+    /**
+     * [handle description]举报处理
+     * @return {[type]} [description]
+     */
+    function handle(){
+      var id = $("#cloid").val();
+      var sugges = $.trim($("#suggestion").val());
+      var res = $("input[name='result']:checked").val();
+      if(sugges == ""){
+        alert("请填写处理意见！");
+        return false;
+      }
+      if(res == ""){
+        alert("请选择处理结果！");
+        return false;
+      }
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/report/handle')}",
+                dataType:"json",
+                data:{id:id,status:res,suggestion:sugges},
+                timeout:30000,
+                error:function(data){
+                    alert("操作失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("操作成功！");
+                        window.location.reload();
+                    }else{
+                        alert("操作失败!");
+                    }
+                }
+            });
+    }
+    //提醒管理员
+    function remind(res){
+      if(res == "gag"){
+        alert("房主将会被禁言一周!");
+      }else if(res == "dark"){
+        alert("房主一周内不得进入其他房间!");
+      }else if(res =="letter"){
+        alert("房主不得提现!");
+      }
+    }
 </script>
 <body>
 
@@ -95,7 +141,7 @@
         </thead>
         <tbody>
       <foreach name="report_list" item="vo" key="k" >
-          
+            <input id="cloid" value=""/>
             <tr>
               <td>{$k+1}</td>
               <td>{$vo.re_date|date='Y-m-d',###}</td>
@@ -108,8 +154,12 @@
               <td>{$vo.result}</td>
               <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
                   <in name="handle" value="$hava_authids"> 
+                    <if condition="$vo.result eq ''">
                     <!-- <a href="{:U('admin/report/handle',array('id'=>$vo['id']))}">举报处理</a> -->
-                    <a href="javascript:;" onclick="reset()" >举报处理</a>
+                    <a href="javascript:;" onclick="reset({$vo['id']})" >举报处理</a>
+                    <else/>
+                    <a href="javascript:;" >已处理</a>
+                  </if>
                    </in>
               </td>
             </tr>
@@ -124,15 +174,15 @@
         <input type="hidden" id="account_id" value="{$_SESSION['admin_id']}"/>
         <div class="tipinfo">
             <ul class="forminfo">
-              <li><label>处理意见</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>
+              <li><label>处理意见</label><textarea id="suggestion" name="suggestion" cols="" rows="" class="textinput"></textarea></li>
                <li><label>处理结果</label><cite>
                 <input name="result" type="radio" value="notreal" />举报不实&nbsp;&nbsp;
-                <input name="result" type="radio" value="gag" />查实禁言一周&nbsp;&nbsp;
-                <input name="result" type="radio" value="dark" />查实小黑屋一周&nbsp;&nbsp;
-                <input name="result" type="radio" value="letter" />查实封款账号
+                <input name="result" type="radio" value="gag" onclick="remind('gag')"/>查实禁言一周&nbsp;&nbsp;
+                <input name="result" type="radio" value="dark" onclick="remind('dark')"/>查实小黑屋一周&nbsp;&nbsp;
+                <input name="result" type="radio" value="letter" onclick="remind('letter')"/>查实封款账号
                 </cite>
               </li>
-                <input name="" onclick="reset_password()" type="button"  class="sure" value="确定" />&nbsp;
+                <input name="" onclick="handle()" type="button"  class="sure" value="确定" />&nbsp;
                 <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
             </ul>
         </div>
