@@ -392,7 +392,27 @@ class UserController extends MobileController{
             $datas['head_url'] = $result['head_url'];
             $datas['profession'] = $result['profession'];
             $datas['per_sign'] = $result['per_sign'];
-            
+            //获取当前用户关注的人数
+            $focus_model = M('friends_focus');
+            $opt['user_id'] = $_REQUEST['userid'];
+            $opt['status'] = 'yes';
+            $focus_num = $focus_model->where($opt)->count();
+            $datas['focus_num'] = $focus_num;
+            //获取当前用户的粉丝人数
+            $opt1['focus_user'] = $_REQUEST['userid'];
+            $opt1['status'] = 'yes';
+            $fans_num = $focus_model->where($opt1)->count();
+            $datas['fans_num'] = $fans_num;
+            //获取评分
+            $live_model = M('live');
+            $live_info = $live_model->where(array('room_user'=>$_REQUEST['userid']))->select();
+            $total_score = 0;
+            $total_usernum = 0;
+            foreach ($live_info as $k => $v) {
+                $total_score += $v['score'];
+                $total_usernum += $v['score_usernum'];
+            }
+            $datas['score'] = round($total_score/$total_usernum);
             output_data($datas);
         }else{
             output_error('没有该用户信息');
@@ -492,6 +512,11 @@ class UserController extends MobileController{
             $data['focus_userinfo'][$k]['ni_name'] = $foucs_userinfo['ni_name'];
             $data['focus_userinfo'][$k]['head_url'] = $foucs_userinfo['head_url'];
             $data['focus_userinfo'][$k]['sex'] = $foucs_userinfo['sex'];
+            //根据生日获取年龄
+            $brithday = date('Y',$foucs_userinfo['birth_date']);
+            $now_year = date('Y',time());
+
+            $data['focus_userinfo'][$k]['age'] = $now_year-$brithday;
         }
         output_data($data);
     }
@@ -884,7 +909,9 @@ class UserController extends MobileController{
             $opt['status'] = "no";
             $withdrawals_model = M('withdrawals');
             $res = $withdrawals_model->add($opt);
-            if($res){
+            //将用户的收入对应的减去提现金额
+            $res1 = $user_model->where(array('id'=>$_REQUEST['userid']))->setInc('cost',$_REQUEST['money']);
+            if($res1){
                 output_data(array('ID'=>$res));
             }else{
                 output_error('提现申请失败');
@@ -1322,8 +1349,8 @@ class UserController extends MobileController{
                 $tags_model = M('tags');
                 $tag_info = $tags_model->where($tiaojian)->select();
                 $tags = "";
-                foreach ($tag_info as $k => $v) {
-                    $tags .= $v['tag'] . " ";
+                foreach ($tag_info as $key => $value) {
+                    $tags .= $value['tag'] . " ";
                 }
                 $data['liveroom_info'][$k]['tags'] = $tags;
                 //根据房主id获取用户的信息
@@ -1352,6 +1379,11 @@ class UserController extends MobileController{
                  }else{
                     $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
                  }
+
+                 //获取当前直播间的观众人数
+                 $userroom_model = M('user_room');
+                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
+                 $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
             }
         }
 
@@ -1401,8 +1433,8 @@ class UserController extends MobileController{
                 $tags_model = M('tags');
                 $tag_info = $tags_model->where($tiaojian)->select();
                 $tags = "";
-                foreach ($tag_info as $k => $v) {
-                    $tags .= $v['tag'] . " ";
+                foreach ($tag_info as $key => $value) {
+                    $tags .= $value['tag'] . " ";
                 }
                 $data['pastroom_info'][$k]['tags'] = $tags;
                 //根据房主id获取用户的信息
@@ -1431,6 +1463,13 @@ class UserController extends MobileController{
                  }else{
                     $data['pastroom_info'][$k]['user_info']['is_focus'] = "no";
                  }
+
+                 //获取当前直播间的观众人数
+                 $userroom_model = M('user_room');
+                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
+                 $data['pastroom_info'][$k]['user_num'] = count($guanzhong_info);
+
+
         }
         output_data($data);
     }
@@ -1612,8 +1651,8 @@ class UserController extends MobileController{
                 $tags_model = M('tags');
                 $tag_info = $tags_model->where($tiaojian)->select();
                 $tags = "";
-                foreach ($tag_info as $k => $v) {
-                    $tags .= $v['tag'] . " ";
+                foreach ($tag_info as $key => $value) {
+                    $tags .= $value['tag'] . " ";
                 }
                 $data['liveroom_info'][$k]['tags'] = $tags;
                 //根据房主id获取用户的信息
@@ -1642,6 +1681,11 @@ class UserController extends MobileController{
                  }else{
                     $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
                  }
+                  //获取当前直播间的观众人数
+                 $userroom_model = M('user_room');
+                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
+                 $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
+
         }
 
         output_data($data);
@@ -1693,8 +1737,8 @@ class UserController extends MobileController{
                 $tags_model = M('tags');
                 $tag_info = $tags_model->where($tiaojian)->select();
                 $tags = "";
-                foreach ($tag_info as $k => $v) {
-                    $tags .= $v['tag'] . " ";
+                foreach ($tag_info as $key => $value) {
+                    $tags .= $value['tag'] . " ";
                 }
                 $data['liveroom_info'][$k]['tags'] = $tags;
                 //根据房主id获取用户的信息
@@ -1723,6 +1767,11 @@ class UserController extends MobileController{
                  }else{
                     $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
                  }
+                  //获取当前直播间的观众人数
+                 $userroom_model = M('user_room');
+                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
+                 $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
+
         }
 
         output_data($data);
@@ -2062,704 +2111,7 @@ class UserController extends MobileController{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###############################################################################################################
-
-
-     /*
-     * 获取用户收货地址信息
-     */
-    public function my_address(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['client_id'] = $_REQUEST['client_id'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-
-        $model_address = M('receivingaddr');
-        $result = $model_address->where($array)->select();
-        $datas = array();
-        if($result[0] != NULL){
-            foreach ($result as $k => $v) {
-               $datas[$k]['id'] = $v['id'];
-               $datas[$k]['userid'] = $v['userid'];
-               $datas[$k]['username'] = $v['username'];
-               $datas[$k]['phone'] = $v['phone'];
-               $datas[$k]['address'] = $v['address'];
-               $datas[$k]['is_default'] = $v['is_default'];      
-            }
-           
-
-            output_data($datas);
-        }else{
-            output_error('没有该用户的收货地址信息');
-        }
-    }
-
-
-
-
-
-
-    /*
-     * 修改用户收货地址信息
-     */
-    public function edit_myaddress(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['client_id'] = $_REQUEST['client_id'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-
-        if($_REQUEST['address'] == NULL ||$_REQUEST['username'] == NULL || $_REQUEST['phone'] == NULL){
-            output_error('参数缺失');
-        }
-        $array = array();
-        $tiaojian = array();
-        $array['address'] = $_REQUEST['address'];
-        $array['username'] = $_REQUEST['username'];
-        $array['phone'] = $_REQUEST['phone'];
-        $array['is_default'] = intval($_REQUEST['is_default'])>0?intval($_REQUEST['is_default']):0;
-        $model_address = M('receivingaddr');
-        $result = $model_address->where(array('userid'=>$_REQUEST['userid']))->save($array);
-        if($result>0){
-            $data = array();
-            $data['id'] = $result;
-            output_data($data);
-        }else{
-            output_error('没有该用户的收货地址信息');
-        }
-    }
-
-
-
-    /*
-     * 增加用户收货地址信息
-     */
-    public function add_myaddress(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['client_id'] = $_REQUEST['client_id'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['address'] == NULL ||$_REQUEST['username'] == NULL || $_REQUEST['phone'] == NULL){
-            output_error('参数缺失');
-        }
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['address'] = $_REQUEST['address'];
-        $array['username'] = $_REQUEST['username'];
-        $array['phone'] = $_REQUEST['phone'];
-        $array['is_default'] = intval($_REQUEST['is_default'])>0?intval($_REQUEST['is_default']):0;
-        $model_address = M('receivingaddr');
-        $result = $model_address->add($array);
-        if($result>0){
-            $data = array();
-            $data['id'] = $result;
-            output_data($data);
-        }else{
-            output_error('添加收货地址失败');
-        }
-    }
-
-
-
-
-
-     /*
-     * 删除用户收货地址信息
-     */
-    public function del_myaddress(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['add_id'] == NULL ){
-            output_error('参数缺失');
-        }
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['id'] = $_REQUEST['add_id'];
-        
-        $model_address = M('address');
-        $result = $model_address->where($array)->delete();
-        if($result>0){
-            $data = array();
-            $data['id'] = $result;
-            output_data($data);
-        }else{
-            output_error('添加收货地址失败');
-        }
-    }
-
-
-
-
-
-
-    /*
-     * 修改昵称
-     */
-    public function edit_nickname(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['username'] == NULL){
-            output_error('参数缺失');
-        }
-        $arr = array();
-        $tiaojian = array();
-        $tiaojian['id'] = $_REQUEST['userid'];
-        $arr['username'] = $_REQUEST['username'];
-        $model_user = M('user');
-        $result = $model_user->where($tiaojian)->save($arr);
-
-        if($result>0){
-            $data = array();
-            $data['id'] = $_REQUEST['userid'];
-            output_data($data);
-        }else{
-            output_error('修改昵称失败');
-        }
-    }
-
-
-
-
-
-     /*
-     * 我的订单列表
-     */
-    public function my_orderlist(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-       
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $order_model = M('order');
-        $result = $order_model->where(array('userid'=>$_REQUEST['userid']))->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有订单信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['areaid'] = $v['areaid'];
-                $data[$k]['addid'] = $v['addid'];
-                $data[$k]['ordernum'] = $v['ordernum'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['buytime'] = $v['buytime'];
-                $data[$k]['totalprice'] = $v['totalprice'];
-                $data[$k]['orderstatus'] = $v['orderstatus'];
-                $data[$k]['iscancel'] = $v['iscancel'];
-                $data[$k]['billtype'] = $v['billtype'];
-                $data[$k]['billhead'] = $v['billhead'];
-                $data[$k]['billcontent'] = $v['billcontent'];
-                $data[$k]['expresstype'] = $v['expresstype'];
-                $data[$k]['address'] = $v['address'];
-                $data[$k]['istoked'] = $v['istoked'];
-                $data[$k]['isurgent'] = $v['isurgent'];
-                $data[$k]['urgentshuom'] = $v['urgentshuom'];
-                $data[$k]['isorder'] = $v['isorder'];
-                $data[$k]['ordertime'] = $v['ordertime'];
-                $data[$k]['ordershuom'] = $v['ordershuom'];
-                $data[$k]['isstore'] = $v['isstore'];
-                $data[$k]['storestart'] = $v['storestart'];
-                $data[$k]['storeend'] = $v['storeend'];
-                $data[$k]['attribute'] = $v['attribute'];
-                $data[$k]['facepic'] = $v['facepic'];
-                $data[$k]['cepic'] = $v['cepic'];
-                $data[$k]['remark'] = $v['remark'];
-                //根据userid和订单编号获取订单详情
-                $orderdetail_model = M('orderdetail');
-                $array = array();
-                $array['userid'] = $v['userid'];
-                $array['orderid'] = $v['ordernum'];
-                $jieguo = $orderdetail_model->where($array)->find();
-                $data[$k]['order_detail']['goodsid'] = $jieguo['goodsid'];
-                $data[$k]['order_detail']['picurl'] = $jieguo['picurl'];
-                $data[$k]['order_detail']['goodsname'] = $jieguo['goodsname'];
-                $data[$k]['order_detail']['goodsaccount'] = $jieguo['goodsaccount'];
-                $data[$k]['order_detail']['goodscount'] = $jieguo['goodscount'];
-                $data[$k]['order_detail']['buyerwords'] = $jieguo['buyerwords'];
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
-
-     /*
-     * 删除订单
-     */
-    public function del_order(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['ordernum'] == NULL){
-            output_error('参数缺失');
-        }
-        $opt =array();
-        $opt['userid'] = $_REQUEST['userid'];
-        $opt['ordernum'] = $_REQUEST['ordernum'];
-        $order_model = M('order');
-        $result = $order_model->where($opt)->delete();
-        if($result){
-            //继续删除订单详情
-             $orderdetail_model = M('orderdetail');
-             $array = array();
-             $array['userid'] = $opt['userid'];
-             $array['orderid'] = $opt['ordernum'];
-             $jieguo = $orderdetail_model->where($array)->delete();
-             if($jieguo){
-                output_data(array(0=>'1'));
-            }else{
-                output_error('订单详情删除失败');
-            }
-             
-        }else{
-           
-             output_error('订单删除失败');
-        }   
-
-    }
-
-
-
-
-
-    /*
-     * 已取消的订单列表
-     */
-    public function my_cancellist(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-       
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['iscancel'] = 0;
-        $order_model = M('order');
-        $result = $order_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有已取消的订单信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['areaid'] = $v['areaid'];
-                $data[$k]['addid'] = $v['addid'];
-                $data[$k]['ordernum'] = $v['ordernum'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['buytime'] = $v['buytime'];
-                $data[$k]['totalprice'] = $v['totalprice'];
-                $data[$k]['orderstatus'] = $v['orderstatus'];
-                $data[$k]['iscancel'] = $v['iscancel'];
-                $data[$k]['billtype'] = $v['billtype'];
-                $data[$k]['billhead'] = $v['billhead'];
-                $data[$k]['billcontent'] = $v['billcontent'];
-                $data[$k]['expresstype'] = $v['expresstype'];
-                $data[$k]['address'] = $v['address'];
-                $data[$k]['istoked'] = $v['istoked'];
-                $data[$k]['isurgent'] = $v['isurgent'];
-                $data[$k]['urgentshuom'] = $v['urgentshuom'];
-                $data[$k]['isorder'] = $v['isorder'];
-                $data[$k]['ordertime'] = $v['ordertime'];
-                $data[$k]['ordershuom'] = $v['ordershuom'];
-                $data[$k]['isstore'] = $v['isstore'];
-                $data[$k]['storestart'] = $v['storestart'];
-                $data[$k]['storeend'] = $v['storeend'];
-                $data[$k]['attribute'] = $v['attribute'];
-                $data[$k]['facepic'] = $v['facepic'];
-                $data[$k]['cepic'] = $v['cepic'];
-                $data[$k]['remark'] = $v['remark'];
-                //根据userid和订单编号获取订单详情
-                $orderdetail_model = M('orderdetail');
-                $array = array();
-                $array['userid'] = $v['userid'];
-                $array['orderid'] = $v['ordernum'];
-                $jieguo = $orderdetail_model->where($array)->find();
-                $data[$k]['order_detail']['goodsid'] = $jieguo['goodsid'];
-                $data[$k]['order_detail']['picurl'] = $jieguo['picurl'];
-                $data[$k]['order_detail']['goodsname'] = $jieguo['goodsname'];
-                $data[$k]['order_detail']['goodsaccount'] = $jieguo['goodsaccount'];
-                $data[$k]['order_detail']['goodscount'] = $jieguo['goodscount'];
-                $data[$k]['order_detail']['buyerwords'] = $jieguo['buyerwords'];
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
-
-
-     /*
-     * 已完成的订单列表
-     */
-    public function my_completelist(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-       
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['orderstatus'] = 6;
-        $order_model = M('order');
-        $result = $order_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有已完成的订单信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['areaid'] = $v['areaid'];
-                $data[$k]['addid'] = $v['addid'];
-                $data[$k]['ordernum'] = $v['ordernum'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['buytime'] = $v['buytime'];
-                $data[$k]['totalprice'] = $v['totalprice'];
-                $data[$k]['orderstatus'] = $v['orderstatus'];
-                $data[$k]['iscancel'] = $v['iscancel'];
-                $data[$k]['billtype'] = $v['billtype'];
-                $data[$k]['billhead'] = $v['billhead'];
-                $data[$k]['billcontent'] = $v['billcontent'];
-                $data[$k]['expresstype'] = $v['expresstype'];
-                $data[$k]['address'] = $v['address'];
-                $data[$k]['istoked'] = $v['istoked'];
-                $data[$k]['isurgent'] = $v['isurgent'];
-                $data[$k]['urgentshuom'] = $v['urgentshuom'];
-                $data[$k]['isorder'] = $v['isorder'];
-                $data[$k]['ordertime'] = $v['ordertime'];
-                $data[$k]['ordershuom'] = $v['ordershuom'];
-                $data[$k]['isstore'] = $v['isstore'];
-                $data[$k]['storestart'] = $v['storestart'];
-                $data[$k]['storeend'] = $v['storeend'];
-                $data[$k]['attribute'] = $v['attribute'];
-                $data[$k]['facepic'] = $v['facepic'];
-                $data[$k]['cepic'] = $v['cepic'];
-                $data[$k]['remark'] = $v['remark'];
-                //根据userid和订单编号获取订单详情
-                $orderdetail_model = M('orderdetail');
-                $array = array();
-                $array['userid'] = $v['userid'];
-                $array['orderid'] = $v['ordernum'];
-                $jieguo = $orderdetail_model->where($array)->find();
-                $data[$k]['order_detail']['goodsid'] = $jieguo['goodsid'];
-                $data[$k]['order_detail']['picurl'] = $jieguo['picurl'];
-                $data[$k]['order_detail']['goodsname'] = $jieguo['goodsname'];
-                $data[$k]['order_detail']['goodsaccount'] = $jieguo['goodsaccount'];
-                $data[$k]['order_detail']['goodscount'] = $jieguo['goodscount'];
-                $data[$k]['order_detail']['buyerwords'] = $jieguo['buyerwords'];
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
-
-
-
-     /*
-     * 待收货的订单列表
-     */
-    public function my_shouhuolist(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-             output_error('请先登录');
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-       
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['orderstatus'] = 1;
-        $order_model = M('order');
-        $result = $order_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有待收货的订单信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['areaid'] = $v['areaid'];
-                $data[$k]['addid'] = $v['addid'];
-                $data[$k]['ordernum'] = $v['ordernum'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['buytime'] = $v['buytime'];
-                $data[$k]['totalprice'] = $v['totalprice'];
-                $data[$k]['orderstatus'] = $v['orderstatus'];
-                $data[$k]['iscancel'] = $v['iscancel'];
-                $data[$k]['billtype'] = $v['billtype'];
-                $data[$k]['billhead'] = $v['billhead'];
-                $data[$k]['billcontent'] = $v['billcontent'];
-                $data[$k]['expresstype'] = $v['expresstype'];
-                $data[$k]['address'] = $v['address'];
-                $data[$k]['istoked'] = $v['istoked'];
-                $data[$k]['isurgent'] = $v['isurgent'];
-                $data[$k]['urgentshuom'] = $v['urgentshuom'];
-                $data[$k]['isorder'] = $v['isorder'];
-                $data[$k]['ordertime'] = $v['ordertime'];
-                $data[$k]['ordershuom'] = $v['ordershuom'];
-                $data[$k]['isstore'] = $v['isstore'];
-                $data[$k]['storestart'] = $v['storestart'];
-                $data[$k]['storeend'] = $v['storeend'];
-                $data[$k]['attribute'] = $v['attribute'];
-                $data[$k]['facepic'] = $v['facepic'];
-                $data[$k]['cepic'] = $v['cepic'];
-                $data[$k]['remark'] = $v['remark'];
-                //根据userid和订单编号获取订单详情
-                $orderdetail_model = M('orderdetail');
-                $array = array();
-                $array['userid'] = $v['userid'];
-                $array['orderid'] = $v['ordernum'];
-                $jieguo = $orderdetail_model->where($array)->find();
-                $data[$k]['order_detail']['goodsid'] = $jieguo['goodsid'];
-                $data[$k]['order_detail']['picurl'] = $jieguo['picurl'];
-                $data[$k]['order_detail']['goodsname'] = $jieguo['goodsname'];
-                $data[$k]['order_detail']['goodsaccount'] = $jieguo['goodsaccount'];
-                $data[$k]['order_detail']['goodscount'] = $jieguo['goodscount'];
-                $data[$k]['order_detail']['buyerwords'] = $jieguo['buyerwords'];
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
-
-    /*
-     *我的预约
-     */
-    public function my_yuyuelist(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-        if($_REQUEST['isorder'] == NULL){
-            output_error("参数缺失");
-        }
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $array['isorder'] = $_REQUEST['isorder'];
-        $array['flag'] = intval($_REQUEST['flag'])>0?intval($_REQUEST['flag']):0;
-        $orderdetail_model = M('orderdetail');
-        $result = $orderdetail_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-            if($array['isorder'] == 0){
-
-                output_error('没有未预约的订单信息');
-            }else{
-                output_error('没有已预约的订单信息');
-            }
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['orderid'] = $v['orderid'];
-                $data[$k]['goodsid'] = $v['goodsid'];
-                $data[$k]['addid'] = $v['addid'];
-                $data[$k]['orderstatus'] = $v['orderstatus'];
-                $data[$k]['picurl'] = $v['picurl'];
-                $data[$k]['goodsname'] = $v['goodsname'];
-                $data[$k]['goodsaccount'] = $v['goodsaccount'];
-                $data[$k]['goodscount'] = $v['goodscount'];
-                $data[$k]['isorder'] = $v['isorder'];
-                $data[$k]['ordertime'] = $v['ordertime'];
-                $data[$k]['flag'] = $v['flag'];
-                $data[$k]['buyerwords'] = $v['buyerwords'];
-               
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
-
-
-
-     /*
-     *我的收藏
-     */
-    public function my_store(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-        
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $array = array();
-        $array['userid'] = $_REQUEST['userid'];
-        $store_model = M('store');
-        $result = $store_model->where($array)->order('id desc')->limit($start,$arrOpt['ps'])->select();
-        if($result[0] == NULL){
-             output_error('没有收藏信息');
-        }else{
-            $data = array();
-            foreach ($result as $k => $v) {
-                $data[$k]['id'] = $v['id'];
-                $data[$k]['userid'] = $v['userid'];
-                $data[$k]['goodsid'] = $v['goodsid'];
-                $data[$k]['picurl'] = $v['picurl'];
-                $data[$k]['goodsname'] = $v['goodsname'];
-                $data[$k]['goodsprice'] = $v['goodsprice'];
-                $data[$k]['flag'] = $v['flag'];
-            }
-            output_data($data);
-        }   
-    }
-
-
-
-
+  
 
 
     /*
@@ -2834,53 +2186,6 @@ class UserController extends MobileController{
 
 
 
- 
-
-
-
-
-    /*
-     *添加头像
-     */
-    public function add_headpic(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-        
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-
-        if($_REQUEST['photo'] == NULL){
-            output_error("请先上传头像");
-        }
-        $user_model = M('user');
-        //先判断数据库中的头像字段和当前上传的是否一样
-        $res = $user_model->where(array('id'=>$arr['userid']))->find();
-        if($_REQUEST['photo'] == $res['headurl']){
-            output_error("您已上传过该头像了哦");
-        }else{
-            $photo = "www.edeco.cc/Upload/" . $_REQUEST['photo'];
-             //根据userid更新其对应的头像
-            $result = $user_model->where(array('id'=>$arr['userid']))->save(array('headurl'=>$photo));
-            if($result){
-                //头像上传成功
-                $data =array();
-                $data['user_headpic'] = $photo;
-                output_data($data);
-            }else{
-                output_error("头像上传失败");
-            }
-        }
-       
-
-    }
 
 
     /*
@@ -2949,14 +2254,14 @@ class UserController extends MobileController{
 
 
 
-    /*
-     *添加收藏
-     */
-    public function add_shouchang(){
+   /*
+    * 用户进入公开直播间
+    */
+   public function into_publicroom(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error("请先登录");
         }
-        
+            
         //验证秘钥是否正确
         $token_model = M('usertoken');
         $arr = array();
@@ -2966,135 +2271,245 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['goodsid'] == NULL){
-            output_error("参数不全");
-        } 
-        //先根据goodsid获取到商品的信息
-        $goods_model = M('servergoods');
-        $goods_info = $goods_model->where(array('id'=>$_REQUEST['goodsid']))->find();
-        $arrOpt = array();
-        $arrOpt['userid'] = $_REQUEST['userid'];
-        $arrOpt['goodsid'] = $_REQUEST['goodsid'];
-        $arrOpt['goodsname'] = $goods_info['goodsname'];
-        $arrOpt['picurl'] = $goods_info['faceurl'];
-        $arrOpt['goodsprice'] = $goods_info['goodsprice1'];
-        $store_model = M('store');
-        $res = $store_model->add($arrOpt);
+        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['username'] == NULL || $_REQUEST['head_pic'] == NULL){
+             output_error('参数不全');
+        }
+        $userroom_model = M('user_room');
+        //先带着userid和房间id去查看当前用户是否在直播间内
+        $con['userid'] = $_REQUEST['userid'];
+        $con['liveroom_id'] = $_REQUEST['liveroom_id'];
+        $info = $userroom_model->where($con)->find();
+        if(empty($info)){
+            //则用户可以进入直播间
+            $conf['userid'] = $_REQUEST['userid'];
+            $conf['liveroom_id'] = $_REQUEST['liveroom_id'];
+            $conf['username'] = $_REQUEST['username'];
+            $conf['head_pic'] = $_REQUEST['head_pic'];
+            $res = $userroom_model->add($conf);
+            if($res){
+                output_data(array('result'=>'true'));
+            }else{
+                output_error('进入直播间失败');
+            }
+        }else{
+            output_error('您当前已经在直播间了');
+        }
+    }
+
+
+
+
+
+    /*
+     * 用户进入邀请好友直播间
+     */
+    public function into_friendsroom(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }
+            
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['roomuserid'] == NULL){
+            output_error('房主不能空');
+        }
+        //1.判断当前用户和房主是不是还有关系,即双方是相互关注的状态
+        $friends_model = M('friends_focus');
+        $info1 = $friends_model->where(array('user_id'=>$_REQUEST['userid']))->where(array('focus_user'=>$_REQUEST['roomuserid']))->find();
+        $info2 = $friends_model->where(array('user_id'=>$_REQUEST['roomuserid']))->where(array('focus_user'=>$_REQUEST['userid']))->find();
+        if(!empty($info1) && !empty($info2)){
+            //必须双方关注才是好友哦
+            if($_REQUEST['liveroom_id'] == NULL ||  $_REQUEST['username'] == NULL || $_REQUEST['head_pic'] == NULL){
+                output_error('参数不全');
+            }else{
+                $con['userid'] = $_REQUEST['userid'];
+                $con['liveroom_id'] = $_REQUEST['liveroom_id'];
+                $con['username'] = $_REQUEST['username'];
+                $con['head_pic'] = $_REQUEST['head_pic'];
+                $userroom_model = M('user_room');
+                $res = $userroom_model->add($con);
+                if($res){
+                    output_data(array('result'=>'true'));
+                }else{
+                    output_error('进入好友直播间失败');
+                }
+
+            }
+
+        }else{
+            output_error('不是好友关系哦');
+        }
+
+    }
+
+
+
+
+
+    /*
+     * 直播间详情
+     */
+    public function into_liveroom(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }
+            
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['liveroom_id'] == NULL){
+            output_error('参数不全');
+        }
+        $live_model = M('live');
+        $liveroom_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
+        if(empty($liveroom_info)){
+            $data['liveroom_info'] = NULL;
+        }else{
+                $data['liveroom_info']['room_id'] = $liveroom_info['id'];
+                $data['liveroom_info']['room_name'] = $liveroom_info['room_name'];
+                $data['liveroom_info']['room_pic_url'] = $liveroom_info['room_pic_url'];
+                $data['liveroom_info']['praise'] = $liveroom_info['praise'];
+                //根据房主id获取用户的信息
+                $con['id'] = $liveroom_info['room_user'];
+                $con['status'] = "start";
+                $user_model = M('user');
+                $user_info = $user_model->where($con)->find();
+                $data['liveroom_info']['roomuser_info']['userid'] = $user_info['id'];
+                $data['liveroom_info']['roomuser_info']['head_url'] = $user_info['head_url'];
+                $data['liveroom_info']['roomuser_info']['ni_name'] = $user_info['ni_name'];
+                 //获取当前直播间的观众人数
+                 $userroom_model = M('user_room');
+                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$liveroom_info['id']))->select();
+                 $data['liveroom_info']['user_num'] = count($guanzhong_info);
+                 //判断当前用户是否对此房间点过赞
+                 $roomdianzan_model = M('roomdianzan');
+                 $dianzan_info = $roomdianzan_model->where(array('userid'=>$_REQUEST['userid']))->where(array('roomid'=>$_REQUEST['liveroom_id']))->find();
+                 if(empty($dianzan_info)){
+                    //没有点过赞
+                    $data['liveroom_info']['is_dianzan'] = "no";
+                 }else{
+                    $data['liveroom_info']['is_dianzan'] = "yes";
+                 }
+                 //获取当前房间的评分
+                 $data['liveroom_info']['pingfen'] = round($liveroom_info['score']/$liveroom_info['score_usernum']);
+                //获取当前直播间的观众头像
+                 $arrOpt = array();
+                $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+                $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+                $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+                $userroom_model = M('user_room');
+                $userinfo = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->limit($start,$arrOpt['ps'])->select(); 
+                foreach ($userinfo as $k => $v) {
+                    $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
+                   $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
+                   $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
+                }
+                
+        }
+        output_data($data);
+
+    }
+
+
+
+
+
+    /*
+     * 观众退出直播间打分
+     */
+    public function out_score(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }
+            
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['score'] == NULL){
+            output_error('参数不全');
+        }
+        //1.打分
+        $live_model = M('live');
+        $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
         if($res){
-            $data =array();
-            $data['goodsid'] = $_REQUEST['goodsid'];
-            output_data($data);
+            //打分成功
+            $result = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score_usernum');
+            if($result){
+                 //打分成功
+                 //添加标签
+                 $tags_model = M('tags');
+                 $tag = explode(',',$_REQUEST['tag']);
+                 foreach ($tag as $k => $v) {
+                     //每个$v是一个标签,判断该标签是否存在
+                     $tag = "#" . $v;
+                     $res1 = $tags_model->where(array('tag'=>$tag))->find();
+                     if(empty($res1)){
+                        //没有该标签
+                        $conf1['tag'] = $tag;
+                        $conf1['add_date'] = time();
+                        $conf1['add_num'] = '0';
+                        $jieguo2 = $tags_model->add($conf1);
+                        if($jieguo2){
+                             $live_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
+                            $live_tags = $live_info['tags'];
+                             $live_tags2 = $live_tags . "," . $tagid;
+                             $jiegou3 = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->save(array('tags'=>$live_tags2));
+                             // if(!$jiegou3){
+                             //    output_error('标签添加失败1');
+                             // }
+                        }
+                     }else{
+                        //已经有该标签
+                        $res2 = $tags_model->where(array('tag'=>$tag))->setInc('add_num');
+                        $tagid = $res1['id'];
+                        //先去查看当前房间的tag
+                        $live_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
+                        $live_tags = $live_info['tags'];
+                        $pos = strrpos($live_tags,$tagid);
+                        if($pos == false){
+                            //说明没有
+                           $live_tags1 = $live_tags . "," . $tagid;
+                           $jiegou1 = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->save(array('tags'=>$live_tags1));
+                           // if(!$jiegou1){
+                           //      output_error('标签添加失败2');
+                           // }
+                        }
+                     }
+                     
+                 }
+                 output_data(array('result'=>'true'));
+            }else{
+                output_error('打分失败1');
+            }
         }else{
-            output_error("添加收藏失败");
-        }   
+            output_error('打分失败2');
+        }
+
     }
 
 
 
 
 
-
-    /*
-     *加入购物车
-     */
-    public function add_shoppingcart(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-        
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['goodsid'] == NULL || $_REQUEST['goodscount'] == NULL || $_REQUEST['acount'] == NULL){
-            output_error("参数不全");
-        } 
-        //先根据goodsid获取到商品的信息
-        $goods_model = M('servergoods');
-        $goods_info = $goods_model->where(array('id'=>$_REQUEST['goodsid']))->find();
-        $arrOpt = array();
-        $arrOpt['userid'] = $_REQUEST['userid'];
-        $arrOpt['areaid'] = $_REQUEST['areaid'];
-        $arrOpt['goodsid'] = $_REQUEST['goodsid'];
-        $arrOpt['servernum'] = $goods_info['servernum'];
-        $arrOpt['goodsname'] = $goods_info['goodsname'];
-        $arrOpt['goodspicurll'] = $goods_info['faceurl'];
-        $arrOpt['goodsprice'] = $goods_info['goodsprice1'];
-        $arrOpt['acount'] = $_REQUEST['acount'];
-        $arrOpt['goodscount'] = $_REQUEST['goodscount'];
-        $arrOpt['goodsprice2'] = $_REQUEST['goodsprice2'];
-        $arrOpt['goodsprice3'] = $_REQUEST['goodsprice3'];
-        $arrOpt['goodsprice4'] = $goods_info['goodsprice4'];
-        $arrOpt['goodsprice5'] = $goods_info['goodsprice5'];
-        //判断该条购物车数据的分类
-        if($_REQUEST['goodsprice2'] != NULL && $_REQUEST['goodsprice3'] != NULL){
-            //安装+配送
-            $arrOpt['attr'] = 2;
-        }elseif($_REQUEST['goodsprice2'] == NULL && $_REQUEST['goodsprice3'] != NULL){
-            //仅配送
-            $arrOpt['attr'] = 2;
-        }elseif($_REQUEST['goodsprice2'] != NULL && $_REQUEST['goodsprice3'] == NULL){
-            //仅安装
-            $arrOpt['attr'] = 1;
-        }else{
-            //基础建材
-            $arrOpt['attr'] = 0;
-        }
-        $arrOpt['specname'] = $_REQUEST['specname'];
-        $arrOpt['colorname'] = $_REQUEST['colorname'];
-        $shopping_cart = M('cart');
-        $result = $shopping_cart->add($arrOpt);
-        if($result){
-            $data = array();
-            $data['result'] = 1;
-            output_data($data);
-        }else{
-            output_error('加入购物车失败');
-        }
-    }
-
-
-
-    /*
-     *取消收藏
-     */
-    public function cancel_shouchang(){
-         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-        
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['goodsid'] == NULL){
-            output_error("参数不全");
-        } 
-        $store_model = M('store');
-        $condition = array();
-        $condition['userid'] = $arr['userid'];
-        $condition['goodsid'] = $_REQUEST['goodsid'];
-
-        $result = $store_model->where($condition)->delete();
-        if($result){
-            $data =array();
-            $data['result'] = true;
-            output_data($data);
-        }else{
-             output_error('取消收藏失败');
-        }
-    }
-   
     
 }
    

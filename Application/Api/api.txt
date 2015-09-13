@@ -118,9 +118,9 @@ datas :
 
 
 
-七.获取用户个人信息
+七.获取用户个人信息----------修改,添加用户的关注数,粉丝数,评分
     请求地址：http://api.skyeyeslive.com
-/index.php/api/user/user_info?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&client_id=qwert
+/index.php/api/user/user_info?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert
     接口参数:
         userid:
         key:
@@ -137,6 +137,9 @@ datas :
             "head_url": 头像,
             "profession": 职业,
             "per_sign": 个性签名
+            "focus_num": -------------------------------关注人数
+            "fans_num": -----------------------------粉丝数量
+            "score": --------------------------------评分
     }
 
 
@@ -237,7 +240,7 @@ datas :
 
 十二.获取我关注人的信息
  请求地址：http://api.skyeyeslive.com
-/index.php/api/user/my_focus?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
+/index.php/api/user/my_focus?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
         key->秘钥
@@ -480,7 +483,7 @@ datas :
 
 二十三.添加意见反馈(系统反馈)
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/add_feedback?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&feedback=这个软件非常好哦
+/index.php/api/user/add_feedback?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&feedback=这个软件非常好哦
  接口参数:
         userid:
         key:
@@ -533,9 +536,9 @@ datas :
 
 
 
-二十六.获取正在直播的房间(当前房间人数,还未完成)
+二十六.获取正在直播的房间
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/live_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+/index.php/api/user/live_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -546,26 +549,27 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-             "liveroom_info": [
+            "liveroom_info": [
             {
-                "id": 
-                "room_name": 直播间名
-                "room_pic_url": 直播封面
-                "isopen": 收费,公开,邀请好友
-                "fees": 收费标准
-                "praise": 赞数
-                "share_num": 分享数
-                "add_date": 创建时间
+                "room_id": ---------------房间id
+                "room_name": -------------房间名
+                "room_pic_url": -----------房间封面
+                "isopen": ------------------是否收费
+                "fees": ---------------------收费标准
+                "praise": -------------------赞数
+                "share_num": -----------------分享数
+                "add_date": ------------------房间创建时间
+                "tags": ----------------------房间标签
                 "user_info": {
-                    "userid": "6",
-                    "head_url": 头像
-                    "ni_name": 主播昵称
-                    "focus_num": 主播关注数
-                    "is_focus": 当前用户是否关注过主播
-                }
+                    "userid": ---------------------房主id
+                    "head_url": --------------------房主头像
+                    "ni_name": ---------------------房主昵称
+                    "focus_num": --------------------房主观众数
+                    "is_focus": ----------------------当前用户是否关注过房主
+                },
+                "user_num": ----------------------------观众数
             }
-          
-          }
+        ]
 
 
 
@@ -573,7 +577,7 @@ datas :
 
 二十七.获取过去72小时的直播房间
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/past_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+/index.php/api/user/past_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -636,12 +640,14 @@ datas :
 
 三十.根据热门标签获取直播房间信息
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/liveroom_bytag?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tagid=1&ps=5&page=1
+/index.php/api/user/liveroom_bytag?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&tagid=1&ps=5&page=1
 接口参数:
         userid:
         key:
         client_id
-       
+        tagid-------------房间标签id
+        ps
+        page
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -656,12 +662,13 @@ datas :
 
 三十一.获取排行首页展示
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/show_paihang?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
+/index.php/api/user/show_paihang?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
         client_id
-       
+        ps
+        page
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -678,30 +685,25 @@ datas :
         ],
         "liveroom_info": [
             {
-                "id": 
-                "room_name": 
-                "room_pic_url": 
-                "isopen": 
-                "fees": 
-                "praise": 
-                "share_num":
-                "add_date": 
-            },
-            {
-                "tags": 
+                "room_id": "1",
+                "room_name": "久居直播间",
+                "room_pic_url": "http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg",
+                "isopen": "收费",
+                "fees": "20",
+                "praise": null,
+                "share_num": "0",
+                "add_date": "1441009575",
+                "tags": "#帅哥 #大神 ",
                 "user_info": {
-                    "userid": 
-                    "head_url":
-                    "ni_name": 
-                    "focus_num":
-                    "is_focus": 
-                }
+                    "userid": "6",
+                    "head_url": "http://api.skyeyeslive.com/Upload/2015-08-28/55deb6edcb2e2.jpg",
+                    "ni_name": "久居",
+                    "focus_num": 1,
+                    "is_focus": "yes"
+                },
+                "user_num": 2
             }
         ]
-   
-          
-          }
-
 
 
 
@@ -876,6 +878,94 @@ datas :
 
 
 
+
+
+
+
+四十.用户进入公开直播房间
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
+接口参数:
+        userid:
+        key:
+        client_id
+       liveroom_id
+       username
+       head_pic
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+
+
+四十一.用户进入邀请好友直播房间
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/into_friendsroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
+接口参数:
+        userid:
+        key:
+        client_id
+       liveroom_id
+       username
+       head_pic
+       roomuserid---------------房主id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+
+四十二.直播间详情
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/into_liveroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&ps=10&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+       liveroom_id
+       ps----------------------获取用户头像用的
+       page
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+
+
+四十三.观众退出直播间打分
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/out_score?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&score=5&tag=帅哥,性感
+接口参数:
+        userid:
+        key:
+        client_id
+       liveroom_id
+       score
+       tag-----------两个标签之前用逗号隔开
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
 
 
 
