@@ -79,6 +79,8 @@ class GiftController extends AdminController{
                 $gift_status_set = $this->checkAuth($actionName2);
                 $actionName3["auth_a"]="search";
                 $search = $this->checkAuth($actionName3);
+                $actionName4["auth_a"]="edit_gift_save";
+                $edit_gift_save = $this->checkAuth($actionName4);
 
                 $this->assign('user_gift_list',$user_gift_list);
                 $this->assign('gift_status_set',$gift_status_set);
@@ -89,7 +91,44 @@ class GiftController extends AdminController{
 
         }
 
+        /**
+         * [edit_gift 编辑礼物,并查询出礼物相关参数]
+         * @return [type] [description]
+         */
         public function edit_gift(){
                 $data['id'] = $_REQUEST['id'];
+                $model = M('gift');
+                $info = $model ->where($data)->find();
+                $this ->ajaxReturn($info,"JSON");
         }
+        public function edit_gift_save(){
+                //根据是否修改图片判断
+                $upload = new \Think\Upload();// 实例化上传类
+                $upload->maxSize   =     3145728 ;// 设置附件上传大小
+                $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+                $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
+                $upload->savePath  = '';
+                // 上传文件 
+                $info   =   $upload->uploadOne($_FILES['upload']);
+
+                        if(!$info) {// 上传错误提示错误信息
+                        $this->error($upload->getError());
+                         }else{// 上传成功
+                         $data['gift_pic_url'] = C("WEB_URL")."/Upload/".$info['savepath'].$info['savename']; 
+                        }
+                $data['gift_name'] = $_REQUEST['edit_gift'];
+                $data['gift_price'] = $_REQUEST['edit_gift_price'];
+                $data['gift_description'] = $_REQUEST['edit_gift_depc'];
+                $data['userphone'] = $_REQUEST['editphone'];
+                $data['gift_sales'] = $_REQUEST['sales'];
+                $data['id'] = $_REQUEST['edit_id'];
+                $data['add_date'] = time();
+                $info = M('gift') ->save($data);
+                if($info){
+                $this->success('修改成功!',U('admin/gift/user_gift_list'));
+                }
+
+
+        }
+
 }

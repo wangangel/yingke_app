@@ -21,7 +21,7 @@ return array(
     'DEFAULT_MODULE'        =>  'Admin',
     'DEFAULT_CONTROLLER' => 'Login', 
     'DB_CHARSET'            =>  'utf8',                 // 数据库编码默认采用utf8
-
+    'WEB_URL'      => 'http://127.0.0.1/yingke/',
 
     'TMPL_ACTION_SUCCESS'=>'Public:jump',
     'TMPL_ACTION_ERROR'=>'Public:jump',
