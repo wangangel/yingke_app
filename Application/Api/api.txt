@@ -300,6 +300,35 @@ datas :
 
 
 
+
+
+
+十四(补).取消关注
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/cancel_focus?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&focus_user=7
+    接口参数：：
+        userid->用户id
+        key->秘钥
+        client_id->客户端唯一标识
+       focus_user->取消关注用户的id
+    返回值：
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        datas:
+       error:错误描述，执行成功没有该字段
+            datas: 
+                result
+
+
+
+
+
+
+
+
+
+
+
+
 十五.获取我的财富信息
  请求地址：http://api.skyeyeslive.com
 /index.php/api/user/my_moneyinfo?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
@@ -439,6 +468,29 @@ datas :
         "datas": {
           id
     }
+
+
+
+
+
+
+二十(补).删除我的店铺礼物
+请求地址：http://api.skyeyeslive.com/index.php/api/user/del_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_id=1
+ 接口参数:
+        userid:
+        key:
+        client_id
+        gift_id----------礼物ID
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          id
+    }
+
+
+
+
+
 
 
 

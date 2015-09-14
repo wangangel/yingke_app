@@ -648,6 +648,50 @@ class UserController extends MobileController{
 
 
 
+
+
+
+
+    /*
+     *取消关注
+     */
+    public function cancel_focus(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+
+        if($_REQUEST['focus_user'] == NULL){
+            output_error('参数不全');
+        }
+        $friendsfocus_model = M('friends_focus');
+        $con['userid'] = $_REQUEST['userid'];
+        $con['focus_user'] = $_REQUEST['focus_user'];
+        $con['status'] = "yes";
+        $res = $friendsfocus_model->where($con)->save(array('status'=>'0'));
+        if($res){
+            output_data(array('result'=>'true'));
+        }else{
+            output_error('取消关注失败');
+        }
+    }
+
+
+
+
+
+
+
+
     /*
      *获取我的财富信息
      */
@@ -1059,6 +1103,43 @@ class UserController extends MobileController{
             output_error('礼物添加失败');
         }
     }
+
+
+
+
+
+    /*
+     *用户删除自定义礼物
+     */
+    public function del_gift(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['gift_id']==NULL){
+            output_error('参数不全');
+        }
+        $gift_model = M('gift');
+        $con['id'] = $_REQUEST['gift_id'];
+        $con['userid'] = $_REQUEST['userid'];
+        $res = $gift_model->where($con)->delete();
+        if($res){
+            output_data(array('result'=>'true'));
+        }else{
+            output_error('礼物删除失败');
+        }
+    }
+
+
 
 
 
