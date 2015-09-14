@@ -1,46 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html class="no-js">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<include file="Index:css"/>
-<script language="javascript">
-  $(function(){
-    $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
-  $(window).resize(function(){  
-    $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
-    })  
-});  
-</script> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+  <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/assets/i/app-icon72x72@2x.png">
+
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/admin.css">
 </head>
+<body>
 
 
-<body style="background:#edf6fa;">
 
-  <div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="#">信息提示</a></li>
-    </ul>
-    </div>
-    
-    <div class="tech">
-    <dl>    
-    <?php if(isset($message)) {?>
-    <dd  style="margin-left:115px; color: red;"><img src="__ROOT__/Public/admin/images/ok.png"> <b><?php echo($message); ?></b></dd>
+
+
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <h2 class="am-text-center am-text-xxxl am-margin-top-lg">
+        <?php if(isset($message)) {?>
+     <p class="success">:) <?php echo($message); ?></p>
      <?php }else{?>
-     <dd  style="margin-left:250px; color: red;"><img src="__ROOT__/Public/admin/images/no.png"> <b><?php echo($error); ?></b></dd>
+     <p class="error">:( <?php echo($error); ?></p>
      <?php }?>
-    <dd  style="margin-left:250px;"><a id="href" href="<?php echo($jumpUrl); ?>">如果你的浏览器没有自动跳转，请点击这里...</a></dd><br />
-    <dd style="margin-left:250px;">等待时间：<b id="wait"><?php echo($waitSecond); ?></b></dd>
-    </dl>
-    
-        
+</h2>
+        <p class="am-text-center"><a id="href" href="<?php echo($jumpUrl); ?>">如果你的浏览器没有自动跳转，请点击这里...</a></p><br />
+        <p class="am-text-center">等待时间：<b id="wait"><?php echo($waitSecond); ?></b></p>
+        <pre class="page-404">
+        </pre>
+      </div>
     </div>
-    
- <script type="text/javascript">
+  </div>
+  <!-- content end -->
+
+</div>
+     <script type="text/javascript">
      (function(){
      var wait = document.getElementById('wait'),href = document.getElementById('href').href;
      var interval = setInterval(function(){
@@ -53,7 +55,5 @@
      })();
 
      </script>
-
 </body>
-
 </html>

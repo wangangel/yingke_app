@@ -21,16 +21,14 @@
     function checkPost(){
       var reg_date = $("#txtBeginDate").val();
       var reg_date2 = $("#txtEndDate").val();
-      var trade_name = $("#trade_name").val();
-      var seller_phone = $("#seller_phone").val();
-      var buyers_phone = $("#buyers_phone").val();
+      var gift_name = $("#gift_name").val();
       if(reg_date != "" && reg_date2 == ""){
           alert("请选择时间区间!");
           return false;
       }else if(reg_date == "" && reg_date2 != ""){
           alert("请选择时间区间!");
           return false;
-      }else if(reg_date == "" && reg_date2 == "" && trade_name == "" && seller_phone == "" && buyers_phone==""){
+      }else if(reg_date == "" && reg_date2 == "" && gift_name == ""){
           alert("请填写筛选条件!");
           return false;
       }
@@ -52,9 +50,8 @@
     <div class="tools">
 
        <in name="user_gift_list" value="$hava_authids"> 
-          <form id="" action="{:U('admin/Gift/search')}" method="post">
+          <form id="mySearch" action="{:U('admin/Gift/search')}" method="post">
             <ul class="toolbar">
-            <input type="button" onclick="addgift();" class="scbtn" value="添加礼物"/>
               <label>日期范围</label>
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
               至&nbsp;&nbsp;<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
@@ -72,8 +69,10 @@
                 <th>礼物图片</th>
                 <th>礼物名称</th>
                 <th>礼物描述</th>
+                <th>用户手机号</th>
                 <th>价格</th>
                 <th>销量</th>
+                <th>创建时间</th>
                 <th>状态</th>
                 <th>操作</th>
                
@@ -88,15 +87,17 @@
               <td><img src="{$vo.gift_pic_url}" width="80px" height="80px" /></td>
               <td>{$vo.gift_name}</td>
               <td>{$vo.gift_description}</td>
+              <td>{$vo.user_phone}</td>
               <td>{$vo.gift_price}</td>
               <td>{$vo.gift_sales}</td>
+              <td>{$vo.add_date|date='Y-m-d H:m:s',###}</td>
               <if condition="($vo.status eq 'start')">
               <td>已启用</td>
               <else/>
               <td>已停用</td>
               </if>
               <td>
-              <a href="javascript:;" >编辑</a>
+              <a href="javascript:;" onclick="edit_gift()" >编辑</a>
               <in name="gift_status_set" value="$hava_authids"> 
               <a href="javascript:;" onclick="set({$vo['id']},'start')">启用</a>
               <a href="javascript:;" onclick="set({$vo['id']},'stop')">停用</a>
@@ -108,24 +109,20 @@
     </table>
      {$page}
       <div class="tip" id="tip">
-        <div class="tiptop"><span>举报处理</span><a  onclick="cancel()" ></a></div>
-        <input type="hidden" id="account_id" value="{$_SESSION['admin_id']}"/>
+        <div class="tiptop"><span>修改礼物</span><a  onclick="cancel()" ></a></div>
         <div class="tipinfo">
             <ul class="forminfo">
-              <li><label>处理意见</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>
-               <li><label>处理结果</label><cite>
-                <input name="result" type="radio" value="notreal" />举报不实&nbsp;&nbsp;
-                <input name="result" type="radio" value="gag" />查实禁言一周&nbsp;&nbsp;
-                <input name="result" type="radio" value="dark" />查实小黑屋一周&nbsp;&nbsp;
-                <input name="result" type="radio" value="letter" />查实封款账号
-                </cite>
+               <li><label>礼物名称</label>
+               <input class="dfinput" id="gift_name" type="text" name="gift_name" value="{$edit_info.gift_name}" /></li>
+                
               </li>
-                <input name="" onclick="reset_password()" type="button"  class="sure" value="确定" />&nbsp;
+                <input name="" onclick="save_edit()" type="button"  class="sure" value="确定" />&nbsp;
                 <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
             </ul>
         </div>
-  </div>
+
     
+    </div>
   <script type="text/javascript">
   $('.tablelist tbody tr:odd').addClass('odd');
 
@@ -152,8 +149,19 @@
     }
 
 
-    function addgift(){
-      $("#tip").css("display","block");
+    function edit_gift(id){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/gift/edit_gift')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                success:function(data){
+                  
+                }
+            });
+      
     }
     /**
      * [reset description]弹出框
