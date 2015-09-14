@@ -377,7 +377,7 @@ h2{font-weight:normal;}
 .scbtn2{width:85px;height:35px; background:url(../images/btnbg4.png) repeat-x center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 
 /*tech*/
-.tech{background:url(../images/jszc.png) no-repeat 70px 50px; height:250px;}
+.tech{ height:250px;}
 .tech dl{padding-left:200px; padding-top:65px;}
 .tech dl dt{display:block; width:135px; height:37px; color:#fff;font-size:24px; background:#76b835; line-height:37px; text-align:center;border-radius:3px;behavior:url(js/pie.htc);margin-bottom:20px; }
 .tech dl dd{font-size:14px; display:block; height:30px;}

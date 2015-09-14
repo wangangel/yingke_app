@@ -1,0 +1,170 @@
+<include file="Index:css"/>
+<style type="text/css">
+/*tip*/
+.tip{width:650px; height:350px; position:absolute;top:10%; left:20%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.tiptop{height:40px; line-height:40px; background:url(__PUBLIC__/admin/images/tcbg.gif)  repeat-x; cursor:pointer;}
+.tiptop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
+.tiptop a{display:block; background:url(__PUBLIC__/admin/images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
+.tiptop a:hover{background:url(__PUBLIC__/admin/images/close1.png) no-repeat;}
+.tipinfo{padding-top:30px;margin-left:65px; height:95px;}
+.tipinfo span{width:95px; height:95px;float:left;}
+.tipright{float:left;padding-top:15px; padding-left:10px;}
+.tipright p{font-size:14px; font-weight:bold; line-height:35px;}
+.tipright cite{color:#858686;}
+.tipbtn{margin-top:45px; margin-left:125px;}
+.sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(__PUBLIC__/admin/images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
+.cancel{background:url(__PUBLIC__/admin/images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
+.forminfo{padding-left: 13px;}
+</style>
+<script type="text/javascript">
+   //提交
+    function checkPost(){
+      var reg_date = $("#txtBeginDate").val();
+      var reg_date2 = $("#txtEndDate").val();
+      var trade_name = $("#trade_name").val();
+      var seller_phone = $("#seller_phone").val();
+      var buyers_phone = $("#buyers_phone").val();
+      if(reg_date != "" && reg_date2 == ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 != ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 == "" && trade_name == "" && seller_phone == "" && buyers_phone==""){
+          alert("请填写筛选条件!");
+          return false;
+      }
+      $("#mySearch").submit();
+    }
+
+</script>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">用户礼物</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+
+       <in name="user_gift_list" value="$hava_authids"> 
+          <form id="" action="{:U('admin/Gift/search')}" method="post">
+            <ul class="toolbar">
+            <input type="button" onclick="addgift();" class="scbtn" value="添加礼物"/>
+              <label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至&nbsp;&nbsp;<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+               <input type="text" class='scinput' id="gift_name" placeholder="礼物名称" value="{$gift_name}" name='gift_name'/>
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
+            </ul>
+          </form>
+       </in>
+    </div>
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+                <th>序号</th>
+                <th>礼物图片</th>
+                <th>礼物名称</th>
+                <th>礼物描述</th>
+                <th>价格</th>
+                <th>销量</th>
+                <th>状态</th>
+                <th>操作</th>
+               
+                
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="gift_info" item="vo" key="k" >
+          
+            <tr>
+              <td>{$k+1}</td>
+              <td><img src="{$vo.gift_pic_url}" width="80px" height="80px" /></td>
+              <td>{$vo.gift_name}</td>
+              <td>{$vo.gift_description}</td>
+              <td>{$vo.gift_price}</td>
+              <td>{$vo.gift_sales}</td>
+              <if condition="($vo.status eq 'start')">
+              <td>已启用</td>
+              <else/>
+              <td>已停用</td>
+              </if>
+              <td>
+              <a href="javascript:;" >编辑</a>
+              <in name="gift_status_set" value="$hava_authids"> 
+              <a href="javascript:;" onclick="set({$vo['id']},'start')">启用</a>
+              <a href="javascript:;" onclick="set({$vo['id']},'stop')">停用</a>
+              </in>
+              </td>
+            </tr>
+            </foreach>
+        </tbody>
+    </table>
+     {$page}
+      <div class="tip" id="tip">
+        <div class="tiptop"><span>举报处理</span><a  onclick="cancel()" ></a></div>
+        <input type="hidden" id="account_id" value="{$_SESSION['admin_id']}"/>
+        <div class="tipinfo">
+            <ul class="forminfo">
+              <li><label>处理意见</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>
+               <li><label>处理结果</label><cite>
+                <input name="result" type="radio" value="notreal" />举报不实&nbsp;&nbsp;
+                <input name="result" type="radio" value="gag" />查实禁言一周&nbsp;&nbsp;
+                <input name="result" type="radio" value="dark" />查实小黑屋一周&nbsp;&nbsp;
+                <input name="result" type="radio" value="letter" />查实封款账号
+                </cite>
+              </li>
+                <input name="" onclick="reset_password()" type="button"  class="sure" value="确定" />&nbsp;
+                <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
+            </ul>
+        </div>
+  </div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+
+  function set(id_index,tag){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/gift/gift_status_set')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                error:function(data){
+                    alert("设置失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("设置成功！");
+                        window.location.reload();
+                    }else{
+                        alert("设置失败!");
+                    }
+                }
+            });
+    }
+
+
+    function addgift(){
+      $("#tip").css("display","block");
+    }
+    /**
+     * [reset description]弹出框
+     * @return {[type]} [description]
+     */
+    function reset(){
+        $("#tip").css('display','block');
+    }
+    function cancel(){
+        $("#tip").css('display','none');
+    }
+  </script>
+
+</body>

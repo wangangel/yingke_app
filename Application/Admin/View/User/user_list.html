@@ -94,7 +94,7 @@
               <td><if condition="$vo.status eq 'start'">启用<else/>停用</if></td>
               <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
                   <in name="user_detail" value="$hava_authids"> 
-                    <a href="{:U('admin/user/user_detail',array('id'=>$vo['id']))}">查看</a>|&nbsp;
+                    <a href="{:U('admin/user/user_detail',array('id'=>$vo['id']))}">查看</a>&nbsp;&nbsp;|&nbsp;
                    </in>
                     <in name="user_set" value="$hava_authids"> 
                       <if condition="$vo.status eq 'start'">

@@ -52,14 +52,11 @@ class UserController extends AdminController{
      * @return [type] [description]
      */
     public function user_detail(){
-        $id = $_GET['id'];
-        $result = M("comment")->delete($id);
-        if($result){
-            $this->success('操作成功！',U("admin/user/user_list"));
-        }else{
-            $this->error('操作失败',U("admin/user/user_list"));
-        }
-
+      //根据用户id来查找用户相关信息
+        $userid['id']  = $_GET['id'];
+        $user_info = M("user") ->where($userid)->find();
+        $this->assign('user_info',$user_info);
+        $this->display("User/user_edit_show");
     }
     /**
      * 设置是否启用
@@ -127,5 +124,14 @@ class UserController extends AdminController{
         $this->display("User/user_list");
     }
 
+
+
+/**
+ * [see_user 查看用户]
+ * @return [type] [description]
+ */
+public function see_user(){
+    
+    }
 
 }
