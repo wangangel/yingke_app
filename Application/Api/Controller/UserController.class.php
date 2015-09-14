@@ -2509,6 +2509,40 @@ class UserController extends MobileController{
 
 
 
+    /*  
+     *  观众分享房间
+     */
+    public function share_room(){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }
+            
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['liveroom_id'] == NULL){
+            output_error('参数不全');
+        }
+        $live_model = M('live');
+        $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('share_num');
+        if($res){
+            $live_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
+            output_data(array('share_num' =>$live_info['share_num']));
+        }else{
+            output_error('分享次数累加失败');
+        }
+    }
+
+
+
+
+
 
     
 }

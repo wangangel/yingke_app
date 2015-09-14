@@ -974,6 +974,32 @@ datas :
 
 
 
+四十四.分享房间,次数累加
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/share_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1
+接口参数:
+        userid:
+        key:
+        client_id
+       liveroom_id
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
