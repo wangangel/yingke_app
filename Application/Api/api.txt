@@ -649,6 +649,33 @@ datas :
 
 
 
+
+二十七(补).获取直播间(正在直播和72小时直播)
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/all_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
+接口参数:
+        userid:
+        key:
+        client_id
+        ps
+        page
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            liveroom_info--------------------------正在直播的房间
+            pastroom_info--------------------------过去72小时的直播间
+          
+          }
+
+
+
+
+
+
+
+
+
 二十八.创建直播间
 请求地址：http://api.skyeyeslive.com
 /index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://api.skyeyeslive.com
