@@ -44,9 +44,36 @@ class UserController extends AdminController{
     /**
      * 添加用户
      */
-    /*public function user_add_show(){
+    public function user_add(){
+        //处理头像上传
+        $upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize   =     3145728 ;// 设置附件上传大小
+        $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
+        $upload->savePath  = '';
+        // 上传文件 
+        if($_FILES['upload']['name']!=''){
+            $info   =   $upload->uploadOne($_FILES['upload']);
+            if(!$info) {// 上传错误提示错误信息
+                $this->error($upload->getError());
+            }else{// 上传成功
+                $data['head_url'] = C("WEB_URL")."/Upload/".$info['savepath'].$info['savename']; 
+            }
+        }
+        $_REQUEST['head_url'] =  $data['head_url'];
+        $_REQUEST['password'] =  md5($_REQUEST['password']);
+        $_REQUEST['birth_date'] =  strtotime($_REQUEST['reg_date2']);
+        $_REQUEST['reg_date'] =  time();
+        $user_model = M('user');
+        $user_info = $user_model -> add($_REQUEST);
+        if($user_info){
+            $this->success("保存成功!",U("admin/user/user_list"));
+        }else{
+            $this->error("保存失败!",U("admin/user/user_add"));
+        }
+    }
 
-    }*/
+
     /**
      * 用户详情
      * @return [type] [description]
@@ -58,6 +85,7 @@ class UserController extends AdminController{
         $this->assign('user_info',$user_info);
         $this->display("User/user_edit_show");
     }
+    
     /**
      * 设置是否启用
      */

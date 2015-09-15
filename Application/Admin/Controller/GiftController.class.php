@@ -5,6 +5,10 @@ use Think\Page;
 
 class GiftController extends AdminController{
 
+        /**
+         * [user_gift_list 用户礼物列表]
+         * @return [type] [description]
+         */
 	public function user_gift_list(){
                 $data['gift_sign'] = 'user';
         	$gift_model = M('gift');        
@@ -32,7 +36,12 @@ class GiftController extends AdminController{
         	$this->display("Gift/user_gift_list");
 	}
 
-public function system_gift_list(){
+
+        /**
+         * [system_gift_list 系统礼物列表]
+         * @return [type] [description]
+         */
+        public function system_gift_list(){
                 $data['gift_sign'] = 'system';
                 $gift_model = M('gift');        
                 //获取总数
