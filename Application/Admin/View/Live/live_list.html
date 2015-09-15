@@ -1,0 +1,125 @@
+<include file="Index:css"/>
+<script type="text/javascript">
+
+    //提交
+    function checkPost(){
+      var reg_date = $("#txtBeginDate").val();
+      var reg_date2 = $("#txtEndDate").val();
+      var phone_num = $("#phone_num").val();
+      var ni_name = $("#room_name").val();
+      if(reg_date != "" && reg_date2 == ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 != ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 == ""  && ni_name == ""){
+          alert("请填写筛选条件!");
+          return false;
+      }
+      $("#mySearch").submit();
+    }
+</script>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">直播列表</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+        
+          <form id="mySearch" action="{:U('admin/live/search')}" method="post">
+            <ul class="toolbar">
+              <li><label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+              </li>
+          
+            </ul>
+             <input type="text" class='scinput' id="room_name" placeholder="房间名" value="{$room_name}" name='room_name'>
+            <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
+          </form>
+        
+    </div>
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+       
+                <th>房间名称</th>
+                <th>房主</th>
+                <th>房间类型</th>
+                <th>收费/元</th>
+                <th>得分</th>
+                <th>围观</th>
+                <th>赞</th>
+               <!--  <th>商品</th>
+                <th>标签</th> -->
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="live_info" item="vo" key="k" >
+            <tr>
+              <td>{$k+1}</td>
+              <td>{$vo.room_name}</td>
+              <td>{$vo.isopen}</td>
+              <td>{$vo.fees}</td>
+              <td>{$vo.score}</td>
+              <td>{$vo.score_usernum}</td>
+              <td>{$vo.praise}</td>
+             <!--  <td>{$vo.profession}</td> -->
+              <td>{$vo.add_date|date='Y-m-d',###}</td>
+              <td><if condition="$vo.status eq 'in'">进行中<elseif condition="$vo.status eq 'stop'"/>已停止<else/>已完成</if></td>
+              <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
+                 
+                    <a href="{:U('admin/user/user_detail',array('id'=>$vo['id']))}">查看</a>&nbsp;&nbsp;|&nbsp;
+             <a href="#" onclick="set({$vo['id']},'0')"> 停用</a>
+              </td>
+            </tr>
+            </foreach>
+        </tbody>
+    </table>
+
+     {$page}
+
+
+    </div>
+    
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+  </script>
+
+</body>
+
+<script type="text/javascript">
+    //显示操作
+    function set(id_index,tag){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/user/user_set')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                error:function(data){
+                    alert("设置失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("设置成功！");
+                        window.location.reload();
+                    }else{
+                        alert("设置失败!");
+                    }
+                }
+            });
+    }
+</script>
