@@ -1,0 +1,212 @@
+<include file="Index:css"/>
+<style type="text/css">
+/*tip*/
+.tip{width:650px; height:470px; position:absolute;top:10%; left:20%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.tiptop{height:40px; line-height:40px; background:url(__PUBLIC__/admin/images/tcbg.gif)  repeat-x; cursor:pointer;}
+.tiptop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
+.tiptop a{display:block; background:url(__PUBLIC__/admin/images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
+.tiptop a:hover{background:url(__PUBLIC__/admin/images/close1.png) no-repeat;}
+.tipinfo{padding-top:30px;margin-left:65px; height:95px;}
+.tipinfo span{width:95px; height:95px;float:left;}
+.tipright{float:left;padding-top:15px; padding-left:10px;}
+.tipright p{font-size:14px; font-weight:bold; line-height:35px;}
+.tipright cite{color:#858686;}
+.tipbtn{margin-top:45px; margin-left:125px;}
+.sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(__PUBLIC__/admin/images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
+.cancel{background:url(__PUBLIC__/admin/images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
+.forminfo{padding-left: 13px;}
+</style>
+<script type="text/javascript">
+   //提交
+    function checkPost(){
+      var reg_date = $("#txtBeginDate").val();
+      var reg_date2 = $("#txtEndDate").val();
+      var gift_name = $("#gift_name").val();
+      if(reg_date != "" && reg_date2 == ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 != ""){
+          alert("请选择时间区间!");
+          return false;
+      }else if(reg_date == "" && reg_date2 == "" && gift_name == ""){
+          alert("请填写筛选条件!");
+          return false;
+      }
+      $("#mySearch").submit();
+    }
+
+</script>
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">用户礼物</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+    <div class="tools">
+
+       <in name="system_gift_list" value="$hava_authids"> 
+          <form id="mySearch" action="{:U('admin/Gift/search')}?type=save" method="post">
+            <ul class="toolbar">
+            <input name="" onclick="edit_gift('','save')" type="button"  class="scbtn" value="添加礼物" />
+              <label>日期范围</label>
+              起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+              至&nbsp;&nbsp;<input id="txtEndDate" name="reg_date2" value="{$reg_date2}" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
+               <input type="text" class='scinput' id="gift_name" placeholder="礼物名称" value="{$gift_name}" name='gift_name'/>
+              <label>&nbsp;</label><input type="button" onclick="checkPost();" class="scbtn" value="搜索"/>
+            </ul>
+          </form>
+       </in>
+    </div>
+    
+    <table class="tablelist">
+      <thead>
+      <tr>
+                <th>序号</th>
+                <th>礼物图片</th>
+                <th>礼物名称</th>
+                <th>礼物描述</th>
+                <th>用户手机号</th>
+                <th>价格</th>
+                <th>销量</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>操作</th>
+               
+                
+        </tr>
+        </thead>
+        <tbody>
+      <foreach name="gift_info" item="vo" key="k" >
+          
+            <tr>
+              <td>{$k+1}</td>
+              <td><img src="{$vo.gift_pic_url}" width="80px" height="80px" /></td>
+              <td>{$vo.gift_name}</td>
+              <td>{$vo.gift_description}</td>
+              <td>{$vo.user_phone}</td>
+              <td>{$vo.gift_price}</td>
+              <td>{$vo.gift_sales}</td>
+              <td>{$vo.add_date|date='Y-m-d H:m:s',###}</td>
+              <if condition="($vo.status eq 'start')">
+              <td>已启用</td>
+              <else/>
+              <td>已停用</td>
+              </if>
+              <td>
+              <a href="javascript:;" onclick="edit_gift({$vo['id']},'system_edit')" >编辑</a>
+              <in name="gift_status_set" value="$hava_authids"> 
+              <a href="javascript:;" onclick="set({$vo['id']},'start')">启用</a>
+              <a href="javascript:;" onclick="set({$vo['id']},'stop')">停用</a>
+              </in>
+              </td>
+            </tr>
+            </foreach>
+        </tbody>
+    </table>
+     {$page}
+      <div class="tip" id="tip">
+        <div class="tiptop"><span>礼物编辑</span><a  onclick="cancel()" ></a></div>
+        <div class="tipinfo">
+        <form id="editForm" action="{:U('admin/gift/edit_gift_save')}?type=save" enctype="multipart/form-data" method="post">
+            <ul class="forminfo">
+               <li><label>礼物名称</label>
+               <input class="dfinput" id="edit_gift_name" type="text" name="edit_gift" value="" /></li>
+              
+               <li><label>礼物图片</label>
+              <img src="" id="edit_gift_pic_url"  name="edit_gift_pic_url" width="100px" height="100px">&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="file" placeholder="修改图片" name='upload'></li>
+                <li><label>价格(元)</label>
+               <input class="dfinput" id="edit_gift_price" type="text" name="edit_gift_price" value="" /></li>
+               <li><label>礼物描述</label>
+               <input class="dfinput" id="edit_gift_depc" type="text" name="edit_gift_depc" value="" /></li>
+               <li><label>手机号</label>
+               <input class="dfinput" id="editphone" type="text" name="editphone" value="" /></li>
+               <li><label>销量</label>
+               <input class="dfinput" id="sales" type="text" name="sales" value="" /></li>
+               <input type="hidden" name="edit_id" id="edit_id">
+               <input type="hidden" name="system_edit" id="system_edit">
+                <input name=""  type="submit"  class="sure" value="确定" />&nbsp;
+                <input name="" onclick="cancel()" type="button"  class="cancel" value="取消" />
+            </ul>
+            </form>
+        </div>
+
+    
+    </div>
+  <script type="text/javascript">
+  $('.tablelist tbody tr:odd').addClass('odd');
+
+  function set(id_index,tag){
+      $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/gift/gift_status_set')}",
+                dataType:"json",
+                data:{id:id_index,status:tag},
+                timeout:30000,
+                error:function(data){
+                    alert("设置失败！")
+                },
+                success:function(data){
+                    if(data == 1){
+                        alert("设置成功！");
+                        window.location.reload();
+                    }else{
+                        alert("设置失败!");
+                    }
+                }
+            });
+    }
+
+
+    function edit_gift(id,type){
+      alert(id!='');
+      if(id!=''){
+ $.ajax({
+                cache:false,
+                type:"POST", 
+                url:"{:U('admin/gift/edit_gift')}",
+                dataType:"json",
+                data:{id:id},
+                timeout:30000,
+                success:function(data){
+                    $("#edit_gift_name").val(data.gift_name);
+                      if(data.gift_pic_url == ''){
+                        $("#edit_gift_pic_url").attr("src","__ROOT__/Public/admin/images/default_head.jpg");
+                      }else{
+                        $("#edit_gift_pic_url").attr("src",data.gift_pic_url);
+                      }
+                    $("#edit_gift_depc").val(data.gift_description);
+                    $("#edit_gift_price").val(data.gift_price);
+                    $("#editphone").val(data.user_phone);
+                    $("#sales").val(data.gift_sales);
+                    $("#edit_id").val(id);
+                    $("#system_edit").val(type);
+                  $("#tip").css("display","block");
+
+                }
+            });
+      }else{
+         $("#system_edit").val(type);
+        $("#tip").css("display","block");
+      }
+     
+      
+    }
+    /**
+     * [reset description]弹出框
+     * @return {[type]} [description]
+     */
+    function reset(){
+        $("#tip").css('display','block');
+    }
+    function cancel(){
+        $("#tip").css('display','none');
+    }
+  </script>
+
+</body>
