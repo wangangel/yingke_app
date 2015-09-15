@@ -120,7 +120,7 @@ datas :
 
 七.获取用户个人信息----------修改,添加用户的关注数,粉丝数,评分
     请求地址：http://api.skyeyeslive.com
-/index.php/api/user/user_info?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert
+/index.php/api/user/user_info?userid=6&key=ecc1715bea14533c55d61771ae02212a&client_id=qwert
     接口参数:
         userid:
         key:
@@ -629,7 +629,7 @@ datas :
 
 二十七.获取过去72小时的直播房间
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/past_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
+/index.php/api/user/past_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -652,7 +652,7 @@ datas :
 
 二十七(补).获取直播间(正在直播和72小时直播)
 请求地址：http://api.skyeyeslive.com
-/index.php/api/user/all_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
+/index.php/api/user/all_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
