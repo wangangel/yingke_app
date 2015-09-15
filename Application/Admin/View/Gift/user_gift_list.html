@@ -50,7 +50,7 @@
     <div class="tools">
 
        <in name="user_gift_list" value="$hava_authids"> 
-          <form id="mySearch" action="{:U('admin/Gift/search')}" method="post">
+          <form id="mySearch" action="{:U('admin/Gift/search')}?type=edit" method="post">
             <ul class="toolbar">
               <label>日期范围</label>
               起<input id="txtBeginDate" name="reg_date" value="{$reg_date}" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
@@ -111,13 +111,14 @@
       <div class="tip" id="tip">
         <div class="tiptop"><span>修改礼物</span><a  onclick="cancel()" ></a></div>
         <div class="tipinfo">
-        <form id="editForm" action="{:U('admin/gift/edit_gift_save')}" enctype="multipart/form-data" method="post">
+        <form id="editForm" action="{:U('admin/gift/edit_gift_save')}?type=edit" enctype="multipart/form-data" method="post">
             <ul class="forminfo">
                <li><label>礼物名称</label>
                <input class="dfinput" id="edit_gift_name" type="text" name="edit_gift" value="" /></li>
               
                <li><label>礼物图片</label>
-              <img src="" id="edit_gift_pic_url"  width="100px" height="100px">&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="file" placeholder="修改图片" name='upload'></li>
+              <img src="" id="edit_gift_pic_url"  name="edit_gift_pic_url" width="100px" height="100px">&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="file" placeholder="修改图片" name='upload'></li>
+              <input type="hidden" name="pic_url" id="pic_url">
                 <li><label>价格(元)</label>
                <input class="dfinput" id="edit_gift_price" type="text" name="edit_gift_price" value="" /></li>
                <li><label>礼物描述</label>
@@ -175,6 +176,7 @@
                     $("#edit_gift_pic_url").attr("src","__ROOT__/Public/admin/images/default_head.jpg");
                   }else{
                     $("#edit_gift_pic_url").attr("src",data.gift_pic_url);
+                     $("#pic_url").val(data.gift_pic_url);
                   }
                   $("#edit_gift_depc").val(data.gift_description);
                   $("#edit_gift_price").val(data.gift_price);

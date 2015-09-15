@@ -32,7 +32,36 @@ class GiftController extends AdminController{
         	$this->display("Gift/user_gift_list");
 	}
 
+public function system_gift_list(){
+                $data['gift_sign'] = 'system';
+                $gift_model = M('gift');        
+                //获取总数
+                $gift_count = $gift_model->where($data)->count();
+                //倒入分页类
+                import('Think.Page');
+                $page_class = new Page($gift_count,15);
+                $page_class->setConfig('prev', '«');
+                $page_class->setConfig('next', '»');
+                $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
+                $page = $page_class->show();
 
+                //为权限加上
+                $actionName1["auth_a"]="system_gift_list";
+                $system_gift_list = $this->checkAuth($actionName1);
+                $actionName2["auth_a"]="gift_status_set";
+                $gift_status_set = $this->checkAuth($actionName2);
+                $actionName3["auth_a"]="search";
+                $search = $this->checkAuth($actionName3);
+                $actionName4["auth_a"]="edit_gift_save";
+                $edit_gift_save = $this->checkAuth($actionName4);
+                $gift_info = $gift_model -> where($data) ->select();
+                $this->assign('system_gift_list',$system_gift_list);
+                $this->assign('gift_status_set',$gift_status_set);
+                $this->assign('page',$page);
+                $this->assign('search',$search);
+                $this->assign('gift_info',$gift_info);
+                $this->display("Gift/system_gift_list");
+        }
         /**
          * [gift_status_set 选择启用礼物,还是停用礼物]
          * @return [type] [description]
@@ -53,6 +82,11 @@ class GiftController extends AdminController{
                 $reg_date1 = strtotime($_POST["reg_date"]);
                 $reg_date2 = strtotime($_POST["reg_date2"]);
                 $gift_name = $_POST['gift_name'];
+                 if($_REQUEST['type'] !='save'){
+                        $map['gift_sign'] ='user';
+                 }else{
+                     $map['gift_sign'] ='system';   
+                 }
                 if($reg_date1 != "" && $reg_date2 !=""){
                     $map['add_date']  = array('between',array($reg_date1,$reg_date2));
                     $this->assign('reg_date',$_POST["reg_date"]);
@@ -73,21 +107,31 @@ class GiftController extends AdminController{
                 $page = $page_class->show();
                 $gift_info = $model->where($map)->limit($page_class->firstRow.','.$page_class->listRows)->select();
                 //为权限加上
+                if($_REQUEST['type'] !='save'){
                 $actionName1["auth_a"]="user_gift_list";
                 $user_gift_list = $this->checkAuth($actionName1);
+                $this->assign('user_gift_list',$user_gift_list);
+                }else{
+                $actionName1["auth_a"]="system_gift_list";
+                $system_gift_list = $this->checkAuth($actionName1);
+                $this->assign('system_gift_list',$system_gift_list);
+                }
                 $actionName2["auth_a"]="gift_status_set";
                 $gift_status_set = $this->checkAuth($actionName2);
                 $actionName3["auth_a"]="search";
                 $search = $this->checkAuth($actionName3);
                 $actionName4["auth_a"]="edit_gift_save";
                 $edit_gift_save = $this->checkAuth($actionName4);
-
-                $this->assign('user_gift_list',$user_gift_list);
                 $this->assign('gift_status_set',$gift_status_set);
                 $this->assign('search',$search);
                 $this->assign('page',$page);
                 $this->assign('gift_info',$gift_info);
-                $this->display("Gift/user_gift_list");
+                if($_REQUEST['type'] !='save'){
+                     $this->display("Gift/user_gift_list");
+                 }else{
+                    $this->display("Gift/system_gift_list");  
+                 }
+                
 
         }
 
@@ -101,7 +145,9 @@ class GiftController extends AdminController{
                 $info = $model ->where($data)->find();
                 $this ->ajaxReturn($info,"JSON");
         }
+
         public function edit_gift_save(){
+                $data['gift_pic_url'] = $_REQUEST['pic_url'];
                 //根据是否修改图片判断
                 $upload = new \Think\Upload();// 实例化上传类
                 $upload->maxSize   =     3145728 ;// 设置附件上传大小
@@ -109,23 +155,41 @@ class GiftController extends AdminController{
                 $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
                 $upload->savePath  = '';
                 // 上传文件 
-                $info   =   $upload->uploadOne($_FILES['upload']);
-
+                if($_FILES['upload']['name']!=''){
+                        $info   =   $upload->uploadOne($_FILES['upload']);
                         if(!$info) {// 上传错误提示错误信息
-                        $this->error($upload->getError());
-                         }else{// 上传成功
-                         $data['gift_pic_url'] = C("WEB_URL")."/Upload/".$info['savepath'].$info['savename']; 
+                                $this->error($upload->getError());
+                        }else{// 上传成功
+                                $data['gift_pic_url'] = C("WEB_URL")."/Upload/".$info['savepath'].$info['savename']; 
                         }
+                }
+               
                 $data['gift_name'] = $_REQUEST['edit_gift'];
                 $data['gift_price'] = $_REQUEST['edit_gift_price'];
                 $data['gift_description'] = $_REQUEST['edit_gift_depc'];
-                $data['userphone'] = $_REQUEST['editphone'];
+                $data['user_phone'] = $_REQUEST['editphone'];
                 $data['gift_sales'] = $_REQUEST['sales'];
-                $data['id'] = $_REQUEST['edit_id'];
                 $data['add_date'] = time();
-                $info = M('gift') ->save($data);
+                if($_REQUEST['type'] == 'edit'){
+                        $data['id'] = $_REQUEST['edit_id'];
+                        $info = M('gift') ->save($data);
+                        $list='user';
+                        $_su="修改"; 
+                }else if($_REQUEST['system_edit'] = 'system_edit' && $_REQUEST['edit_id'] != ''){
+                        $data['id'] = $_REQUEST['edit_id'];
+                        $info = M('gift') ->save($data);
+                        $list='system';
+                        $_su="修改"; 
+                }else{
+                        $info = M('gift') ->add($data);
+                        $list='system'; 
+                        $_su="保存";  
+                }
+                
                 if($info){
-                $this->success('修改成功!',U('admin/gift/user_gift_list'));
+                $this->success($_su.'成功!',U('admin/gift/'.$list.'_gift_list'));
+                }else{
+                $this->error($_su.'失败!',U('admin/gift/'.$list.'_gift_list')); 
                 }
 
 
