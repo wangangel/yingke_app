@@ -2,7 +2,6 @@
 namespace Admin\Controller;
 use Admin\Common\AdminController;
 use Think\Controller;
-
 class LoginController extends AdminController{
   
     /*
@@ -40,7 +39,6 @@ class LoginController extends AdminController{
             }
             
         }
-        
         $this->display();
         
     }
@@ -53,6 +51,8 @@ class LoginController extends AdminController{
         $this->success('退出成功！！',U('admin/login/login'));
     }
     
-    
+    public function index(){
+        $this->success('正在进入...',U('admin/index/index'));
+    }
     
 }
