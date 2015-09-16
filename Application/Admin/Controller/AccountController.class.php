@@ -94,6 +94,7 @@ class AccountController extends AdminController{
     public function account_edit(){
         $model_account = M('account');
         $arr['id'] = $_POST['id'];
+        $arr['account'] = $_POST['account'];
         $arr['password'] = md5($_POST['password']);
         $arr['employee'] = $_POST['employee'];
         $arr['add_person'] = $_POST['add_person'];
