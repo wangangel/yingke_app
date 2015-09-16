@@ -6,13 +6,13 @@ use Think\Page;
 use Think\Upload;
 class BackupController extends AdminController{
     protected $autoCheckFields =false;
-    var $database = 'anjuyi';
+    var $database = 'yingke';
     public $content; 
     /*
      * 数据备份列表
      */
     public function backup_list(){
-        $database = 'anjuyi';
+        $database = 'yingke';
         $Model = new \Think\Model();
         $sql="show tables";
         $list = $Model->query($sql); 
