@@ -2787,6 +2787,29 @@ class UserController extends MobileController{
 
 
 
+    /**
+     * 获取当前直播间的关注头像
+     */
+    public function guanzhong_headpic(){
+        if($_REQUEST['liveroom_id'] == NULL){
+            output_error('参数不全');
+        }else{
+             //获取当前直播间的观众头像
+             $arrOpt = array();
+            $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+            $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+            $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+            $userroom_model = M('user_room');
+            $userinfo = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->limit($start,$arrOpt['ps'])->select(); 
+            foreach ($userinfo as $k => $v) {
+                $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
+               $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
+               $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
+            }
+        }
+        output_data($data);
+       
+    }
 
 
     

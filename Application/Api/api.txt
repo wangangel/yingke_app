@@ -1076,6 +1076,26 @@ datas :
 
 
 
+四十五.获取当前直播间观众的头像
+请求地址：http://api.skyeyeslive.com
+/index.php/api/user/guanzhong_headpic?liveroom_id=1&ps=10&page=1
+接口参数:
+       liveroom_id
+       ps----------------------获取用户头像用的
+       page
+       
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+          
+          }
+
+
+
+
+
+
 
 
 
