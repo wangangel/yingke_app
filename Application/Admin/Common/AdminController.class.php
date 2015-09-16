@@ -10,7 +10,6 @@ class AdminController extends Controller{
     public function __construct(){
         parent::__construct();
 
-        
        $nowac = CONTROLLER_NAME."-".ACTION_NAME;
         //没有对应session信息的用户，禁止访问系统
         //除了后台登录login-login、
@@ -29,7 +28,7 @@ class AdminController extends Controller{
             $role_auth_ids = $role_info['role_auth_ids'];
             //判断当前请求的控制器-操作方法 是否存在于角色的权限范围内
             //$allowac默认允许访问权限
-            $allowac = "Login-logout,Login-login,Index-top,Index-left,Index-footer,Index-main,Index-index";
+            $allowac = "Login-logout,Login-login,Index-top,Index-left,Index-footer,Index-main,Index-index,Login-index";
             //var_dump(strpos($role_ac,$nowac));
             //① 判断本身是否拥有此权限
             //② 判断访问的是否是默认允许权限
@@ -38,9 +37,9 @@ class AdminController extends Controller{
                     && $_SESSION['admin_name']!='admin'){
                 $this->error('没有访问权限,若有需要请联系管理员！',U("admin/index/index"));
             }
-            
+
             $this->assign('hava_authids',$role_auth_ids);
-            
+           
         }
         
     }
@@ -130,33 +129,6 @@ class AdminController extends Controller{
         }
 
     }
-
-
-
-    /*
-     * 条件查询
-     */
-    public function tiaojian_search($opt){
-        //$opt为一个条件数组,数组的键为条件,数组的值为条件的值
-        // foreach ($opt as $k => $v) {
-        //     if($k == "c"){
-        //         //则说明$v的值是控制器名或数据表名
-        //         $Controller = $v;
-        //         $model = M($Controller);
-        //     }
-        //     if($k == "phone"){
-
-        //     }
-
-
-        // }
-        
-
-
-    }
-
-
-
 
 
   

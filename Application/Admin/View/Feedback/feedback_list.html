@@ -70,20 +70,16 @@
             <tr>
               <td><input type="checkbox"  name="ids" value="{$vo.id}"/></td>
               <td>{$k+1}</td>
-              <if condition="$vo.f_classify eq null">
-                <td>无</td>
-                <else/>
-                <td>{$vo.f_classify}<td>
-              </if>
+              <td>{$vo.f_classify}</td>
               <td>{$vo.f_content}</td>
               <td>{$vo.f_name}</td>
               <td>{$vo.f_phone}</td>
-              <td>{$vo.f_date|date='Y-m-d',###}</td>
+              <td>{$vo.f_date|date='Y-m-d',###}</td> 
               <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
-                  <in name="feedback_del" value="$hava_authids"> 
+                 <in name="feedback_del" value="$hava_authids"> 
                     <a href="{:U('admin/feedback/feedback_del',array('id'=>$vo['id']))}">删除</a>
-                   </in>
-              </td>
+                  </in>
+              </td> 
             </tr>
             </foreach>
         </tbody>
@@ -91,22 +87,6 @@
 
      {$page}
 
-   <!--    <div class="tip">
-            <div class="tiptop"><span>提示信息</span><a></a></div>
-            <div class="tipinfo">
-              <span><img src="images/ticon.png" /></span>
-                <div class="tipright">
-                <p>是否确认对信息的修改 ？</p>
-                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-                </div>
-              </div>
-              <div class="tipbtn">
-              <input name="" type="button"  class="sure" value="确定" />&nbsp;
-              <input name="" type="button"  class="cancel" value="取消" />
-            </div>
-      </div>
- -->
-    
     </div>
     
   <script type="text/javascript">
