@@ -1,11 +1,11 @@
-
+﻿
 
 
 用户模块
 
 一.获取手机验证码
 接口链接：
-http://api.skyeyeslive.com
+http://api.bihuo123.com
 /index.php/api/user/getphonecode?phone=18651551916&optype=1
 
 接口参数：
@@ -26,7 +26,7 @@ datas :
 
 二.验证手机验证码
 接口链接：
-http://api.skyeyeslive.com
+http://api.bihuo123.com
 /index.php/api/user/checkphonecode?phone=18651551916&code=368830
 接口参数：
 phpne
@@ -40,7 +40,7 @@ datas :
 
 
 三、用户注册
-    请求地址：http://api.skyeyeslive.com
+    请求地址：http://api.bihuo123.com
 /index.php/api/user/register?phonenumber=18651551916&password=juping&client_id=qwert
 
     接口参数：：
@@ -61,7 +61,7 @@ datas :
 
 
 四、用户登录
-    请求地址：http://api.skyeyeslive.com
+    请求地址：http://api.bihuo123.com
 /index.php/api/user/login?phone=18651551916&password=juping&client_id=qwert
 
     接口参数：：
@@ -83,7 +83,7 @@ datas :
 
 
 五、用户退出登录
-    请求地址：http://api.skyeyeslive.com
+    请求地址：http://api.bihuo123.com
 /index.php/api/user/logout?key=ea5b00dac64674ba50746705ab22be8f&userid=6&client_id=qwert
 
     接口参数：：
@@ -102,7 +102,7 @@ datas :
 
 
 六、忘记密码
-     请求地址：http://api.skyeyeslive.com
+     请求地址：http://api.bihuo123.com
 /index.php/api/user/forget_password?phonenum=18651551916&password=123123
 
     接口参数：：
@@ -119,7 +119,7 @@ datas :
 
 
 七.获取用户个人信息----------修改,添加用户的关注数,粉丝数,评分
-    请求地址：http://api.skyeyeslive.com
+    请求地址：http://api.bihuo123.com
 /index.php/api/user/user_info?userid=6&key=ecc1715bea14533c55d61771ae02212a&client_id=qwert
     接口参数:
         userid:
@@ -147,8 +147,8 @@ datas :
 
 
 八.修改个人信息接口
-请求地址：http://api.skyeyeslive.com
-/index.php/api/user/editor_userinfo?userid=6&key=265a410b0b950c14de9cfde7b5271f30&ni_name=久居&sex=男&birth_date=1992-12-30&head_url=http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
+/index.php/api/user/editor_userinfo?userid=6&key=265a410b0b950c14de9cfde7b5271f30&ni_name=久居&sex=男&birth_date=1992-12-30&head_url=http://api.bihuo123.com
 /Upload/2015-08-28/55deb6edcb2e2.jpg&profession=程序猿&per_sign=我的世界里只有代码&lable=屌丝,程序猿&client_id=qwert
   参数：
        必须参数：
@@ -159,7 +159,7 @@ datas :
        nickname:
        sex:性别
        birthday:格式类似于1992-12-30
-       head_url:http://api.skyeyeslive.com
+       head_url:http://api.bihuo123.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg
         lable-------------------------------------------多个标签用逗号隔开
        ......
@@ -176,7 +176,7 @@ datas :
 
 
 九.上传图片接口
-  请求地址：http://api.skyeyeslive.com
+  请求地址：http://api.bihuo123.com
 /index.php/api/index/add_pic
     接口参数：：
         userid->用户id
@@ -195,7 +195,7 @@ datas :
 
 
 十.用户绑定接口
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/user_bind?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&qq=1550010428&weixin=jiuju2015&weibo=jiujusinna&renren=renren&client_id=qwert
     接口参数：：
         userid->用户id
@@ -218,7 +218,7 @@ datas :
 
 
 十一.获取我的消息
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/my_message?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
@@ -239,7 +239,7 @@ datas :
 
 
 十二.获取我关注人的信息
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/my_focus?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
@@ -258,7 +258,7 @@ datas :
 
 
 十三.获取我的粉丝信息
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/my_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
@@ -282,7 +282,7 @@ datas :
 
 
 十四.关注用户
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/focus_user?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&focus_user=7
     接口参数：：
         userid->用户id
@@ -304,7 +304,7 @@ datas :
 
 
 十四(补).取消关注
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/cancel_focus?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&focus_user=7
     接口参数：：
         userid->用户id
@@ -330,7 +330,7 @@ datas :
 
 
 十五.获取我的财富信息
- 请求地址：http://api.skyeyeslive.com
+ 请求地址：http://api.bihuo123.com
 /index.php/api/user/my_moneyinfo?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
     接口参数：：
         userid->用户id
@@ -351,7 +351,7 @@ datas :
 
 
 十六.绑定银行卡
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/bind_bankcard?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&card_username=久居&bankname=工商银行&card_num=123456789
     接口参数:
         userid:
@@ -369,7 +369,7 @@ datas :
 
 
 十七.用户获取绑定银行的信息
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/user_bindcard?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
     接口参数:
         userid:
@@ -386,7 +386,7 @@ datas :
 
 
 十八.余额提现
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/cash_tixian?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&money=300
  接口参数:
         userid:
@@ -408,7 +408,7 @@ datas :
 
 
 十八(补).提现记录
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/tixian_record?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
  接口参数:
         userid:
@@ -433,7 +433,7 @@ datas :
 
 
 十九.获取我的店铺礼物
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/myshop_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
  接口参数:
         userid:
@@ -454,7 +454,7 @@ datas :
 
 
 二十.添加我的店铺礼物
-请求地址：http://api.skyeyeslive.com/index.php/api/user/add_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_pic_url=http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com/index.php/api/user/add_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_pic_url=http://api.bihuo123.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg&gift_name=怡宝&gift_price=20
  接口参数:
         userid:
@@ -475,7 +475,7 @@ datas :
 
 
 二十(补).删除我的店铺礼物
-请求地址：http://api.skyeyeslive.com/index.php/api/user/del_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_id=1
+请求地址：http://api.bihuo123.com/index.php/api/user/del_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&gift_id=1
  接口参数:
         userid:
         key:
@@ -498,7 +498,7 @@ datas :
 
 
 二十一.获取我的标签
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/mylabel?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
  接口参数:
         userid:
@@ -515,7 +515,7 @@ datas :
 
 
 二十二.添加我的标签
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/add_mylabel?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&lable=帅哥
  接口参数:
         userid:
@@ -534,7 +534,7 @@ datas :
 
 
 二十三.添加意见反馈(系统反馈)
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/add_feedback?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&feedback=这个软件非常好哦
  接口参数:
         userid:
@@ -552,7 +552,7 @@ datas :
 
 
 二十四.获取系统推荐好友
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/recommend_info?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
  接口参数:
         userid:
@@ -571,7 +571,7 @@ datas :
 
 
 二十五.条件搜索
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/tiaojian_search?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tiaojian=18456123789
  接口参数:
         userid:
@@ -589,7 +589,7 @@ datas :
 
 
 二十六.获取正在直播的房间
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/live_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
@@ -628,7 +628,7 @@ datas :
 
 
 二十七.获取过去72小时的直播房间
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/past_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
@@ -651,7 +651,7 @@ datas :
 
 
 二十七(补).获取直播间(正在直播和72小时直播)
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/all_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
@@ -677,8 +677,8 @@ datas :
 
 
 二十八.创建直播间
-请求地址：http://api.skyeyeslive.com
-/index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
+/index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://api.bihuo123.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20
 接口参数:
         userid:
@@ -699,7 +699,7 @@ datas :
 
 
 二十九.添加房间标签
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/add_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tag=帅哥
 接口参数:
         userid:
@@ -718,7 +718,7 @@ datas :
 
 
 三十.根据热门标签获取直播房间信息
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/liveroom_bytag?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&tagid=1&ps=5&page=1
 接口参数:
         userid:
@@ -740,7 +740,7 @@ datas :
 
 
 三十一.获取排行首页展示
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/show_paihang?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
@@ -775,7 +775,7 @@ datas :
                 "tags": "#帅哥 #大神 ",
                 "user_info": {
                     "userid": "6",
-                    "head_url": "http://api.skyeyeslive.com/Upload/2015-08-28/55deb6edcb2e2.jpg",
+                    "head_url": "http://api.bihuo123.com/Upload/2015-08-28/55deb6edcb2e2.jpg",
                     "ni_name": "久居",
                     "focus_num": 1,
                     "is_focus": "yes"
@@ -788,7 +788,7 @@ datas :
 
 
 三十二.获取热门标签(默认取5条标签)
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/show_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 接口参数:
         userid:
@@ -818,7 +818,7 @@ datas :
 
 三十三.购买礼物
 
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/buy_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&giftname=玫瑰花&giftprice=10&number=2&paytype=微信支付&roomuserid=7
 接口参数:
         userid:
@@ -840,7 +840,7 @@ datas :
 
 
 三十四.付费观看
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/buy_room?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomname=脱衣舞哦&roomprice=20&paytype=微信支付&roomuserid=7
 接口参数:
         userid:
@@ -860,7 +860,7 @@ datas :
 
 
 三十五.对房间点赞
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/room_dianzan?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=1
 接口参数:
         userid:
@@ -878,7 +878,7 @@ datas :
 
 
 三十六.举报房间
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/add_jubao?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=1&content=色情主播&roomusername=鬼鬼
 接口参数:
         userid:
@@ -900,7 +900,7 @@ datas :
 
 
 三十七.对房间进行反馈
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/add_roomfeedback?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&feedback=这个主播非常好哦
  接口参数:
         userid:
@@ -921,7 +921,7 @@ datas :
 
 
 三十八.修改密码
-     请求地址：http://api.skyeyeslive.com
+     请求地址：http://api.bihuo123.com
 /index.php/api/user/edit_password?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&password=123123
 
     接口参数：：
@@ -940,7 +940,7 @@ datas :
 
 
 三十九.获取用户的绑定信息
-  请求地址：http://api.skyeyeslive.com
+  请求地址：http://api.bihuo123.com
 /index.php/api/user/band_info?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert
 
     接口参数：：
@@ -962,7 +962,7 @@ datas :
 
 
 四十.用户进入公开直播房间
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
 接口参数:
         userid:
@@ -984,7 +984,7 @@ datas :
 
 
 四十一.用户进入邀请好友直播房间
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/into_friendsroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
 接口参数:
         userid:
@@ -1006,7 +1006,7 @@ datas :
 
 
 四十二.直播间详情
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/into_liveroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&ps=10&page=1
 接口参数:
         userid:
@@ -1029,7 +1029,7 @@ datas :
 
 
 四十三.观众退出直播间打分
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/out_score?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&score=5&tag=帅哥,性感
 接口参数:
         userid:
@@ -1054,7 +1054,7 @@ datas :
 
 
 四十四.分享房间,次数累加
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/share_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1
 接口参数:
         userid:
@@ -1077,7 +1077,7 @@ datas :
 
 
 四十五.获取当前直播间观众的头像
-请求地址：http://api.skyeyeslive.com
+请求地址：http://api.bihuo123.com
 /index.php/api/user/guanzhong_headpic?liveroom_id=1&ps=10&page=1
 接口参数:
        liveroom_id

@@ -1,46 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
 <include file="Index:css"/>
-
-<style type="text/css">
-.forminfos{padding-left:43px;}
-.forminfos li label{width:86px;line-height:34px; display:block; float:left;}
-.forminfos li i{color:#7f7f7f; padding-left:20px; font-style:normal;}
-.forminfos li cite{display:block; padding-top:10px;}
-.forminfos ul{overflow:hidden;width:100%;}
-.forminfos li{width:33.33%;margin-bottom:13px;line-height:25px;float:left;}
-</style>
-</head>
-
-<body>
-
-  <div class="place">
+  <!-- sidebar end -->
+  <style type="text/css">
+  .admin-content{
+    height: 3000px;
+  }
+  *{font-size: 14px;}
+ul{overflow:hidden;width:100%;}
+ul li{width:33.33%;float:left;}
+                 </style>
+  <!-- content start -->
+  <div class="admin-content">
+   <div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li>权限分配</li>
-
+    <li><a href="#">权限分配</a></li>
     </ul>
     </div>
-       <form id="myForm" action={:U('admin/role/distribute_role')} method='post'>
-    <div class="formbody">
-   <foreach name="auth_infoA" item="vo" key="k" >  
-              <ul  class="forminfos">
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+       
+
+      </div>
+
+       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form id="myForm" class="am-form am-form-horizontal" action={:U('admin/role/distribute_role')} method='post'>
+          <div style="font-size: 13px; margin: 10px 20px;">
+            <h4>角色&nbsp;[&nbsp;{$role_info.role_name}&nbsp;]</h4>
+              <foreach name="auth_infoA" item="vo" key="k" >  
+              <ul  class="am-list am-list-static">
                     <in name="vo.auth_id" value="$have_auth_arr">
-                       <li> <input type='checkbox' name='ids' onclick="checkAll(this,{$vo.auth_id})" value='{$vo.auth_id}'checked='checked'> <b><font color="red">{$vo.auth_name}</font></b></li> 
+                       <li  style="line-height: 30px;color: red;"> <input type='checkbox' name='ids' onclick="checkAll(this,{$vo.auth_id})" value='{$vo.auth_id}'checked='checked'> <b>{$vo.auth_name} </b></li> 
                       <else/>
-                        <li><input type='checkbox' id="check{$vo.auth_id}" name='ids' onclick="checkAll(this,{$vo.auth_id})" value='{$vo.auth_id}'> <b><font color="red">{$vo.auth_name}</font></b></li>
+                        <li  style="line-height: 30px;color: red;"><input type='checkbox' id="check{$vo.auth_id}" name='ids' onclick="checkAll(this,{$vo.auth_id})" value='{$vo.auth_id}'> <b>{$vo.auth_name} </b></li>
                     </in>
                </ul>
-                    <ul id='li_style' class="forminfos">
+               
+                    <ul id='li_style' class="am-list am-list-static am-list-border am-list-striped">
                       <foreach name="auth_infoB" item="vv" key="k" >
                           <if condition="$vv['auth_pid'] eq $vo['auth_id']">
                                 <in name="vv.auth_id" value="$have_auth_arr">
-                                  <li><input type='checkbox' id="childid{$vv.auth_pid}" name='ids' value='{$vv.auth_id}'checked='checked'>{$vv.auth_name}</li>
+                                  <li style="line-height: 30px;"><input type='checkbox' id="childid{$vv.auth_pid}" name='ids' value='{$vv.auth_id}'checked='checked'>{$vv.auth_name}</li>
                                     <else/>
-                                    <li>
+                                    <li style="line-height: 30px;">
                                       <input type='checkbox'id="childid{$vv.auth_pid}" name='ids' value='{$vv.auth_id}'>
                                     {$vv.auth_name}
                                   </li>
@@ -48,14 +57,27 @@
                           </if>
                       </foreach>
                     </ul>
+              
+         
                </foreach>
-   
-    
-    <input type="hidden"  name="role_id" value="{$role_info.role_id}">
+          
+        </div>
+          <input type="hidden"  name="role_id" value="{$role_info.role_id}">
           <input type="hidden" id="authids" name="authids" value=""/>
-       <button type="button" onclick="getAll()" class="btn">分配权限</button>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" onclick="getAll()" class="btn">分配权限</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-</form>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<include file="Index:footer"/>
 <script data-cfasync="false" type="text/javascript">
   function checkAll(obj,index){
     if(obj.checked){
@@ -85,6 +107,3 @@
   }
   
 </script>
-</body>
-
-</html>

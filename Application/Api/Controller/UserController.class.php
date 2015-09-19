@@ -1401,6 +1401,7 @@ class UserController extends MobileController{
         $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
         $arr['token'] = $_REQUEST['key'];
+
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
@@ -1599,6 +1600,7 @@ class UserController extends MobileController{
                 $data['liveroom_info'][$k]['praise'] = $v['praise'];
                 $data['liveroom_info'][$k]['share_num'] = $v['share_num'];
                 $data['liveroom_info'][$k]['add_date'] = $v['add_date'];
+                $data['liveroom_info'][$k]['groupid'] = $v['groupid'];
                  //根据标签id获取标签信息
                 $tiaojian['id'] = array('in',$v['tags']);
                 $tags_model = M('tags');
@@ -1750,6 +1752,7 @@ class UserController extends MobileController{
         $opt['fees'] = $_REQUEST['fees'];
         $opt['status'] = "in";
         $opt['add_date'] = time();
+        $opt['groupid'] = $_REQUEST['groupid'];
         $tags = explode(',', $_REQUEST['tags']);
         if(empty($tags)){
             $opt['tags'] = NULL;
