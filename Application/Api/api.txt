@@ -240,7 +240,7 @@ datas :
 
 十二.获取我关注人的信息
  请求地址：http://api.bihuo123.com
-/index.php/api/user/my_focus?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=10&page=1
+/index.php/api/user/my_focus?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=10&page=1
     接口参数：：
         userid->用户id
         key->秘钥
@@ -535,7 +535,7 @@ datas :
 
 二十三.添加意见反馈(系统反馈)
 请求地址：http://api.bihuo123.com
-/index.php/api/user/add_feedback?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&feedback=这个软件非常好哦
+/index.php/api/user/add_feedback?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&feedback=这个软件非常好哦
  接口参数:
         userid:
         key:
@@ -590,7 +590,7 @@ datas :
 
 二十六.获取正在直播的房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/live_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
+/index.php/api/user/live_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -623,13 +623,13 @@ datas :
             }
         ]
 
-
+        
 
 
 
 二十七.获取过去72小时的直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/past_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
+/index.php/api/user/past_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -679,7 +679,7 @@ datas :
 二十八.创建直播间
 请求地址：http://api.bihuo123.com
 /index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://api.bihuo123.com
-/Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20
+/Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20&groupid=2
 接口参数:
         userid:
         key:
@@ -689,7 +689,7 @@ datas :
         tags-------------标签id,多个用逗号隔开
         isopen----------收费,公开,邀请好友
         fees-----------收费标准
-
+        groupid ---------云直播id
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
@@ -719,7 +719,7 @@ datas :
 
 三十.根据热门标签获取直播房间信息
 请求地址：http://api.bihuo123.com
-/index.php/api/user/liveroom_bytag?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&tagid=1&ps=5&page=1
+/index.php/api/user/liveroom_bytag?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&tagid=1&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -741,7 +741,7 @@ datas :
 
 三十一.获取排行首页展示
 请求地址：http://api.bihuo123.com
-/index.php/api/user/show_paihang?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&ps=5&page=1
+/index.php/api/user/show_paihang?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
         userid:
         key:
@@ -922,7 +922,7 @@ datas :
 
 三十八.修改密码
      请求地址：http://api.bihuo123.com
-/index.php/api/user/edit_password?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&password=123123
+/index.php/api/user/edit_password?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&password=123123
 
     接口参数：：
         userid
@@ -941,7 +941,7 @@ datas :
 
 三十九.获取用户的绑定信息
   请求地址：http://api.bihuo123.com
-/index.php/api/user/band_info?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert
+/index.php/api/user/band_info?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert
 
     接口参数：：
         userid
@@ -985,7 +985,7 @@ datas :
 
 四十一.用户进入邀请好友直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_friendsroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
+/index.php/api/user/into_friendsroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
 接口参数:
         userid:
         key:
@@ -1007,7 +1007,7 @@ datas :
 
 四十二.直播间详情
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_liveroom?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&ps=10&page=1
+/index.php/api/user/into_liveroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&ps=10&page=1
 接口参数:
         userid:
         key:
@@ -1030,7 +1030,7 @@ datas :
 
 四十三.观众退出直播间打分
 请求地址：http://api.bihuo123.com
-/index.php/api/user/out_score?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1&score=5&tag=帅哥,性感
+/index.php/api/user/out_score?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&score=5&tag=帅哥,性感
 接口参数:
         userid:
         key:
@@ -1055,7 +1055,7 @@ datas :
 
 四十四.分享房间,次数累加
 请求地址：http://api.bihuo123.com
-/index.php/api/user/share_room?userid=6&key=f0f4cf379a736d8f12e3793c8de27ae6&client_id=qwert&liveroom_id=1
+/index.php/api/user/share_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1
 接口参数:
         userid:
         key:

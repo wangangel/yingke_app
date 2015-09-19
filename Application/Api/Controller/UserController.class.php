@@ -1412,7 +1412,7 @@ class UserController extends MobileController{
         $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $live_model = M('live');
-        $liveroom_info = $live_model->where(array('status'=>'in'))->limit($start,$arrOpt['ps'])->select();
+        $liveroom_info = $live_model->where(array('status'=>'in'))->order('add_date desc')->limit($start,$arrOpt['ps'])->select();
         if(empty($liveroom_info)){
             $data['liveroom_info'] = NULL;
             output_data($data);
@@ -1500,7 +1500,7 @@ class UserController extends MobileController{
         $time = strtotime("-3 day");
         $cond['add_date'] = array('egt',$time);
         $live_model = M('live');
-        $live_info = $live_model->where($cond)->limit($start,$arrOpt['ps'])->select();
+        $live_info = $live_model->where($cond)->order("add_date desc")->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
                 $data['pastroom_info'][$k]['room_id'] = $v['id'];
                 $data['pastroom_info'][$k]['room_name'] = $v['room_name'];
@@ -2630,6 +2630,7 @@ class UserController extends MobileController{
                 $data['liveroom_info']['room_name'] = $liveroom_info['room_name'];
                 $data['liveroom_info']['room_pic_url'] = $liveroom_info['room_pic_url'];
                 $data['liveroom_info']['praise'] = $liveroom_info['praise'];
+                $data['liveroom_info']['groupid'] = $liveroom_info['groupid'];
                 //根据房主id获取用户的信息
                 $con['id'] = $liveroom_info['room_user'];
                 $con['status'] = "start";
