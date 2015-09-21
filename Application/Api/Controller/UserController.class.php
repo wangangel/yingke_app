@@ -7,11 +7,39 @@ use Home\Event;
 
 
 class UserController extends MobileController{
+    
     public function __construct(){
         parent::__construct();
     }
-   
-    
+    /**获取所有的直播列表
+     * [ceshi description]
+     * @return [type] [description]
+     */
+   function live_list() {
+        //判断是否登录，是否带token；
+        $inte_url = "/api/20140928/task_list"; 
+        $data = "service_code=QXSJSP";
+        $key = "0ec08fd5";
+        $header_timestamp = $this->getMillisecond();
+        $signature = $this->signature($header_timestamp,$inte_url,$data,$key);
+        $url = "c.zhiboyun.com/api/20140928/task_list";
+        $params["service_code"] = "QXSJSP";
+        $res = $this->get($url,$params,$signature,$header_timestamp);
+        $de_json = json_decode($res,TRUE);
+        var_dump($res);
+        //$postArray ='{"ret":0,"user_list":[{"vs_id":"aws-cn_north_1-5","service_code":"QXSJSP","user_name":"001","client_version":"800","device_type":"20"}],"task_list":[{"id":"aws-cn_north_1-3-915d3d3f44146da1","serial":13420227,"sequence":261,"progress":0,"vs_id":"aws-cn_north_1-5","service_code":"QXSJSP","outputs":[{"file_name":"aws-cn_north_1-3-915d3d3f44146da1.flv","tag":"tcp_output","audio_codec_name":"aac","video_codec_name":"libx264","format":"flv","width":640,"height":360,"relative_dir":"QXSJSP/20150920/13/16/flv/","http_output_bytes":0,"http_connections_num":0,"streams":[{"index":0,"codec_type":1,"codec_id":86018,"copy":0,"width":0,"height":0,"bit_rate":128000},{"index":1,"codec_type":0,"codec_id":28,"copy":1,"width":640,"height":360,"bit_rate":0}]}],"inputs":[{"url":"","service_code":"QXSJSP","user_name":"001","device_type":20,"device_version":"800"}],"http_live_url":"http://xvs-5.zhiboyun.com:80/live/id/","input_bytes":1124794,"opaque":"%25E8%25AF%25B7%25E5%25A4%25A7%25E5%25AE%25B6"}]}';
+        //$ceshi_params = json_decode($de_json,TRUE);
+        $count_json = count($de_json);
+        for ($i = 0; $i < $count_json; $i++){
+                $user_name[$i]["user"] = $de_json["user_list"][$i]["user_name"];
+                $task_list[$i]["task_id"] = $de_json["task_list"][$i]["id"];
+                $live_url[$i]["http_live_url"] = $de_json["task_list"][$i]["http_live_url"];
+            }
+        var_dump($live_url);
+        //去直播列表查正在直播的,封装成json，返回userID
+        
+    }
+
     /**
      * 注册生成token,一个账号和设备一个token
      */
@@ -97,7 +125,7 @@ class UserController extends MobileController{
 			output_error("对不起，注册失败！");
         }
     }
-
+    
 
 
     /*
@@ -113,9 +141,11 @@ class UserController extends MobileController{
         $phonecode_model =  M('phonecode');
         $phonecode_info = $phonecode_model->query($strSql);
         $count = count($phonecode_info);
+        $gets = $this->Post_2();
         if($count>0){
             //数据库中有未失效的验证码,有效期为60秒
             output_error("您的验证码已经发送，请不要重复发送");
+           
         }else{
             $arr = array();
             $arr['phonenum'] = $intPhone;
