@@ -146,7 +146,6 @@ class UserController extends MobileController{
         $phonecode_model =  M('phonecode');
         $phonecode_info = $phonecode_model->query($strSql);
         $count = count($phonecode_info);
-        $gets = $this->Post_2();
         if($count>0){
             //数据库中有未失效的验证码,有效期为60秒
             output_error("您的验证码已经发送，请不要重复发送");
