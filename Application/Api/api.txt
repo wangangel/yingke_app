@@ -558,7 +558,6 @@ datas :
         userid:
         key:
         client_id
-        feedback------意见反馈
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false

@@ -161,14 +161,13 @@ class UserController extends MobileController{
             $result = $phonecode_model->add($arr);
             if($result>0){
                 //向手机发送验证码
-                $post_data = "action=send&userid=&account=ajywangluokeji&password=200005&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【映客客户端】");
+                $post_data = "action=send&userid=&account=hcs9148&password=152747&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【天眼互动】");
                 $target = "http://sms.chanzor.com:8001/sms.aspx";
                 $arrResu = $this->Post_1($post_data,$target);
                 output_data(array(
                 'phonenum' => $intPhone,
                 'code'=>$intCode,
                 'optype' => $intOptype
-                
                 ));
             }else{
                 output_error("验证码获取失败");
