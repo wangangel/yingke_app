@@ -1091,7 +1091,18 @@ datas :
           
           }
 
+四十六、鉴权接口
+    请求地址：http://api.bihuo123.com
+/index.php/api/user/woan_auth?username=18651551916&password=juping
 
+    接口参数：：
+        username->用户名或手机号码
+        password->密码 md5加密好的数据
+        
+
+    返回值：
+    ret:0 代表鉴权成功
+        1 代表鉴权失败
 
 
 

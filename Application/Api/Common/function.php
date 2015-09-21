@@ -20,6 +20,21 @@ function output_data($datas, $extend_data) {
         echo json_encode($data);die;
     }
 }
+/**返回给第三方json
+ * [return_data description]
+ * @param  [type] $datas [description]
+ * @return [type]        [description]
+ */
+function return_data($datas){
+    $data = array();
+    $data['datas'] = $datas;
+
+    if(!empty($_GET['callback'])) {
+        echo $_GET['callback'].'('.json_encode($datas).')';die;
+    } else {
+        echo json_encode($datas);die;
+    }
+}
 
 function output_error($message, $extend_data = array()) {
     $datas = array('error' => $message);

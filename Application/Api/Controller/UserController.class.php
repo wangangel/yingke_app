@@ -11,6 +11,11 @@ class UserController extends MobileController{
     public function __construct(){
         parent::__construct();
     }
+    /**
+     * 
+     */
+
+
     /**获取所有的直播列表
      * [ceshi description]
      * @return [type] [description]
@@ -225,17 +230,44 @@ class UserController extends MobileController{
             
         }
     }
-
-
+     function strToHex($string){ //字符串转十六进制都
+        $hex="";
+        for($i=0;$i<strlen($string);$i++)
+        $hex.=dechex(ord($string[$i]));
+        $hex=strtoupper($hex);
+        return $hex;
+    }  
+    /**
+     * 鉴权机制
+     */
+    public function woan_auth(){
+        if($_REQUEST['username'] == null || $_REQUEST['password'] == null ) {
+            $data["ret"] = 1;
+            return_data($data);
+        }
+        $user_model = M('user');
+        //拿着手机号登录的情况
+        $arr = array();
+        $arr['phone_num'] = htmlspecialchars($_REQUEST['username'],ENT_QUOTES);
+        $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
+        //$arr['password']  = md5($arr['password']);
+        $user_info1 = $user_model->where($arr)->select();
+        if(empty($user_info1)){
+            $data["ret"] = 1;
+            return_data($data);
+        }else{
+            $data["ret"] = 0;
+            return_data($data);
+        }
+    }
     /*
-     * 登录
+     * 登录--->
      */
     public function login(){
         if($_REQUEST['phone'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
             output_error('参数不全！');
         }
         $user_model = M('user');
-      
             //拿着手机号登录的情况
             $arr = array();
             $arr['phone_num'] = htmlspecialchars($_REQUEST['phone'],ENT_QUOTES);
@@ -1033,14 +1065,6 @@ class UserController extends MobileController{
         }
         output_data($data);
     }
-
-
-
-
-
-
-
-
 
     /*
      *获取我的店铺礼物
