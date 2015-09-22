@@ -11,39 +11,6 @@ class UserController extends MobileController{
     public function __construct(){
         parent::__construct();
     }
-    /**
-     * 
-     */
-
-
-    /**获取所有的直播列表
-     * [ceshi description]
-     * @return [type] [description]
-     */
-   function live_list() {
-        //判断是否登录，是否带token；
-        $inte_url = "/api/20140928/task_list"; 
-        $data = "service_code=QXSJSP";
-        $key = "0ec08fd5";
-        $header_timestamp = $this->getMillisecond();
-        $signature = $this->signature($header_timestamp,$inte_url,$data,$key);
-        $url = "c.zhiboyun.com/api/20140928/task_list";
-        $params["service_code"] = "QXSJSP";
-        $res = $this->get($url,$params,$signature,$header_timestamp);
-        $de_json = json_decode($res,TRUE);
-        var_dump($res);
-        //$postArray ='{"ret":0,"user_list":[{"vs_id":"aws-cn_north_1-5","service_code":"QXSJSP","user_name":"001","client_version":"800","device_type":"20"}],"task_list":[{"id":"aws-cn_north_1-3-915d3d3f44146da1","serial":13420227,"sequence":261,"progress":0,"vs_id":"aws-cn_north_1-5","service_code":"QXSJSP","outputs":[{"file_name":"aws-cn_north_1-3-915d3d3f44146da1.flv","tag":"tcp_output","audio_codec_name":"aac","video_codec_name":"libx264","format":"flv","width":640,"height":360,"relative_dir":"QXSJSP/20150920/13/16/flv/","http_output_bytes":0,"http_connections_num":0,"streams":[{"index":0,"codec_type":1,"codec_id":86018,"copy":0,"width":0,"height":0,"bit_rate":128000},{"index":1,"codec_type":0,"codec_id":28,"copy":1,"width":640,"height":360,"bit_rate":0}]}],"inputs":[{"url":"","service_code":"QXSJSP","user_name":"001","device_type":20,"device_version":"800"}],"http_live_url":"http://xvs-5.zhiboyun.com:80/live/id/","input_bytes":1124794,"opaque":"%25E8%25AF%25B7%25E5%25A4%25A7%25E5%25AE%25B6"}]}';
-        //$ceshi_params = json_decode($de_json,TRUE);
-        $count_json = count($de_json);
-        for ($i = 0; $i < $count_json; $i++){
-                $user_name[$i]["user"] = $de_json["user_list"][$i]["user_name"];
-                $task_list[$i]["task_id"] = $de_json["task_list"][$i]["id"];
-                $live_url[$i]["http_live_url"] = $de_json["task_list"][$i]["http_live_url"];
-            }
-        var_dump($live_url);
-        //去直播列表查正在直播的,封装成json，返回userID
-        
-    }
 
     /**
      * 注册生成token,一个账号和设备一个token
@@ -282,6 +249,8 @@ class UserController extends MobileController{
                     $data['nickname'] = $user_info1[0]['ni_name'];
                     $data['headurl'] = $user_info1[0]['head_url'];
                     $data['key'] = $token;
+                    $data["password"] = $user_info1[0]['password'];
+                    $data["server_code"] = $user_info1[0]['server_code'];
                     //根据id获取我关注的人的数量
                     $focus_model = M('friends_focus');
                     $opt['user_id'] = $user_info1[0]['id'];
@@ -1458,70 +1427,78 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
+        $live_ids = $this->live_list();
+        if($live_ids != false){
+            $arrOpt = array();
+            $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+            $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+            $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+            $live_model = M('live');
+            $map["status"] = "in";
+            $map["id"] = array('in',$live_ids);
+            $liveroom_info = $live_model->where($map)->order('add_date desc')->limit($start,$arrOpt['ps'])->select();
+            if(empty($liveroom_info)){
+                $data['liveroom_info'] = NULL;
+                output_data($data);
+            }else{
+                foreach ($liveroom_info as $k => $v) {
+                    $data['liveroom_info'][$k]['room_id'] = $v['id'];
+                    $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
+                    $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
+                    $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
+                    $data['liveroom_info'][$k]['fees'] = $v['fees'];
+                    $data['liveroom_info'][$k]['praise'] = $v['praise'];
+                    $data['liveroom_info'][$k]['share_num'] = $v['share_num'];
+                    $data['liveroom_info'][$k]['add_date'] = $v['add_date'];
+                    $data['liveroom_info'][$k]['live_url'] = $v['live_url'];
+                     //根据标签id获取标签信息
+                    $tiaojian['id'] = array('in',$v['tags']);
+                    $tags_model = M('tags');
+                    $tag_info = $tags_model->where($tiaojian)->select();
+                    $tags = "";
+                    foreach ($tag_info as $key => $value) {
+                        $tags .= $value['tag'] . " ";
+                    }
+                    $data['liveroom_info'][$k]['tags'] = $tags;
+                    //根据房主id获取用户的信息
+                    $con['id'] = $v['room_user'];
+                    $con['status'] = "start";
+                    $user_model = M('user');
+                    $user_info = $user_model->where($con)->find();
+                    $data['liveroom_info'][$k]['user_info']['userid'] = $user_info['id'];
+                    $data['liveroom_info'][$k]['user_info']['head_url'] = $user_info['head_url'];
+                    $data['liveroom_info'][$k]['user_info']['ni_name'] = $user_info['ni_name'];
+                    //获取主播的关注数
+                    $focus_model = M('friends_focus');
+                    $opt['focus_user'] = $v['room_user'];
+                    $opt['status'] = "yes";
+                    $focus_info = $focus_model->where($opt)->select();
+                    $focus_cound = count($focus_info);
+                    $data['liveroom_info'][$k]['user_info']['focus_num'] = $focus_cound;
+                    //获取当前用户是否关注过该主播
+                     $opt['focus_user'] = $v['room_user'];
+                     $opt['user_id'] = $_REQUEST['userid'];
+                     $opt['status'] = "yes";
+                     $is_focus = $focus_model->where($opt)->select();
+                     if(empty($is_focus)){
+                        //没有关注过
+                        $data['liveroom_info'][$k]['user_info']['is_focus'] = "yes";
+                     }else{
+                        $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
+                     }
 
-        $arrOpt = array();
-        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
-        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-        $live_model = M('live');
-        $liveroom_info = $live_model->where(array('status'=>'in'))->order('add_date desc')->limit($start,$arrOpt['ps'])->select();
-        if(empty($liveroom_info)){
-            $data['liveroom_info'] = NULL;
+                     //获取当前直播间的观众人数
+                     $userroom_model = M('user_room');
+                     $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
+                     $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
+                }
+            }
             output_data($data);
         }else{
-            foreach ($liveroom_info as $k => $v) {
-                $data['liveroom_info'][$k]['room_id'] = $v['id'];
-                $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
-                $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
-                $data['liveroom_info'][$k]['isopen'] = $v['isopen'];
-                $data['liveroom_info'][$k]['fees'] = $v['fees'];
-                $data['liveroom_info'][$k]['praise'] = $v['praise'];
-                $data['liveroom_info'][$k]['share_num'] = $v['share_num'];
-                $data['liveroom_info'][$k]['add_date'] = $v['add_date'];
-                 //根据标签id获取标签信息
-                $tiaojian['id'] = array('in',$v['tags']);
-                $tags_model = M('tags');
-                $tag_info = $tags_model->where($tiaojian)->select();
-                $tags = "";
-                foreach ($tag_info as $key => $value) {
-                    $tags .= $value['tag'] . " ";
-                }
-                $data['liveroom_info'][$k]['tags'] = $tags;
-                //根据房主id获取用户的信息
-                $con['id'] = $v['room_user'];
-                $con['status'] = "start";
-                $user_model = M('user');
-                $user_info = $user_model->where($con)->find();
-                $data['liveroom_info'][$k]['user_info']['userid'] = $user_info['id'];
-                $data['liveroom_info'][$k]['user_info']['head_url'] = $user_info['head_url'];
-                $data['liveroom_info'][$k]['user_info']['ni_name'] = $user_info['ni_name'];
-                //获取主播的关注数
-                $focus_model = M('friends_focus');
-                $opt['focus_user'] = $v['room_user'];
-                $opt['status'] = "yes";
-                $focus_info = $focus_model->where($opt)->select();
-                $focus_cound = count($focus_info);
-                $data['liveroom_info'][$k]['user_info']['focus_num'] = $focus_cound;
-                //获取当前用户是否关注过该主播
-                 $opt['focus_user'] = $v['room_user'];
-                 $opt['user_id'] = $_REQUEST['userid'];
-                 $opt['status'] = "yes";
-                 $is_focus = $focus_model->where($opt)->select();
-                 if(empty($is_focus)){
-                    //没有关注过
-                    $data['liveroom_info'][$k]['user_info']['is_focus'] = "yes";
-                 }else{
-                    $data['liveroom_info'][$k]['user_info']['is_focus'] = "no";
-                 }
-
-                 //获取当前直播间的观众人数
-                 $userroom_model = M('user_room');
-                 $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
-                 $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
-            }
+            //没人在直播
+            output_error("对不起，目前主播很忙!");
         }
-
-        output_data($data);
+        
     }
 
 
@@ -2586,8 +2563,14 @@ class UserController extends MobileController{
             $conf['username'] = $_REQUEST['username'];
             $conf['head_pic'] = $_REQUEST['head_pic'];
             $res = $userroom_model->add($conf);
+            //获取直播间的直播url
+            $arr["id"] = $_REQUEST['liveroom_id'];
+            $live = M("live")->where($arr)->find();
             if($res){
-                output_data(array('result'=>'true'));
+                $data["result"] = "true";
+                $data["live_url"] = $live["live_url"];
+                $data["live_id"] = $live["id"];
+                output_data($data);
             }else{
                 output_error('进入直播间失败');
             }
@@ -2636,7 +2619,11 @@ class UserController extends MobileController{
                 $userroom_model = M('user_room');
                 $res = $userroom_model->add($con);
                 if($res){
-                    output_data(array('result'=>'true'));
+                    $live_data["id"] = $_REQUEST['liveroom_id'];
+                    $live_detail = M("live")->where($live_data)->find();
+                    $back_result["live_url"] = $live_detail["live_url"];
+                    $back_result["result"] = 'true';
+                    output_data($back_result);
                 }else{
                     output_error('进入好友直播间失败');
                 }
@@ -2707,14 +2694,14 @@ class UserController extends MobileController{
                  //获取当前房间的评分
                  $data['liveroom_info']['pingfen'] = round($liveroom_info['score']/$liveroom_info['score_usernum']);
                 //获取当前直播间的观众头像
-                 $arrOpt = array();
+                $arrOpt = array();
                 $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
                 $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
                 $start = ($arrOpt['page']-1)*$arrOpt['ps'];
                 $userroom_model = M('user_room');
                 $userinfo = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->limit($start,$arrOpt['ps'])->select(); 
                 foreach ($userinfo as $k => $v) {
-                    $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
+                   $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
                    $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
                    $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
                 }
@@ -2723,11 +2710,44 @@ class UserController extends MobileController{
         output_data($data);
 
     }
-
-
-
-
-
+    /**用户退出直播间---要分房主和观众
+     * [out_live description]
+     * @return [type] [description]
+     */
+    public function out_live(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        } 
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        if($_REQUEST['live_id'] == NULL){
+            output_error('参数不全');
+        }
+        $data["room_user"] = $_REQUEST['userid'];
+        $data["id"] = $_REQUEST['live_id'];
+        $data["status"] = "in";
+        $live = M("live")->where($data)->find();
+        if($live == null ){
+            //不是主播
+            $data["live_id"] = $_REQUEST['live_id'];
+            $data["userid"] = $_REQUEST['userid'];
+            output_data($data);
+        }else{
+            //是主播，调用所有的
+            $stop["status"] = "stop";
+            $stop["id"] = $_REQUEST['live_id'];
+            M("live")->save($stop);
+            output_data(array('result'=>'success'));
+        }
+    }
     /*
      * 观众退出直播间打分
      */
@@ -2740,6 +2760,7 @@ class UserController extends MobileController{
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
@@ -2752,7 +2773,10 @@ class UserController extends MobileController{
         $live_model = M('live');
         $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
         if($res){
-            //打分成功
+            //打分成功--清理房间记录
+            $room_["liveroom_id"] = $_REQUEST['liveroom_id'];
+            $room_["userid"] = $_REQUEST['userid']
+            M('user_room')->where($room_)->delete();
             $result = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score_usernum');
             if($result){
                  //打分成功

@@ -76,6 +76,8 @@ datas :
         userid:用户id  
         username：用户名------------昵称就是用户名
         phone:手机号码
+        password:用户密码（MD5加密好的）
+        server_code：服务码，用户创建直播用的
         key:加密信息
         headurl:头像地址
 
@@ -605,6 +607,7 @@ datas :
                 "room_id": ---------------房间id
                 "room_name": -------------房间名
                 "room_pic_url": -----------房间封面
+                "live_url": -----------直播url
                 "isopen": ------------------是否收费
                 "fees": ---------------------收费标准
                 "praise": -------------------赞数
@@ -692,7 +695,7 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-            "id": 
+            "id": 返回直播房间id，透传(opaque)的字段
           
           }
 
@@ -967,15 +970,18 @@ datas :
         userid:
         key:
         client_id
-       liveroom_id
-       username
-       head_pic
+        liveroom_id
+        username
+        head_pic
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
+        执行成功并返回直播live_url,以及live_id
         "datas": {
-          
-          }
+        "result":"true",
+        "live_url":"http:\/\/xvs-5.zhiboyun.com:80\/live\/id\/aws-cn_north_1-3-d66f8636fe1c1c11.flv",
+        "live_id":"74"
+        }
 
 
 
@@ -996,9 +1002,7 @@ datas :
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
-        "datas": {
-          
-          }
+        "datas": {"errresult":true,"datas":{"result":"true","live_url":"http:\/\/xvs-5.zhiboyun.com:80\/live\/id\/aws-cn_north_1-3-d66f8636fe1c1c11.flv"}}
 
 
 
@@ -1090,9 +1094,10 @@ datas :
           
           }
 
+
 四十六、鉴权接口
-    请求地址：http://api.bihuo123.com
-/index.php/api/user/woan_auth?username=18651551916&password=juping
+        请求地址：http://api.bihuo123.com
+    /index.php/api/user/woan_auth?username=18651551916&password=juping
 
     接口参数：：
         username->用户名或手机号码
@@ -1102,6 +1107,22 @@ datas :
     返回值：
     ret:0 代表鉴权成功
         1 代表鉴权失败
+
+四十七、退出直播房间---传入房间id，传入userid
+请求地址：http://api.bihuo123.com
+/index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&live_id=1
+接口参数:
+        userid:用户id
+        key:
+        client_id
+        live_id 直播id
+       
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        观众退出：{"errresult":true,"datas":{"room_user":"6","id":"74","status":"in","live_id":"74","userid":"6"}}
+        
+        房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
+
 
 
 

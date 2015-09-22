@@ -15,7 +15,7 @@ class AccountController extends AdminController{
         $admin_count = $model_user->where($arr)->count();
         //倒入分页类
         import('Think.Page');
-        $page_class = new Page($admin_count,15);
+        $page_class = new Page($admin_count,1);
         $page_class->setConfig('prev', '<<');
         $page_class->setConfig('next', '>>');
         $page_class->setConfig('theme', '<div class="pagin"><ul class="paginList"><li class="paginItem">%UP_PAGE%</li><li class="paginItem">%LINK_PAGE%</li><li class="paginItem">%DOWN_PAGE%</a></li></ul></div>');
