@@ -2775,7 +2775,7 @@ class UserController extends MobileController{
         if($res){
             //打分成功--清理房间记录
             $room_["liveroom_id"] = $_REQUEST['liveroom_id'];
-            $room_["userid"] = $_REQUEST['userid']
+            $room_["userid"] = $_REQUEST['userid'];
             M('user_room')->where($room_)->delete();
             $result = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score_usernum');
             if($result){
