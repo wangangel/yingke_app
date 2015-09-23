@@ -691,7 +691,7 @@ datas :
         tags-------------标签id,多个用逗号隔开
         isopen----------收费,公开,邀请好友
         fees-----------收费标准
-        groupid ---------云直播id
+        groupid ---------环信组id
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
