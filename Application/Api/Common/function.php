@@ -35,7 +35,22 @@ function return_data($datas){
         echo json_encode($datas);die;
     }
 }
+function re_data($datas){
+    $data = array();
+    $data['datas'] = $datas;
 
+    if(!empty($_GET['callback'])) {
+        echo $_GET['callback'].'('.json_encode($datas).')';
+    } else {
+        echo json_encode($datas);
+    }
+}
+/**错误返回
+ * [output_error description]
+ * @param  [type] $message     [description]
+ * @param  array  $extend_data [description]
+ * @return [type]              [description]
+ */
 function output_error($message, $extend_data = array()) {
     $datas = array('error' => $message);
     output_data($datas, "1");

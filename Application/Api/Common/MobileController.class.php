@@ -61,10 +61,18 @@ class MobileController extends Controller{
         /*$url = "/api/20140928/task_list"; 
         $data = "service_code=QXSJSP";
         $key = "0ec08fd5";*/
+        //var_dump($url.$data.$header_timestamp);
         $signature = hash_hmac("sha256", utf8_encode($url.$data.$header_timestamp), utf8_encode($key));
         return $signature;
     }
-    //请求地址
+    /**直播请求，get方式
+     * [get description]
+     * @param  [type] $url              [description]
+     * @param  array  $param            [description]
+     * @param  [type] $signature        [description]
+     * @param  [type] $header_timestamp [description]
+     * @return [type]                   [description]
+     */
     function get($url, $param=array(),$signature,$header_timestamp){
         if(!is_array($param)){
             throw new Exception("参数必须为array");
@@ -82,8 +90,8 @@ class MobileController extends Controller{
         }
         $p=preg_replace('/&$/','',$p);
         $header = $this->FormatHeader($url,$p,$signature,$header_timestamp);
-        //var_dump($header);
         $url=$url.$p;
+        //var_dump($url);
         $httph =curl_init($url);
         curl_setopt($httph, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($httph, CURLOPT_SSL_VERIFYHOST, 1);
@@ -96,6 +104,33 @@ class MobileController extends Controller{
         curl_close($httph);
         return $rst;
     }
+    /**直播请求post的请求
+     * [post description]
+     * @param  [type] $url   [description]
+     * @param  array  $param [description]
+     * @return [type]        [description]
+     */
+     function post($url, $param,$signature,$header_timestamp){
+        /*if(!is_array($param)){
+            throw new Exception("参数必须为array");
+        }*/
+        $P = null;
+        $header = $this->FormatHeader($url,$p,$signature,$header_timestamp);
+        //var_dump($header);
+        $httph =curl_init($url);
+        curl_setopt($httph, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($httph, CURLOPT_SSL_VERIFYHOST, 1);
+        curl_setopt($httph, CURLOPT_HTTPHEADER, $header);//设置请求头信息
+        curl_setopt($httph, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($httph, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+        curl_setopt($httph, CURLOPT_POST, 1);//设置为POST方式 
+        curl_setopt($httph, CURLOPT_POSTFIELDS, $param);
+        curl_setopt($httph, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($httph, CURLOPT_HEADER,1);
+        $rst=curl_exec($httph);
+        curl_close($httph);
+        return $rst;
+     }
     /**拼接请求头
      * [FormatHeader description]
      * @param [type] $url              [description]
@@ -105,20 +140,37 @@ class MobileController extends Controller{
      */
     function FormatHeader($url,$p,$signature,$header_timestamp){
         // 解悉url
-        $temp = $url.$p;
-        $header = array (
+        if($p != null){
+            $temp = $url.$p;
+            $header = array (
             "GET'$temp' HTTP/1.1",
             "Host: $url",
             "Content-Type: text/xml; charset=utf-8",
             'Accept: */*',
             "Referer: http://$url/",
             'User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1)',
-            //"X-Forwarded-For: {$myIp}",
             "xvs-timestamp:$header_timestamp",
             "xvs-signature:$signature",
             "Content-length: 380",
             "Connection: Close"
-        ); 
+            ); 
+        }else{
+            $p = "?service_code=QXSJSP";
+            $temp = $url.$p;
+            $header = array (
+            "POST'$temp' HTTP/1.1",
+            "Host: $url",
+            "Content-Type: text/xml; charset=utf-8",
+            'Accept: */*',
+            "Referer: http://$url/",
+            'User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1)',
+            "xvs-timestamp:$header_timestamp",
+            "xvs-signature:$signature",
+            "Content-length: 380",
+            "Connection: Close"
+            ); 
+        }
+        
         return $header;
     } 
 
@@ -127,7 +179,6 @@ class MobileController extends Controller{
      * @return [type] [description]
      */
    function live_list() {
-       
         $inte_url = "/api/20140928/task_list"; 
         $data = "service_code=QXSJSP";
         $key = "0ec08fd5";
@@ -147,10 +198,7 @@ class MobileController extends Controller{
                 $task_list[$i]["task_id"] = $ceshi_params["task_list"][$i]["id"];
                 $live_url[$i]["http_live_url"] = $ceshi_params["task_list"][$i]["http_live_url"].$ceshi_params["task_list"][$i]["outputs"][0]["file_name"];
             }
-            //var_dump($task_list);
-           /* var_dump($live_list);
-            var_dump($task_list);
-            var_dump($live_url);*/
+            //var_dump($live_list);
             //去直播列表查正在直播的,封装成json，返回userID
             $live = M("live");
             // /var_dump($task_list);
@@ -172,6 +220,61 @@ class MobileController extends Controller{
         }
         
     }
+
+    /**获取72小时的视频
+     * [getlive_list description]
+     * @return [type] [description]$ps,$page
+     */
+    function getlive_list(){
+        //昨天，大前天
+        $from_time = date("Y-m-d",strtotime("-1 day"));
+        $to_time = date("Y-m-d",time());
+        $key = "0ec08fd5";
+        $header_timestamp = $this->getMillisecond();
+        $signature = md5($key);
+        $url = "www.zhiboyun.com/front/taskInfo/get/history/videos";
+        $params["service_code"] = "QXSJSP";
+        $params["signature"] = $signature;
+        $params["page_index"] = 0;//页码
+        $params["per_page"] = 30;//每页条数
+        $params["time_from"] = $from_time;
+        $params["time_to"] = $to_time;
+        $res = $this->get($url,$params,$signature,$header_timestamp);       
+        $ceshi_params = json_decode($res,TRUE);
+        $count_json = count($ceshi_params['obj']['rows']);
+        //var_dump($count_json);
+        if($count_json != 0){
+            for ($i = 0; $i < $count_json; $i++){
+                $live_url[$i] = $ceshi_params["obj"]["rows"][$i]["url"];
+                $task_list[$i] = $ceshi_params["obj"]["rows"][$i]["task_id"];
+                //$task_time[$i] = $ceshi_params["obj"]["rows"][$i]["time"];
+            }
+            //var_dump($task_list[0]);
+            $live = M("live");
+            //var_dump($live_url[0]);
+            for ($i=0; $i <count($task_list) ; $i++) { 
+                $taskid_data["task_id"] = $task_list[$i];
+                $save_data["live_url"] = $live_url[$i];
+                $save_data["task_id"] = $task_list[$i];
+                $save_data["status"] = "success";
+                $live_room = $live->where($taskid_data)->find();
+                if($live_room !=null){
+                    $save_data["id"] = $live_room["id"];
+                    $result = $live->save($save_data);
+                    if(!$result){
+                        //未对插入不进去的数据进行收录    
+                        break;
+                    }
+                }
+                $live_list[$i] = $live_room;
+            }
+            //var_dump($live_list);
+            return $task_list;
+        }else{
+            return false;
+        }
+    }
+    
     /**
      * 停止直播
      */

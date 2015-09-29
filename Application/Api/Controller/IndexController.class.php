@@ -6,6 +6,36 @@ class IndexController extends MobileController{
     public function __construct(){
         parent::__construct();
     }
+    /*
+     *    判断是否在appStore的审核期
+    */
+    public function get_appstatus(){
+        /*$arrOpt = array();
+        if($_REQUEST['key'] == null || $_REQUEST['userid'] == null ){
+            output_error('请先登录！');
+        }
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }*/
+        $model_sys   = M('sysconfig');
+        $sys_list = $model_sys->select();
+        $status = $sys_list[0]["status"];
+        if($status == 0){
+            $data["status"] = 0;//未在审核期 
+        }else{
+            $data["status"] = 1;//在审核期
+        }
+        output_data($data);
+
+    }
+
+
 
 
     /*
@@ -205,7 +235,6 @@ class IndexController extends MobileController{
                 $data['content'][$k]['userinfo']['userid'] = $user_info['id'];
                 $data['content'][$k]['userinfo']['username'] = $user_info['username'];
                 $data['content'][$k]['userinfo']['headurl'] = $user_info['headurl'];
-
                 $data['content'][$k]['id'] = $v['id'];
                 $data['content'][$k]['content'] = $v['content'];
                 $data['content'][$k]['comefrom'] = $v['comefrom'];
@@ -242,7 +271,6 @@ class IndexController extends MobileController{
     /*
      *上传图片
      */
-
     public function add_pic(){
         $arrOpt = array();
         $arrOpt['photo'] = $_FILES['photo'];
@@ -268,7 +296,8 @@ class IndexController extends MobileController{
         $upload->maxSize   =     3145728 ;// 设置附件上传大小
         $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
         $upload->rootPath  =      './Upload/'; // 设置附件上传根目录
-     
+        //$upload->savePath  = '';
+        //$upload->saveName = 'time';
         //判断是否已经选择图片
         if(!empty($_FILES['photo']['tmp_name'])){
             //echo'已选择文件';
@@ -281,12 +310,24 @@ class IndexController extends MobileController{
             }
             //这里是设置文件的url注意使用.不是+  
             $imgurl1 = $info1['savepath'].$info1['savename'];
+            //压缩图片
+            /*$info = $upload->upload();
+            foreach ($info as $file) {
+                $file_path = './Upload/'.$file['savepath'].$file['savename'];
+               //$file_mini = '/Upload/mini/'.$file['savepath'].$file['savename'];
+            }
+            $image = new \Think\Image();
+            $image->open($file_path);
+            $time = time();
+            $image->thumb(100,100)->save("./Upload/mini/".$time.".jpg");*/
+
             $data = array();
-            $data['picurl'] = "http://api.skyeyeslive.com/Upload/" . $imgurl1;
+            $data['picurl'] = "http://api.bihuo123.com/Upload/".$imgurl1;
+            //$image = new \Think\Image();
             output_data($data);
             
         }else{
-             output_error("未选择图片上传");
+             output_error("未选择图片上传!");
         }
        
        

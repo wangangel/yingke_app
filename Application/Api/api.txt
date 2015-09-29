@@ -56,7 +56,8 @@ datas :
         username：用户名
         phone:手机号码
         key:加密信息
-
+        password:加密好的密码
+        server_code：服务码
 
 
 
@@ -73,14 +74,28 @@ datas :
     "errresult":true|false 执行成功返回true，执行失败返回false
     datas:
         error:错误描述，执行成功没有该字段
-        userid:用户id  
+        userid:平台id  
         username：用户名------------昵称就是用户名
         phone:手机号码
         password:用户密码（MD5加密好的）
         server_code：服务码，用户创建直播用的
         key:加密信息
         headurl:头像地址
-
+如：{
+    "errresult": true,
+    "datas": {
+        "ID": "35",
+        "userid": "18141494072",平台id
+        "phone": "18651551916",
+        "nickname": "18651551916",昵称
+        "headurl": null,
+        "key": "496bde4a7845f9ff11cc85792f602023",
+        "password": "546f8b05c4c360b0e10c48ce06bad476",
+        "server_code": "QXSJSP",
+        "focus_num": 0,
+        "fans_num": 0
+    }
+}
 
 
 
@@ -191,7 +206,6 @@ datas :
        error:错误描述，执行成功没有该字段
             datas: 
                    picurl:图片url
-
 
 
 
@@ -589,7 +603,7 @@ datas :
 
 
 
-二十六.获取正在直播的房间
+二十六.获取正在直播的房间包括72小时直播间
 请求地址：http://api.bihuo123.com
 /index.php/api/user/live_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
@@ -622,6 +636,7 @@ datas :
                     "is_focus": ----------------------当前用户是否关注过房主
                 },
                 "user_num": ----------------------------观众数
+                "type": ----------------------------0为正在直播，1为过去72小时
             }
         ]
 
@@ -629,7 +644,7 @@ datas :
 
 
 
-二十七.获取过去72小时的直播房间
+二十七.获取过去72小时的直播房间（多余）
 请求地址：http://api.bihuo123.com
 /index.php/api/user/past_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
@@ -641,10 +656,23 @@ datas :
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
-        "datas": {
-            "id": 
-          
-          }
+        "datas": 返回具体参数
+        room_id :房间id
+        room_name：房间名称
+        room_pic_url：房间封面
+        isopen：是否公开
+        fees：收费标准
+        praise：赞数
+        share_num：分享数
+        add_date：创建时间
+        live_url：视频地址
+        tags：标签
+        user_info :房主信息
+        user_num：获取当前观众人数
+       如： {"errresult":true,
+       "datas":{"pastroom_info":
+       [{"room_id":"182","room_name":"\u6765\u628a","room_pic_url":"\u6765\u628a","isopen":"\u6536\u8d39","fees":"20","praise":null,"share_num":"0","add_date":"1443077251","live_url":null,"tags":"",
+       "user_info":{"userid":"31","head_url":"http:\/\/api.skyeyeslive.com\/Upload\/2015-09-21\/55ff98b399b24.png","ni_name":"15012940105","focus_num":1,"is_focus":"yes"},"user_num":0}]}}
 
 
 
@@ -652,7 +680,7 @@ datas :
 
 
 
-二十七(补).获取直播间(正在直播和72小时直播)
+二十七(补).获取直播间(正在直播和72小时直播)（多余）
 请求地址：http://api.bihuo123.com
 /index.php/api/user/all_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
@@ -972,16 +1000,22 @@ datas :
         client_id
         liveroom_id
         username
-        head_pic
+        head_pic(可以为空)
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         执行成功并返回直播live_url,以及live_id
-        "datas": {
-        "result":"true",
-        "live_url":"http:\/\/xvs-5.zhiboyun.com:80\/live\/id\/aws-cn_north_1-3-d66f8636fe1c1c11.flv",
-        "live_id":"74"
-        }
+       如 {
+    "errresult": true,
+    "datas": {
+        "result": "true",
+        "live_url": "http://xvs-5.zhiboyun.com:80/live/id/aws-cn_north_1-5-4bf233e135a1648b.flv",
+        "live_id": "426",
+        "groupid": "1443512320306",
+        "praise": 0,
+        "score": 3
+    }
+}
 
 
 
@@ -1042,13 +1076,12 @@ datas :
        score
        tag-----------两个标签之前用逗号隔开
        
-
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
           
           }
-
+          {"errresult":true,"datas":{"result":"true"}}
 
 
 
@@ -1122,6 +1155,62 @@ datas :
         观众退出：{"errresult":true,"datas":{"room_user":"6","id":"74","status":"in","live_id":"74","userid":"6"}}
         
         房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
+
+四十八、直播开始通知包含的字段(直播云转发给我)accpet_params
+    http://api.bihuo123.com/index.php/api/user/accpet_params
+type固定为0    hashed_id   author  url svod    size    created_at  format  vs_id   path    private_flag    ctype   cversion    service_code    is_resume   tag opaque
+
+
+
+
+
+
+四十九、appStore审核期屏蔽支付宝、微信
+    http://api.bihuo123.com/index.php/api/index/get_appstatus
+
+ 返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+       
+        
+        {"errresult":true,"datas":{"status":0}}//代表未在AppStore审核期
+        0代表未在审核期，1为在审核期
+
+
+五十、获取点赞数请求地址：http://api.bihuo123.com/index.php/api/user/getroom_priase?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
+接口参数:
+        userid:用户id
+        key:密钥
+        client_id设备id
+      roomid---------房间id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        如:{
+                "errresult": true,
+                "datas": {
+                    "count": 0
+                }
+            }
+
+五十一、获取点赞数请求地址：http://api.bihuo123.com/index.php/api/user/getroom_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
+接口参数:
+        userid:用户id
+        key:密钥
+        client_id设备id
+      roomid---------房间id
+
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        如:{"errresult":true,"datas":{"count":"2"}}
+
+
+
+
+
+
+
+
+
 
 
 
