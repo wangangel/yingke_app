@@ -162,7 +162,23 @@ class GiftController extends AdminController{
                 $upload->maxSize   =     3145728 ;// 设置附件上传大小
                 $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
                 $upload->rootPath  =     './Upload/'; // 设置附件上传根目录
-                $upload->savePath  = '';
+                //$upload->savePath  = '';
+                //$upload->saveName = 'time';
+                /*压缩图片
+                $info = $upload->upload();
+                foreach ($info as $file) {
+                    $file_path = './Upload/'.$file['savepath'].$file['savename'];
+                    $file_mini = '/Upload/mini/'.$file['savepath'].$file['savename'];
+                }
+                $image = new \Think\Image();
+                $image->open($file_path);
+                var_dump($file_path);
+                $time = time();
+                $image->thumb(100,100)->save("./Upload/mini/".$time.".jpg");
+                var_dump($image);
+
+
+                die();*/
                 // 上传文件 
                 if($_FILES['upload']['name']!=''){
                         $info   =   $upload->uploadOne($_FILES['upload']);
@@ -194,7 +210,7 @@ class GiftController extends AdminController{
                         $list='system'; 
                         $_su="保存";  
                 }
-                
+                $info = ture;
                 if($info){
                 $this->success($_su.'成功!',U('admin/gift/'.$list.'_gift_list'));
                 }else{

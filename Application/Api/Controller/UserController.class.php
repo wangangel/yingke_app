@@ -2739,7 +2739,7 @@ class UserController extends MobileController{
                 $conf['head_pic'] = $_REQUEST['head_pic'];
             }
             $res = $userroom_model->add($conf);
-            $res = true;
+            //$res = true;
             //获取直播间的直播url
             $arr["id"] = $_REQUEST['liveroom_id'];
             $live = M("live")->where($arr)->find();

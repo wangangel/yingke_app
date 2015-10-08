@@ -1192,7 +1192,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
                 }
             }
 
-五十一、获取点赞数请求地址：http://api.bihuo123.com/index.php/api/user/getroom_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
+五十一、获取粉丝请求地址：http://api.bihuo123.com/index.php/api/user/getroom_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
 接口参数:
         userid:用户id
         key:密钥
@@ -1201,7 +1201,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
-        如:{"errresult":true,"datas":{"count":"2"}}
+        如:{"errresult":true,"datas":{"count":"2"}}粉丝数
 
 
 
