@@ -323,7 +323,6 @@ class IndexController extends MobileController{
 
             $data = array();
             $data['picurl'] = "http://api.bihuo123.com/Upload/".$imgurl1;
-            //$image = new \Think\Image();
             output_data($data);
             
         }else{
