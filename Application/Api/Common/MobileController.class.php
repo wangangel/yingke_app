@@ -200,19 +200,19 @@ class MobileController extends Controller{
             }
             //var_dump($live_list);
             //去直播列表查正在直播的,封装成json，返回userID
-            $live = M("live");
-            // /var_dump($task_list);
-            for ($i=0; $i <count($live_list) ; $i++) { 
+            //$live = M("live");
+            /*for ($i=0; $i <count($live_list) ; $i++) { 
                 $save_data["id"] = $live_list[$i];
                 $save_data["task_id"] = $task_list[$i]["task_id"];
                 $save_data["live_url"] = $live_url[$i]["http_live_url"];
                 $save_data["status"] = "in";
                 $result = $live->save($save_data);
+                var_dump($result);
                 if(!$result){
                     //未对插入不进去的数据进行收录    
                     break;
                 }
-            }
+            }*/
             return $live_list;
         }else{
             //报错，或者没人直播的时候
