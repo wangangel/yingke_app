@@ -1235,9 +1235,11 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
+
         if($_REQUEST['lable'] == NULL){
             output_error('参数不全');
         }
+
         $user_model = M('user');
         //获取当前用户的label
         $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
@@ -1447,9 +1449,9 @@ class UserController extends MobileController{
              output_error('秘钥key不正确');
         }
         $live_ids = $this->live_list();
-        //var_dump($live_ids);
+
         if($live_ids != false){
-            $arrOpt = array();
+		    $arrOpt = array();
             $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
             $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
             $start = ($arrOpt['page']-1)*$arrOpt['ps'];
@@ -1516,6 +1518,8 @@ class UserController extends MobileController{
             $data["type"] = 0;
             output_data($data);
         }else{
+            //没人在直播
+            output_error("对不起，目前没有正在直播的房间!");
             //获取72小时在直播
             $ps = intval($_REQUEST['ps'])>15?intval($_REQUEST['ps']):30;
             $page = intval($_REQUEST['page'])>1?intval($_REQUEST['page']):0;
@@ -1595,7 +1599,6 @@ class UserController extends MobileController{
             }else{
                 output_error("对不起还没有直播房间!");
             }
-            
         }
         
     }
@@ -2316,6 +2319,14 @@ class UserController extends MobileController{
             $opt['dateline'] = time();
             $res = $dianzan_model->add($opt);
             if($res){
+<<<<<<< .mine
+                //根据roomid来对live表中的praise进行点赞操作
+                $live_data['id'] = $_REQUEST['roomid'];
+                $info = M('live') -> where($live_data)->find();
+                $live_data['praise'] = $info['praise']+1;
+                $info = M('live') ->save($live_data);
+                output_data(array('praise'=>$live_data['praise']));
+=======
                 //根据房间的id进行保存赞数
                 $live["id"] = $_REQUEST['roomid'];
                 $live_info = M("live")->where($live)->find();
@@ -2328,6 +2339,7 @@ class UserController extends MobileController{
                 $live["prasie"] = $praise;
                 M("live")->save($live);
                 output_data(array('ID'=>$res));
+>>>>>>> .r115
             }else{
                 output_error("点赞失败");
             }
