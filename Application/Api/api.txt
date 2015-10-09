@@ -901,7 +901,7 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-          
+          praise----------该房间点赞数
           }
 
 
