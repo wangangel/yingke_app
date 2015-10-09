@@ -22,8 +22,9 @@ class UserController extends MobileController{
             $data["id"] = $_REQUEST['opaque'];//房间id
             $data["task_id"] = $_REQUEST['hashed_id'];//任务id
             $data["live_url"] = $_REQUEST['url'];//直播地址
+            $data["status"] = "in";
+            $data["remark"] = time();
             $result = M("live")->save($data);
-        
     }
     /**
      * 注册生成token,一个账号和设备一个token
@@ -1446,7 +1447,7 @@ class UserController extends MobileController{
              output_error('秘钥key不正确');
         }
         $live_ids = $this->live_list();
-        //$live_ids = false;
+        //var_dump($live_ids);
         if($live_ids != false){
             $arrOpt = array();
             $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
@@ -1882,7 +1883,7 @@ class UserController extends MobileController{
         $opt['room_user'] = $_REQUEST['userid'];
         $opt['isopen'] = $_REQUEST['isopen'];
         $opt['fees'] = $_REQUEST['fees'];
-        $opt['status'] = "in";
+        //$opt['status'] = "in";
         $opt['add_date'] = time();
         $opt['groupid'] = $_REQUEST['groupid'];
         $tags = explode(',', $_REQUEST['tags']);
@@ -2287,7 +2288,7 @@ class UserController extends MobileController{
      *用户对直播房间点赞
      */
     public function room_dianzan(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
@@ -2302,7 +2303,7 @@ class UserController extends MobileController{
         }
         if($_REQUEST['roomid'] == NULL){
             output_error('参数不全');
-        }
+        }*/
         $dianzan_model = M('roomdianzan');
         //先判断该用户是否对该直播房间点过赞
         $con['userid'] = $_REQUEST['userid'];
