@@ -42,9 +42,11 @@ datas :
 
 三、用户注册
     请求地址：http://api.bihuo123.com
-/index.php/api/user/register?phonenumber=18651551916&password=juping&client_id=qwert
+/index.php/api/user/register?phonenumber=18651551916&password=juping&client_id=qwert&type=qq&token=adwedswfsrrwew
 
     接口参数：：
+        type:第三方登录类型(weixin   weibo)
+        token:第三方登录token
         phonenumber->手机号码 
         password->密码 
         client_id->客户端设备唯一标识,不同设备的标识不同
@@ -62,11 +64,20 @@ datas :
 
 更新时间：
 
+<<<<<<< .mine
+更新时间:20151010 am:9:18
+
+=======
+>>>>>>> .r120
+
 四、用户登录
     请求地址：http://api.bihuo123.com
-/index.php/api/user/login?phone=18651551916&password=juping&client_id=qwert
+/index.php/api/user/login?phone=18651551916&password=juping&client_id=qwert&type=qq&token=adwedswfsrrwew
 
     接口参数：：
+        type:第三方登录类型(weixin   weibo)
+        token:第三方登录密钥
+
         phone->用户名或手机号码
         password->密码
         client_id->客户端设备唯一标识
@@ -97,6 +108,7 @@ datas :
         "fans_num": 0
     }
 }
+更新时间:20151010 am:9:14
 
 更新时间：
 
@@ -176,7 +188,7 @@ datas :
        可添加参数：
        nickname:
        sex:性别
-       birthday:格式类似于1992-12-30
+       birth_date:格式类似于1992-12-30
        head_url:http://api.bihuo123.com
 /Upload/2015-08-27/55deb6edcb2e2.jpg
         lable-------------------------------------------多个标签用逗号隔开
@@ -189,7 +201,11 @@ datas :
             datas: 
                    id:用户id
 
+<<<<<<< .mine
+更新时间:20151010 am:9:40
+=======
 更新时间：
+>>>>>>> .r120
 
 
 
@@ -527,8 +543,10 @@ datas :
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
             label
+            无标签返回:NULL 
 }
 
+更新时间:20151010 am: 9:37
 
 更新时间：
 
@@ -540,7 +558,7 @@ datas :
         userid:
         key:
         client_id
-        label------标签
+        lable------标签
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -548,9 +566,14 @@ datas :
             "id": 
           
 }
+更新时间:20151010 am: 9:38
 
 更新时间：
 
+<<<<<<< .mine
+
+=======
+>>>>>>> .r120
 二十三.添加意见反馈(系统反馈)
 请求地址：http://api.bihuo123.com
 /index.php/api/user/add_feedback?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&feedback=这个软件非常好哦
@@ -564,7 +587,6 @@ datas :
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
             "id": 
-          
 }
 
 更新时间：
