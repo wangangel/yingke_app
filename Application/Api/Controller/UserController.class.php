@@ -251,12 +251,9 @@ class UserController extends MobileController{
      * 登录--->
      */
     public function login(){
-<<<<<<< .mine
         if($_REQUEST['phone'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
             output_error('参数不全！');
         }
-=======
->>>>>>> .r122
         $user_model = M('user');
             //拿着手机号登录的情况
             $arr = array();
@@ -264,9 +261,6 @@ class UserController extends MobileController{
             $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
             $arr['password']  = md5($arr['password']);
             $user_info1 = $user_model->where($arr)->select();
-<<<<<<< .mine
-            //var_dump($arr);
-=======
             $type = $_REQUEST['type'];
             $openid = $_REQUEST['token'];
             //第三方绑定
@@ -274,7 +268,6 @@ class UserController extends MobileController{
             $aa[$type.'openid'] = $openid;
             $user_info1 = $user_model->where($aa)->select();
             }
->>>>>>> .r122
             if(!empty($user_info1)){
                 $token = $this->_get_token($user_info1[0]['id'], $user_info1[0]['phone_num'], $_REQUEST['client_id']);
                 if($token){
@@ -1461,24 +1454,13 @@ class UserController extends MobileController{
             $arr['client_id'] = $_REQUEST['client_id'];
             $arr['userid'] = $_REQUEST['userid'];
             $arr['token'] = $_REQUEST['key'];
-
-<<<<<<< .mine
             $jieguo = $token_model->where($arr)->select();
             if($jieguo[0] == NULL){
                  output_error('秘钥key不正确');
             }
-            /*$live_ids = $this->live_list();
-            var_dump($live_ids);
-            */
-=======
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
         $live_ids = $this->live_list();
         if($live_ids != false){
 		    $arrOpt = array();
->>>>>>> .r122
             $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
             $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
             $start = ($arrOpt['page']-1)*$arrOpt['ps'];
@@ -1487,15 +1469,6 @@ class UserController extends MobileController{
             $map["task_id"] = array('neq',"");
             //$map["id"] = array('in',$live_ids);
             $liveroom_info = $live_model->where($map)->order('add_date desc')->limit($start,$arrOpt['ps'])->select();
-<<<<<<< .mine
-            if(count($liveroom_info) >0){//说明有直播
-                    //var_dump($liveroom_info);
-                if(empty($liveroom_info)){
-                    $data['liveroom_info'] = NULL;
-                    output_data($data);
-                }else{
-                    foreach ($liveroom_info as $k => $v) {
-=======
             if(empty($liveroom_info)){
                 $data['liveroom_info'] = NULL;
                 output_data($data);
@@ -1577,7 +1550,6 @@ class UserController extends MobileController{
                 $live_info = $live_model->where($cond)->order("add_date desc")->limit($start,$arrOpt['ps'])->select();
                 if($live_info != null){
                     foreach ($live_info as $k => $v) {
->>>>>>> .r122
                         $data['liveroom_info'][$k]['room_id'] = $v['id'];
                         $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
                         $data['liveroom_info'][$k]['room_pic_url'] = $v['room_pic_url'];
@@ -1714,11 +1686,9 @@ class UserController extends MobileController{
                 
             
             }
-<<<<<<< .mine
-=======
+
         }
-        
->>>>>>> .r122
+
     }
 
 
