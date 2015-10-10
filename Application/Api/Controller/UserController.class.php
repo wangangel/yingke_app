@@ -94,7 +94,10 @@ class UserController extends MobileController{
             //数据库中没有
             $register_info['user_id'] = $arr['user_id'];
         }
-
+        //通过第三方注册绑定
+        if($_REQUEST['type'] != NULL && $_REQUEST['openid'] != NULL){
+            $register_info[$_REQUEST['type'].'openid'] = $_REQUEST['openid'];
+        }
         $user_info = $user_model->add($register_info);
         if($user_info) {
             $token = $this->_get_token($user_info,$register_info['phone_num'],$_REQUEST['client_id']);
@@ -248,9 +251,6 @@ class UserController extends MobileController{
      * 登录--->
      */
     public function login(){
-        /*if($_REQUEST['phone'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
-            output_error('参数不全！');
-        }*/
         $user_model = M('user');
             //拿着手机号登录的情况
             $arr = array();
@@ -258,6 +258,13 @@ class UserController extends MobileController{
             $arr['password'] = htmlspecialchars($_REQUEST['password'],ENT_QUOTES);
             $arr['password']  = md5($arr['password']);
             $user_info1 = $user_model->where($arr)->select();
+            $type = $_REQUEST['type'];
+            $openid = $_REQUEST['token'];
+            //第三方绑定
+            if('' != $type){
+            $aa[$type.'openid'] = $openid;
+            $user_info1 = $user_model->where($aa)->select();
+            }
             if(!empty($user_info1)){
                 $token = $this->_get_token($user_info1[0]['id'], $user_info1[0]['phone_num'], $_REQUEST['client_id']);
                 if($token){
@@ -1208,6 +1215,7 @@ class UserController extends MobileController{
         $user_info = $user_model->where($con)->find();
         if($user_info['lable'] == NULL){
             $data['label'] = NULL;
+            output_data($data);
         }else{
             $label_info = explode(',',$user_info['lable']);
             $data['label'] = $label_info;
@@ -2017,7 +2025,7 @@ class UserController extends MobileController{
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $tag = "%" . $tag_info[0]['id'] . "%";
         $opt['tags'] = array('like',$tag);
-        $opt['status'] = "in";
+       // $opt['status'] = "in";
         $live_model = M('live');
         $live_info = $live_model->where($opt)->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
@@ -2103,7 +2111,7 @@ class UserController extends MobileController{
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $tag = "%" . $_REQUEST['tagid'] . "%";
         $opt['tags'] = array('like',$tag);
-        $opt['status'] = "in";
+        //$opt['status'] = "in";
         $live_model = M('live');
         $live_info = $live_model->where($opt)->limit($start,$arrOpt['ps'])->select();
         foreach ($live_info as $k => $v) {
@@ -2966,7 +2974,7 @@ class UserController extends MobileController{
                  $tag = explode(',',$_REQUEST['tag']);
                  foreach ($tag as $k => $v) {
                      //每个$v是一个标签,判断该标签是否存在
-                     $tag = "#" . $v;
+                     $tag =  $v;
                      $res1 = $tags_model->where(array('tag'=>$tag))->find();
                      if(empty($res1)){
                         //没有该标签
