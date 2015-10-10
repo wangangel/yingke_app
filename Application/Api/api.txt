@@ -20,7 +20,7 @@ datas :
     optype:1->注册时获取的验证码 
     2->重置密码时候获取验证码
 
-
+更新时间：
 
 
 
@@ -34,8 +34,9 @@ code
 
 返回值：
 "errresult":true|false 执行成功返回true，执行失败返回false
-datas : 
+datas :
 
+更新时间：
 
 
 
@@ -59,7 +60,7 @@ datas :
         password:加密好的密码
         server_code：服务码
 
-
+更新时间：
 
 四、用户登录
     请求地址：http://api.bihuo123.com
@@ -97,7 +98,7 @@ datas :
     }
 }
 
-
+更新时间：
 
 五、用户退出登录
     请求地址：http://api.bihuo123.com
@@ -116,7 +117,7 @@ datas :
             msg->"退出成功"
 
 
-
+更新时间：
 
 六、忘记密码
      请求地址：http://api.bihuo123.com
@@ -132,7 +133,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-
+更新时间：
 
 
 七.获取用户个人信息----------修改,添加用户的关注数,粉丝数,评分
@@ -160,7 +161,7 @@ datas :
     }
 
 
-
+更新时间：
 
 
 八.修改个人信息接口
@@ -188,7 +189,7 @@ datas :
             datas: 
                    id:用户id
 
-
+更新时间：
 
 
 
@@ -207,7 +208,7 @@ datas :
             datas: 
                    picurl:图片url
 
-
+更新时间：
 
 
 十.用户绑定接口
@@ -228,6 +229,7 @@ datas :
             datas: 
                    id
 
+更新时间：
 
 
 
@@ -249,7 +251,7 @@ datas :
             datas: 
                    id
 
-
+更新时间：
 
 
 
@@ -269,7 +271,7 @@ datas :
        error:错误描述，执行成功没有该字段
             datas: 
                    id
-
+更新时间：
 
 
 
@@ -293,7 +295,7 @@ datas :
                 "sex": 
                 "is_focus": 0---未关注,1:已关注
 
-
+更新时间：
 
 
 
@@ -312,7 +314,7 @@ datas :
             datas: 
                 result
 
-
+更新时间：
 
 
 
@@ -335,7 +337,7 @@ datas :
                 result
 
 
-
+更新时间：
 
 
 
@@ -363,7 +365,7 @@ datas :
                 "sex": 
                 "is_focus": 0---未关注,1:已关注
 
-
+更新时间：
 
 
 十六.绑定银行卡
@@ -382,7 +384,7 @@ datas :
           id
     }
 
-
+更新时间：
 
 十七.用户获取绑定银行的信息
 请求地址：http://api.bihuo123.com
@@ -398,7 +400,7 @@ datas :
     }
 
 
-
+更新时间：
 
 
 十八.余额提现
@@ -416,7 +418,7 @@ datas :
     }
 
 
-
+更新时间：
 
 
 
@@ -437,6 +439,7 @@ datas :
           id
     }
 
+更新时间：
 
 
 
@@ -466,7 +469,7 @@ datas :
 }
 
 
-
+更新时间：
 
 
 二十.添加我的店铺礼物
@@ -485,7 +488,7 @@ datas :
           id
     }
 
-
+更新时间：
 
 
 
@@ -505,7 +508,7 @@ datas :
 
 
 
-
+更新时间：
 
 
 
@@ -527,7 +530,7 @@ datas :
 }
 
 
-
+更新时间：
 
 
 二十二.添加我的标签
@@ -546,8 +549,7 @@ datas :
           
 }
 
-
-
+更新时间：
 
 二十三.添加意见反馈(系统反馈)
 请求地址：http://api.bihuo123.com
@@ -565,7 +567,7 @@ datas :
           
 }
 
-
+更新时间：
 
 二十四.获取系统推荐好友
 请求地址：http://api.bihuo123.com
@@ -582,8 +584,7 @@ datas :
           
 }
 
-
-
+更新时间：
 
 二十五.条件搜索
 请求地址：http://api.bihuo123.com
@@ -601,7 +602,7 @@ datas :
           
 }
 
-
+更新时间：
 
 二十六.获取正在直播的房间包括72小时直播间
 请求地址：http://api.bihuo123.com
@@ -641,7 +642,7 @@ datas :
         ]
 
         
-
+更新时间：
 
 
 二十七.获取过去72小时的直播房间（多余）
@@ -727,6 +728,8 @@ datas :
           
           }
 
+更新时间：
+
 
 二十九.添加房间标签
 请求地址：http://api.bihuo123.com
@@ -745,7 +748,7 @@ datas :
           
           }
 
-
+更新时间：
 
 三十.根据热门标签获取直播房间信息
 请求地址：http://api.bihuo123.com
@@ -765,7 +768,7 @@ datas :
           
           }
 
-
+更新时间：
 
 
 
@@ -815,7 +818,7 @@ datas :
         ]
 
 
-
+更新时间：
 
 三十二.获取热门标签(默认取5条标签)
 请求地址：http://api.bihuo123.com
@@ -842,7 +845,7 @@ datas :
           
           }
 
-
+更新时间：
 
 
 
@@ -866,7 +869,7 @@ datas :
             id
           }
 
-
+更新时间：
 
 
 三十四.付费观看
@@ -887,7 +890,7 @@ datas :
           
           }
 
-
+更新时间：
 
 三十五.对房间点赞
 请求地址：http://api.bihuo123.com
@@ -905,7 +908,7 @@ datas :
           }
 
 
-
+更新时间：
 
 三十六.举报房间
 请求地址：http://api.bihuo123.com
@@ -923,7 +926,7 @@ datas :
           
           }
 
-
+更新时间：
 
 
 
@@ -945,7 +948,7 @@ datas :
           
 }
 
-
+更新时间：
 
 
 
@@ -966,7 +969,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-
+更新时间：
 
 
 三十九.获取用户的绑定信息
@@ -984,7 +987,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-
+更新时间：
 
 
 
@@ -1018,7 +1021,7 @@ datas :
 }
 
 
-
+更新时间：
 
 
 
@@ -1038,7 +1041,7 @@ datas :
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {"errresult":true,"datas":{"result":"true","live_url":"http:\/\/xvs-5.zhiboyun.com:80\/live\/id\/aws-cn_north_1-3-d66f8636fe1c1c11.flv"}}
 
-
+更新时间：
 
 
 
@@ -1060,7 +1063,7 @@ datas :
           
           }
 
-
+更新时间：
 
 
 
@@ -1084,7 +1087,7 @@ datas :
           {"errresult":true,"datas":{"result":"true"}}
 
 
-
+更新时间：
 
 
 
@@ -1105,7 +1108,7 @@ datas :
           
           }
 
-
+更新时间：
 
 
 
@@ -1127,6 +1130,8 @@ datas :
           
           }
 
+更新时间：
+
 
 四十六、鉴权接口
         请求地址：http://api.bihuo123.com
@@ -1140,6 +1145,10 @@ datas :
     返回值：
     ret:0 代表鉴权成功
         1 代表鉴权失败
+
+更新时间：
+
+
 
 四十七、退出直播房间---传入房间id，传入userid
 请求地址：http://api.bihuo123.com
@@ -1156,12 +1165,15 @@ datas :
         
         房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
 
+
+更新时间：
+
 四十八、直播开始通知包含的字段(直播云转发给我)accpet_params
     http://api.bihuo123.com/index.php/api/user/accpet_params
 type固定为0    hashed_id   author  url svod    size    created_at  format  vs_id   path    private_flag    ctype   cversion    service_code    is_resume   tag opaque
 
 
-
+更新时间：
 
 
 
@@ -1175,6 +1187,8 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
         {"errresult":true,"datas":{"status":0}}//代表未在AppStore审核期
         0代表未在审核期，1为在审核期
 
+
+更新时间：
 
 五十、获取点赞数请求地址：http://api.bihuo123.com/index.php/api/user/getroom_priase?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
 接口参数:
@@ -1192,6 +1206,8 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
                 }
             }
 
+更新时间：
+
 五十一、获取粉丝请求地址：http://api.bihuo123.com/index.php/api/user/getroom_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
 接口参数:
         userid:用户id
@@ -1203,7 +1219,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
         "errresult":true|false 执行成功返回true，执行失败返回false
         如:{"errresult":true,"datas":{"count":"2"}}粉丝数
 
-
+更新时间：
 
 
 
