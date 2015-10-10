@@ -1449,7 +1449,6 @@ class UserController extends MobileController{
              output_error('秘钥key不正确');
         }
         $live_ids = $this->live_list();
-
         if($live_ids != false){
 		    $arrOpt = array();
             $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
@@ -2319,27 +2318,12 @@ class UserController extends MobileController{
             $opt['dateline'] = time();
             $res = $dianzan_model->add($opt);
             if($res){
-<<<<<<< .mine
-                //根据roomid来对live表中的praise进行点赞操作
-                $live_data['id'] = $_REQUEST['roomid'];
-                $info = M('live') -> where($live_data)->find();
-                $live_data['praise'] = $info['praise']+1;
-                $info = M('live') ->save($live_data);
-                output_data(array('praise'=>$live_data['praise']));
-=======
                 //根据房间的id进行保存赞数
                 $live["id"] = $_REQUEST['roomid'];
                 $live_info = M("live")->where($live)->find();
-                $praise = $live_info["praise"];
-                if($praise == null ||$praise == ""){
-                    $praise = 1;
-                }else{
-                    $praise = intval($praise)+1;
-                }
-                $live["prasie"] = $praise;
-                M("live")->save($live);
-                output_data(array('ID'=>$res));
->>>>>>> .r115
+                $live["praise"] = $live_info['$praise']+1;
+                $live_info = M("live")->save($live);
+                output_data($live["praise"]);
             }else{
                 output_error("点赞失败");
             }
