@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace Api\Controller;
 use Api\Common\MobileController;
 use Think\Controller;
@@ -263,10 +263,15 @@ class UserController extends MobileController{
             $user_info1 = $user_model->where($arr)->select();
             $type = $_REQUEST['type'];
             $openid = $_REQUEST['token'];
+            if(!empty($type)){
+                if(empty($openid)){
+                    output_error('第三方key为空!');
+                }
+            }
             //第三方绑定
             if('' != $type){
-            $aa[$type.'openid'] = $openid;
-            $user_info1 = $user_model->where($aa)->select();
+                $aa[$type.'openid'] = $openid;
+                $user_info1 = $user_model->where($aa)->select();
             }
             if(!empty($user_info1)){
                 $token = $this->_get_token($user_info1[0]['id'], $user_info1[0]['phone_num'], $_REQUEST['client_id']);
@@ -301,8 +306,6 @@ class UserController extends MobileController{
             }else{
                  output_error('登陆失败,账号或密码错误');
             }
-           
-        
         
     }
 
@@ -392,17 +395,17 @@ class UserController extends MobileController{
         if($user_info == null){
             output_error('不存在该用户！');
         }
-        //如果原密码和现在的修改密码相同则直接提示密码修改成功
+        //如果原密码和现在的修改密码相同则直接提示密码修改失败
         if($user_info['password'] == md5($_REQUEST['password'])){
             $datas = array();
-            $datas['msg'] = '修改成功，请登陆！';
+            $datas['msg'] = '和原密码相同,修改失败！';
             output_data($datas);
         }
        
         $array = array();
         $array['password'] = md5($_REQUEST['password']);
         //将密码更新
-        $result = $user_model->where(array('phone'=>$_REQUEST['phonenum']))->save($array);
+        $result = $user_model->where(array('phone_num'=>$_REQUEST['phonenum']))->save($array);
         if($result){
             $datas = array();
             $datas['msg'] = '修改成功，请登陆！';
@@ -3086,6 +3089,5 @@ class UserController extends MobileController{
     
 }
    
-    
     
     
