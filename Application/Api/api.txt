@@ -568,12 +568,7 @@ datas :
 }
 更新时间:20151010 am: 9:38
 
-更新时间：
 
-<<<<<<< .mine
-
-=======
->>>>>>> .r120
 二十三.添加意见反馈(系统反馈)
 请求地址：http://api.bihuo123.com
 /index.php/api/user/add_feedback?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&feedback=这个软件非常好哦
@@ -593,12 +588,13 @@ datas :
 
 二十四.获取系统推荐好友
 请求地址：http://api.bihuo123.com
-/index.php/api/user/recommend_info?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
+/index.php/api/user/recommend_info?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&ps=5&page=1
  接口参数:
         userid:
         key:
         client_id
-
+        ps  每页个数默认5
+        page 页码默认1
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
@@ -606,17 +602,18 @@ datas :
           
 }
 
-更新时间：
+更新时间：2015-10-11 10:43
 
 二十五.条件搜索
 请求地址：http://api.bihuo123.com
-/index.php/api/user/tiaojian_search?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tiaojian=18456123789
+/index.php/api/user/tiaojian_search?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&tiaojian=18456123789&ps=5&page=1
  接口参数:
         userid:
         key:
         client_id
         tiaojian------搜索条件
-
+        ps  每页个数默认5
+        page 页码默认1
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
@@ -624,7 +621,7 @@ datas :
           
 }
 
-更新时间：
+更新时间：2015-10-11 10:43
 
 二十六.获取正在直播的房间包括72小时直播间
 请求地址：http://api.bihuo123.com

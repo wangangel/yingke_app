@@ -1334,9 +1334,16 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
+
         $recommend_model = M('recommend');
-        $sql = "select * from yk_recommend where re_batch=(select max(re_batch) from yk_recommend)";
-        $recommend_info = $recommend_model->query($sql);
+        //$sql = "select * from yk_recommend where re_batch=(select max(re_batch) from yk_recommend)";
+        //$recommend_info = $recommend_model->query($sql);
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $max_batch = $recommend_model->max('re_batch');
+        $opt["re_batch"] = $max_batch;
+        $recommend_info = $recommend_model->where($opt)->limit($start,$arrOpt['ps'])->select();
         //根据用户id获取推荐用户的信息
         foreach ($recommend_info as $k => $v) {
             $user_model = M('user');
@@ -1392,7 +1399,10 @@ class UserController extends MobileController{
         $user_model = M('user');
         $tiaojian = "%".$_REQUEST['tiaojian']."%";
         $con['ni_name'] = array('like',$tiaojian);
-        $user_info = $user_model->where($con)->select();
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $user_info = $user_model->where($con)->limit($start,$arrOpt['ps'])->select();
         if(!empty($user_info)){
             foreach ($user_info as $k => $v) {
                $data['tiaojian_search'][$k]['userid'] = $v['id'];

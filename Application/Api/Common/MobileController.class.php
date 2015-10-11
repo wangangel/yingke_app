@@ -102,6 +102,7 @@ class MobileController extends Controller{
         curl_setopt($httph, CURLOPT_HEADER,0);//取得头返回信息
         $rst=curl_exec($httph);
         curl_close($httph);
+
         return $rst;
     }
     /**直播请求post的请求
@@ -198,7 +199,7 @@ class MobileController extends Controller{
                 $task_list[$i]["task_id"] = $ceshi_params["task_list"][$i]["id"];
                 $live_url[$i]["http_live_url"] = $ceshi_params["task_list"][$i]["http_live_url"].$ceshi_params["task_list"][$i]["outputs"][0]["file_name"];
             }
-            //var_dump($live_list);
+            //var_dump($res);
             //去直播列表查正在直播的,封装成json，返回userID
             //$live = M("live");
             /*for ($i=0; $i <count($live_list) ; $i++) { 
