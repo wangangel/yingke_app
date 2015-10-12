@@ -2758,6 +2758,7 @@ class UserController extends MobileController{
             }else{
                 $conf['head_pic'] = $_REQUEST['head_pic'];
             }
+            $conf['city'] = $_REQUEST['city'];
             $res = $userroom_model->add($conf);
             //$res = true;
             //获取直播间的直播url
@@ -2816,6 +2817,7 @@ class UserController extends MobileController{
                 $con['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $con['username'] = $_REQUEST['username'];
                 $con['head_pic'] = $_REQUEST['head_pic'];
+                $conf['city'] = $_REQUEST['city'];
                 $userroom_model = M('user_room');
                 $res = $userroom_model->add($con);
                 if($res){
@@ -3086,7 +3088,7 @@ class UserController extends MobileController{
             $userroom_model = M('user_room');
             $userinfo = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->limit($start,$arrOpt['ps'])->select(); 
             foreach ($userinfo as $k => $v) {
-                $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
+               $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
                $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
                $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
             }
