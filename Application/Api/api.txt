@@ -47,6 +47,7 @@ datas :
     接口参数：：
         type:第三方登录类型(weixin   weibo)
         token:第三方登录token
+
         phonenumber->手机号码 
         password->密码 
         client_id->客户端设备唯一标识,不同设备的标识不同
@@ -471,7 +472,7 @@ datas :
 请求地址：http://api.bihuo123.com
 /index.php/api/user/myshop_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
  接口参数:
-        userid:
+        userid:-----------------(查看我的礼物就传自己的userid  房主就传房主id)
         key:
         client_id
     返回值:
@@ -1015,14 +1016,15 @@ datas :
 
 四十.用户进入公开直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
+/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&ip=218.93.251.115
 接口参数:
         userid:
         key:
         client_id
-        liveroom_id
-        username
-        head_pic(可以为空)
+        liveroom_id------直播间id
+        user_name-------用户名
+        head_pic(可以为空)------头像
+        ip-------用户设备ip
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1040,21 +1042,22 @@ datas :
 }
 
 
-更新时间：
+更新时间：20151012 am 11:07
 
 
 
 四十一.用户进入邀请好友直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_friendsroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&username=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
+/index.php/api/user/into_friendsroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7&&ip=218.93.251.115
 接口参数:
         userid:
         key:
         client_id
-       liveroom_id
-       username
-       head_pic
+       liveroom_id-----房间id
+       user_name-------用户名
+       head_pic------头像
        roomuserid---------------房主id
+       ip-------用户设备ip
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1068,18 +1071,27 @@ datas :
 请求地址：http://api.bihuo123.com
 /index.php/api/user/into_liveroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&ps=10&page=1
 接口参数:
-        userid:
-        key:
-        client_id
-       liveroom_id
-       ps----------------------获取用户头像用的
-       page
+    userid:----------用户id
+    key:---------key
+    client_id--------设备id
+    liveroom_id-----------直播间id
+    ps
+    page
        
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-          
+        room_name--------房间名称
+        room_pic_url---------房间封面图
+        userid----------房主id
+        head_url---------房主头像
+        ni_name--------房主昵称
+        user_num--------房间观众人数
+        praise----------点赞数
+        groupid-----------环信组id
+        is_dianzan-------查看用户是否点赞(yes   no)
+        pingfen-----------当前房间评分
           }
 
 更新时间：
@@ -1136,20 +1148,29 @@ datas :
 
 四十五.获取当前直播间观众的头像
 请求地址：http://api.bihuo123.com
-/index.php/api/user/guanzhong_headpic?liveroom_id=1&ps=10&page=1
+/index.php/api/user/guanzhong_headpic?liveroom_id=1&ps=10&page=1&userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert
 接口参数:
-       liveroom_id
-       ps----------------------获取用户头像用的
-       page
+        userid:------用户id
+        key:----------密钥
+        client_id--------设备唯一识别码
+        liveroom_id ------直播间id
+        ps
+        page
        
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-          
+          ni_name------昵称
+          head_pic-----头像
+          city------所在位置
+          sex-----性别
+          per_sign-----个性签名
+          age --------- 年龄
+          focus_count-------关注数
           }
 
-更新时间：
+更新时间：20151012 am10:50
 
 
 四十六、鉴权接口
@@ -1240,19 +1261,25 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 
 更新时间：
 
+五十二、获取房主店铺礼品：http://api.bihuo123.com
+/index.php/api/user/roomuser_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=123
+ 接口参数:
+        userid----------用户id
+        key:--------------key
+        client_id:---------------设备id
+        liveroom_id:----------直播房间id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+        system_gift/user_gift
+            "id": "1",
+            "gift_name": 礼物名
+            "gift_pic_url": 礼物图片url
+            "gift_price": 礼物价格
+            "gift_sign": 礼物发送人
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+更新时间：2015/10/12  14:43
 
 
 
@@ -1260,4 +1287,13 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+更新文档:
+2015/10/12
+1.新增接口五十二  获取正在直播房主的礼物
+2.在进入直播间需要传入用户ip  (不管是邀请好友,还是公开房间都需要)
+
+
+2015/10/14
+1.获取房主礼物可以使用十九接口   只需要传递房主的userid   查看自己的传递自己的userid
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace Api\Controller;
 use Api\Common\MobileController;
 use Think\Controller;
@@ -10,6 +10,33 @@ class UserController extends MobileController{
     
     public function __construct(){
         parent::__construct();
+    }
+    /**
+ * 淘宝IP地址库 Reset API
+ * @author Chunice <hrb@usa.com>
+ * @param  [string] $ip [IP地址]
+ * @return [type]     [只返回获取成功的ip数据]
+ */
+    public function getLocation($ip) {
+        if (empty($ip)) $ip = get_client_ip();
+        $taobaoUrl = "http://ip.taobao.com/service/getIpInfo.php?ip=";
+        $url       = $taobaoUrl . $ip;
+        $data      = self::httpRequest($url);
+        $data      = preg_replace("#\\\u([0-9a-f]{4})#ie", "iconv('UCS-2BE', 'UTF-8', pack('H4', '\\1'))", $data);
+        $data      = json_decode($data, true);
+        return $data[data];
+    }
+
+    Static Private function httpRequest($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        if ($output === FALSE) {
+            return "cURL Error: " . curl_error($ch);
+        }
+        return $output;
     }
     /**云直播直播转发通知
      * [accpet_params description]
@@ -61,7 +88,7 @@ class UserController extends MobileController{
      */
 	public function register(){
         if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['client_id'] == NULL){
-             output_error('参数不全');
+            output_error('参数不全');
         }
 		$user_model	= M('user');
 		$result = $user_model->where(array('phone_num'=>$_REQUEST['phonenumber']))->find();
@@ -2739,7 +2766,7 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['username'] == NULL || $_REQUEST['head_pic'] == NULL){
+        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
              output_error('参数不全');
         }
         $userroom_model = M('user_room');
@@ -2747,18 +2774,18 @@ class UserController extends MobileController{
         $con['userid'] = $_REQUEST['userid'];
         $con['liveroom_id'] = $_REQUEST['liveroom_id'];
         $info = $userroom_model->where($con)->find();
-
         if(empty($info)){
             //则用户可以进入直播间
             $conf['userid'] = $_REQUEST['userid'];
             $conf['liveroom_id'] = $_REQUEST['liveroom_id'];
-            $conf['username'] = $_REQUEST['username'];
+            $conf['username'] = $_REQUEST['user_name'];
             if($_REQUEST['head_pic'] =="" || $_REQUEST['head_pic']==null){
                 $conf['head_pic'] = "http://ua.tdimg.com:8080/picture/4167/4167";
             }else{
                 $conf['head_pic'] = $_REQUEST['head_pic'];
             }
-            $conf['city'] = $_REQUEST['city'];
+            $city = $this->getLocation($_REQUEST['ip']);
+            $conf['city'] = $city['city'];
             $res = $userroom_model->add($conf);
             //$res = true;
             //获取直播间的直播url
@@ -2810,14 +2837,15 @@ class UserController extends MobileController{
         $info2 = $friends_model->where(array('user_id'=>$_REQUEST['roomuserid']))->where(array('focus_user'=>$_REQUEST['userid']))->find();
         if(!empty($info1) && !empty($info2)){
             //必须双方关注才是好友哦
-            if($_REQUEST['liveroom_id'] == NULL ||  $_REQUEST['username'] == NULL || $_REQUEST['head_pic'] == NULL){
+            if($_REQUEST['liveroom_id'] == NULL ||  $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
                 output_error('参数不全');
             }else{
                 $con['userid'] = $_REQUEST['userid'];
                 $con['liveroom_id'] = $_REQUEST['liveroom_id'];
-                $con['username'] = $_REQUEST['username'];
+                $con['username'] = $_REQUEST['user_name'];
                 $con['head_pic'] = $_REQUEST['head_pic'];
-                $conf['city'] = $_REQUEST['city'];
+                $city = $this->getLocation($_REQUEST['ip']);
+                $conf['city'] = $city['city'];
                 $userroom_model = M('user_room');
                 $res = $userroom_model->add($con);
                 if($res){
@@ -3044,7 +3072,7 @@ class UserController extends MobileController{
      *  观众分享房间
      */
     public function share_room(){
-         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error("请先登录");
         }
             
@@ -3077,11 +3105,24 @@ class UserController extends MobileController{
      * 获取当前直播间的关注头像
      */
     public function guanzhong_headpic(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error("请先登录");
+        }   
+        //验证秘钥是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
         if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }else{
              //获取当前直播间的观众头像
-             $arrOpt = array();
+            $arrOpt = array();
             $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
             $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
             $start = ($arrOpt['page']-1)*$arrOpt['ps'];
@@ -3089,15 +3130,119 @@ class UserController extends MobileController{
             $userinfo = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->limit($start,$arrOpt['ps'])->select(); 
             foreach ($userinfo as $k => $v) {
                $data['liveroom_info']['guanzong_info'][$k]['ID'] = $v['userid'];
+               $u_data['id'] = $v['userid'];
+               $info = M('user')->where($u_data)->find();
+               $data['liveroom_info']['guanzong_info'][$k]['per_sign'] = $info['per_sign'];
+               $data['liveroom_info']['guanzong_info'][$k]['sex'] = $info['sex'];
+               //计算年龄
+               $year_1 = (date('Y',time()));
+               if(empty($info['birth_date'])){
+                $year_2 = (date('Y',time()));
+               }else{
+                $year_2 = (date('Y',$info['birth_date']));
+               }
+               $age = intval($year_1)-intval($year_2);
+               $f_data['user_id']=$v['userid'];
+               $f_count = M('friends_focus')->where($f_data)->count();
                $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
                $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
+               $data['liveroom_info']['guanzong_info'][$k]['city'] = $v['city'];
+               $data['liveroom_info']['guanzong_info'][$k]['age'] = $age;
+               $data['liveroom_info']['guanzong_info'][$k]['focus_count'] =  $f_count;
             }
         }
         output_data($data);
        
     }
 
+    /*
+     *获取房主店铺礼物
+     */
+    public function roomuser_gift(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        if($_REQUEST['liveroom_id'] == NULL){
+            output_error('参数不全');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //根据liveroom_id来获取房主id
+        $r_data['id'] = $_REQUEST['liveroom_id'];
+        $r_info = M('live')->where($r_data)->find();
+        $gift_model = M('gift');
+        //1.获取用户自定义的礼物
+        $u_data['userid']=$r_info['user_id'];
+        $gift_info = $gift_model->where($u_data)->where(array('gift_sign'=>"user"))->where(array('status'=>"start"))->select();
+        if(empty($gift_info)){
+            $data['user_gift'] = NULL;
+        }else{
+            foreach ($gift_info as $k => $v) {
+                $data['user_gift'][$k]['gift_id'] = $v['id'];
+                $data['user_gift'][$k]['gift_name'] = $v['gift_name'];
+                $data['user_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
+                $data['user_gift'][$k]['gift_price'] = $v['gift_price'];
+                $data['user_gift'][$k]['gift_sign'] = $v['gift_sign'];
+            }
+        }
+       
+        //获取系统礼物
+        $sysgift_info = $gift_model->where(array('gift_sign'=>"system"))->where(array('status'=>"start"))->select();
+        if(empty($sysgift_info)){
+            $data['system_gift'] = NULL;
+        }else{
+            foreach ($sysgift_info as $k => $v) {
+                $data['system_gift'][$k]['gift_id'] = $v['id'];
+                $data['system_gift'][$k]['gift_name'] = $v['gift_name'];
+                $data['system_gift'][$k]['gift_pic_url'] = $v['gift_pic_url'];
+                $data['system_gift'][$k]['gift_price'] = $v['gift_price'];
+                $data['system_gift'][$k]['gift_sign'] = $v['gift_sign'];
+            }
+        }
+        output_data($data);
+    }
 
+
+
+        /**
+         * 非正常退出房间,再次进入需要先评分后再进入
+         */
+    public function anomaly_exit{
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        if($_REQUEST['liveroom_id'] == NULL){
+            output_error('参数不全');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //根据userid和liveroom_id来判断用户是否正常评分退出
+        $opt['userid'] = $_REQUEST['userid'];
+        $opt['liveroom_id'] = $_REQUEST['liveroom_id'];
+        $r_info = M('live_room')->where($opt)->find();
+        if(empty($r_info)){
+            output_error('无未评分房间!');
+        }else{
+            output_data($_REQUEST['liveroom_id']); 
+        }
+
+    }
     
 }
    
