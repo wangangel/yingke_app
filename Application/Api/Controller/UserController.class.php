@@ -515,8 +515,8 @@ class UserController extends MobileController{
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
-        if($_REQUEST['qq'] == NULL && $_REQUEST['weixin'] == NULL && $_REQUEST['weibo'] == NULL && $_REQUEST['renren'] == NULL){
-            output_error('没有需要绑定的参数');
+        if($_REQUEST['email'] == NULL){
+            output_error('邮箱绑定参数错误');
         }
         //验证key是否正确,这边需要设备唯一标识
         $token_model = M('usertoken');
@@ -528,39 +528,24 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        $userbind_model = M('userbind');
-        $arr = array();
-        
-          //先判断该用户是否已经绑定
-        $opt['userid'] = $_REQUEST['userid'];
+        $userbind_model = M('user');
+        //先判断该用户是否已经绑定
+        $opt['id'] = $_REQUEST['userid'];
+        $opt['email'] = $_REQUEST['email'];
         $bind_info = $userbind_model->where($opt)->find();
         if(empty($bind_info)){
             //没有绑定过
-            $arr['qq'] = $_REQUEST['qq'];
-            $arr['weixin'] = $_REQUEST['weixin'];
-            $arr['weibo'] = $_REQUEST['weibo'];
-            $arr['renren'] = $_REQUEST['renren'];
-            $arr['userid'] = $_REQUEST['userid'];
-            $res = $userbind_model->add($arr);
+            $arr['email'] = $_REQUEST['email'];
+            $arr['id'] = $_REQUEST['userid'];
+            $res = $userbind_model->save($arr);
             if($res){
                 output_data(array('ID'=>$res));
             }else{
                 output_error('绑定失败');
             }
         }else{
-            //执行更新操作
-             $arr['qq'] = $_REQUEST['qq'];
-            $arr['weixin'] = $_REQUEST['weixin'];
-            $arr['weibo'] = $_REQUEST['weibo'];
-            $arr['renren'] = $_REQUEST['renren'];
-            $result = $userbind_model->where($opt)->save($arr);
-            if($result){
-                 output_data(array('ID'=>$result));
-            }else{
-                output_error('绑定失败');
-            }
+            output_error('重复绑定');
         }
-
     }
 
 
@@ -3215,7 +3200,7 @@ class UserController extends MobileController{
         /**
          * 非正常退出房间,再次进入需要先评分后再进入
          */
-    public function anomaly_exit{
+    public function anomaly_exit(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -3243,7 +3228,82 @@ class UserController extends MobileController{
         }
 
     }
+
+
+       /**
+         * 获取系统热门标签以及数量
+         */
+    public function hot_tags_num(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //根据userid和liveroom_id来判断用户是否正常评分退出
+        $tags_info = M('tags')->order('add_num desc')->limit(3)->select();
+        if(empty($tags_info)){
+            output_error('标签库没有标签!');
+        }else{
+            output_data($tags_info); 
+        }
+
+    }
+
+
+
+        /**
+         * 判断用户第三方是否绑定
+         */
+    public function bind_show(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $opt['id'] = $_REQUEST['userid'];
+        //根据userid和liveroom_id来判断用户是否正常评分退出
+        $user_info = M('user')->where($opt)->find();
+        if(empty($user_info)){
+            output_error('该用户不存在!');
+        }else{
+            if(empty($user_info['weixintoken'])){
+                $data['weixin']='no';
+            }else{
+                $data['weixin']='yes';
+            }
+            if(empty($user_info['email'])){
+                $data['email']='no';
+            }else{
+                $data['email']='yes';
+            }
+            if(empty($user_info['weibo'])){
+                $data['weibo']='no';
+            }else{
+                $data['weibo']='yes';
+            }
+            output_data($data); 
+        }
+
+    }
     
+
+        
 }
    
     

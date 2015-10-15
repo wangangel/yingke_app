@@ -20,7 +20,7 @@ datas :
     optype:1->注册时获取的验证码 
     2->重置密码时候获取验证码
 
-更新时间：
+：
 
 
 
@@ -36,7 +36,7 @@ code
 "errresult":true|false 执行成功返回true，执行失败返回false
 datas :
 
-更新时间：
+：
 
 
 
@@ -63,10 +63,10 @@ datas :
         password:加密好的密码
         server_code：服务码
 
-更新时间：
+：
 
 <<<<<<< .mine
-更新时间:20151010 am:9:18
+:20151010 am:9:18
 
 =======
 >>>>>>> .r120
@@ -109,9 +109,9 @@ datas :
         "fans_num": 0
     }
 }
-更新时间:20151010 am:9:14
+:20151010 am:9:14
 
-更新时间：
+：
 
 五、用户退出登录
     请求地址：http://api.bihuo123.com
@@ -130,7 +130,7 @@ datas :
             msg->"退出成功"
 
 
-更新时间：
+：
 
 六、忘记密码
      请求地址：http://api.bihuo123.com
@@ -146,7 +146,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-更新时间：
+：
 
 
 七.获取用户个人信息----------修改,添加用户的关注数,粉丝数,评分
@@ -174,7 +174,7 @@ datas :
     }
 
 
-更新时间：
+：
 
 
 八.修改个人信息接口
@@ -203,9 +203,9 @@ datas :
                    id:用户id
 
 <<<<<<< .mine
-更新时间:20151010 am:9:40
+:20151010 am:9:40
 =======
-更新时间：
+：
 >>>>>>> .r120
 
 
@@ -225,20 +225,17 @@ datas :
             datas: 
                    picurl:图片url
 
-更新时间：
+：
 
 
-十.用户绑定接口
+十.用户绑定邮箱接口
  请求地址：http://api.bihuo123.com
-/index.php/api/user/user_bind?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&qq=1550010428&weixin=jiuju2015&weibo=jiujusinna&renren=renren&client_id=qwert
+/index.php/api/user/user_bind?userid=6&key=89e1b01bd9150dce8559aa9d145c76c3&email=690303775@qq.com&client_id=qwert
     接口参数：：
         userid->用户id
         key->秘钥
         client_id->客户端唯一标识
-        qq
-        weixin
-        weibo 
-        renren
+        email------邮箱参数
     返回值：
         "errresult":true|false 执行成功返回true，执行失败返回false
         datas:
@@ -246,7 +243,7 @@ datas :
             datas: 
                    id
 
-更新时间：
+
 
 
 
@@ -268,7 +265,7 @@ datas :
             datas: 
                    id
 
-更新时间：
+
 
 
 
@@ -288,7 +285,7 @@ datas :
        error:错误描述，执行成功没有该字段
             datas: 
                    id
-更新时间：
+：
 
 
 
@@ -312,7 +309,7 @@ datas :
                 "sex": 
                 "is_focus": 0---未关注,1:已关注
 
-更新时间：
+：
 
 
 
@@ -331,7 +328,7 @@ datas :
             datas: 
                 result
 
-更新时间：
+：
 
 
 
@@ -354,7 +351,7 @@ datas :
                 result
 
 
-更新时间：
+：
 
 
 
@@ -382,7 +379,7 @@ datas :
                 "sex": 
                 "is_focus": 0---未关注,1:已关注
 
-更新时间：
+：
 
 
 十六.绑定银行卡
@@ -401,7 +398,7 @@ datas :
           id
     }
 
-更新时间：
+：
 
 十七.用户获取绑定银行的信息
 请求地址：http://api.bihuo123.com
@@ -417,7 +414,7 @@ datas :
     }
 
 
-更新时间：
+：
 
 
 十八.余额提现
@@ -435,7 +432,7 @@ datas :
     }
 
 
-更新时间：
+：
 
 
 
@@ -456,7 +453,7 @@ datas :
           id
     }
 
-更新时间：
+：
 
 
 
@@ -486,7 +483,7 @@ datas :
 }
 
 
-更新时间：
+：
 
 
 二十.添加我的店铺礼物
@@ -505,7 +502,7 @@ datas :
           id
     }
 
-更新时间：
+：
 
 
 
@@ -525,7 +522,7 @@ datas :
 
 
 
-更新时间：
+：
 
 
 
@@ -547,9 +544,9 @@ datas :
             无标签返回:NULL 
 }
 
-更新时间:20151010 am: 9:37
+:20151010 am: 9:37
 
-更新时间：
+：
 
 
 二十二.添加我的标签
@@ -567,7 +564,7 @@ datas :
             "id": 
           
 }
-更新时间:20151010 am: 9:38
+:20151010 am: 9:38
 
 
 二十三.添加意见反馈(系统反馈)
@@ -585,7 +582,7 @@ datas :
             "id": 
 }
 
-更新时间：
+：
 
 二十四.获取系统推荐好友
 请求地址：http://api.bihuo123.com
@@ -603,7 +600,7 @@ datas :
           
 }
 
-更新时间：2015-10-11 10:43
+：2015-10-11 10:43
 
 二十五.条件搜索
 请求地址：http://api.bihuo123.com
@@ -622,7 +619,7 @@ datas :
           
 }
 
-更新时间：2015-10-11 10:43
+：2015-10-11 10:43
 
 二十六.获取正在直播的房间包括72小时直播间
 请求地址：http://api.bihuo123.com
@@ -662,7 +659,7 @@ datas :
         ]
 
         
-更新时间：2015-10-10 14:58
+：2015-10-10 14:58
 
 
 二十七.获取过去72小时的直播房间（多余）
@@ -748,7 +745,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 
 二十九.添加房间标签
@@ -768,7 +765,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 三十.根据热门标签获取直播房间信息
 请求地址：http://api.bihuo123.com
@@ -788,7 +785,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 
 
@@ -838,13 +835,13 @@ datas :
         ]
 
 
-更新时间：
+：
 
 三十二.获取热门标签(默认取5条标签)
 请求地址：http://api.bihuo123.com
 /index.php/api/user/show_tags?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 接口参数:
-        userid:
+        userid:------用户id
         key:
         client_id
        
@@ -865,7 +862,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 
 
@@ -889,7 +886,7 @@ datas :
             id
           }
 
-更新时间：
+：
 
 
 三十四.付费观看
@@ -910,7 +907,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 三十五.对房间点赞
 请求地址：http://api.bihuo123.com
@@ -928,7 +925,7 @@ datas :
           }
 
 
-更新时间：
+：
 
 三十六.举报房间
 请求地址：http://api.bihuo123.com
@@ -946,7 +943,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 
 
@@ -968,7 +965,7 @@ datas :
           
 }
 
-更新时间：
+：
 
 
 
@@ -989,7 +986,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-更新时间：
+：
 
 
 三十九.获取用户的绑定信息
@@ -1007,7 +1004,7 @@ datas :
             error:错误描述，执行成功没有该字段
             datas: msg->"修改成功，请登录"
 
-更新时间：
+：
 
 
 
@@ -1042,7 +1039,7 @@ datas :
 }
 
 
-更新时间：20151012 am 11:07
+：20151012 am 11:07
 
 
 
@@ -1063,7 +1060,7 @@ datas :
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {"errresult":true,"datas":{"result":"true","live_url":"http:\/\/xvs-5.zhiboyun.com:80\/live\/id\/aws-cn_north_1-3-d66f8636fe1c1c11.flv"}}
 
-更新时间：
+：
 
 
 
@@ -1094,7 +1091,7 @@ datas :
         pingfen-----------当前房间评分
           }
 
-更新时间：
+：
 
 
 
@@ -1118,7 +1115,7 @@ datas :
           {"errresult":true,"datas":{"result":"true"}}
 
 
-更新时间：
+：
 
 
 
@@ -1139,7 +1136,7 @@ datas :
           
           }
 
-更新时间：
+：
 
 
 
@@ -1170,7 +1167,7 @@ datas :
           focus_count-------关注数
           }
 
-更新时间：20151012 am10:50
+：20151012 am10:50
 
 
 四十六、鉴权接口
@@ -1186,7 +1183,7 @@ datas :
     ret:0 代表鉴权成功
         1 代表鉴权失败
 
-更新时间：
+：
 
 
 
@@ -1206,14 +1203,14 @@ datas :
         房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
 
 
-更新时间：
+：
 
 四十八、直播开始通知包含的字段(直播云转发给我)accpet_params
     http://api.bihuo123.com/index.php/api/user/accpet_params
 type固定为0    hashed_id   author  url svod    size    created_at  format  vs_id   path    private_flag    ctype   cversion    service_code    is_resume   tag opaque
 
 
-更新时间：
+：
 
 
 
@@ -1228,7 +1225,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
         0代表未在审核期，1为在审核期
 
 
-更新时间：
+：
 
 五十、获取点赞数请求地址：http://api.bihuo123.com/index.php/api/user/getroom_priase?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
 接口参数:
@@ -1246,7 +1243,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
                 }
             }
 
-更新时间：
+：
 
 五十一、获取粉丝请求地址：http://api.bihuo123.com/index.php/api/user/getroom_fans?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&roomid=387
 接口参数:
@@ -1259,7 +1256,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
         "errresult":true|false 执行成功返回true，执行失败返回false
         如:{"errresult":true,"datas":{"count":"2"}}粉丝数
 
-更新时间：
+：
 
 五十二、获取房主店铺礼品：http://api.bihuo123.com
 /index.php/api/user/roomuser_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=123
@@ -1279,10 +1276,39 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             "gift_sign": 礼物发送人
 }
 
-更新时间：2015/10/12  14:43
+：2015/10/12  14:43
 
+五十三 获取系统热门标签以及数量http://api.bihuo123.com
+/index.php/api/user/hot_tags_num?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 
+ 接口参数:
+        userid----------用户id
+        key:--------------key
+        client_id:---------------设备id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            "id": "1",
+            "add_date": 标签创建时间
+            "add_num": 标签使用数量
+            "remark": 备注(未使用)
+}
+五十四 获取用户绑定情况http://api.bihuo123.com
+/index.php/api/user/bind_show?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 
+ 接口参数:
+        userid----------用户id
+        key:--------------key
+        client_id:---------------设备id
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        "datas": {
+            状态:yes 已绑定   no 未绑定
+            weibo-----------微博
+            weixin-----------微信
+            email------------邮箱
+            注:人人写死,不作任何操作
+}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1296,4 +1322,9 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 
 2015/10/14
 1.获取房主礼物可以使用十九接口   只需要传递房主的userid   查看自己的传递自己的userid
+
+2015/10/15
+1.增加接口五十三,获取系统标签使用最热的前三.
+2.增加接口五十四,获取用户的绑定情况.
+3.修改接口十为邮箱绑定接口.
 
