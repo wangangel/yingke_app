@@ -2749,6 +2749,7 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
+
         if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
              output_error('参数不全');
         }
@@ -2767,8 +2768,8 @@ class UserController extends MobileController{
             }else{
                 $conf['head_pic'] = $_REQUEST['head_pic'];
             }
-            $city = $this->getLocation($_REQUEST['ip']);
-            $conf['city'] = $city['city'];
+            $city = $this->getLocation($_SERVER['REMOTE_ADDR']);
+            $conf['city'] = $city;
             $res = $userroom_model->add($conf);
             //$res = true;
             //获取直播间的直播url
@@ -2786,7 +2787,9 @@ class UserController extends MobileController{
                 output_error('进入直播间失败');
             }
         }else{
-            output_error('您当前已经在直播间了');
+            $da['liveroom_id'] = $_REQUEST['liveroom_id'];
+            $da['note'] = '该返回值,是用户非正常/未评分退出!';
+            output_data($da);
         }
     }
 
@@ -2827,7 +2830,7 @@ class UserController extends MobileController{
                 $con['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $con['username'] = $_REQUEST['user_name'];
                 $con['head_pic'] = $_REQUEST['head_pic'];
-                $city = $this->getLocation($_REQUEST['ip']);
+                $city = $this->getLocation($_SERVER['REMOTE_ADDR']);
                 $conf['city'] = $city['city'];
                 $userroom_model = M('user_room');
                 $res = $userroom_model->add($con);
@@ -3203,7 +3206,7 @@ class UserController extends MobileController{
             output_error('请先登录');
         }
         if($_REQUEST['liveroom_id'] == NULL){
-            output_error('参数不全');
+            output_error('房间id为空!');
         }
          //验证key是否正确
         $token_model = M('usertoken');
@@ -3298,13 +3301,6 @@ class UserController extends MobileController{
             output_data($data); 
         }
 
-    }
-    /**
-    *获取ip的地址
-    */
-    public function client_ip(){
-        $data["ip"] =  $_SERVER['REMOTE_ADDR'];
-        output_data($data);
     }
 
         

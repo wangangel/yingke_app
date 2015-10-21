@@ -1008,7 +1008,7 @@ datas :
 
 四十.用户进入公开直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&ip=218.93.251.115
+/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
 接口参数:
         userid:
         key:
@@ -1016,7 +1016,6 @@ datas :
         liveroom_id------直播间id
         user_name-------用户名
         head_pic(可以为空)------头像
-        ip-------用户设备ip
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1029,18 +1028,18 @@ datas :
         "live_id": "426",
         "groupid": "1443512320306",
         "praise": 0,
-        "score": 3
+        "score": 3,
     }
+    liveroom_id-------已经在直播间就返回id
 }
 
 
-：20151012 am 11:07
 
 
 
 四十一.用户进入邀请好友直播房间
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_friendsroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7&&ip=218.93.251.115
+/index.php/api/user/into_friendsroom?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg&roomuserid=7
 接口参数:
         userid:
         key:
@@ -1049,7 +1048,6 @@ datas :
        user_name-------用户名
        head_pic------头像
        roomuserid---------------房主id
-       ip-------用户设备ip
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1256,29 +1254,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 
 
 
-五十二、获取房主店铺礼品：http://api.bihuo123.com
-/index.php/api/user/roomuser_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=123
- 接口参数:
-        userid----------用户id
-        key:--------------key
-        client_id:---------------设备id
-        liveroom_id:----------直播房间id
-    返回值:
-        "errresult":true|false 执行成功返回true，执行失败返回false
-        "datas": {
-        system_gift/user_gift
-            "id": "1",
-            "gift_name": 礼物名
-            "gift_pic_url": 礼物图片url
-            "gift_price": 礼物价格
-            "gift_sign": 礼物发送人
-}
 
-    返回值:
-        "errresult":true|false 执行成功返回true，执行失败返回false
-        如:{"errresult":true,"datas":{"count":"2"}}粉丝数
-
-：2015/10/12  14:43
 
 
 五十三 获取系统热门标签以及数量http://api.bihuo123.com
@@ -1313,12 +1289,8 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             注:人人写死,不作任何操作
 }
 
-五十五、获取客户端IP的接口
-http://api.bihuo123.com/index.php/api/user/client_ip
-接口参数:
-       
-返回值：
-    {"errresult":true,"datas":{"ip":"127.0.0.1"}}
+================================================================================
+
 
 
 更新文档:
@@ -1336,8 +1308,8 @@ http://api.bihuo123.com/index.php/api/user/client_ip
 3.修改接口十为邮箱绑定接口.
 
 2015/10/21
-1.增加接口五十五，获取客户端IP的接口。
-
+1.删除接口四十/四十一 传入IP参数   (不需要传递ip)
+2.删除接口五十二获取房主店铺礼品,统一使用接口十九,访问自己就传入自己id,房主就传房主id
 
 
 
