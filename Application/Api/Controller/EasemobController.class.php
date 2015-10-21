@@ -59,25 +59,26 @@ class EasemobController extends Controller{
         $option ['grant_type'] = "client_credentials";
         $option ['client_id'] = $this->client_id;
         $option ['client_secret'] = $this->client_secret;
-        $url = $this->url . "token";
+        $url = $this->url;
+       
         $fp = @fopen ( "easemob.txt", 'r' );
         if ($fp) {
             $arr = unserialize ( fgets ( $fp ) );
             if ($arr ['expires_in'] < time ()) {
-                $result = $this->postCurl ( $url, $option, $head = 0 );
+                $result = $this->postCurl ($url, $option, $head = 0 );
                 $result ['expires_in'] = $result ['expires_in'] + time ();
                 @fwrite ( $fp, serialize ( $result ) );
                 return $result ['access_token'];
                 fclose ( $fp );
                 exit ();
             }
-            return $arr ['access_token'];
-            fclose ( $fp );
-            exit ();
+            return $arr['access_token'];
+            fclose ($fp);
+            exit();
         }
         $result = $this->postCurl ( $url, $option, $head = 0 );
         $result = json_decode($result);
-        $result ['expires_in'] = $result ['expires_in'] + time ();
+        $result['expires_in'] = $result['expires_in']+time();
         $fp = @fopen ( "easemob.txt", 'w' );
         @fwrite ( $fp, serialize ( $result ) );
         return $result ['access_token'];
@@ -104,7 +105,7 @@ class EasemobController extends Controller{
         $access_token = $this->getToken ();
         $header [] = 'Authorization: Bearer ' . $access_token;
         $result = $this->postCurl ( $url, '', $header, $type = "GET" );
-        var_dump($result);
+        //var_dump($result);
         return $result;
     }
 }
