@@ -1385,8 +1385,6 @@ class UserController extends MobileController{
 
 
 
-
-
     /*
      *条件搜素
      */
@@ -3301,7 +3299,13 @@ class UserController extends MobileController{
         }
 
     }
-    
+    /**
+    *获取ip的地址
+    */
+    public function client_ip(){
+        $data["ip"] =  $_SERVER['REMOTE_ADDR'];
+        output_data($data);
+    }
 
         
 }

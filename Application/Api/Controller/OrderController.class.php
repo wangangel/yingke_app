@@ -3,7 +3,7 @@ namespace Api\Controller;
 use Api\Common\MobileController;
 class OrderController extends MobileController{
     /*
-     * 创建订单
+     * 创建订单大
      */
     public function create_order(){
         if($_POST['key'] == null || $_POST['member_id'] == null || $_POST['client'] == null){

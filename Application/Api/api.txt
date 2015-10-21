@@ -65,11 +65,9 @@ datas :
 
 ：
 
-<<<<<<< .mine
+
 :20151010 am:9:18
 
-=======
->>>>>>> .r120
 
 四、用户登录
     请求地址：http://api.bihuo123.com
@@ -202,11 +200,8 @@ datas :
             datas: 
                    id:用户id
 
-<<<<<<< .mine
 :20151010 am:9:40
-=======
-：
->>>>>>> .r120
+
 
 
 
@@ -1256,7 +1251,10 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
         "errresult":true|false 执行成功返回true，执行失败返回false
         如:{"errresult":true,"datas":{"count":"2"}}粉丝数
 
-：
+更新时间：2015-10-21
+
+
+
 
 五十二、获取房主店铺礼品：http://api.bihuo123.com
 /index.php/api/user/roomuser_gift?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=123
@@ -1276,7 +1274,12 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             "gift_sign": 礼物发送人
 }
 
+    返回值:
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        如:{"errresult":true,"datas":{"count":"2"}}粉丝数
+
 ：2015/10/12  14:43
+
 
 五十三 获取系统热门标签以及数量http://api.bihuo123.com
 /index.php/api/user/hot_tags_num?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
@@ -1310,8 +1313,12 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             注:人人写死,不作任何操作
 }
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+五十五、获取客户端IP的接口
+http://api.bihuo123.com/index.php/api/user/client_ip
+接口参数:
+       
+返回值：
+    {"errresult":true,"datas":{"ip":"127.0.0.1"}}
 
 
 更新文档:
@@ -1327,4 +1334,13 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 1.增加接口五十三,获取系统标签使用最热的前三.
 2.增加接口五十四,获取用户的绑定情况.
 3.修改接口十为邮箱绑定接口.
+
+2015/10/21
+1.增加接口五十五，获取客户端IP的接口。
+
+
+
+
+
+
 
