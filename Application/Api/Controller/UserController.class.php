@@ -2945,10 +2945,9 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['score'] == NULL || $_REQUEST['tag'] == NULL){
+        if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }
-
         //根据userid来判断用户是房主还是观众;
         $data["room_user"] = $_REQUEST['userid'];
         $data["id"] = $_REQUEST['liveroom_id'];
@@ -2965,8 +2964,11 @@ class UserController extends MobileController{
             output_data($da_1);
         }else{
             //用户退出需要进入评分
+            if($_REQUEST['score'] == NULL || $_REQUEST['tag'] == NULL){
+                 output_error('参数不全');
+              }
             $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
-            if($result){
+            if($res){
                  //打分成功
                  //添加标签
                  $tags_model = M('tags');
