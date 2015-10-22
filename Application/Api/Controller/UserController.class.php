@@ -2944,60 +2944,26 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['live_id'] == NULL){
+        if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }
+
+        //根据userid来判断用户是房主还是观众;
         $data["room_user"] = $_REQUEST['userid'];
-        $data["id"] = $_REQUEST['live_id'];
-        $data["status"] = "in";
-        $live = M("live")->where($data)->find();
-        if($live == null ){
-            //不是主播
-            //--清理房间记录
-            $room_["liveroom_id"] = $_REQUEST['live_id'];
-            $room_["userid"] = $_REQUEST['userid'];
-            M('user_room')->where($room_)->delete();
-            $data["live_id"] = $_REQUEST['live_id'];
-            $data["userid"] = $_REQUEST['userid'];
-            output_data($data);
-        }else{
-            //是主播，调用所有的
+        $data["id"] = $_REQUEST['liveroom_id'];
+        $live_model = M('live');
+        $live = $live_model->where($data)->find();
+
+        //如果$live为空证明就是观众,否则就为房主
+        if(!empty($live)){
+            //是主播就更改房间状态
             $stop["status"] = "success";
-            $stop["id"] = $_REQUEST['live_id'];
+            $stop["id"] = $_REQUEST['liveroom_id'];
             M("live")->save($stop);
             output_data(array('result'=>'success'));
-        }
-    }
-    /*
-     * 观众退出直播间打分
-     */
-    public function out_score(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error("请先登录");
-        }
-            
-        //验证秘钥是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['client_id'] = $_REQUEST['client_id'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }
-        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['score'] == NULL){
-            output_error('参数不全');
-        }
-        //1.打分
-        $live_model = M('live');
-        $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
-        if($res){
-            //打分成功--清理房间记录
-            $room_["liveroom_id"] = $_REQUEST['liveroom_id'];
-            $room_["userid"] = $_REQUEST['userid'];
-            M('user_room')->where($room_)->delete();
-            $result = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score_usernum');
+        }else{
+            //用户退出需要进入评分
+            $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
             if($result){
                  //打分成功
                  //添加标签
@@ -3014,13 +2980,10 @@ class UserController extends MobileController{
                         $conf1['add_num'] = '0';
                         $jieguo2 = $tags_model->add($conf1);
                         if($jieguo2){
-                             $live_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
+                            $live_info = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->find();
                             $live_tags = $live_info['tags'];
-                             $live_tags2 = $live_tags . "," . $tagid;
-                             $jiegou3 = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->save(array('tags'=>$live_tags2));
-                             // if(!$jiegou3){
-                             //    output_error('标签添加失败1');
-                             // }
+                            $live_tags2 = $live_tags . "," . $tagid;
+                            $jiegou3 = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->save(array('tags'=>$live_tags2));
                         }
                      }else{
                         //已经有该标签
@@ -3034,25 +2997,17 @@ class UserController extends MobileController{
                             //说明没有
                            $live_tags1 = $live_tags . "," . $tagid;
                            $jiegou1 = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->save(array('tags'=>$live_tags1));
-                           // if(!$jiegou1){
-                           //      output_error('标签添加失败2');
-                           // }
                         }
                      }
                      
                  }
                  output_data(array('result'=>'true'));
             }else{
-                output_error('打分失败1');
+                output_error('评分失败');
             }
-        }else{
-            output_error('打分失败2');
         }
-
+        
     }
-
-
-
 
     /*  
      *  观众分享房间

@@ -1084,33 +1084,6 @@ datas :
         pingfen-----------当前房间评分
           }
 
-：
-
-
-
-
-四十三.观众退出直播间打分
-请求地址：http://api.bihuo123.com
-/index.php/api/user/out_score?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&score=5&tag=帅哥,性感
-接口参数:
-        userid:
-        key:
-        client_id
-       liveroom_id
-       score
-       tag-----------两个标签之前用逗号隔开
-       
-    返回值:
-        "errresult":true|false 执行成功返回true，执行失败返回false
-        "datas": {
-          
-          }
-          {"errresult":true,"datas":{"result":"true"}}
-
-
-：
-
-
 
 
 四十四.分享房间,次数累加
@@ -1176,18 +1149,14 @@ datas :
     ret:0 代表鉴权成功
         1 代表鉴权失败
 
-：
-
-
-
 四十七、退出直播房间---传入房间id，传入userid
 请求地址：http://api.bihuo123.com
-/index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&live_id=1
+/index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1
 接口参数:
         userid:用户id
         key:
         client_id
-        live_id 直播id
+        liveroom_id ------------- 直播房间id
        
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1195,8 +1164,6 @@ datas :
         
         房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
 
-
-：
 
 四十八、直播开始通知包含的字段(直播云转发给我)accpet_params
     http://api.bihuo123.com/index.php/api/user/accpet_params
@@ -1310,6 +1277,10 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 2015/10/21
 1.删除接口四十/四十一 传入IP参数   (不需要传递ip)
 2.删除接口五十二获取房主店铺礼品,统一使用接口十九,访问自己就传入自己id,房主就传房主id
+
+2015/10/22
+1.删除四十三接口,用户房主退出采用四十七接口
+2.四十七接口修改参数live_id为liveroom_id,房主/用户退出统一接口
 
 
 

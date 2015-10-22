@@ -26,4 +26,10 @@ return array(
     'TMPL_ACTION_SUCCESS'=>'Public:jump',
     'TMPL_ACTION_ERROR'=>'Public:jump',
     //'SESSION_AUTO_START' => true,    //是否开启SESSION
+     'OAUTH'                 => array(
+        'WEIBO_APPKEY'      => '599678130',
+        'WEIBO_APPSECRETKEY'=> 'f17b02720629fb39a56fba35e677a0bb',
+        'WEIBO_SCOPE'       => '',
+        'WEIBO_CALLBACK'    => 'http://127.0.0.1/yingke/login/auth/weibo',
+    ),
 );
