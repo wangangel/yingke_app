@@ -1468,7 +1468,7 @@ class UserController extends MobileController{
      *获取正在直播的房间(当前房间人数,还未完成)---以及72小时
      */
     public function live_room(){
-            if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+          /* if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
                 output_error('请先登录');
             }
              //验证key是否正确
@@ -1480,7 +1480,7 @@ class UserController extends MobileController{
             $jieguo = $token_model->where($arr)->select();
             if($jieguo[0] == NULL){
                  output_error('秘钥key不正确');
-            }
+            }*/
             /*$live_ids = $this->live_list();
             var_dump($live_ids);
             */
@@ -1490,8 +1490,9 @@ class UserController extends MobileController{
             $live_model = M('live');
             $map["status"] = "in";
             $map["task_id"] = array('neq',"");
-            //$map["id"] = array('in',$live_ids);
+            
             $liveroom_info = $live_model->where($map)->order('add_date desc')->limit($start,$arrOpt['ps'])->select();
+            
             if(count($liveroom_info) >0){//说明有直播
                     //var_dump($liveroom_info);
                 if(empty($liveroom_info)){
@@ -1553,24 +1554,23 @@ class UserController extends MobileController{
                 $data["type"] = 0;
                 output_data($data);
             }else{
+
                 //获取72小时在直播
                 $ps = intval($_REQUEST['ps'])>15?intval($_REQUEST['ps']):30;
                 $page = intval($_REQUEST['page'])>1?intval($_REQUEST['page']):0;
                 $past_live = $this->getlive_list($ps,$page);
+                
                 if($past_live != false){
-                    $arrOpt = array();
-                    $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
-                    $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):0;
-                    $start = ($arrOpt['page']-1)*$arrOpt['ps'];
-                    $from_time = date("Y-m-d",strtotime("-3 day"));
-                    $to_time = date("Y-m-d",strtotime("-1 day"));
+
                     //获得72小时前的时间戳
                     $time = strtotime("-3 day");
+
                     $cond['status'] = "success";
                     $cond['add_date'] = array('egt',$time);
                     $cond['task_id'] = array('in',$past_live);
                     $live_model = M('live');
                     $live_info = $live_model->where($cond)->order("add_date desc")->limit($start,$arrOpt['ps'])->select();
+                    
                     if($live_info != null){
                         foreach ($live_info as $k => $v) {
                             $data['liveroom_info'][$k]['room_id'] = $v['id'];
@@ -1769,6 +1769,7 @@ class UserController extends MobileController{
         $live_model = M('live');
         //1.获取正在直播的房间
         $liveroom_info = $live_model->where(array('status'=>'in'))->limit($start,$arrOpt['ps'])->select();
+        
         if(empty($liveroom_info)){
             $data['liveroom_info'] = NULL;
         }else{
