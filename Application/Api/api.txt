@@ -1287,6 +1287,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 2015/10/22
 1.删除四十三接口,用户房主退出采用四十七接口
 2.四十七接口修改参数live_id为liveroom_id,增加 tag(标签)score(评分)参数  房主/用户退出统一接口
+3.四十七接口,房主退出不需要传递 tag(标签)score(评分)参数 
 
 
 
