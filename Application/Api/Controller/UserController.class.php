@@ -2944,7 +2944,7 @@ class UserController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
-        if($_REQUEST['liveroom_id'] == NULL){
+        if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['score'] == NULL || $_REQUEST['tag'] == NULL){
             output_error('参数不全');
         }
 
@@ -2953,14 +2953,15 @@ class UserController extends MobileController{
         $data["id"] = $_REQUEST['liveroom_id'];
         $live_model = M('live');
         $live = $live_model->where($data)->find();
-
         //如果$live为空证明就是观众,否则就为房主
         if(!empty($live)){
             //是主播就更改房间状态
             $stop["status"] = "success";
             $stop["id"] = $_REQUEST['liveroom_id'];
             M("live")->save($stop);
-            output_data(array('result'=>'success'));
+            $da_1['note'] = "房主退出成功!房间已关闭!";
+            $da_1['result'] = 'success';
+            output_data($da_1);
         }else{
             //用户退出需要进入评分
             $res = $live_model->where(array('id'=>$_REQUEST['liveroom_id']))->setInc('score',$_REQUEST['score']);
@@ -3001,9 +3002,15 @@ class UserController extends MobileController{
                      }
                      
                  }
-                 output_data(array('result'=>'true'));
+                 $da_3['note'] = '观众评分成功,返回广场!';
+                 $dat_1["userid"] = $_REQUEST['userid'];
+                 $dat_1["liveroom_id"] = $_REQUEST['liveroom_id'];
+                 $rs = M('user_room')->where($dat_1)->delete();
+                 output_data($da_3);
             }else{
-                output_error('评分失败');
+                $da_2['note'] = '观众评分失败,需要重新评分!';
+                $da_2['liveroom_id'] = $_REQUEST['liveroom_id'];
+                output_data($da_2);
             }
         }
         

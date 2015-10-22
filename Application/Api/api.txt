@@ -1151,18 +1151,24 @@ datas :
 
 四十七、退出直播房间---传入房间id，传入userid
 请求地址：http://api.bihuo123.com
-/index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1
+/index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&tag=帅哥&score=5
 接口参数:
         userid:用户id
         key:
         client_id
         liveroom_id ------------- 直播房间id
-       
+        tag----------------标签
+        score-------------评分
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
-        观众退出：{"errresult":true,"datas":{"room_user":"6","id":"74","status":"in","live_id":"74","userid":"6"}}
+        观众退出：{
+        评分成功退出,返回广场
+        评分失败:返回liveroom_id.
+        }
         
-        房主退出：{"errresult":true,"datas":{"result":"success"}}，success后app执行停止直播
+        房主退出：{
+        更改房间状态,提示退出成功!
+        }
 
 
 四十八、直播开始通知包含的字段(直播云转发给我)accpet_params
@@ -1280,7 +1286,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 
 2015/10/22
 1.删除四十三接口,用户房主退出采用四十七接口
-2.四十七接口修改参数live_id为liveroom_id,房主/用户退出统一接口
+2.四十七接口修改参数live_id为liveroom_id,增加 tag(标签)score(评分)参数  房主/用户退出统一接口
 
 
 
