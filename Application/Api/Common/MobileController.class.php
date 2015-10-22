@@ -93,9 +93,9 @@ class MobileController extends Controller{
         $url=$url.$p;
         //var_dump($url);
         $httph =curl_init($url);
-        curl_setopt($httph, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($httph, CURLOPT_SSL_VERIFYHOST, 1);
-        curl_setopt($httph, CURLOPT_HTTPHEADER, $header);//设置请求头信息
+        curl_setopt($httph, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($httph, CURLOPT_SSL_VERIFYHOST, FALSE);
+        //curl_setopt($httph, CURLOPT_HTTPHEADER, $header);//设置请求头信息
         curl_setopt($httph, CURLOPT_RETURNTRANSFER,1);
         curl_setopt($httph, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
         curl_setopt($httph, CURLOPT_RETURNTRANSFER,1);
@@ -226,24 +226,23 @@ class MobileController extends Controller{
      * [getlive_list description]
      * @return [type] [description]$ps,$page
      */
-    function getlive_list(){
+    function getlive_list($ps,$page){
         //昨天，大前天
-        $from_time = date("Y-m-d",strtotime("-1 day"));
+        $from_time = date("Y-m-d",strtotime("-3 day"));
         $to_time = date("Y-m-d",time());
         $key = "0ec08fd5";
         $header_timestamp = $this->getMillisecond();
         $signature = md5($key);
-        $url = "www.zhiboyun.com/front/taskInfo/get/history/videos";
+        $url = "www.zhiboyun.com/console/front/taskInfo/get/history/videos";
         $params["service_code"] = "QXSJSP";
         $params["signature"] = $signature;
-        $params["page_index"] = 0;//页码
-        $params["per_page"] = 30;//每页条数
+        $params["page_index"] = $page;//页码
+        $params["per_page"] = $ps;//每页条数
         $params["time_from"] = $from_time;
         $params["time_to"] = $to_time;
         $res = $this->get($url,$params,$signature,$header_timestamp);       
         $ceshi_params = json_decode($res,TRUE);
         $count_json = count($ceshi_params['obj']['rows']);
-        //var_dump($count_json);
         if($count_json != 0){
             for ($i = 0; $i < $count_json; $i++){
                 $live_url[$i] = $ceshi_params["obj"]["rows"][$i]["url"];
@@ -262,10 +261,10 @@ class MobileController extends Controller{
                 if($live_room !=null){
                     $save_data["id"] = $live_room["id"];
                     $result = $live->save($save_data);
-                    if(!$result){
+                    /*if(!$result){
                         //未对插入不进去的数据进行收录    
                         break;
-                    }
+                    }*/
                 }
                 $live_list[$i] = $live_room;
             }
