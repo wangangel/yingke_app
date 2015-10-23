@@ -1,4 +1,4 @@
-﻿
+
 
 
 用户模块
@@ -657,7 +657,7 @@ datas :
 ：2015-10-10 14:58
 
 
-二十七.获取过去72小时的直播房间（多余）
+二十七.获取过去72小时的直播房间（去掉）
 请求地址：http://api.bihuo123.com
 /index.php/api/user/past_room?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&ps=5&page=1
 接口参数:
@@ -693,7 +693,7 @@ datas :
 
 
 
-二十七(补).获取直播间(正在直播和72小时直播)（多余）
+二十七(补).获取直播间(正在直播和72小时直播)（去掉）
 请求地址：http://api.bihuo123.com
 /index.php/api/user/all_room?userid=6&key=37625fc64ffe2c3bf08531ab0394bf16&client_id=qwert&ps=5&page=1
 接口参数:
@@ -1024,13 +1024,22 @@ datas :
     "errresult": true,
     "datas": {
         "result": "true",
+        "isin":"false",此人不在该房间
         "live_url": "http://xvs-5.zhiboyun.com:80/live/id/aws-cn_north_1-5-4bf233e135a1648b.flv",
         "live_id": "426",
         "groupid": "1443512320306",
         "praise": 0,
         "score": 3,
     }
-    liveroom_id-------已经在直播间就返回id
+该返回值,是用户非正常/未评分退出!
+    {
+    "errresult": true,
+    "datas": {
+        "isin": "true",表示此人还在直播间
+        "liveroom_id": "813",
+        "note": "该返回值,是用户非正常/未评分退出!"
+    }
+    }
 }
 
 
@@ -1245,6 +1254,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             "add_num": 标签使用数量
             "remark": 备注(未使用)
 }
+
 五十四 获取用户绑定情况http://api.bihuo123.com
 /index.php/api/user/bind_show?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert
 
@@ -1288,6 +1298,9 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 1.删除四十三接口,用户房主退出采用四十七接口
 2.四十七接口修改参数live_id为liveroom_id,增加 tag(标签)score(评分)参数  房主/用户退出统一接口
 3.四十七接口,房主退出不需要传递 tag(标签)score(评分)参数 
+
+2015/10/23
+1、更新四十接口，非正常退出未评分用户给予表示isin 为true则为此人在该房间
 
 
 

@@ -2739,7 +2739,7 @@ class UserController extends MobileController{
     * 用户进入公开直播间
     */
    public function into_publicroom(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error("请先登录");
         }
         //验证秘钥是否正确
@@ -2754,41 +2754,43 @@ class UserController extends MobileController{
 
         if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
              output_error('参数不全');
-        }
+        }*/
         $userroom_model = M('user_room');
         //先带着userid和房间id去查看当前用户是否在直播间内
         $con['userid'] = $_REQUEST['userid'];
         $con['liveroom_id'] = $_REQUEST['liveroom_id'];
         $info = $userroom_model->where($con)->find();
+
         if(empty($info)){
-            //则用户可以进入直播间
-            $conf['userid'] = $_REQUEST['userid'];
-            $conf['liveroom_id'] = $_REQUEST['liveroom_id'];
-            $conf['username'] = $_REQUEST['user_name'];
-            if($_REQUEST['head_pic'] =="" || $_REQUEST['head_pic']==null){
-                $conf['head_pic'] = "http://ua.tdimg.com:8080/picture/4167/4167";
-            }else{
-                $conf['head_pic'] = $_REQUEST['head_pic'];
-            }
-            $city = $this->getLocation($_SERVER['REMOTE_ADDR']);
-            $conf['city'] = $city;
-            $res = $userroom_model->add($conf);
-            //$res = true;
-            //获取直播间的直播url
             $arr["id"] = $_REQUEST['liveroom_id'];
             $live = M("live")->where($arr)->find();
-            if($res){
-                $data["result"] = "true";
-                $data["live_url"] = $live["live_url"];
-                $data["live_id"] = $live["id"];
-                $data["groupid"] = $live["groupid"];
-                $data["praise"] = $live["praise"];
-                $data["score"] =  intval($live["score"])/intval($live["score_usernum"]);
-                output_data($data);
-            }else{
-                output_error('进入直播间失败');
+            if($live["room_user"] != $_REQUEST['userid']){//区分房主与观众
+                //则用户可以进入直播间
+                $conf['userid'] = $_REQUEST['userid'];
+                $conf['liveroom_id'] = $_REQUEST['liveroom_id'];
+                $conf['username'] = $_REQUEST['user_name'];
+                if($_REQUEST['head_pic'] =="" || $_REQUEST['head_pic']==null){
+                    $conf['head_pic'] = "http://ua.tdimg.com:8080/picture/4167/4167";
+                }else{
+                    $conf['head_pic'] = $_REQUEST['head_pic'];
+                }
+                $city = $this->getLocation($_SERVER['REMOTE_ADDR']);
+                $conf['city'] = $city;
+                $res = $userroom_model->add($conf);
             }
+            //$res = true;
+            //获取直播间的直播url
+            $data["result"] = "true";
+            $da["isin"] = "false";
+            $data["live_url"] = $live["live_url"];
+            $data["live_id"] = $live["id"];
+            $data["groupid"] = $live["groupid"];
+            $data["praise"] = $live["praise"];
+            $data["score"] =  intval($live["score"])/intval($live["score_usernum"]);
+            output_data($data);
+            
         }else{
+            $da["isin"] = "true";
             $da['liveroom_id'] = $_REQUEST['liveroom_id'];
             $da['note'] = '该返回值,是用户非正常/未评分退出!';
             output_data($da);
