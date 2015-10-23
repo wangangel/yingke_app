@@ -1536,6 +1536,7 @@ class UserController extends MobileController{
                         //获取当前用户是否关注过该主播
                          $opt['focus_user'] = $v['room_user'];
                          $opt['user_id'] = $_REQUEST['userid'];
+                         
                          $opt['status'] = "yes";
                          $is_focus = $focus_model->where($opt)->select();
                          if(empty($is_focus)){
