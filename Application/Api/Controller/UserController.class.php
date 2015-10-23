@@ -2739,7 +2739,7 @@ class UserController extends MobileController{
     * 用户进入公开直播间
     */
    public function into_publicroom(){
-        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error("请先登录");
         }
         //验证秘钥是否正确
@@ -2754,7 +2754,7 @@ class UserController extends MobileController{
 
         if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
              output_error('参数不全');
-        }*/
+        }
         $userroom_model = M('user_room');
         //先带着userid和房间id去查看当前用户是否在直播间内
         $con['userid'] = $_REQUEST['userid'];
