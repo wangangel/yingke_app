@@ -19,7 +19,7 @@ class WeiboConnect {
             "code"          =>    $code,
             "redirect_uri"  =>    $callback
         );
-
+        dump($param);
         $param = http_build_query($param);
         $response = post($url, $param);
         if($response == false) {
@@ -68,7 +68,6 @@ class WeiboConnect {
 
     public function callback($appkey, $appsecretkey, $callback) {
         $code = $_GET['code'];
-
         $token = $this->get_access_token($appkey, $appsecretkey, $code, $callback);
         $openid = $this->get_openid($token);
         if(!$token || !$openid) {
