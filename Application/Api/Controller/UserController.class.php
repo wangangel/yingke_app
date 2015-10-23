@@ -654,7 +654,7 @@ class UserController extends MobileController{
      *关注用户
      */
     public function focus_user(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
         //验证key是否正确,这边需要设备唯一标识
@@ -666,7 +666,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         //先判断被关注人是否存在
         $user_model = M('user');
         $user_info = $user_model->where(array('id'=>$_REQUEST['focus_user']))->find();
@@ -1933,6 +1933,8 @@ class UserController extends MobileController{
             }
         }
         $opt['tags'] = $tag;
+        //添加定位
+        $opt["add_city"] = $this->getLocation($_SERVER['REMOTE_ADDR']);
         $res = $live_model->add($opt);
         if($res){
             output_data(array('ID'=>$res));
@@ -2564,6 +2566,7 @@ class UserController extends MobileController{
 
 
 
+
     /*
      * 获取用户绑定的信息
      */
@@ -2760,10 +2763,9 @@ class UserController extends MobileController{
         $con['userid'] = $_REQUEST['userid'];
         $con['liveroom_id'] = $_REQUEST['liveroom_id'];
         $info = $userroom_model->where($con)->find();
-
+        $arr["id"] = $_REQUEST['liveroom_id'];
+        $live = M("live")->where($arr)->find();
         if(empty($info)){
-            $arr["id"] = $_REQUEST['liveroom_id'];
-            $live = M("live")->where($arr)->find();
             if($live["room_user"] != $_REQUEST['userid']){//区分房主与观众
                 //则用户可以进入直播间
                 $conf['userid'] = $_REQUEST['userid'];
@@ -2780,8 +2782,7 @@ class UserController extends MobileController{
             }
             //$res = true;
             //获取直播间的直播url
-            $data["result"] = "true";
-            $da["isin"] = "false";
+            $data["isin"] = "false";
             $data["live_url"] = $live["live_url"];
             $data["live_id"] = $live["id"];
             $data["groupid"] = $live["groupid"];
@@ -2790,8 +2791,22 @@ class UserController extends MobileController{
             output_data($data);
             
         }else{
+            //返回进入打分的数据
             $da["isin"] = "true";
-            $da['liveroom_id'] = $_REQUEST['liveroom_id'];
+            //根据房主id获取用户的信息
+            $con['id'] = $live['room_user'];
+            $con['status'] = "start";
+            $user_info = M('user')->where($con)->find();
+            $da['userid'] = $user_info['id'];
+            $da['head_pic'] = $user_info['head_url'];
+            $da['ni_name'] = $user_info['ni_name'];
+            //获取当前直播间的观众人数
+            $userroom_model = M('user_room');
+            $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$_REQUEST['liveroom_id']))->select();
+            $da['user_num'] = count($guanzhong_info);
+            $da["liveroom_id"] = $_REQUEST['liveroom_id'];
+            $da["room_name"] = $live["room_name"];
+            $da["add_city"] = $live["add_city"];
             $da['note'] = '该返回值,是用户非正常/未评分退出!';
             output_data($da);
         }

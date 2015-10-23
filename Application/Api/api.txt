@@ -1,7 +1,4 @@
-
-
-
-用户模块
+﻿用户模块
 
 一.获取手机验证码
 接口链接：
@@ -1023,7 +1020,6 @@ datas :
        如 {
     "errresult": true,
     "datas": {
-        "result": "true",
         "isin":"false",此人不在该房间
         "live_url": "http://xvs-5.zhiboyun.com:80/live/id/aws-cn_north_1-5-4bf233e135a1648b.flv",
         "live_id": "426",
@@ -1035,12 +1031,17 @@ datas :
     {
     "errresult": true,
     "datas": {
-        "isin": "true",表示此人还在直播间
-        "liveroom_id": "813",
-        "note": "该返回值,是用户非正常/未评分退出!"
+        "isin": "true",//代表需要跳入评分页
+        "userid": "101",//房主id
+        "head_pic": "http://api.bihuo123.com/Upload/2015-10-21/5627ab65cea20.png",//房主头像
+        "ni_name": "13720037114",//房主昵称
+        "user_num": 1,//围观人数
+        "liveroom_id": "811",//房间id
+        "room_name": "大家九点半",//房间名称
+        "add_city": "北京市",//直播地址
+        "note": "该返回值,是用户非正常/未评分退出!"//备注
     }
     }
-}
 
 
 
@@ -1300,7 +1301,7 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 3.四十七接口,房主退出不需要传递 tag(标签)score(评分)参数 
 
 2015/10/23
-1、更新四十接口，非正常退出未评分用户给予表示isin 为true则为此人在该房间
+1、更新四十接口，非正常退出未评分用户给予表示isin 为true则为此人在该房间，并返回需要打分的房间信息
 
 
 
