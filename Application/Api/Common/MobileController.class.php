@@ -228,7 +228,7 @@ class MobileController extends Controller{
      */
     function getlive_list($ps,$page){
         //昨天，大前天
-        $from_time = date("Y-m-d",strtotime("-2 day"));
+        $from_time = date("Y-m-d",strtotime("-3 day"));
         $to_time = date("Y-m-d",time());
         $key = "0ec08fd5";
         $header_timestamp = $this->getMillisecond();
@@ -243,13 +243,13 @@ class MobileController extends Controller{
         $res = $this->get($url,$params,$signature,$header_timestamp);       
         $ceshi_params = json_decode($res,TRUE);
         $count_json = count($ceshi_params['obj']['rows']);
+        //var_dump($res);
         if($count_json != 0){
             for ($i = 0; $i < $count_json; $i++){
                 $live_url[$i] = $ceshi_params["obj"]["rows"][$i]["url"];
                 $task_list[$i] = $ceshi_params["obj"]["rows"][$i]["task_id"];
                 //$task_time[$i] = $ceshi_params["obj"]["rows"][$i]["time"];
             }
-            //var_dump($task_list[0]);
             $live = M("live");
             //var_dump($live_url[0]);
             for ($i=0; $i <count($task_list) ; $i++) { 

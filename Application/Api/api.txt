@@ -626,8 +626,7 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
-            "liveroom_info": [
-            {
+            "liveroom_info": [{
                 "room_id": ---------------房间id
                 "room_name": -------------房间名
                 "room_pic_url": -----------房间封面
@@ -1163,7 +1162,7 @@ datas :
 请求地址：http://api.bihuo123.com
 /index.php/api/user/out_live?userid=6&key=9733a5a7dc0b1c6099aaec50c8037b37&client_id=qwert&liveroom_id=1&tag=帅哥&score=5
 接口参数:
-        userid:用户id
+        userid:房间创建者id
         key:
         client_id
         liveroom_id ------------- 直播房间id
@@ -1177,7 +1176,11 @@ datas :
         }
         
         房主退出：{
-        更改房间状态,提示退出成功!
+            "errresult": true,
+            "datas": {
+                "note": "房主退出成功!房间已关闭!",
+                "result": "success"
+            }
         }
 
 
