@@ -140,23 +140,21 @@ class UserController extends MobileController{
         if($_REQUEST['type'] != NULL && $_REQUEST['openid'] != NULL){
             $register_info[$_REQUEST['type'].'openid'] = $_REQUEST['openid'];
         }
-
         $user_info = $user_model->add($register_info);
         if($user_info) {
             $token = $this->_get_token($user_info,$register_info['phone_num'],$_REQUEST['client_id']);
             if($token) {
+
                 //用户注册成功后,同时注册环信
                 $hx_opt['password']=md5($_REQUEST['password']);
                 $hx_opt['username']=$_REQUEST['phonenumber'];
                 $HX = new \Api\Common\HxController;
                 $hx_info = $HX->openRegister($hx_opt);
                 $hx_a = json_decode($hx_info,true);
-                if(!empty($hx_a['entities'])){
                     $hx_save['id'] = $user_info;
                     $hx_save['hx_password']=md5($_REQUEST['password']);
                     $hx_save['hx_user']=$_REQUEST['phonenumber'];
                     $hx_info = $user_model ->save($hx_save);
-                    if($hx_info){
                         output_data(array(
                         'userid' => $user_info,
                         'phone'=>$register_info['phone_num'],
@@ -167,11 +165,6 @@ class UserController extends MobileController{
                         'hx_user' =>$_REQUEST['phonenumber'],
                         'hx_password' =>md5($_REQUEST['password'])
                         ));
-                    }else{
-                        output_error("对不起，聊天室注册失败！");
-                    }
-                }
-
             } else {
                 output_error('祝贺您成功注册映客，请尝试登录');
             }
@@ -472,7 +465,15 @@ class UserController extends MobileController{
         //将密码更新
         $result = $user_model->where(array('phone_num'=>$_REQUEST['phonenum']))->save($array);
         if($result){
-            $datas = array();
+                //修改环信密码
+                $hx_opt['password']=$user_info['password'];
+                $hx_opt['username']=$_REQUEST['phonenumber'];
+                $hx_opt['newpassword']= md5($_REQUEST['password']);
+                $HX = new \Api\Common\HxController;
+                $hx_info = $HX->editPassword($hx_opt);
+                $hx_a = json_decode($hx_info,true);
+                $hx_save['hx_password']=md5($_REQUEST['password']);
+                $hx_info = $user_model-> where(array('phone_num'=>$_REQUEST['phonenum']))->save($hx_save);
             $datas['msg'] = '修改成功，请登陆！';
             output_data($datas);
         }else{
