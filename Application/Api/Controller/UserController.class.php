@@ -174,7 +174,7 @@ class UserController extends MobileController{
             $result = $phonecode_model->add($arr);
             if($result>0){
                 //向手机发送验证码
-                $post_data = "action=send&userid=&account=hcs9148&password=152747&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【天眼互动】");
+                $post_data = "action=send&userid=&account=tianyanhudong&password=152747&mobile=".$intPhone."&sendTime=&content=".rawurlencode("您的验证码为".$intCode.",如非本人操作请忽略,验证码有效时间:1分钟.【天眼互动】");
                 $target = "http://sms.chanzor.com:8001/sms.aspx";
                 $arrResu = $this->Post_1($post_data,$target);
                 output_data(array(
@@ -750,9 +750,10 @@ class UserController extends MobileController{
         $con['userid'] = $_REQUEST['userid'];
         $con['focus_user'] = $_REQUEST['focus_user'];
         $con['status'] = "yes";
-        $res = $friendsfocus_model->where($con)->save(array('status'=>'0'));
+        $res = $friendsfocus_model->where($con)->save(array('status'=>'no'));
         if($res){
-            output_data(array('result'=>'true'));
+            $data['status'] = 'no';
+            output_data($data);
         }else{
             output_error('取消关注失败');
         }
@@ -1503,7 +1504,6 @@ class UserController extends MobileController{
             $con_arr["task_id"] = array('neq',"");
             $liveroom_info = $live_model->where($con_arr)->order('status asc')->limit($start,$arrOpt['ps'])->select();
             //echo $live_model->getlastsql();
-            //var_dump($liveroom_info);
                 foreach ($liveroom_info as $k => $v) {
                     $data['liveroom_info'][$k]['room_id'] = $v['id'];
                     $data['liveroom_info'][$k]['room_name'] = $v['room_name'];
@@ -1535,16 +1535,14 @@ class UserController extends MobileController{
                     $focus_model = M('friends_focus');
                     $opt['focus_user'] = $v['room_user'];
                     $opt['status'] = "yes";
-                    $focus_info = $focus_model->where($opt)->select();
-                    $focus_cound = count($focus_info);
+                    $focus_cound = $focus_model->where($opt)->count();
                     $data['liveroom_info'][$k]['user_info']['focus_num'] = $focus_cound;
                     //获取当前用户是否关注过该主播
-                    $opt['focus_user'] = $v['room_user'];
-                    $opt['user_id'] = $_REQUEST['userid'];
-                         
-                    $opt['status'] = "yes";
-                    $is_focus = $focus_model->where($opt)->select();
-                    if(empty($is_focus)){
+                    $opt1['focus_user'] = $v['room_user'];
+                    $opt1['user_id'] = $_REQUEST['userid'];
+                   // $opt1['status'] = "yes";
+                    $is_focus = $focus_model->where($opt1)->select();
+                    if(!empty($is_focus)){
                             //没有关注过
                         $data['liveroom_info'][$k]['user_info']['is_focus'] = "yes";
                         }else{
@@ -2765,6 +2763,7 @@ class UserController extends MobileController{
         if($_REQUEST['liveroom_id'] == NULL || $_REQUEST['user_name'] == NULL || $_REQUEST['head_pic'] == NULL){
              output_error('参数不全');
         }
+        
         $userroom_model = M('user_room');
         //先带着userid和房间id去查看当前用户是否在直播间内
         $con['userid'] = $_REQUEST['userid'];
@@ -2787,9 +2786,23 @@ class UserController extends MobileController{
                 $conf['city'] = $city;
                 $res = $userroom_model->add($conf);
             }
+            $data["isin"] = "false";
             //$res = true;
             //获取直播间的直播url
-            $data["isin"] = "false";
+            //根据房间类型,来判断用户是否支付过 
+            $da['id'] = $_REQUEST['liveroom_id'];
+             $info_sf = M('live')->where($da)->find();
+            if($info_sf['isopen'] == '收费'){
+                $pay['userid'] = $_REQUEST['userid'];
+                $pay['room_id'] = $_REQUEST['liveroom_id'];
+                $pay_info = M('live_pay')->where($pay)->find();
+                if($pay_info != NULL){
+                    if($pay_info['pay_status'] == 'yes'){
+                        $data['isin'] ='pay';
+                        $da['isin'] ='pay';
+                    }
+                }
+            }
             $data["live_url"] = $live["live_url"];
             $data["live_id"] = $live["id"];
             $data["groupid"] = $live["groupid"];
@@ -2816,6 +2829,7 @@ class UserController extends MobileController{
             $da["add_city"] = $live["add_city"];
             $da['note'] = '该返回值,是用户非正常/未评分退出!';
             output_data($da);
+
         }
     }
 
@@ -3292,6 +3306,7 @@ class UserController extends MobileController{
         }
 
     }
+
 
         
 }

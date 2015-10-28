@@ -340,7 +340,7 @@ datas :
         datas:
        error:错误描述，执行成功没有该字段
             datas: 
-                result
+                status  -------  no  未关注
 
 
 ：
@@ -1019,7 +1019,7 @@ datas :
        如 {
     "errresult": true,
     "datas": {
-        "isin":"false",此人不在该房间
+        "isin":"false",此人不在该房间 isin:pay   跳转到支付页面
         "live_url": "http://xvs-5.zhiboyun.com:80/live/id/aws-cn_north_1-5-4bf233e135a1648b.flv",
         "live_id": "426",
         "groupid": "1443512320306",
@@ -1030,6 +1030,7 @@ datas :
     {
     "errresult": true,
     "datas": {
+        "pay_status":yes/no   判断收费房间支付状态,用户是否支付过
         "isin": "true",//代表需要跳入评分页
         "userid": "101",//房主id
         "head_pic": "http://api.bihuo123.com/Upload/2015-10-21/5627ab65cea20.png",//房主头像
@@ -1306,6 +1307,8 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 2015/10/23
 1、更新四十接口，非正常退出未评分用户给予表示isin 为true则为此人在该房间，并返回需要打分的房间信息
 
+2015/10/27
+1.更新接口四十,isin增加状态值pay
 
 
 
