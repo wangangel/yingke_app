@@ -59,11 +59,10 @@ datas :
         key:加密信息
         password:加密好的密码
         server_code：服务码
+        hx_user:环信用户名
+        hx_password:环信用户密码
 
-：
 
-
-:20151010 am:9:18
 
 
 四、用户登录
@@ -89,6 +88,8 @@ datas :
         server_code：服务码，用户创建直播用的
         key:加密信息
         headurl:头像地址
+        hx_user:环信用户名
+        hx_password:环信用户密码
 如：{
     "errresult": true,
     "datas": {
@@ -718,7 +719,7 @@ datas :
 二十八.创建直播间
 请求地址：http://api.bihuo123.com
 /index.php/api/user/add_liveroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&room_name=久居直播间&room_pic_url=http://api.bihuo123.com
-/Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20&groupid=2
+/Upload/2015-08-27/55deb6edcb2e2.jpg&tags=1,2&isopen=收费&fees=20
 接口参数:
         userid:
         key:
@@ -728,11 +729,11 @@ datas :
         tags-------------标签id,多个用逗号隔开
         isopen----------收费,公开,邀请好友
         fees-----------收费标准
-        groupid ---------环信组id
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
             "id": 返回直播房间id，透传(opaque)的字段
+            'groupid':后台注册环信用户组id
           
           }
 
@@ -1025,6 +1026,7 @@ datas :
         "groupid": "1443512320306",
         "praise": 0,
         "score": 3,
+        groupid:返回环信群组
     }
 该返回值,是用户非正常/未评分退出!
     {
@@ -1310,6 +1312,13 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 2015/10/27
 1.更新接口四十,isin增加状态值pay
 
+2015/10/29
+1.更新接口三,增加返回参数 hx_user(环信用户) hx_password(环信用户密码)
+2.更新接口四,增加返回参数 hx_user(环信用户) hx_password(环信用户密码)
+3.更新接口二十八,取消传入参数groupid   改为后台注册,并返回环信用户组groupid
+4.更新接口四十，增加返回参数:环信群组id   ---  groupid
+5.更新接口三十五，点赞接口直接在服务端操作处理用户点赞操作。
+6.更新接口四十七，退出评分，添加标签向环信群组发送消息。已经在服务端处理。
 
 
 

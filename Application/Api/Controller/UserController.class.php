@@ -6,10 +6,25 @@ use Org\ThinkSDK\ThinkOauth;
 use Home\Event;
 
 
+
 class UserController extends MobileController{
     
     public function __construct(){
         parent::__construct();
+    }
+
+
+    function object_array($array){
+       if(is_object($array)){
+        $array = (array)$array;
+       }
+       if(is_array($array)){
+        foreach($array as $key=>$value)
+        {
+         $array[$key] = object_array($value);
+        }
+       }
+       return $array;
     }
     /**
  * 淘宝IP地址库 Reset API
@@ -93,7 +108,7 @@ class UserController extends MobileController{
 		$user_model	= M('user');
 		$result = $user_model->where(array('phone_num'=>$_REQUEST['phonenumber']))->find();
 		if($result != NULL){
-		    output_error('已经存在该手机用户了！');
+		    output_error('已经存在该手机用户了!');
 		}
 		//接收数据
         $register_info = array();
@@ -125,18 +140,38 @@ class UserController extends MobileController{
         if($_REQUEST['type'] != NULL && $_REQUEST['openid'] != NULL){
             $register_info[$_REQUEST['type'].'openid'] = $_REQUEST['openid'];
         }
+
         $user_info = $user_model->add($register_info);
         if($user_info) {
             $token = $this->_get_token($user_info,$register_info['phone_num'],$_REQUEST['client_id']);
             if($token) {
-                output_data(array(
-                'userid' => $user_info,
-                'phone'=>$register_info['phone_num'],
-                'nickname' => $register_info['ni_name'],
-                'server_code'=>$register_info['server_code'],
-                'password'=>$register_info['password'],
-                'key' => $token
-                ));
+                //用户注册成功后,同时注册环信
+                $hx_opt['password']=md5($_REQUEST['password']);
+                $hx_opt['username']=$_REQUEST['phonenumber'];
+                $HX = new \Api\Common\HxController;
+                $hx_info = $HX->openRegister($hx_opt);
+                $hx_a = json_decode($hx_info,true);
+                if(!empty($hx_a['entities'])){
+                    $hx_save['id'] = $user_info;
+                    $hx_save['hx_password']=md5($_REQUEST['password']);
+                    $hx_save['hx_user']=$_REQUEST['phonenumber'];
+                    $hx_info = $user_model ->save($hx_save);
+                    if($hx_info){
+                        output_data(array(
+                        'userid' => $user_info,
+                        'phone'=>$register_info['phone_num'],
+                        'nickname' => $register_info['ni_name'],
+                        'server_code'=>$register_info['server_code'],
+                        'password'=>$register_info['password'],
+                        'key' => $token,
+                        'hx_user' =>$_REQUEST['phonenumber'],
+                        'hx_password' =>md5($_REQUEST['password'])
+                        ));
+                    }else{
+                        output_error("对不起，聊天室注册失败！");
+                    }
+                }
+
             } else {
                 output_error('祝贺您成功注册映客，请尝试登录');
             }
@@ -312,6 +347,9 @@ class UserController extends MobileController{
                     $data['key'] = $token;
                     $data["password"] = $user_info1[0]['password'];
                     $data["server_code"] = $user_info1[0]['server_code'];
+                    //增加环信返回
+                    $data["hx_user"] = $user_info1[0]['hx_user'];
+                    $data["hx_password"] = $user_info1[0]['hx_password'];
                     //根据id获取我关注的人的数量
                     $focus_model = M('friends_focus');
                     $opt['user_id'] = $user_info1[0]['id'];
@@ -1903,6 +1941,7 @@ class UserController extends MobileController{
      *创建直播间
      */
     public function add_liveroom(){
+        
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -1927,7 +1966,26 @@ class UserController extends MobileController{
         $opt['fees'] = $_REQUEST['fees'];
         //$opt['status'] = "in";
         $opt['add_date'] = time();
-        $opt['groupid'] = $_REQUEST['groupid'];
+
+        //获取环信组id
+        //群组名称
+        $hx_opt['groupname']=$_REQUEST['room_name'];
+        //是否公开
+        $hx_opt['public']=true;
+        //加入群组是否需要审核
+        $hx_opt['approval']=false;
+        //群组管理员,默认房主
+        //根据userid获取该用户的环信帐号密码
+        $hx_udata['id'] = $_REQUEST['userid'];
+        $hx_ui = M('user')->where($hx_udata)->find();
+        $hx_opt['owner']=$hx_ui['hx_user'];
+        //群组描述
+        $hx_opt['desc']=$_REQUEST['room_name'];
+        $HX = new \Api\Common\HxController;
+        $hx_info = $HX->createGroups($hx_opt);
+        $hx_a = json_decode($hx_info,true);
+        $data = $hx_a['data']['groupid'];
+        $opt['groupid'] = $hx_a['data']['groupid'];
         $tags = explode(',', $_REQUEST['tags']);
         if(empty($tags)){
             $opt['tags'] = NULL;
@@ -1942,7 +2000,8 @@ class UserController extends MobileController{
         $opt["add_city"] = $this->getLocation($_SERVER['REMOTE_ADDR']);
         $res = $live_model->add($opt);
         if($res){
-            output_data(array('ID'=>$res));
+            $data['ID'] = $res;
+            output_data($data);
         }else{
             output_data('创建直播间失败!');
         }
@@ -2365,6 +2424,17 @@ class UserController extends MobileController{
                 $live_info = M("live")->where($live)->find();
                 $live["praise"] = $live_info['$praise']+1;
                 $live_info = M("live")->save($live);
+                $HX = new \Api\Common\HxController;
+                //根据userid获取环信的
+                $hx_udata['id'] = $_REQUEST['userid'];
+                $hx_ui = M('user')->where($hx_udata)->find();
+                $from_user=$hx_ui['hx_user'];
+                $hx_rdata['id'] = $_REQUEST['liveroom_id'];
+                $hx_ri = M('live')->where($hx_rdata)->find();
+                $username = array($hx_ri['groupid']);
+                $content="【系统】".$hx_ui['ni_name'].":点了个赞!";
+                $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
+                $hx_a = json_decode($hx_info,true);
                 output_data($live["praise"]);
             }else{
                 output_error("点赞失败");
@@ -2808,6 +2878,19 @@ class UserController extends MobileController{
             $data["groupid"] = $live["groupid"];
             $data["praise"] = $live["praise"];
             $data["score"] =  intval($live["score"])/intval($live["score_usernum"]);
+            //用户进入直播间,根据liveroom_id来查询环信组,并发送消息
+            $HX = new \Api\Common\HxController;
+            //根据userid获取环信的
+            $hx_udata['id'] = $_REQUEST['userid'];
+            $hx_ui = M('user')->where($hx_udata)->find();
+            $from_user=$hx_ui['hx_user'];
+            $hx_rdata['id'] = $_REQUEST['liveroom_id'];
+            $hx_ri = M('live')->where($hx_rdata)->find();
+            $username = array($hx_ri['groupid']);
+            $content="【系统】".$_REQUEST['user_name']."进入了房间";
+            $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
+            $hx_a = json_decode($hx_info,true);
+            $data['groupid'] = $hx_ri['groupid'];
             output_data($data);
             
         }else{
@@ -3044,11 +3127,22 @@ class UserController extends MobileController{
                      }
                      
                  }
-                 $da_3['note'] = '观众评分成功,返回广场!';
-                 $dat_1["userid"] = $_REQUEST['userid'];
-                 $dat_1["liveroom_id"] = $_REQUEST['liveroom_id'];
-                 $rs = M('user_room')->where($dat_1)->delete();
-                 output_data($da_3);
+                 $HX = new \Api\Common\HxController;
+                //根据userid获取环信的
+                $hx_udata['id'] = $_REQUEST['userid'];
+                $hx_ui = M('user')->where($hx_udata)->find();
+                $from_user=$hx_ui['hx_user'];
+                $hx_rdata['id'] = $_REQUEST['liveroom_id'];
+                $hx_ri = M('live')->where($hx_rdata)->find();
+                $username = array($hx_ri['groupid']);
+                $content="【系统】".$hx_ui['ni_name'].":添加标签[".$_REQUEST['tag']."]";
+                $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
+                $hx_a = json_decode($hx_info,true);
+                $da_3['note'] = '观众评分成功,返回广场!';
+                $dat_1["userid"] = $_REQUEST['userid'];
+                $dat_1["liveroom_id"] = $_REQUEST['liveroom_id'];
+                $rs = M('user_room')->where($dat_1)->delete();
+                output_data($da_3);
             }else{
                 $da_2['note'] = '观众评分失败,需要重新评分!';
                 $da_2['liveroom_id'] = $_REQUEST['liveroom_id'];
@@ -3306,9 +3400,8 @@ class UserController extends MobileController{
         }
 
     }
-
-
         
+
 }
    
     
