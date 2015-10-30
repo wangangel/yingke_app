@@ -1,21 +1,20 @@
 <?php
-use Org\ThinkSDK\ThinkOauth;
 class WeixinSDK extends ThinkOauth
 {
     /**
-     * »ñÈ¡requestCodeµÄapi½Ó¿Ú
+     * è·å–requestCodeçš„apiæ¥å£
      * @var string
      */
     protected $GetRequestCodeURL = 'https://open.weixin.qq.com/connect/qrconnect';
     
     /**
-     * »ñÈ¡access_tokenµÄapi½Ó¿Ú
+     * è·å–access_tokençš„apiæ¥å£
      * @var string
      */
     protected $GetAccessTokenURL = 'https://api.weixin.qq.com/sns/oauth2/access_token';
     
     /**
-     * API¸ùÂ·¾¶
+     * APIæ ¹è·¯å¾„
      * @var string
      */
     protected $ApiBase = 'https://api.weixin.qq.com/';
@@ -33,8 +32,8 @@ class WeixinSDK extends ThinkOauth
     }
     
     /**
-     * »ñÈ¡access_token
-     * @param string $code ÉÏÒ»²½ÇëÇóµ½µÄcode
+     * è·å–access_token
+     * @param string $code ä¸Šä¸€æ­¥è¯·æ±‚åˆ°çš„code
      */
     public function getAccessToken($code, $extend = null){
         $this->config();
@@ -44,7 +43,6 @@ class WeixinSDK extends ThinkOauth
                 'grant_type'    => $this->GrantType,
                 'code'          => $code,
         );
-
         $data = $this->http($this->GetAccessTokenURL, $params, 'POST');
         $this->Token = $this->parseToken($data, $extend);
         return $this->Token;
@@ -52,14 +50,14 @@ class WeixinSDK extends ThinkOauth
 
     
     /**
-     * ×é×°½Ó¿Úµ÷ÓÃ²ÎÊı ²¢µ÷ÓÃ½Ó¿Ú
-     * @param  string $api    Î¢²©API
-     * @param  string $param  µ÷ÓÃAPIµÄ¶îÍâ²ÎÊı
-     * @param  string $method HTTPÇëÇó·½·¨ Ä¬ÈÏÎªGET
+     * ç»„è£…æ¥å£è°ƒç”¨å‚æ•° å¹¶è°ƒç”¨æ¥å£
+     * @param  string $api    å¾®åšAPI
+     * @param  string $param  è°ƒç”¨APIçš„é¢å¤–å‚æ•°
+     * @param  string $method HTTPè¯·æ±‚æ–¹æ³• é»˜è®¤ä¸ºGET
      * @return json
      */
     public function call($api, $param = '', $method = 'GET', $multi = false){
-        /* ÌÚÑ¶Î¢²©µ÷ÓÃ¹«¹²²ÎÊı */
+        /* è…¾è®¯å¾®åšè°ƒç”¨å…¬å…±å‚æ•° */
         $params = array(
             'access_token'       => $this->Token['access_token'],
             'openid'             => $this->openid(),
@@ -72,7 +70,7 @@ class WeixinSDK extends ThinkOauth
     
     
     /**
-     * ½âÎöaccess_token·½·¨ÇëÇóºóµÄ·µ»ØÖµ
+     * è§£æaccess_tokenæ–¹æ³•è¯·æ±‚åçš„è¿”å›å€¼
      */
     protected function parseToken($result, $extend)
     {
@@ -83,11 +81,11 @@ class WeixinSDK extends ThinkOauth
             $data['openid'] = $this->openid();
             return $data;
         } else
-            throw new Exception("»ñÈ¡Î¢ĞÅ ACCESS_TOKEN ³ö´í£º{$result}");
+            throw new Exception("è·å–å¾®ä¿¡ ACCESS_TOKEN å‡ºé”™ï¼š{$result}");
     }
     
     /**
-     * »ñÈ¡µ±Ç°ÊÚÈ¨Ó¦ÓÃµÄopenid
+     * è·å–å½“å‰æˆæƒåº”ç”¨çš„openid
      */
     public function openid()
     {
@@ -95,7 +93,7 @@ class WeixinSDK extends ThinkOauth
         if(!empty($data['openid']))
             return $data['openid'];
         else
-            exit('Ã»ÓĞ»ñÈ¡µ½Î¢ĞÅÓÃ»§ID£¡');
+            exit('æ²¡æœ‰è·å–åˆ°å¾®ä¿¡ç”¨æˆ·IDï¼');
     }
 }
 

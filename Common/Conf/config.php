@@ -1,6 +1,6 @@
 <?php
 //定义回调URL通用的URL
-
+define('URL_CALLBACK', 'http://127.0.0.1/index.php?m=Api&c=SSO&a=callback&type=');
 return array(
     'VAR_MODULE'            =>  'm',     // 默认模块获取变量
     'VAR_CONTROLLER'        =>  'c',    // 默认控制器获取变量
@@ -25,11 +25,10 @@ return array(
 
     'TMPL_ACTION_SUCCESS'=>'Public:jump',
     'TMPL_ACTION_ERROR'=>'Public:jump',
-    //'SESSION_AUTO_START' => true,    //是否开启SESSION
-     'OAUTH'                 => array(
-        'WEIBO_APPKEY'      => '599678130',
-        'WEIBO_APPSECRETKEY'=> 'f17b02720629fb39a56fba35e677a0bb',
-        'WEIBO_SCOPE'       => '',
-        'WEIBO_CALLBACK'    => 'http://127.0.0.1/yingke/login/auth/weibo',
+     //微信登录
+    'THINK_SDK_WEIXIN' => array(
+        'APP_KEY'    => 'wxb8e3693e0481e640', //应用注册成功后分配的 APP ID
+        'APP_SECRET' => '73b424971cea37515ea6354fb924742b', //应用注册成功后分配的KEY
+        'CALLBACK'   => URL_CALLBACK . 'weixin',
     ),
 );

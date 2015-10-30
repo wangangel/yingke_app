@@ -1942,7 +1942,6 @@ class UserController extends MobileController{
      *创建直播间
      */
     public function add_liveroom(){
-        
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -1979,13 +1978,14 @@ class UserController extends MobileController{
         //根据userid获取该用户的环信帐号密码
         $hx_udata['id'] = $_REQUEST['userid'];
         $hx_ui = M('user')->where($hx_udata)->find();
-        $hx_opt['owner']=$hx_ui['hx_user'];
+        $hx_opt['owner']= $hx_ui['hx_user'];
         //群组描述
         $hx_opt['desc']=$_REQUEST['room_name'];
         $HX = new \Api\Common\HxController;
         $hx_info = $HX->createGroups($hx_opt);
         $hx_a = json_decode($hx_info,true);
-        $data = $hx_a['data']['groupid'];
+        //dump($hx_a);
+        $data['groupid'] = $hx_a['data']['groupid'];
         $opt['groupid'] = $hx_a['data']['groupid'];
         $tags = explode(',', $_REQUEST['tags']);
         if(empty($tags)){
@@ -2000,6 +2000,7 @@ class UserController extends MobileController{
         //添加定位
         $opt["add_city"] = $this->getLocation($_SERVER['REMOTE_ADDR']);
         $res = $live_model->add($opt);
+        //dump($res);
         if($res){
             $data['ID'] = $res;
             output_data($data);
