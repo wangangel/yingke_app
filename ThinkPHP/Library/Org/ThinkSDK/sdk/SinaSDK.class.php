@@ -41,6 +41,7 @@ class SinaSDK extends ThinkOauth{
 		/* 新浪微博调用公共参数 */
 		$params = array(
 			'access_token' => $this->Token['access_token'],
+			
 		);
 		
 		$vars = $this->param($params, $param);

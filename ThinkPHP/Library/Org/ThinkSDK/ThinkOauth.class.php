@@ -9,6 +9,7 @@
 // | Author: 麦当苗儿 <zuojiazi.cn@gmail.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 // | ThinkOauth.class.php 2013-02-25
+
 // +----------------------------------------------------------------------
 abstract class ThinkOauth{
 	/**
@@ -121,7 +122,7 @@ abstract class ThinkOauth{
 	/**
 	 * 初始化配置
 	 */
-	private function config(){
+	protected function config(){
 		$config = C("THINK_SDK_{$this->Type}");
 		if(!empty($config['AUTHORIZE']))
 			$this->Authorize = $config['AUTHORIZE'];
@@ -141,6 +142,7 @@ abstract class ThinkOauth{
 			'client_id'     => $this->AppKey,
 			'redirect_uri'  => $this->Callback,
 			'response_type' => $this->ResponseType,
+			
 		);
 		
 		//获取额外参数

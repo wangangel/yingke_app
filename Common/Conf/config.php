@@ -1,6 +1,7 @@
 <?php
 //定义回调URL通用的URL
-define('URL_CALLBACK', 'http://127.0.0.1/index.php?m=Api&c=SSO&a=callback&type=');
+define('URL_CALLBACK', 'http://127.0.0.1/yingke/index.php?m=Api&c=SSO&a=callback&type=');
+define('WEB_HOST', 'http://127.0.0.1');
 return array(
     'VAR_MODULE'            =>  'm',     // 默认模块获取变量
     'VAR_CONTROLLER'        =>  'c',    // 默认控制器获取变量
@@ -29,6 +30,23 @@ return array(
     'THINK_SDK_WEIXIN' => array(
         'APP_KEY'    => 'wxb8e3693e0481e640', //应用注册成功后分配的 APP ID
         'APP_SECRET' => '73b424971cea37515ea6354fb924742b', //应用注册成功后分配的KEY
-        'CALLBACK'   => URL_CALLBACK . 'weixin',
+        'CALLBACK'   => URL_CALLBACK . 'weixin'
     ),
+    'THINK_SDK_SINA' => array(
+        'APP_KEY'    => '599678130', //应用注册成功后分配的 APP ID
+        'APP_SECRET' => 'f17b02720629fb39a56fba35e677a0bb', //应用注册成功后分配的KEY
+        'CALLBACK'   => URL_CALLBACK . 'sina'
+    ),
+      /*微信支付配置*/
+    'WxPayConf_pub'=>array(
+        'APPID' => 'wxb8e3693e0481e640',
+        'MCHID' => '1264809601',
+        'KEY' => 'BZruR8wE9xHNSnXVTh0MDXOhdhGX85HH',
+        'APPSECRET' => '73b424971cea37515ea6354fb924742b',
+        'JS_API_CALL_URL' => WEB_HOST.'/index.php/Api/WxJsAPI/jsApiCall',
+        'SSLCERT_PATH' => WEB_HOST.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_cert.pem',
+        'SSLKEY_PATH' => WEB_HOST.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_key.pem',
+        'NOTIFY_URL' =>  WEB_HOST.'/index.php/Api/WxJsAPI/notify',
+        'CURL_TIMEOUT' => 30
+    )
 );

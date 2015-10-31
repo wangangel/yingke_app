@@ -43,6 +43,7 @@ class WeixinSDK extends ThinkOauth
                 'grant_type'    => $this->GrantType,
                 'code'          => $code,
         );
+
         $data = $this->http($this->GetAccessTokenURL, $params, 'POST');
         $this->Token = $this->parseToken($data, $extend);
         return $this->Token;

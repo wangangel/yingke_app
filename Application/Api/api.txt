@@ -4,7 +4,6 @@
 接口链接：
 http://api.bihuo123.com
 /index.php/api/user/getphonecode?phone=18651551916&optype=1
-
 接口参数：
 phone : 手机号
 optype : 操作类型（1：注册时获取验证码；2：重置密码时候获取验证码）

@@ -2889,7 +2889,7 @@ class UserController extends MobileController{
             $hx_rdata['id'] = $_REQUEST['liveroom_id'];
             $hx_ri = M('live')->where($hx_rdata)->find();
             $username = array($hx_ri['groupid']);
-            $content="【系统】".$_REQUEST['user_name']."进入了房间";
+            $content="【系统】".$_REQUEST['user_name'].":进入了房间";
             $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
             $hx_a = json_decode($hx_info,true);
             $data['groupid'] = $hx_ri['groupid'];
