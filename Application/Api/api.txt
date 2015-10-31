@@ -1,4 +1,4 @@
-﻿用户模块
+用户模块
 
 一.获取手机验证码
 接口链接：
@@ -1279,6 +1279,26 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
             注:人人写死,不作任何操作
 }
 
+五十五 邀请获取好友列表接口
+http://api.bihuo123.com
+/index.php/api/user/friend_list?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwertZ&ps=10&page=1
+ 接口参数：：
+        userid->用户id
+        key->秘钥
+        client_id->客户端唯一标识
+        ps 每页显示个数
+        page 页码
+返回数据：userid:好友的id ni_name:好友昵称 sex：性别 head_url:头像
+    {"errresult":true,
+        "datas":
+        {"user_info":[
+            {"userid":"161","ni_name":"15978778364","sex":null,"head_url":null},
+            {"userid":"162","ni_name":"13720037114","sex":null,"head_url":null},
+            {"userid":"163","ni_name":"18083757192","sex":null,"head_url":null}
+            ]}
+    }
+    如果没有则返回为null；
+
 ================================================================================
 
 
@@ -1320,6 +1340,9 @@ type固定为0    hashed_id   author  url svod    size    created_at  format  vs
 5.更新接口三十五，点赞接口直接在服务端操作处理用户点赞操作。
 6.更新接口四十七，退出评分，添加标签向环信群组发送消息。已经在服务端处理。
 
+2015/10/31
+1.新增五十五接口，在直播间进行邀请，获取到所有好友列表，进行邀请
+2.
 
 
 

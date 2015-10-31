@@ -3357,8 +3357,41 @@ class UserController extends MobileController{
         }
 
     }
-
-
+        /**
+         * 好友列表接口
+         */
+    public function friend_list(){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }*/
+        $data["user_id"] = $_REQUEST['userid'];
+        $data["status"] = "yes";
+        $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
+        $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
+        $start = ($arrOpt['page']-1)*$arrOpt['ps'];
+        $friend_model = M('friends_focus');
+        $friend_list = $friend_model->where($data)->limit($start,$arrOpt['ps'])->getField('focus_user',true); 
+        if(count($friend_list) > 0){
+            $userinfo_list = M("user")->select($friend_list);
+            foreach ($userinfo_list as $k => $v) {
+                $return_data["user_info"][$k]["userid"] = $v["id"];
+                $return_data["user_info"][$k]["ni_name"] = $v["ni_name"];
+                $return_data["user_info"][$k]["sex"] = $v["sex"];
+                $return_data["user_info"][$k]["head_url"] = $v["head_url"];
+            }
+        }
+        output_data($return_data);
+    }
 
         /**
          * 判断用户第三方是否绑定
