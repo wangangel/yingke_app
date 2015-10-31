@@ -1,7 +1,7 @@
 <?php
 //定义回调URL通用的URL
-define('URL_CALLBACK', 'http://127.0.0.1/yingke/index.php?m=Api&c=SSO&a=callback&type=');
-define('WEB_HOST', 'http://127.0.0.1');
+define('URL_CALLBACK', 'http://api.bihuo123.com/index.php?m=Api&c=SSO&a=callback&type=');
+define('WEB_HOST', 'http://api.bihuo123.com');
 return array(
     'VAR_MODULE'            =>  'm',     // 默认模块获取变量
     'VAR_CONTROLLER'        =>  'c',    // 默认控制器获取变量
@@ -48,5 +48,32 @@ return array(
         'SSLKEY_PATH' => WEB_HOST.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_key.pem',
         'NOTIFY_URL' =>  WEB_HOST.'/index.php/Api/WxJsAPI/notify',
         'CURL_TIMEOUT' => 30
-    )
+    ),
+    //支付宝配置参数
+'alipay_config'=>array(
+       'partner' =>'2088021170084496',   //这里是你在成功申请支付宝接口后获取到的PID；
+    'key'=>'txa6xj0p2wepunravfzryo230pan2npu',//这里是你在成功申请支付宝接口后获取到的Key
+    'sign_type'=>strtoupper('MD5'),
+    'input_charset'=> strtolower('utf-8'),
+    'cacert'=> getcwd().'\\cacert.pem',
+    'transport'=> 'http',
+      ),
+     //以上配置项，是从接口包中alipay.config.php 文件中复制过来，进行配置；
+    
+'alipay'   =>array(
+ //这里是卖家的支付宝账号，也就是你申请接口时注册的支付宝账号
+'seller_email'=>'dev@skyeyeslive.com',
+
+//这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
+'notify_url'=>'http://127.0.0.1/Api/SSO/notifyurl', 
+
+//这里是页面跳转通知url，提交到项目的Pay控制器的returnurl方法；
+'return_url'=>'http://127.0.0.1/Api/SSO/returnurl',
+
+//支付成功跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参payed（已支付列表）
+'successpage'=>'User/myorder?ordtype=payed',   
+
+//支付失败跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参unpay（未支付列表）
+'errorpage'=>'User/myorder?ordtype=unpay', 
+),
 );

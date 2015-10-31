@@ -1943,7 +1943,7 @@ class UserController extends MobileController{
      */
     public function add_liveroom(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error('请先登录');
+            output_error('请先登录！');
         }
          //验证key是否正确
         $token_model = M('usertoken');
@@ -1953,7 +1953,7 @@ class UserController extends MobileController{
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
+             output_error('秘钥key不正确！！');
         }
         if($_REQUEST['room_name'] == NULL || $_REQUEST['room_pic_url'] == NULL || $_REQUEST['tags'] == NULL || $_REQUEST['isopen'] == NULL){
              output_error('参数不全');

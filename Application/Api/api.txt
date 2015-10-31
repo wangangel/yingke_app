@@ -1298,6 +1298,33 @@ http://api.bihuo123.com
     }
     如果没有则返回为null；
 
+
+五十六 第三方登录接口
+http://api.bihuo123.com
+/index.php/api/user/login?type=sina&token=dssdsdsd
+
+接口参数:
+        type----------第三方登录类型  sina 新浪微博   weixin 微信
+        token:--------------第三方token
+    返回值:
+    userid:用户id  
+        username：用户名
+        phone:手机号码
+        password:加密好的密码
+        server_code：服务码
+        hx_user:环信用户名
+        hx_password:环信用户密码
+        
+五十七 新增支付宝支付接口
+http://api.bihuo123.com
+/index.php/api/user/alipay?ordsubject=鲜花&ordtotal_fee=2.05&ordbody=商品描述
+接口参数:
+        ordsubject---------商品名称
+        ordtotal_fee:--------商品金额
+        ordbody----------------商品描述
+    返回值:
+        支付状态
+
 ================================================================================
 
 
@@ -1341,7 +1368,7 @@ http://api.bihuo123.com
 
 2015/10/31
 1.新增五十五接口，在直播间进行邀请，获取到所有好友列表，进行邀请
-2.
+2.新增五十六接口，第三方登录，需配合测试。做到这里打声招呼
 
 
 
