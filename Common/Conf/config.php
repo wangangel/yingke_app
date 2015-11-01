@@ -22,7 +22,7 @@ return array(
     'DEFAULT_MODULE'        =>  'Admin',
     'DEFAULT_CONTROLLER' => 'Login', 
     'DB_CHARSET'            =>  'utf8',                 // 数据库编码默认采用utf8
-    'WEB_URL'      => 'http://127.0.0.1/yingke/',
+    'WEB_URL'      => 'http://api.bihuo123.com',
 
     'TMPL_ACTION_SUCCESS'=>'Public:jump',
     'TMPL_ACTION_ERROR'=>'Public:jump',
@@ -33,8 +33,8 @@ return array(
         'CALLBACK'   => URL_CALLBACK . 'weixin'
     ),
     'THINK_SDK_SINA' => array(
-        'APP_KEY'    => '599678130', //应用注册成功后分配的 APP ID
-        'APP_SECRET' => 'f17b02720629fb39a56fba35e677a0bb', //应用注册成功后分配的KEY
+        'APP_KEY'    => '1339073680', //应用注册成功后分配的 APP ID
+        'APP_SECRET' => '5f1612579409aa8f1801f0ba6064600f', //应用注册成功后分配的KEY
         'CALLBACK'   => URL_CALLBACK . 'sina'
     ),
       /*微信支付配置*/

@@ -1300,31 +1300,30 @@ http://api.bihuo123.com
     如果没有则返回为null；
 
 
-五十六 第三方登录接口
+五十六 微信發起支付接口
 http://api.bihuo123.com
-/index.php/api/third/login?type=sina&token=dssdsdsd
-
-接口参数:
-        type----------第三方登录类型  sina 新浪微博   weixin 微信
-        token:--------------第三方token
+/index.php/api/wxpay/start_pay?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwertZ&shop_desc=鮮花&shop_cash=10.01
+ 接口参数:
+        userid----------用户id
+        key:--------------key
+        client_id:---------------设备id
+        shop_desc ------------商品名稱或者商品描述
+        shop_cash----------商品支付金額
     返回值:
-    userid:用户id  
-        username：用户名
-        phone:手机号码
-        password:加密好的密码
-        server_code：服务码
-        hx_user:环信用户名
-        hx_password:环信用户密码
-        
-五十七 新增支付宝支付接口
-http://api.bihuo123.com
-/index.php/api/third/alipay?ordsubject=鲜花&ordtotal_fee=2.05&ordbody=商品描述
-接口参数:
-        ordsubject---------商品名称
-        ordtotal_fee:--------商品金额
-        ordbody----------------商品描述
-    返回值:
-        支付状态
+        "errresult":true|false 执行成功返回true，执行失败返回false
+        //微信支付返回參數
+       "return_code":"SUCCESS",
+       "return_msg":"OK",
+       "appid":"wxb8e3693e0481e640",
+       "mch_id":"1264809601",
+       "nonce_str":"Sv2wMRYAxIKGi3y9",
+       "sign":"E3E65B498B1A84723458D36E42AA7D15",
+       "result_code":"SUCCESS",
+       "prepay_id":"wx2015110111221494127989110749245275",
+       "trade_type":"APP",
+       "timestamp":1446348092,
+       "package":"Sign=WXPay"
+}
 
 ================================================================================
 
@@ -1369,11 +1368,11 @@ http://api.bihuo123.com
 
 2015/10/31
 1.新增五十五接口，在直播间进行邀请，获取到所有好友列表，进行邀请
-2.新增五十六接口，第三方登录，需配合测试。做到这里打声招呼
 
 
 2015/11/1
 1.更新接口四十五,增加返回参数 userid
 2.更新接口四十,修改head_pic为必传参数
+3.新增接口五十六,調起微信支付
 
 

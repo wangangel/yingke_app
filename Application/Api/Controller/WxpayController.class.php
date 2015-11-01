@@ -12,33 +12,67 @@ class WxpayController extends MobileController{
         vendor('WxPayPubHelper.WxPayPubHelper');
     }
 
-
-     public function wxpay(){
+     public function start_pay(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+         //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
         //使用统一支付接口
         $unifiedOrder = new \UnifiedOrder_pub();
-        $unifiedOrder->setParameter("body","微信安全支付");//商品描述
+        if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
+            output_error('參數不全');
+        }
+        $shop_desc = $_REQUEST['shop_desc'];
+        //隨機生成訂單號
+        $shop_num = date('YmdHis').rand(0,9999);
+        //微信支付是以分為單位,這裡需要乘以100
+        $shop_cash = $_REQUEST['shop_cash']*100;
+        $unifiedOrder->setParameter("body", $shop_desc);//商品描述
         //自定义订单号，此处仅作举例
         $timeStamp = time();
-        $out_trade_no = $_REQUEST['ordernum'];
-        $unifiedOrder->setParameter("out_trade_no","454654");//商户订单号 
-        $unifiedOrder->setParameter("total_fee","100");//总金额
+        $unifiedOrder->setParameter("out_trade_no",$shop_num);//商户订单号 
+        $unifiedOrder->setParameter("total_fee",$shop_cash);//总金额
         $unifiedOrder->setParameter("notify_url", C('WxPayConf_pub.NOTIFY_URL'));//通知地址 
         $unifiedOrder->setParameter("trade_type","APP");//交易类型
-        
         //获取统一支付接口结果
         $unifiedOrderResult = $unifiedOrder->getResult();
-        
+        $unifiedOrderResult['timestamp'] = time();
+        $unifiedOrderResult['package'] = 'Sign=WXPay';
+
+        //訂單記錄保存到表中
+        $pay_model = M('pay');
+        $pay_data['shop_name'] = $shop_desc;
+        $pay_data['shop_num'] = $shop_num;
+        $pay_data['shop_cash'] = $_REQUEST['shop_cash'];
+        $pay_data['pay_type'] = '微信支付';
+        $pay_data['pay_date'] = time();
+        $pay_data['pay_userid'] = $_REQUEST['userid'];
+        if(empty($_REQUEST['liveroom_id'])){
+            $pay_data['is_room'] = 0;
+        }else{
+            $pay_data['pay_userid'] = $_REQUEST['liveroom_id'];
+            $pay_data['is_room'] = 1;
+        }
+        $pay_info = $pay_model ->add($pay_data);
         //商户根据实际情况设置相应的处理流程
         if ($unifiedOrderResult["return_code"] == "FAIL") 
         {
             //商户自行增加处理流程
-            echo "通信出错：".$unifiedOrderResult['return_msg']."<br>";
+            output_error("通信出错：".$unifiedOrderResult['return_msg']."<br>");
         }
         elseif($unifiedOrderResult["result_code"] == "FAIL")
         {
-            //商户自行增加处理流程
-            echo "错误代码：".$unifiedOrderResult['err_code']."<br>";
-            echo "错误代码描述：".$unifiedOrderResult['err_code_des']."<br>";
+            output_error("错误代码：".$unifiedOrderResult['err_code']."<br>");
+            output_error("错误代码描述：".$unifiedOrderResult['err_code_des']."<br>");
         }
         output_data($unifiedOrderResult);
     }
