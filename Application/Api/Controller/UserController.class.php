@@ -3467,7 +3467,7 @@ class UserController extends MobileController{
                         'server_code'=>$u_data['server_code'],
                         'password'=>$u_data['password'],
                         'key' => $token,
-                        'hx_user' =>$u_data['phone_num'];,
+                        'hx_user' =>$u_data['phone_num'],
                         'hx_password' =>md5($u_data['password'])
                         ));
                 }else{
