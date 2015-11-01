@@ -3423,7 +3423,7 @@ class UserController extends MobileController{
             $u_data['password'] = md5($arr['phone_num']);
         }
         //判断注册类型
-        if("sina" == $_REQUEST['type']){
+        if("weibo" == $_REQUEST['type']){
             $u_data['reg_type'] = '微博';
         }else if('weixin' == $_REQUEST['type']){
             $u_data['reg_type'] = '微信';
@@ -3460,7 +3460,16 @@ class UserController extends MobileController{
                 $b_info = M('userbind')->add($b_data);
                 if($b_info){
                     $u_data['userid']=$u_info;
-                    output_data($u_data);
+                    output_data(array(
+                        'userid' => $u_info,
+                        'phone'=>$u_data['phone_num'],
+                        'nickname' => $u_data['ni_name'],
+                        'server_code'=>$u_data['server_code'],
+                        'password'=>$u_data['password'],
+                        'key' => $token,
+                        'hx_user' =>$u_data['phone_num'];,
+                        'hx_password' =>md5($u_data['password'])
+                        ));
                 }else{
                     output_error('绑定失败');
                 }

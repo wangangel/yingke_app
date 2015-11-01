@@ -1335,7 +1335,7 @@ http://api.bihuo123.com
 /index.php/api/user/third_reg?uid=12121212&client_id=qwert&type=sina&ni_name=hehe&head_url=http://avatar.csdn.net/9/1/0/1_jsbba.jpg&sex=女&email=690303775@qq.com
  接口参数:
         uid----------第三方用户的唯一标识(必传参数)
-        type:--------------第三方类型(sina/weixin)
+        type:--------------第三方类型(weibo/weixin)
         ni_name:---------------用户昵称
         head_url ------------头像地址
         sex----------性别
@@ -1344,18 +1344,14 @@ http://api.bihuo123.com
         client_id-----------设备id
     返回值:
     "errresult":true|false 执行成功返回true，执行失败返回false
-      "phone_num":手机号码,
-      "reg_type":注册类型,
-      "ni_name":昵称,
-      "user_name":用户名,
-      "head_url":头像地址,
-      "sex":性别
-      "birth_date":出生日期,
-      "email":邮箱,
-      "reg_date":注册时间,
-      "hx_password":环信密码,
-      "hx_user":环信用户,
-      "userid":用户id
+      userid:用户id  
+        username：用户名
+        phone:手机号码
+        key:加密信息
+        password:加密好的密码
+        server_code：服务码
+        hx_user:环信用户名
+        hx_password:环信用户密码
 }
 
 
