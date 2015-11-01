@@ -1011,7 +1011,7 @@ datas :
         client_id
         liveroom_id------直播间id
         user_name-------用户名
-        head_pic(可以为空)------头像
+        head_pic------头像
 
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
@@ -1141,6 +1141,7 @@ datas :
           sex-----性别
           per_sign-----个性签名
           age --------- 年龄
+          userid--------用户id
           focus_count-------关注数
           }
 
@@ -1301,7 +1302,7 @@ http://api.bihuo123.com
 
 五十六 第三方登录接口
 http://api.bihuo123.com
-/index.php/api/user/login?type=sina&token=dssdsdsd
+/index.php/api/third/login?type=sina&token=dssdsdsd
 
 接口参数:
         type----------第三方登录类型  sina 新浪微博   weixin 微信
@@ -1317,7 +1318,7 @@ http://api.bihuo123.com
         
 五十七 新增支付宝支付接口
 http://api.bihuo123.com
-/index.php/api/user/alipay?ordsubject=鲜花&ordtotal_fee=2.05&ordbody=商品描述
+/index.php/api/third/alipay?ordsubject=鲜花&ordtotal_fee=2.05&ordbody=商品描述
 接口参数:
         ordsubject---------商品名称
         ordtotal_fee:--------商品金额
@@ -1370,5 +1371,9 @@ http://api.bihuo123.com
 1.新增五十五接口，在直播间进行邀请，获取到所有好友列表，进行邀请
 2.新增五十六接口，第三方登录，需配合测试。做到这里打声招呼
 
+
+2015/11/1
+1.更新接口四十五,增加返回参数 userid
+2.更新接口四十,修改head_pic为必传参数
 
 

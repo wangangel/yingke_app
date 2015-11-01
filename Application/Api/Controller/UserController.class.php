@@ -3233,6 +3233,7 @@ class UserController extends MobileController{
                $data['liveroom_info']['guanzong_info'][$k]['ni_name'] = $v['username'];
                $data['liveroom_info']['guanzong_info'][$k]['head_pic'] = $v['head_pic'];
                $data['liveroom_info']['guanzong_info'][$k]['city'] = $v['city'];
+               $data['liveroom_info']['guanzong_info'][$k]['userid'] = $v['USERID'];
                $data['liveroom_info']['guanzong_info'][$k]['age'] = $age;
                $data['liveroom_info']['guanzong_info'][$k]['focus_count'] =  $f_count;
             }
