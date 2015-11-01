@@ -13,6 +13,8 @@ class WxpayController extends MobileController{
     }
 
      public function start_pay(){
+          //增加回调地址
+
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -47,7 +49,6 @@ class WxpayController extends MobileController{
         $unifiedOrderResult = $unifiedOrder->getResult();
         $unifiedOrderResult['timestamp'] = time();
         $unifiedOrderResult['package'] = 'Sign=WXPay';
-
         //訂單記錄保存到表中
         $pay_model = M('pay');
         $pay_data['shop_name'] = $shop_desc;
@@ -74,6 +75,8 @@ class WxpayController extends MobileController{
             output_error("错误代码：".$unifiedOrderResult['err_code']."<br>");
             output_error("错误代码描述：".$unifiedOrderResult['err_code_des']."<br>");
         }
+        //回调地址
+        $unifiedOrderResult['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
         output_data($unifiedOrderResult);
     }
 

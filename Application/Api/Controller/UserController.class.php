@@ -3394,10 +3394,82 @@ class UserController extends MobileController{
         output_data($return_data);
     }
 
-    
-
-    public function 
-
+    /**
+     * 第三放账号 绑定并生成
+     */
+    public function third_reg(){
+        //获取第三方账号用户信息,并保存,生成手机号增加绑定记录
+         //生成指定规则的userID
+        if($_REQUEST['uid']== NULL){
+            output_error('参数不全!');
+        }
+        $str = uniqid(mt_rand(), true);
+        $str = substr($str,0,8);
+        $arr['phone_num'] = "180" . $str;
+        //插入数据库之需要查询数据库中是否存在
+        $user_model = M('user');
+        $res = $user_model->where($arr)->count();
+        if($res){
+            //数据库中该userid已经存在,需要重新生成      
+            $str = uniqid(mt_rand(), true);
+            $str = substr($str,0,8);
+            $u_data['phone_num'] = "180" . $str;
+            $u_data['password'] = md5($u_data['phone_num']);
+            $u_data['user_id'] = "180" . $str;
+        }else{
+            //数据库中没有
+            $u_data['phone_num'] = $arr['phone_num'];
+            $u_data['user_id'] = $arr['phone_num'];
+            $u_data['password'] = md5($arr['phone_num']);
+        }
+        //判断注册类型
+        if("sina" == $_REQUEST['type']){
+            $u_data['reg_type'] = '微博';
+        }else if('weixin' == $_REQUEST['type']){
+            $u_data['reg_type'] = '微信';
+        }
+        $u_data['ni_name'] = $_REQUEST['ni_name'];
+        $u_data['user_name'] = $_REQUEST['user_name'];
+        $u_data['head_url'] = $_REQUEST['head_url'];
+        $u_data['sex'] = $_REQUEST['sex'];
+        $u_data['birth_date'] = $_REQUEST['birth_date'];
+        $u_data['email'] = $_REQUEST['email'];
+        $u_data['reg_date']=time();
+        $u_info = $user_model->add($u_data);
+        if($u_info){
+            $token = $this->_get_token($u_info,$u_data['phone_num'],$_REQUEST['client_id']);
+            if($token){
+                //用户注册成功后,同时注册环信
+                $hx_opt['password']=md5($u_data['password']);
+                $hx_opt['username']=$u_data['phone_num'];
+                $HX = new \Api\Common\HxController;
+                $hx_info = $HX->openRegister($hx_opt);
+                $hx_a = json_decode($hx_info,true);
+                $hx_save['id'] = $u_info;
+                $hx_save['hx_password']=md5($u_data['password']);
+                $hx_save['hx_user']=$u_data['phone_num'];
+                $hx_save['reg_date']=time();
+                $hx_info = $user_model ->save($hx_save);
+                $u_data['hx_password']=md5($u_data['password']);
+                $u_data['hx_user']=$u_data['phone_num'];
+                //新增用户第三方绑定信息
+                $b_data['userid'] = $u_info;
+                $b_data['type'] = $_REQUEST['type'];
+                $b_data['uid'] = $_REQUEST['uid'];
+                $b_data['add_date'] = time();
+                $b_info = M('userbind')->add($b_data);
+                if($b_info){
+                    $u_data['userid']=$u_info;
+                    output_data($u_data);
+                }else{
+                    output_error('绑定失败');
+                }
+            }
+                
+        }else{
+            output_error('登陆失败');
+        }
+    }
         
 
 }

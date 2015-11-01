@@ -1302,13 +1302,16 @@ http://api.bihuo123.com
 
 五十六 微信發起支付接口
 http://api.bihuo123.com
-/index.php/api/wxpay/start_pay?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwertZ&shop_desc=鮮花&shop_cash=10.01
+/index.php/api/wxpay/start_pay?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwertZ&shop_desc=鮮花&shop_cash=10.01&liveroom_id=22&user_name=hehe&head_url=http://avatar.csdn.net/9/1/0/1_jsbba.jpg
  接口参数:
         userid----------用户id
         key:--------------key
         client_id:---------------设备id
         shop_desc ------------商品名稱或者商品描述
         shop_cash----------商品支付金額
+        liveroom_id---------------直播间id
+        user_name--------------用户名
+        head_url----------- 用户头像
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         //微信支付返回參數
@@ -1323,7 +1326,38 @@ http://api.bihuo123.com
        "trade_type":"APP",
        "timestamp":1446348092,
        "package":"Sign=WXPay"
+       callback---------回调地址
 }
+
+
+五十七 第三方登陆接口
+http://api.bihuo123.com
+/index.php/api/user/third_reg?uid=12121212&client_id=qwert&type=sina&ni_name=hehe&head_url=http://avatar.csdn.net/9/1/0/1_jsbba.jpg&sex=女&email=690303775@qq.com
+ 接口参数:
+        uid----------第三方用户的唯一标识(必传参数)
+        type:--------------第三方类型(sina/weixin)
+        ni_name:---------------用户昵称
+        head_url ------------头像地址
+        sex----------性别
+        birth_date----------出生日期
+        email--------邮箱
+        client_id-----------设备id
+    返回值:
+    "errresult":true|false 执行成功返回true，执行失败返回false
+      "phone_num":手机号码,
+      "reg_type":注册类型,
+      "ni_name":昵称,
+      "user_name":用户名,
+      "head_url":头像地址,
+      "sex":性别
+      "birth_date":出生日期,
+      "email":邮箱,
+      "reg_date":注册时间,
+      "hx_password":环信密码,
+      "hx_user":环信用户,
+      "userid":用户id
+}
+
 
 ================================================================================
 
@@ -1374,5 +1408,6 @@ http://api.bihuo123.com
 1.更新接口四十五,增加返回参数 userid
 2.更新接口四十,修改head_pic为必传参数
 3.新增接口五十六,調起微信支付
+4.新增接口五十七,第三方登陆
 
 
