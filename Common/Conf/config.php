@@ -43,10 +43,10 @@ return array(
         'MCHID' => '1264809601',
         'KEY' => 'BZruR8wE9xHNSnXVTh0MDXOhdhGX85HH',
         'APPSECRET' => '73b424971cea37515ea6354fb924742b',
-        'JS_API_CALL_URL' => WEB_HOST.'/index.php/Api/WxJsAPI/jsApiCall',
-        'SSLCERT_PATH' => WEB_HOST.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_cert.pem',
-        'SSLKEY_PATH' => WEB_HOST.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_key.pem',
-        'NOTIFY_URL' =>  WEB_HOST.'/index.php/Api/WxJsAPI/notify',
+        'JS_API_CALL_URL' => WEB_URL.'/index.php/Api/Wxpay/start_pay',
+        'SSLCERT_PATH' => WEB_URL.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_cert.pem',
+        'SSLKEY_PATH' => WEB_URL.'/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_key.pem',
+        'NOTIFY_URL' =>  WEB_URL.'/index.php/Api/Wxpay/notify',
         'CURL_TIMEOUT' => 30
     ),
     //支付宝配置参数
