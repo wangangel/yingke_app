@@ -102,68 +102,112 @@ class UserController extends MobileController{
      * 用户注册
      */
 	public function register(){
-        if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['client_id'] == NULL){
-            output_error('参数不全');
-        }
 		$user_model	= M('user');
-		$result = $user_model->where(array('phone_num'=>$_REQUEST['phonenumber']))->find();
-		if($result != NULL){
-		    output_error('已经存在该手机用户了!');
-		}
-		//接收数据
-        $register_info = array();
-        $register_info['password'] = md5($_REQUEST['password']);
-        $register_info['phone_num'] = $_REQUEST['phonenumber'];
-        //注册后的用户名为手机号码
-        $register_info['ni_name'] = $_REQUEST['phonenumber'];
-        $register_info['reg_date'] = time();
-        $register_info['status'] = "start";
-        $register_info['reg_type'] = "注册";
-        $register_info['server_code'] = "QXSJSP";
-        //生成指定规则的userID
-        $str = uniqid(mt_rand(), true);
-        $str = substr($str,0,9);
-        $arr['focus_user'] = "18" . $str;
-        //插入数据库之需要查询数据库中是否存在
-        $res = $user_model->where($arr)->select();
-        $count = count($res);
-        if($count){
-            //数据库中该userid已经存在,需要重新生成      
+        if($_REQUEST['type'] != NULL){
+            if ($_REQUEST['uid'] == NULL) {
+               output_error('参数不全');
+            }
+            $str = uniqid(mt_rand(), true);
+            $str = substr($str,0,8);
+            $arr['phone_num'] = "180" . $str;
+            //插入数据库之需要查询数据库中是否存在
+            $user_model = M('user');
+            $res = $user_model->where($arr)->count();
+            if($res){
+                //数据库中该userid已经存在,需要重新生成      
+                $str = uniqid(mt_rand(), true);
+                $str = substr($str,0,8);
+                $register_info['phone_num'] = "180" . $str;
+                $register_info['password'] = md5($u_data['phone_num']);
+                $register_info['user_id'] = "180" . $str;
+            }else{
+                //数据库中没有
+                $register_info['phone_num'] = $arr['phone_num'];
+                $register_info['user_id'] = $arr['phone_num'];
+                $register_info['password'] = md5($arr['phone_num']);
+            }
+            //判断注册类型
+            if("weibo" == $_REQUEST['type']){
+                $register_info['reg_type'] = '微博';
+            }else if('weixin' == $_REQUEST['type']){
+                $register_info['reg_type'] = '微信';
+            }
+            $register_info['ni_name'] = $_REQUEST['ni_name'];
+            $register_info['user_name'] = $_REQUEST['user_name'];
+            $register_info['head_url'] = $_REQUEST['head_url'];
+            $register_info['sex'] = $_REQUEST['sex'];
+            $register_info['birth_date'] = $_REQUEST['birth_date'];
+            $register_info['email'] = $_REQUEST['email'];
+            $register_info['reg_date']=time();
+        }else{
+            if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['client_id'] == NULL){
+                 output_error('参数不全');
+            }
+            $result = $user_model->where(array('phone_num'=>$_REQUEST['phonenumber']))->find();
+            if($result != NULL){
+                output_error('已经存在该手机用户了!');
+            }
+
+            //接收数据
+            $register_info = array();
+            $register_info['password'] = md5($_REQUEST['password']);
+            $register_info['phone_num'] = $_REQUEST['phonenumber'];
+            //注册后的用户名为手机号码
+            $register_info['ni_name'] = $_REQUEST['phonenumber'];
+            $register_info['reg_date'] = time();
+            $register_info['status'] = "start";
+            $register_info['reg_type'] = "注册";
+            $register_info['server_code'] = "QXSJSP";
+            //生成指定规则的userID
             $str = uniqid(mt_rand(), true);
             $str = substr($str,0,9);
-            $register_info['user_id'] = "18" . $str;
-        }else{
-            //数据库中没有
-            $register_info['user_id'] = $arr['user_id'];
+            $arr['focus_user'] = "18" . $str;
+            //插入数据库之需要查询数据库中是否存在
+            $res = $user_model->where($arr)->select();
+            $count = count($res);
+            if($count){
+                //数据库中该userid已经存在,需要重新生成      
+                $str = uniqid(mt_rand(), true);
+                $str = substr($str,0,9);
+                $register_info['user_id'] = "18" . $str;
+            }else{
+                //数据库中没有
+                $register_info['user_id'] = $arr['user_id'];
+            }
         }
-        //通过第三方注册绑定
-        if($_REQUEST['type'] != NULL && $_REQUEST['openid'] != NULL){
-            $register_info[$_REQUEST['type'].'openid'] = $_REQUEST['openid'];
-        }
+		
+
         $user_info = $user_model->add($register_info);
         if($user_info) {
             $token = $this->_get_token($user_info,$register_info['phone_num'],$_REQUEST['client_id']);
             if($token) {
-
-                //用户注册成功后,同时注册环信
-                $hx_opt['password']=md5($_REQUEST['password']);
-                $hx_opt['username']=$_REQUEST['phonenumber'];
-                $HX = new \Api\Common\HxController;
-                $hx_info = $HX->openRegister($hx_opt);
-                $hx_a = json_decode($hx_info,true);
+                    //用户注册成功后,同时注册环信
+                    $hx_opt['password']=md5($_REQUEST['password']);
+                    $hx_opt['username']=$_REQUEST['phonenumber'];
+                    $HX = new \Api\Common\HxController;
+                    $hx_info = $HX->openRegister($hx_opt);
+                    $hx_a = json_decode($hx_info,true);
                     $hx_save['id'] = $user_info;
                     $hx_save['hx_password']=md5($_REQUEST['password']);
                     $hx_save['hx_user']=$_REQUEST['phonenumber'];
                     $hx_info = $user_model ->save($hx_save);
+                    if($_REQUEST['type'] == NULL){
+                             $hx['hx_user'] = $_REQUEST['phonenumber'];
+                             $hx['hx_password'] = md5($_REQUEST['password']);
+                    }else{
+                            $hx['hx_user'] = $register_info['phone_num'];
+                            $hx['hx_password'] = md5($register_info['password']);
+                    }
                         output_data(array(
                         'userid' => $user_info,
                         'phone'=>$register_info['phone_num'],
                         'nickname' => $register_info['ni_name'],
-                        'server_code'=>$register_info['server_code'],
+                        'server_code'=>'QXSJSP',
                         'password'=>$register_info['password'],
                         'key' => $token,
-                        'hx_user' =>$_REQUEST['phonenumber'],
-                        'hx_password' =>md5($_REQUEST['password'])
+                        'hx_user' => $register_info['phone_num'],
+                        'hx_password' => md5($register_info['password']),
+                        'head_url'=>$register_info['head_url']
                         ));
             } else {
                 output_error('祝贺您成功注册映客，请尝试登录');
@@ -3393,93 +3437,6 @@ class UserController extends MobileController{
         }
         output_data($return_data);
     }
-
-    /**
-     * 第三放账号 绑定并生成
-     */
-    public function third_reg(){
-        //获取第三方账号用户信息,并保存,生成手机号增加绑定记录
-         //生成指定规则的userID
-        if($_REQUEST['uid']== NULL){
-            output_error('参数不全!');
-        }
-        $str = uniqid(mt_rand(), true);
-        $str = substr($str,0,8);
-        $arr['phone_num'] = "180" . $str;
-        //插入数据库之需要查询数据库中是否存在
-        $user_model = M('user');
-        $res = $user_model->where($arr)->count();
-        if($res){
-            //数据库中该userid已经存在,需要重新生成      
-            $str = uniqid(mt_rand(), true);
-            $str = substr($str,0,8);
-            $u_data['phone_num'] = "180" . $str;
-            $u_data['password'] = md5($u_data['phone_num']);
-            $u_data['user_id'] = "180" . $str;
-        }else{
-            //数据库中没有
-            $u_data['phone_num'] = $arr['phone_num'];
-            $u_data['user_id'] = $arr['phone_num'];
-            $u_data['password'] = md5($arr['phone_num']);
-        }
-        //判断注册类型
-        if("weibo" == $_REQUEST['type']){
-            $u_data['reg_type'] = '微博';
-        }else if('weixin' == $_REQUEST['type']){
-            $u_data['reg_type'] = '微信';
-        }
-        $u_data['ni_name'] = $_REQUEST['ni_name'];
-        $u_data['user_name'] = $_REQUEST['user_name'];
-        $u_data['head_url'] = $_REQUEST['head_url'];
-        $u_data['sex'] = $_REQUEST['sex'];
-        $u_data['birth_date'] = $_REQUEST['birth_date'];
-        $u_data['email'] = $_REQUEST['email'];
-        $u_data['reg_date']=time();
-        $u_info = $user_model->add($u_data);
-        if($u_info){
-            $token = $this->_get_token($u_info,$u_data['phone_num'],$_REQUEST['client_id']);
-            if($token){
-                //用户注册成功后,同时注册环信
-                $hx_opt['password']=md5($u_data['password']);
-                $hx_opt['username']=$u_data['phone_num'];
-                $HX = new \Api\Common\HxController;
-                $hx_info = $HX->openRegister($hx_opt);
-                $hx_a = json_decode($hx_info,true);
-                $hx_save['id'] = $u_info;
-                $hx_save['hx_password']=md5($u_data['password']);
-                $hx_save['hx_user']=$u_data['phone_num'];
-                $hx_save['reg_date']=time();
-                $hx_info = $user_model ->save($hx_save);
-                $u_data['hx_password']=md5($u_data['password']);
-                $u_data['hx_user']=$u_data['phone_num'];
-                //新增用户第三方绑定信息
-                $b_data['userid'] = $u_info;
-                $b_data['type'] = $_REQUEST['type'];
-                $b_data['uid'] = $_REQUEST['uid'];
-                $b_data['add_date'] = time();
-                $b_info = M('userbind')->add($b_data);
-                if($b_info){
-                    $u_data['userid']=$u_info;
-                    output_data(array(
-                        'userid' => $u_info,
-                        'phone'=>$u_data['phone_num'],
-                        'nickname' => $u_data['ni_name'],
-                        'server_code'=>$u_data['server_code'],
-                        'password'=>$u_data['password'],
-                        'key' => $token,
-                        'hx_user' =>$u_data['phone_num'],
-                        'hx_password' =>md5($u_data['password'])
-                        ));
-                }else{
-                    output_error('绑定失败');
-                }
-            }
-                
-        }else{
-            output_error('登陆失败');
-        }
-    }
-        
 
 }
    
