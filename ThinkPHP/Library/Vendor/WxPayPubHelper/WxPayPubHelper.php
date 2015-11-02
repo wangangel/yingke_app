@@ -78,8 +78,8 @@ class Common_util_pub
 		    {
 			   $v = urlencode($v);
 			}
-			//$buff .= strtolower($k) . "=" . $v . "&";
-			$buff .= $k . "=" . $v . "&";
+			$buff .= strtolower($k) . "=" . $v . "&";
+			//$buff .= $k . "=" . $v . "&";
 		}
 		$reqPar;
 		if (strlen($buff) > 0) 
@@ -94,6 +94,7 @@ class Common_util_pub
 	 */
 	public function getSign($Obj)
 	{
+
 		foreach ($Obj as $k => $v)
 		{
 			$Parameters[$k] = $v;
@@ -299,7 +300,7 @@ class Wxpay_client_pub extends Common_util_pub
 	{		
 		$this->postXml();
 		$this->result = $this->xmlToArray($this->response);
-		return $this->result;
+		return $this->response;
 	}
 }
 

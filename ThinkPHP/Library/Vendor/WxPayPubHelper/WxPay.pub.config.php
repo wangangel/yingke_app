@@ -11,7 +11,7 @@ class WxPayConf_pub
 	//受理商ID，身份标识
 	const MCHID = '1264809601';
 	//商户支付密钥Key。审核通过后，在微信发送的邮件中查看
-	const KEY = 'BZruR8wE9xHNSnXVTh0MDXOhdhGX85HH';
+	const KEY = 'b53d1471a45f39cb6de2a0372c2d71cb';
 	//JSAPI接口中获取openid，审核后在公众平台开启开发模式后可查看
 	const APPSECRET = '73b424971cea37515ea6354fb924742b';
 	

@@ -28,6 +28,9 @@ class WxpayController extends MobileController{
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
         }
+
+        
+        //=========步骤2：使用统一支付接口，获取prepay_id============
         //使用统一支付接口
         $unifiedOrder = new \UnifiedOrder_pub();
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
@@ -38,7 +41,7 @@ class WxpayController extends MobileController{
         $shop_num = date('YmdHis').rand(0,9999);
         //微信支付是以分為單位,這裡需要乘以100
         $shop_cash = $_REQUEST['shop_cash']*100;
-
+        $_REQUEST['num'] =$shop_num;
         $unifiedOrder->setParameter("body", $shop_desc);//商品描述
         $unifiedOrder->setParameter("out_trade_no",$shop_num);//商户订单号 
         $unifiedOrder->setParameter("total_fee",$shop_cash);//总金额
@@ -74,6 +77,7 @@ class WxpayController extends MobileController{
             output_error("错误代码：".$unifiedOrderResult['err_code']."<br>");
             output_error("错误代码描述：".$unifiedOrderResult['err_code_des']."<br>");
         }
+       dump($unifiedOrderResult);
         //回调地址
         $unifiedOrderResult['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
         output_data($unifiedOrderResult);
