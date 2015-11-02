@@ -10,11 +10,12 @@ class WxpayController extends MobileController{
     public function _initialize(){
         //引入WxPayPubHelper
         vendor('WxPayPubHelper.WxPayPubHelper');
+
     }
 
      public function start_pay(){
           //增加回调地址
-
+/*
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -31,8 +32,7 @@ class WxpayController extends MobileController{
 
         
         //=========步骤2：使用统一支付接口，获取prepay_id============
-        //使用统一支付接口
-        $unifiedOrder = new \UnifiedOrder_pub();
+        
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
             output_error('參數不全');
         }
@@ -41,16 +41,42 @@ class WxpayController extends MobileController{
         $shop_num = date('YmdHis').rand(0,9999);
         //微信支付是以分為單位,這裡需要乘以100
         $shop_cash = $_REQUEST['shop_cash']*100;
-        $_REQUEST['num'] =$shop_num;
-        $unifiedOrder->setParameter("body", $shop_desc);//商品描述
-        $unifiedOrder->setParameter("out_trade_no",$shop_num);//商户订单号 
-        $unifiedOrder->setParameter("total_fee",$shop_cash);//总金额
+        $_REQUEST['num'] =$shop_num;*/
+        //使用统一支付接口
+        //使用jsapi接口
+        $jsApi = new \JsApi_pub();
+
+        //=========步骤1：网页授权获取用户openid============
+        //通过code获得openid
+        if (!isset($_REQUEST['code']))
+        {
+            //触发微信返回code码
+            $url = $jsApi->createOauthUrlForCode(C('WxPayConf_pub.JS_API_CALL_URL'));
+            Header("Location: $url"); 
+        }else
+        {
+            //获取code码，以获取openid
+            $code = $_REQUEST['code'];
+            $jsApi->setCode($code);
+            $openid = $jsApi->getOpenId();
+        }
+        
+    //=========步骤2：使用统一支付接口，获取prepay_id============
+         //使用统一支付接口
+        $unifiedOrder = new \UnifiedOrder_pub();
+        $unifiedOrder->setParameter("body", '212');//商品描述
+        $unifiedOrder->setParameter("out_trade_no",'44');//商户订单号 
+        $unifiedOrder->setParameter("total_fee",'1');//总金额
+        //$unifiedOrder->setParameter("timestamp",time());//总金额
         $unifiedOrder->setParameter("notify_url", C('WxPayConf_pub.NOTIFY_URL'));//通知地址 
         $unifiedOrder->setParameter("trade_type","APP");//交易类型
         //获取统一支付接口结果
         $unifiedOrderResult = $unifiedOrder->getResult();
-        $unifiedOrderResult['timestamp'] = time();
-        $unifiedOrderResult['package'] = 'Sign=WXPay';
+         $prepay_id = $unifiedOrder->getPrepayId();
+        dump($unifiedOrderResult);
+        die;
+        //$unifiedOrderResult['timestamp'] = time();
+        //$unifiedOrderResult['package'] = 'Sign=WXPay';
         //訂單記錄保存到表中
         $pay_model = M('pay');
         $pay_data['shop_name'] = $shop_desc;
@@ -77,7 +103,7 @@ class WxpayController extends MobileController{
             output_error("错误代码：".$unifiedOrderResult['err_code']."<br>");
             output_error("错误代码描述：".$unifiedOrderResult['err_code_des']."<br>");
         }
-       dump($unifiedOrderResult);
+       
         //回调地址
         $unifiedOrderResult['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
         output_data($unifiedOrderResult);
