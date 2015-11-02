@@ -178,10 +178,8 @@ class UserController extends MobileController{
                     $bind_add = M('userbind')->add($bind_data);
                     $register_info['fans_num'] = 0;
                     $register_info['focus_num'] = 0;
-
             }
-            /**---------------------------------------**/
-              
+            /**---------------------------------------**/ 
         }else{
             if($_REQUEST['password'] == NULL || $_REQUEST['phonenumber'] == NULL || $_REQUEST['client_id'] == NULL){
                  output_error('参数不全');
@@ -395,7 +393,7 @@ class UserController extends MobileController{
         }
     }
     /*
-     * 登录--->
+     *登录--->
      */
     public function login(){
         if($_REQUEST['phone'] == null || $_REQUEST['password'] == null || $_REQUEST['client_id'] == null) {
@@ -3450,11 +3448,11 @@ class UserController extends MobileController{
         }
 
     }
-        /**
-         * 好友列表接口
-         */
+    /**
+      * 好友列表接口
+    */
     public function friend_list(){
-        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
         //验证key是否正确
@@ -3463,17 +3461,27 @@ class UserController extends MobileController{
         $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
         $arr['token'] = $_REQUEST['key'];
+
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }*/
+        }
         $data["user_id"] = $_REQUEST['userid'];
         $data["status"] = "yes";
         $arrOpt['ps'] = intval($_REQUEST['ps'])>0?intval($_REQUEST['ps']):10;
         $arrOpt['page'] = intval($_REQUEST['page'])>0?intval($_REQUEST['page']):1;
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $friend_model = M('friends_focus');
-        $friend_list = $friend_model->where($data)->limit($start,$arrOpt['ps'])->getField('focus_user',true); 
+        $focus_list = $friend_model->where($data)->getField('focus_user',true); 
+        //SELECT `focus_user` FROM `yk_friends_focus` WHERE `user_id`=162 AND `status`="yes"
+        $friend["focus_user"] = $_REQUEST['userid'];
+        $friend["user_id"] = array('in',$focus_list);
+        $friend_list = $friend_model->where($friend)->limit($start,$arrOpt['ps'])->getField('user_id',true); 
+        //SELECT `user_id` FROM `yk_friends_focus` WHERE `focus_user` = 162 AND `user_id` IN ('161','163','165','171') LIMIT 0,10
+     /*   $sql = $friend_model->getlastsql();
+        var_dump($sql);
+        var_dump($friend_list);*/
+
         if(count($friend_list) > 0){
             $userinfo_list = M("user")->select($friend_list);
             foreach ($userinfo_list as $k => $v) {
