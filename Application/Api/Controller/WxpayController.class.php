@@ -90,7 +90,7 @@ class WxpayController extends MobileController{
         $input->SetGoods_tag($shop_desc);
         $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
         $input->SetTrade_type("APP");
-        $input->SetOpenid($openId);
+        //$input->SetOpenid($openId);
         $order = new \WxPayApi();
         $aa = $order::unifiedOrder($input);
         //訂單記錄保存到表中
@@ -109,7 +109,7 @@ class WxpayController extends MobileController{
         }
         $pay_info = $pay_model ->add($pay_data);
         //回调地址
-        $aa['timestamp'] = $this->getMillisecond();
+        $aa['timestamp'] = time();
         $aa['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
         output_data($aa);
         //$jsApiParameters = $tools->GetJsApiParameters($order);
