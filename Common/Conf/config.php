@@ -41,7 +41,7 @@ return array(
     'WxPayConf_pub'=>array(
         'APPID' => 'wxb8e3693e0481e640',
         'MCHID' => '1264809601',
-        'KEY' => '74132E0DC7EA859EDDD677E3914D39AE',
+        'KEY' => 'dfsgfagg3refsafgrhst7434568536ta',
         'APPSECRET' => '0d323cc2299edd8e00e6d92f65ec02ca',
         'JS_API_CALL_URL' => 'http://api.bihuo123.com/index.php/Api/Wxpay/start_pay',
         'SSLCERT_PATH' =>'http://api.bihuo123.com/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_cert.pem',
