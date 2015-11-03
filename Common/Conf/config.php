@@ -29,7 +29,7 @@ return array(
      //微信登录
     'THINK_SDK_WEIXIN' => array(
         'APP_KEY'    => 'wxb8e3693e0481e640', //应用注册成功后分配的 APP ID
-        'APP_SECRET' => '73b424971cea37515ea6354fb924742b', //应用注册成功后分配的KEY
+        'APP_SECRET' => '0d323cc2299edd8e00e6d92f65ec02ca', //应用注册成功后分配的KEY
         'CALLBACK'   => URL_CALLBACK . 'weixin'
     ),
     'THINK_SDK_SINA' => array(
@@ -41,8 +41,8 @@ return array(
     'WxPayConf_pub'=>array(
         'APPID' => 'wxb8e3693e0481e640',
         'MCHID' => '1264809601',
-        'KEY' => 'b53d1471a45f39cb6de2a0372c2d71cb',
-        'APPSECRET' => '73b424971cea37515ea6354fb924742b',
+        'KEY' => '74132E0DC7EA859EDDD677E3914D39AE',
+        'APPSECRET' => '0d323cc2299edd8e00e6d92f65ec02ca',
         'JS_API_CALL_URL' => 'http://api.bihuo123.com/index.php/Api/Wxpay/start_pay',
         'SSLCERT_PATH' =>'http://api.bihuo123.com/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_cert.pem',
         'SSLKEY_PATH' =>'http://api.bihuo123.com/ThinkPHP/Library/Vendor/WxPayPubHelper/cacert/apiclient_key.pem',
