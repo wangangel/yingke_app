@@ -107,11 +107,9 @@ class UserController extends MobileController{
             if ($_REQUEST['uid'] == NULL) {
                output_error('参数不全');
             }
-
             //判断用户是否绑定过
             $bind_model = M('userbind');
             $bind_info = $bind_model ->where(array("uid"=>$_REQUEST['uid']))->find();
-            
              if(count($bind_info)>0){
                     //根据绑定信息找到用户信息
                     $bind_user = M('user') ->where(array('id'=>$bind_info['userid']))->find();
