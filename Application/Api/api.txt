@@ -1322,7 +1322,7 @@ http://api.bihuo123.com
         user_name--------------用户名
         head_url----------- 用户头像
     返回值:
-<<<<<<< .mine
+
     userid:用户id  
         username：用户名
         phone:手机号码
@@ -1340,7 +1340,7 @@ http://api.bihuo123.com
         ordbody----------------商品描述
     返回值:
         支付状态
-=======
+
         "errresult":true|false 执行成功返回true，执行失败返回false
         //微信支付返回參數
        "return_code":"SUCCESS",
@@ -1356,7 +1356,21 @@ http://api.bihuo123.com
        "package":"Sign=WXPay"
        callback---------回调地址
 }
->>>>>>> .r176
+
+五十八、推送接口（邀请好友给对方推送）
+http://api.bihuo123.com
+/index.php/api/umeng/request_push?visterid=162&key=7530122d99ccbd4efc2d995652e78d8f&client_id=32E522CE-2330-4868-9A86-76CDD2BC635F&device=IOS&liveroom_id=859&friend_id=168
+ 接口参数:
+        visterid----------邀请者id
+        key:--------------key
+        client_id:---------------设备id
+        friend_id ---------好友id（受邀者id，同时也是alias的值，alias_type统一为1.1）
+        device----------设备名称（IOS,ANDROID）必须大写
+        liveroom_id---------------直播间id
+返回值：
+        {"errresult":true,"datas":{"result":"success"}}
+
+备注：这里统一app对alias调用sdk中setAlias(alias, alias_type)，别名（alias为受邀者id，alias_type统一为1.1，前端有疑义就问）
 
 ================================================================================
 
@@ -1410,5 +1424,8 @@ http://api.bihuo123.com
 3.新增接口五十六,調起微信支付
 4.更新接口三,增加第三方登陆判断  参数uid,type 都是必传参数.
 
+
+2015/11/3
+1.新增五十八接口，在邀请好友后给予推送
 
 
