@@ -162,6 +162,7 @@ class UserController extends MobileController{
                     }
                     $register_info['ni_name'] = $_REQUEST['ni_name'];
                     $register_info['user_name'] = $_REQUEST['user_name'];
+                    
                     $register_info['head_url'] = $_REQUEST['head_url'];
                     $register_info['sex'] = $_REQUEST['sex'];
                     $register_info['birth_date'] = $_REQUEST['birth_date'];
@@ -781,7 +782,7 @@ class UserController extends MobileController{
      *关注用户
      */
     public function focus_user(){
-        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
         //验证key是否正确,这边需要设备唯一标识
@@ -793,7 +794,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }*/
+        }
         //先判断被关注人是否存在
         $user_model = M('user');
         $user_info = $user_model->where(array('id'=>$_REQUEST['focus_user']))->find();
