@@ -294,9 +294,10 @@ class HxController extends Controller{
 	 * @param $limit 条数
 	 *        	默认20
 	 */
-	public function chatRecord($ql = '', $cursor = '', $limit = 20) {
+	public function chatRecord($ql, $cursor, $limit) {
 		$ql = ! empty ( $ql ) ? "ql=" . $ql : "order+by+timestamp+desc";
 		$cursor = ! empty ( $cursor ) ? "&cursor=" . $cursor : '';
+		//dump($ql);
 		$url = $this->url . "chatmessages?" . $ql . "&limit=" . $limit . $cursor;
 		$access_token = $this->getToken ();
 		$header [] = 'Authorization: Bearer ' . $access_token;

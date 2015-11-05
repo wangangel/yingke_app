@@ -25,11 +25,14 @@ class ThirdController extends MobileController{
         $notify_url = C('alipay.notify_url'); //服务器异步通知页面路径
         $return_url = C('alipay.return_url'); //页面跳转同步通知页面路径
         $seller_email = C('alipay.seller_email');//卖家支付宝帐户必填
-        $out_trade_no = $_POST['trade_no'];//商户订单号 通过支付页面的表单进行传递，注意要唯一！
+      /*  $out_trade_no = $_POST['trade_no'];//商户订单号 通过支付页面的表单进行传递，注意要唯一！
         $subject = $_POST['ordsubject'];  //订单名称 //必填 通过支付页面的表单进行传递
         $total_fee = $_POST['ordtotal_fee'];   //付款金额  //必填 通过支付页面的表单进行传递
-        $body = $_POST['ordbody'];  //订单描述 通过支付页面的表单进行传递
-     
+        $body = $_POST['ordbody'];*/  //订单描述 通过支付页面的表单进行传递
+     $out_trade_no = '22';//商户订单号 通过支付页面的表单进行传递，注意要唯一！
+        $subject = 'wddfzx';  //订单名称 //必填 通过支付页面的表单进行传递
+        $total_fee = '12.00';   //付款金额  //必填 通过支付页面的表单进行传递
+        $body = '测试';
         /************************************************************/
     
         //构造要请求的参数数组，无需改动
@@ -51,6 +54,7 @@ class ThirdController extends MobileController{
         );
         //建立请求
         $alipaySubmit = new \AlipaySubmit($alipay_config);
+        dump();
         $html_text = $alipaySubmit->buildRequestForm($parameter,"post", "确认");
         echo $html_text;
     }

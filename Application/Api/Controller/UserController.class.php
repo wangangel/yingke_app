@@ -3494,6 +3494,26 @@ class UserController extends MobileController{
         output_data($return_data);
     }
 
+
+    public function hx_chatrecord(){
+        $hx = new \Api\Common\HxController;
+       // $ql ="select+*+where+groupId+=+";
+        $record = $hx->chatRecord('','', 50);
+        $data = json_decode($record, true);
+        //根据参数判断显示循环聊天记录
+        $chat_data= $data['entities'];
+        $groupid = '1442494790144';
+        for($i=0;$i<count($chat_data);$i++){
+            if($chat_data[$i]['groupId']==$groupid){
+              $opt .= $chat_data[$i]['from'].":".$chat_data[$i]['payload']['bodies'][0]['msg']."\n";
+            }
+        }
+        //获取聊天记录
+    }
+      
+
+
+
 }
    
     
