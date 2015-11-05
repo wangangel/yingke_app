@@ -1,7 +1,7 @@
 <?php
 require_once "WxPayException.php";
 require_once "WxPayConfig.php";
-//require_once "WxPayData.php";
+require_once "WxPayData.php";
 
 /**
  * 
@@ -57,7 +57,6 @@ class WxPayApi
 		//签名
 		$inputObj->SetSign();
 		$xml = $inputObj->ToXml();
-
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response);
