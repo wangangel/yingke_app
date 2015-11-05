@@ -12,7 +12,7 @@ class WxpayController extends MobileController{
         vendor('WxPayPubHelper.WxPayApi');
         vendor('WxPayPubHelper.WxPayConfig');
         vendor('WxPayPubHelper.WxPayJsApiPay');
-        vendor('WxPayPubHelper.WxPayData');
+        //vendor('WxPayPubHelper.WxPayData');
     }
 
      public function start_pay(){
@@ -51,7 +51,7 @@ class WxpayController extends MobileController{
        
         
         output_data($unifiedOrderResult,0);*/
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
@@ -68,7 +68,7 @@ class WxpayController extends MobileController{
         
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
             output_error('參數不全');
-        }
+        }*/
         $shop_desc = $_REQUEST['shop_desc'];
         //隨機生成訂單號
         $shop_num = date('YmdHis').rand(0,9999);
@@ -88,7 +88,7 @@ class WxpayController extends MobileController{
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($shop_desc);
-        $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
+        $input->SetNotify_url("http://api.bihuo123.com/index.php/Api/Wxpay/notify");
         $input->SetTrade_type("APP");
         //$input->SetOpenid($openId);
         $order = new \WxPayApi();
@@ -111,6 +111,7 @@ class WxpayController extends MobileController{
         //回调地址
         $aa['timestamp'] = time();
         $aa['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
+        
         output_data($aa);
         //$jsApiParameters = $tools->GetJsApiParameters($order);
 
