@@ -1,48 +1,45 @@
 <?php
 namespace Api\Controller;
 use Api\Common\MobileController;
+use Think\Controller;
 class UmengController extends MobileController{
-
-    /**
-     * 初始化
-     */
-    public function _initialize(){
-        //引入WxPayPubHelper
-        vendor('notification.android.AndroidBroadcast');
-        vendor('notification.android.AndroidFilecast');
-        vendor('notification.android.AndroidGroupcast');
-        vendor('notification.android.AndroidUnicast');
-        vendor('notification.android.AndroidCustomizedcast');
-        vendor('notification.android.IOSBroadcast');
-        vendor('notification.android.IOSFilecast');
-        vendor('notification.android.IOSGroupcast');
-        vendor('notification.android.IOSUnicast');
-        vendor('notification.android.IOSCustomizedcast');
-    }
-    protected $appkey           = NULL; 
-    protected $appMasterSecret     = NULL;
+    
+    protected $appkey  = "55e65c5be0f55a60dc0001f2"; 
+    protected $appMasterSecret     = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
     protected $timestamp        = NULL;
     protected $validation_token = NULL;
-
+   
     function __construct($key, $secret) {
+        vendor('Notification.android.AndroidBroadcast');
+        vendor('Notification.android.AndroidFilecast');
+        vendor('Notification.android.AndroidGroupcast');
+        vendor('Notification.android.AndroidUnicast');
+        vendor('Notification.android.AndroidCustomizedcast');
+        vendor('Notification.ios.IOSBroadcast');
+        vendor('Notification.ios.IOSFilecast');
+        vendor('Notification.ios.IOSGroupcast');
+        vendor('Notification.ios.IOSUnicast');
+        vendor('Notification.ios.IOSCustomizedcast');
         $this->appkey = $key;
         $this->appMasterSecret = $secret;
         $this->timestamp = strval(time());
     }
+   
 
     function sendAndroidBroadcast() {
         try {
-            $brocast = new AndroidBroadcast();
+            $brocast = new \AndroidBroadcast();
             $brocast->setAppMasterSecret($this->appMasterSecret);
             $brocast->setPredefinedKeyValue("appkey",           $this->appkey);
             $brocast->setPredefinedKeyValue("timestamp",        $this->timestamp);
+            $brocast->setPredefinedKeyValue("description",      "Android test3");
             $brocast->setPredefinedKeyValue("ticker",           "Android broadcast ticker");
-            $brocast->setPredefinedKeyValue("title",            "中文的title");
-            $brocast->setPredefinedKeyValue("text",             "Android broadcast text");
+            $brocast->setPredefinedKeyValue("title",            "映客");
+            $brocast->setPredefinedKeyValue("text",             "Android broadcast 测试");
             $brocast->setPredefinedKeyValue("after_open",       "go_app");
             // Set 'production_mode' to 'false' if it's a test device. 
             // For how to register a test device, please see the developer doc.
-            $brocast->setPredefinedKeyValue("production_mode", "true");
+            $brocast->setPredefinedKeyValue("production_mode", "false");
             // [optional]Set extra fields
             $brocast->setExtraField("test", "helloworld");
             print("Sending broadcast notification, please wait...\r\n");
@@ -55,7 +52,7 @@ class UmengController extends MobileController{
 
     function sendAndroidUnicast() {
         try {
-            $unicast = new AndroidUnicast();
+            $unicast = new \AndroidUnicast();
             $unicast->setAppMasterSecret($this->appMasterSecret);
             $unicast->setPredefinedKeyValue("appkey",           $this->appkey);
             $unicast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -80,7 +77,7 @@ class UmengController extends MobileController{
 
     function sendAndroidFilecast() {
         try {
-            $filecast = new AndroidFilecast();
+            $filecast = new \AndroidFilecast();
             $filecast->setAppMasterSecret($this->appMasterSecret);
             $filecast->setPredefinedKeyValue("appkey",           $this->appkey);
             $filecast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -125,7 +122,7 @@ class UmengController extends MobileController{
                                         )
                         );
                       
-            $groupcast = new AndroidGroupcast();
+            $groupcast = new \AndroidGroupcast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
             $groupcast->setPredefinedKeyValue("appkey",           $this->appkey);
             $groupcast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -148,7 +145,7 @@ class UmengController extends MobileController{
 
     function sendAndroidCustomizedcast() {
         try {
-            $customizedcast = new AndroidCustomizedcast();
+            $customizedcast = new \AndroidCustomizedcast();
             $customizedcast->setAppMasterSecret($this->appMasterSecret);
             $customizedcast->setPredefinedKeyValue("appkey",           $this->appkey);
             $customizedcast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -172,18 +169,18 @@ class UmengController extends MobileController{
 
     function sendIOSBroadcast() {
         try {
-            $brocast = new IOSBroadcast();
+            $brocast = new \IOSBroadcast();
             $brocast->setAppMasterSecret($this->appMasterSecret);
             $brocast->setPredefinedKeyValue("appkey",           $this->appkey);
             $brocast->setPredefinedKeyValue("timestamp",        $this->timestamp);
-
+             $brocast->setPredefinedKeyValue("description",      "Android test3");
             $brocast->setPredefinedKeyValue("alert", "IOS 广播测试");
             $brocast->setPredefinedKeyValue("badge", 0);
             $brocast->setPredefinedKeyValue("sound", "chime");
             // Set 'production_mode' to 'true' if your app is under production mode
             $brocast->setPredefinedKeyValue("production_mode", "false");
             // Set customized fields
-            $brocast->setCustomizedField("test", "helloworld");
+            $brocast->setCustomizedField("test", "11");
             print("Sending broadcast notification, please wait...\r\n");
             $brocast->send();
             print("Sent SUCCESS\r\n");
@@ -191,15 +188,17 @@ class UmengController extends MobileController{
             print("Caught exception: " . $e->getMessage());
         }
     }
-
+    /**
+    *向ios单个设备进行推送
+    */
     function sendIOSUnicast() {
         try {
-            $unicast = new IOSUnicast();
+            $unicast = new \IOSUnicast();
             $unicast->setAppMasterSecret($this->appMasterSecret);
             $unicast->setPredefinedKeyValue("appkey",           $this->appkey);
             $unicast->setPredefinedKeyValue("timestamp",        $this->timestamp);
             // Set your device tokens here
-            $unicast->setPredefinedKeyValue("device_tokens",    "xx"); 
+            $unicast->setPredefinedKeyValue("device_tokens",    "XX"); 
             $unicast->setPredefinedKeyValue("alert", "IOS 单播测试");
             $unicast->setPredefinedKeyValue("badge", 0);
             $unicast->setPredefinedKeyValue("sound", "chime");
@@ -217,7 +216,7 @@ class UmengController extends MobileController{
 
     function sendIOSFilecast() {
         try {
-            $filecast = new IOSFilecast();
+            $filecast = new \IOSFilecast();
             $filecast->setAppMasterSecret($this->appMasterSecret);
             $filecast->setPredefinedKeyValue("appkey",           $this->appkey);
             $filecast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -260,7 +259,7 @@ class UmengController extends MobileController{
                                         )
                         );
                       
-            $groupcast = new IOSGroupcast();
+            $groupcast = new \IOSGroupcast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
             $groupcast->setPredefinedKeyValue("appkey",           $this->appkey);
             $groupcast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -281,7 +280,7 @@ class UmengController extends MobileController{
 
     function sendIOSCustomizedcast() {
         try {
-            $customizedcast = new IOSCustomizedcast();
+            $customizedcast = new \IOSCustomizedcast();
             $customizedcast->setAppMasterSecret($this->appMasterSecret);
             $customizedcast->setPredefinedKeyValue("appkey",           $this->appkey);
             $customizedcast->setPredefinedKeyValue("timestamp",        $this->timestamp);
@@ -305,10 +304,22 @@ class UmengController extends MobileController{
         }
     }
 
+    public function ceshi(){
+        $ios_appkey = "55e65c5be0f55a60dc0001f2";
+        $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
+
+        $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
+
+        $ios_push->sendIOSBroadcast();
+        $android_appkey = "563ac69ce0f55abbca000cc1";
+        $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
+        $android_push = new UmengController($android_appkey, $android_mastersecret);
+        $android_push->sendAndroidBroadcast();
+    }
 
     // Set your appkey and master secret here
-    $demo = new UmengController("your appkey", "your app master secret");
-    $demo->sendAndroidUnicast();
+    //$demo = new UmengController("your appkey", "your app master secret");
+    //$demo->sendAndroidUnicast();
     /* these methods are all available, just fill in some fields and do the test
      * $demo->sendAndroidBroadcast();
      * $demo->sendAndroidFilecast();
@@ -321,6 +332,11 @@ class UmengController extends MobileController{
      * $demo->sendIOSGroupcast();
      * $demo->sendIOSCustomizedcast();
      */
-
+    /**
+    * 邀请好友进行通知
+    */
+    public function request_push(){
+        
+    }
 
 }

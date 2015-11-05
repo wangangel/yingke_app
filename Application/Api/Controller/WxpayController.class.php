@@ -51,7 +51,7 @@ class WxpayController extends MobileController{
        
         
         output_data($unifiedOrderResult,0);*/
-        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
@@ -68,7 +68,7 @@ class WxpayController extends MobileController{
         
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
             output_error('參數不全');
-        }*/
+        }
         $shop_desc = $_REQUEST['shop_desc'];
         //隨機生成訂單號
         $shop_num = date('YmdHis').rand(0,9999);
@@ -119,8 +119,7 @@ class WxpayController extends MobileController{
         //$editAddress = $tools->GetEditAddressParameters();
     }
 
-
-/**
+   /**
      * 获取毫秒级别的时间戳
      */
     public  function getMillisecond()
