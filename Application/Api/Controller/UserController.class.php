@@ -3511,7 +3511,47 @@ class UserController extends MobileController{
         //获取聊天记录
     }
       
-
+/**
+         * 判断用户第三方是否绑定
+         */
+    public function bind_show(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        $opt['id'] = $_REQUEST['userid'];
+        //根据userid和liveroom_id来判断用户是否正常评分退出
+        $user_info = M('user')->where($opt)->find();
+        if(empty($user_info)){
+            output_error('该用户不存在!');
+        }else{
+            if(empty($user_info['weixintoken'])){
+                $data['weixin']='no';
+            }else{
+                $data['weixin']='yes';
+            }
+            if(empty($user_info['email'])){
+                $data['email']='no';
+            }else{
+                $data['email']='yes';
+            }
+            if(empty($user_info['weibo'])){
+                $data['weibo']='no';
+            }else{
+                $data['weibo']='yes';
+            }
+            output_data($data); 
+        }
+    }
 
 
 }
