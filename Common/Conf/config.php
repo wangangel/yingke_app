@@ -55,7 +55,7 @@ return array(
     'key'=>'txa6xj0p2wepunravfzryo230pan2npu',//这里是你在成功申请支付宝接口后获取到的Key
     'sign_type'=>strtoupper('MD5'),
     'input_charset'=> strtolower('utf-8'),
-    'cacert'=> 'http://api.bihuo123.com/cacert.pem',
+    'cacert'=> getcwd().'\\cacert.pem',
     'transport'=> 'http',
       ),
      //以上配置项，是从接口包中alipay.config.php 文件中复制过来，进行配置；

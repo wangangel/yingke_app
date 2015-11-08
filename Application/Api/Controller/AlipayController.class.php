@@ -13,56 +13,7 @@ class AlipayController extends MobileController{
     }
 
 
-//doalipay方法
-        /*该方法其实就是将接口文件包下alipayapi.php的内容复制过来
-          然后进行相关处理
-        */
-    public function alipay(){
-       //这里我们通过TP的C函数把配置项参数读出，赋给$alipay_config；
-       $alipay_config=C('alipay_config');  
-        /**************************请求参数**************************/
-        $payment_type = "1"; //支付类型 //必填，不能修改
-        $notify_url = C('alipay.notify_url'); //服务器异步通知页面路径
-        $return_url = C('alipay.return_url'); //页面跳转同步通知页面路径
-        $seller_email = C('alipay.seller_email');//卖家支付宝帐户必填
-        $out_trade_no = "A".time();//商户订单号 通过支付页面的表单进行传递，注意要唯一！
-        $subject = "ceshi";  //订单名称 //必填 通过支付页面的表单进行传递
-        $total_fee = "0.01";   //付款金额  //必填 通过支付页面的表单进行传递
-        $body = "订单描述";  //订单描述 通过支付页面的表单进行传递
-     
-        /************************************************************/
-    
-        //构造要请求的参数数组，无需改动
-    $parameter = array(
-        "service" => "create_direct_pay_by_user",
-        "partner" => trim($alipay_config['partner']),
-        "payment_type"    => $payment_type,
-        "notify_url"    => $notify_url,
-        "return_url"    => $return_url,
-        "seller_email"    => $seller_email,
-        "out_trade_no"    => $out_trade_no,
-        "subject"    => $subject,
-        "total_fee"    => $total_fee,
-        "body"            => $body,
-        "show_url"    => $show_url,
-        "anti_phishing_key"    => $anti_phishing_key,
-        "exter_invoke_ip"    => $exter_invoke_ip,
-        "_input_charset"    => trim(strtolower($alipay_config['input_charset']))
-        );
-        //建立请求
-        $alipaySubmit = new \AlipaySubmit($alipay_config);
-        dump($alipaySubmit);
-        /*$html_text = $alipaySubmit->buildRequestForm($parameter,"post", "确认");
-        echo $html_text;*/
-    }
-    
-        /******************************
-        服务器异步通知页面方法
-        其实这里就是将notify_url.php文件中的代码复制过来进行处理
-        
-        *******************************/
-
-    function notifyurl(){
+    function notify_url(){
                 /*
                 同理去掉以下两句代码；
                 */ 
@@ -72,8 +23,9 @@ class AlipayController extends MobileController{
                 //这里还是通过C函数来读取配置项，赋值给$alipay_config
         $alipay_config=C('alipay_config');
         //计算得出通知验证结果
-        $alipayNotify = new AlipayNotify($alipay_config);
+        $alipayNotify = new \AlipayNotify($alipay_config);
         $verify_result = $alipayNotify->verifyNotify();
+        //dump($verify_result);
         if($verify_result) {
                //验证成功
                    //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
@@ -101,11 +53,11 @@ class AlipayController extends MobileController{
                }
             }
             output_data("支付成功！");
-                echo "success";        //请不要修改或删除
+                //echo "success";        //请不要修改或删除
          }else {
          	output_error("支付失败");
                 //验证失败
-                echo "fail";
+                //echo "fail";
         }    
     }
     

@@ -1333,28 +1333,13 @@ http://api.bihuo123.com
         
 五十七 新增支付宝支付接口
 http://api.bihuo123.com
-/index.php/api/sso/alipay?ordsubject=鲜花&ordtotal_fee=2.05&ordbody=商品描述
-接口参数:
-        ordsubject---------商品名称
-        ordtotal_fee:--------商品金额
-        ordbody----------------商品描述
+/index.php/api/alipay/notify_url
     返回值:
         支付状态
 
         "errresult":true|false 执行成功返回true，执行失败返回false
         //微信支付返回參數
-       "return_code":"SUCCESS",
-       "return_msg":"OK",
-       "appid":"wxb8e3693e0481e640",
-       "mch_id":"1264809601",
-       "nonce_str":"Sv2wMRYAxIKGi3y9",
-       "sign":"E3E65B498B1A84723458D36E42AA7D15",
-       "result_code":"SUCCESS",
-       "prepay_id":"wx2015110111221494127989110749245275",
-       "trade_type":"APP",
-       "timestamp":1446348092,
-       "package":"Sign=WXPay"
-       callback---------回调地址
+        返回支付成功、支付失败
 }
 
 五十八、推送接口（邀请好友给对方推送）
