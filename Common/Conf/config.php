@@ -55,7 +55,7 @@ return array(
     'key'=>'txa6xj0p2wepunravfzryo230pan2npu',//这里是你在成功申请支付宝接口后获取到的Key
     'sign_type'=>strtoupper('MD5'),
     'input_charset'=> strtolower('utf-8'),
-    'cacert'=> getcwd().'\\cacert.pem',
+    'cacert'=> 'http://api.bihuo123.com/cacert.pem',
     'transport'=> 'http',
       ),
      //以上配置项，是从接口包中alipay.config.php 文件中复制过来，进行配置；
@@ -65,10 +65,10 @@ return array(
 'seller_email'=>'dev@skyeyeslive.com',
 
 //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
-'notify_url'=>'http://127.0.0.1/Api/SSO/notifyurl', 
+'notify_url'=>'http://api.bihuo123.com/index.php/Api/alipay/notifyurl', 
 
 //这里是页面跳转通知url，提交到项目的Pay控制器的returnurl方法；
-'return_url'=>'http://127.0.0.1/Api/SSO/returnurl',
+'return_url'=>'http://api.bihuo123.com/index.php/Api/alipay/returnurl',
 
 //支付成功跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参payed（已支付列表）
 'successpage'=>'User/myorder?ordtype=payed',   
