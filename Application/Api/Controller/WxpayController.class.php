@@ -9,49 +9,14 @@ class WxpayController extends MobileController{
      */
     public function _initialize(){
         //引入WxPayPubHelper
-        vendor('WxPayPubHelper.WxPayApi');
-        vendor('WxPayPubHelper.WxPayConfig');
-        vendor('WxPayPubHelper.WxPayJsApiPay');
+        vendor('WxPayPubHelper.WxPayHelper');
+       // vendor('WxPayPubHelper.WxPayConfig');
+        //vendor('WxPayPubHelper.WxPayJsApiPay');
         //vendor('WxPayPubHelper.WxPayData');
     }
 
      public function start_pay(){
-          //增加回调地址
-        /*
-        //使用统一支付接口*/
-        
-    //=========步骤2：使用统一支付接口，获取prepay_id============
-         //使用统一支付接口
-       /* $unifiedOrder = new \WxPayApi();
-        $unifiedOrder->setParameter("body", $shop_desc);//商品描述
-        $unifiedOrder->setParameter("out_trade_no",$shop_num);//商户订单号 
-        $unifiedOrder->setParameter("total_fee",$shop_cash);//总金额
-        //$unifiedOrder->setParameter("timestamp",time());//总金额
-        $unifiedOrder->setParameter("notify_url", C('WxPayConf_pub.NOTIFY_URL'));//通知地址 
-        $unifiedOrder->setParameter("trade_type","APP");//交易类型
-        //获取统一支付接口结果
-        $unifiedOrderResult = $unifiedOrder->getResult();
-       // dump($unifiedOrderResult);
-       // die;
-        $unifiedOrderResult['timestamp'] = time();
-        //$unifiedOrderResult['package'] = 'Sign=WXPay';
-       // $unifiedOrderResult['num'] = $shop_num;
-        
-        //商户根据实际情况设置相应的处理流程
-        if ($unifiedOrderResult["return_code"] == "FAIL") 
-        {
-            //商户自行增加处理流程
-            output_error("通信出错：".$unifiedOrderResult['return_msg']."<br>");
-        }
-        elseif($unifiedOrderResult["result_code"] == "FAIL")
-        {
-            output_error("错误代码：".$unifiedOrderResult['err_code']."<br>");
-            output_error("错误代码描述：".$unifiedOrderResult['err_code_des']."<br>");
-        }
-       
-        
-        output_data($unifiedOrderResult,0);*/
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
@@ -62,37 +27,23 @@ class WxpayController extends MobileController{
         $arr['token'] = $_REQUEST['key'];
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
-             output_error('秘钥key不正确ss');
+             output_error('秘钥key不正确');
         }  
         //=========步骤2：使用统一支付接口，获取prepay_id============
         
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
-            output_error('參數不全');
+            output_error('参数不全');
         }
         $shop_desc = $_REQUEST['shop_desc'];
         //隨機生成訂單號
         $shop_num = date('YmdHis').rand(0,9999);
         //微信支付是以分為單位,這裡需要乘以100
         $shop_cash = $_REQUEST['shop_cash']*100;
-        $_REQUEST['num'] =$shop_num;
 
-        /*//①、获取用户openid
-        $tools = new \JsApiPay();
-        $openId = $tools->GetOpenid();*/
-        $input = new \WxPayUnifiedOrder();
-        //$input = new \WxPayApi();
-        $input->SetBody($shop_desc);
-        $input->SetAttach($shop_desc);
-        $input->SetOut_trade_no($shop_num);
-        $input->SetTotal_fee($shop_cash);
-        $input->SetTime_start(date("YmdHis"));
-        $input->SetTime_expire(date("YmdHis", time() + 600));
-        $input->SetGoods_tag($shop_desc);
-        $input->SetNotify_url("http://api.bihuo123.com/index.php/Api/Wxpay/notify");
-        $input->SetTrade_type("APP");
-        //$input->SetOpenid($openId);
-        $order = new \WxPayApi();
-        $aa = $order::unifiedOrder($input);
+        $WxPayHelper = new \WxPayHelper();
+        $response = $WxPayHelper->getPrePayOrder($shop_desc, $shop_num, $shop_cash);
+        //dump($response);
+        $x = $WxPayHelper->getOrder($response['prepay_id']);
         //訂單記錄保存到表中
         $pay_model = M('pay');
         $pay_data['shop_name'] = $shop_desc;
@@ -108,29 +59,9 @@ class WxpayController extends MobileController{
             $pay_data['is_room'] = 1;
         }
         $pay_info = $pay_model ->add($pay_data);
-        //回调地址
-        $aa['timestamp'] = time();
-        $aa['callback'] =C('WEB_URL')."/index.php/api/user/into_publicroom?userid=".$_REQUEST['userid']."&liveroom_id=".$_REQUEST['liveroom_id']."&user_name=".$_REQUEST['user_name']."&head_url=".$_REQUEST['head_url'];
-        
-        output_data($aa);
-        //$jsApiParameters = $tools->GetJsApiParameters($order);
-
-        //获取共享收货地址js函数参数
-        //$editAddress = $tools->GetEditAddressParameters();
+        output_data($x);
     }
 
-   /**
-     * 获取毫秒级别的时间戳
-     */
-    public  function getMillisecond()
-    {
-        //获取毫秒的时间戳
-        $time = explode ( " ", microtime () );
-        $time = $time[1] . ($time[0] * 1000);
-        $time2 = explode( ".", $time );
-        $time = $time2[0];
-        return $time;
-    }
 
    public function notify(){
         //使用通用通知接口
@@ -157,7 +88,7 @@ class WxpayController extends MobileController{
         //以log文件形式记录回调信息
         //         $log_ = new Log_();
         $log_name= __ROOT__."/Public/log/notify_url.log";//log文件路径
-         $zt['orderstatus']='';
+       //  $zt['orderstatus']='';
         $this->log_result($log_name,"【接收到的notify通知】:\n".$xml."\n");
         if($notify->checkSign() == TRUE)
         {
