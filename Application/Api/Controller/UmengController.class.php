@@ -176,7 +176,7 @@ class UmengController extends MobileController{
             $brocast->setAppMasterSecret($this->appMasterSecret);
             $brocast->setPredefinedKeyValue("appkey",           $this->appkey);
             $brocast->setPredefinedKeyValue("timestamp",        $this->timestamp);
-            $brocast->setPredefinedKeyValue("description",      "Android test3");
+            $brocast->setPredefinedKeyValue("description",      "IOS 广播测试");
             $brocast->setPredefinedKeyValue("alert", "IOS 广播测试");
             $brocast->setPredefinedKeyValue("badge", 0);
             $brocast->setPredefinedKeyValue("sound", "chime");

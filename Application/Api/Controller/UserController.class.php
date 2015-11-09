@@ -579,11 +579,11 @@ class UserController extends MobileController{
      * 获取个人信息
      */
     public function user_info(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /* if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
              output_error('请先登录');
         }
         //验证秘钥是否正确
-        $token_model = M('usertoken');
+       $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
         $arr['client_id'] = $_REQUEST['client_id'];
@@ -591,8 +591,10 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
+        }*/
+        if($_REQUEST['userid'] == NULL){
+             output_error('参数用户id不能为null');
         }
-
         $array = array();
         $array['id'] = $_REQUEST['userid'];
         $model_user = M('user');
@@ -1207,14 +1209,14 @@ class UserController extends MobileController{
     }
 
     /*
-     *获取我的店铺礼物
+     *获取我的店铺礼物--房主店铺也用
      */
     public function myshop_gift(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
-        $token_model = M('usertoken');
+       /* $token_model = M('usertoken');
         $arr = array();
         $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
@@ -1222,7 +1224,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         $gift_model = M('gift');
         //1.获取用户自定义的礼物
         $gift_info = $gift_model->where(array('userid'=>$_REQUEST['userid']))->where(array('gift_sign'=>"user"))->where(array('status'=>"start"))->select();

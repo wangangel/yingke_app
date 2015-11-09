@@ -1,4 +1,4 @@
-﻿用户模块
+用户模块
 
 
 
@@ -158,9 +158,9 @@ datas :
     请求地址：http://api.bihuo123.com
 /index.php/api/user/user_info?userid=6&key=ecc1715bea14533c55d61771ae02212a&client_id=qwert
     接口参数:
-        userid:
-        key:
-        client_id
+        userid:（必传参数）
+        key:（不需要传）
+        client_id（不需要传）
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
@@ -1412,5 +1412,8 @@ http://api.bihuo123.com
 
 2015/11/3
 1.新增五十八接口，在邀请好友后给予推送
+
+2015/11/9
+1、变更七号接口，获取个人信息（只需传userid参数）
 
 
