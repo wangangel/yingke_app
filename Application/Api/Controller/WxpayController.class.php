@@ -16,7 +16,7 @@ class WxpayController extends MobileController{
     }
 
      public function start_pay(){
-         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
@@ -28,7 +28,7 @@ class WxpayController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }  
+        }  */
         //=========步骤2：使用统一支付接口，获取prepay_id============
         
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
@@ -104,10 +104,11 @@ class WxpayController extends MobileController{
             }
             else{
                 //此处应该更新一下订单状态，商户自行增删操作
+                output_data("支付成功!");
                 log_result($log_name,"【支付成功】:\n".$xml."\n");
             }
             //增加处理流程
-            output_data("支付成功!");
+            
         }
     }
 
