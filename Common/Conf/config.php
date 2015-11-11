@@ -66,14 +66,4 @@ return array(
 
 //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
 'notify_url'=>'http://api.bihuo123.com/index.php/Api/alipay/notifyurl', 
-
-//这里是页面跳转通知url，提交到项目的Pay控制器的returnurl方法；
-'return_url'=>'http://api.bihuo123.com/index.php/Api/alipay/returnurl',
-
-//支付成功跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参payed（已支付列表）
-'successpage'=>'User/myorder?ordtype=payed',   
-
-//支付失败跳转到的页面，我这里跳转到项目的User控制器，myorder方法，并传参unpay（未支付列表）
-'errorpage'=>'User/myorder?ordtype=unpay', 
-),
 );
