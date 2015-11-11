@@ -66,4 +66,5 @@ return array(
 
 //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
 'notify_url'=>'http://api.bihuo123.com/index.php/Api/alipay/notifyurl', 
+),
 );
