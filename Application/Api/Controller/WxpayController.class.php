@@ -104,7 +104,7 @@ class WxpayController extends MobileController{
             }
             else{
                 //此处应该更新一下订单状态，商户自行增删操作
-                output_data("支付成功!");
+               
                 log_result($log_name,"【支付成功】:\n".$xml."\n");
             }
             //增加处理流程
