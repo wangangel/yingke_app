@@ -10,27 +10,9 @@ class WxpayController extends MobileController{
     public function _initialize(){
         //引入WxPayPubHelper
         vendor('WxPayPubHelper.WxPayHelper');
-       // vendor('WxPayPubHelper.WxPayConfig');
-        //vendor('WxPayPubHelper.WxPayJsApiPay');
-        //vendor('WxPayPubHelper.WxPayData');
     }
 
      public function start_pay(){
-        /*if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
-            output_error('请先登录');
-        }
-         //验证key是否正确
-        $token_model = M('usertoken');
-        $arr = array();
-        $arr['client_id'] = $_REQUEST['client_id'];
-        $arr['userid'] = $_REQUEST['userid'];
-        $arr['token'] = $_REQUEST['key'];
-        $jieguo = $token_model->where($arr)->select();
-        if($jieguo[0] == NULL){
-             output_error('秘钥key不正确');
-        }  */
-        //=========步骤2：使用统一支付接口，获取prepay_id============
-        
         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
             output_error('参数不全');
         }
@@ -52,13 +34,16 @@ class WxpayController extends MobileController{
         $pay_data['pay_type'] = '微信支付';
         $pay_data['pay_date'] = time();
         $pay_data['pay_userid'] = $_REQUEST['userid'];
+        $pay_data['pay_status'] = 0;
         if(empty($_REQUEST['liveroom_id'])){
             $pay_data['is_room'] = 0;
         }else{
-            $pay_data['pay_userid'] = $_REQUEST['liveroom_id'];
+            $pay_data['liveroom_id'] = $_REQUEST['liveroom_id'];
             $pay_data['is_room'] = 1;
         }
+        //添加支付记录
         $pay_info = $pay_model ->add($pay_data);
+
         output_data($x);
     }
 
@@ -104,8 +89,26 @@ class WxpayController extends MobileController{
             }
             else{
                 //此处应该更新一下订单状态，商户自行增删操作
-               
+                //根据订单号来查询订单详情
+                $pay_data['shop_num'] = $_POST["out_trade_no"];
+                //变更订单状态
+                $pay_status['pay_status']=1;
+                $pay_info = M('pay')->where($pay_data)->find();
+                $pay_info = M('pay')->where($pay_data)->save($pay_status);
+                //out_trade_no 来获取房主的id
+                $live_data['id'] = $pay_info['liveroom_id'];
+                $live_info = M('live')->where($live_data)->find();
+                //根据房主id来查询现在的余额，并加入此次支付金额
+                $user_data['id'] = $live_info['room_user'];
+                $user_info = M('user') ->where($user_data)->find();
+                //累加此次金额
+                $cash= $user_info['income']+$pay_info['shop_cash'];
+                //保留两位小数
+                $income['income'] = sprintf("%.2f", $cash);
+                //再次更新用户表
+                $user_info = M('user')->where($user_data)->save($income);
                 log_result($log_name,"【支付成功】:\n".$xml."\n");
+
             }
             //增加处理流程
             

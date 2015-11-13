@@ -77,11 +77,11 @@
               <td>{$vo.praise}</td>
              <!--  <td>{$vo.profession}</td> -->
               <td>{$vo.add_date|date='Y-m-d',###}</td>
-              <td><if condition="$vo.status eq 'in'">进行中<elseif condition="$vo.status eq 'stop'"/>已停止<else/>已完成</if></td>
+              <td><if condition="$vo.status eq 'in'">进行中<elseif condition="$vo.status eq 'stop'"/>已停止<else />已完成</if></td>
               <td style="text-overflow:ellipsis;word-break:keep-all; white-space:nowrap;">
                  
-                    <a href="{:U('admin/user/user_detail',array('id'=>$vo['id']))}">查看</a>&nbsp;&nbsp;|&nbsp;
-             <a href="#" onclick="set({$vo['id']},'0')"> 停用</a>
+                    <a href="{:U('admin/live/live_detail',array('id'=>$vo['id']))}">查看</a>&nbsp;&nbsp;|&nbsp;
+             <a href="javascript:;" onclick="set('{$vo.id}','{$vo.status}')"> 停用</a>
               </td>
             </tr>
             </foreach>
@@ -105,7 +105,7 @@
       $.ajax({
                 cache:false,
                 type:"POST", 
-                url:"{:U('admin/user/user_set')}",
+                url:"{:U('admin/live/live_set')}",
                 dataType:"json",
                 data:{id:id_index,status:tag},
                 timeout:30000,

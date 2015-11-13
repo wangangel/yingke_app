@@ -1328,19 +1328,14 @@ http://api.bihuo123.com
 
 五十六 微信發起支付接口
 http://api.bihuo123.com
-/index.php/api/wxpay/start_pay?userid=162&key=17c048cc11f1598fae1d55d44bd2f164&client_id=A1DEF939-146F-4E7B-BEE0-1B508151504D&shop_desc=dadada&shop_cash=0.01&liveroom_id=859&user_name=137200374&head_url=http://pic15.nipic.com/20110624/7348760_084532494318_2.jpg
+/index.php/api/wxpay/start_pay?userid=101&shop_desc=dadada&shop_cash=0.01&liveroom_id=859
  接口参数:
-        userid----------用户id
-        key:--------------key
-        client_id:---------------设备id
         shop_desc ------------商品名稱或者商品描述
         shop_cash----------商品支付金額
         liveroom_id---------------直播间id
-        user_name--------------用户名
-        head_url----------- 用户头像
-    返回值:
 
-    userid:用户id  
+    返回值:
+        userid:用户id  
         username：用户名
         phone:手机号码
         password:加密好的密码
