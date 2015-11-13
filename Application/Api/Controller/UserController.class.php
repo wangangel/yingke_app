@@ -12,8 +12,6 @@ class UserController extends MobileController{
     public function __construct(){
         parent::__construct();
     }
-
-
     function object_array($array){
        if(is_object($array)){
         $array = (array)$array;
@@ -2907,7 +2905,7 @@ class UserController extends MobileController{
 
 
    /*
-    * 用户进入公开直播间
+    * 用户进入直播间（包括收费直播间）
     */
    public function into_publicroom(){
         if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
@@ -2934,6 +2932,7 @@ class UserController extends MobileController{
         $info = $userroom_model->where($con)->find();
         $arr["id"] = $_REQUEST['liveroom_id'];
         $live = M("live")->where($arr)->find();
+        //var_dump($info["id"]);
         if(empty($info)){
             if($live["room_user"] != $_REQUEST['userid']){//区分房主与观众
                 //则用户可以进入直播间
@@ -2956,14 +2955,16 @@ class UserController extends MobileController{
             $da['id'] = $_REQUEST['liveroom_id'];
              $info_sf = M('live')->where($da)->find();
             if($info_sf['isopen'] == '收费'){
-                $pay['userid'] = $_REQUEST['userid'];
-                $pay['room_id'] = $_REQUEST['liveroom_id'];
-                $pay_info = M('live_pay')->where($pay)->find();
-                if($pay_info != NULL){
-                    if($pay_info['pay_status'] == 'yes'){
+                $pay['pay_userid'] = $_REQUEST['userid'];
+                $pay['liveroom_id'] = $_REQUEST['liveroom_id'];
+                $pay_info = M('pay')->where($pay)->select();
+                if(count($pay_info) == 0){
+                    //if($pay_info['pay_status'] == 'yes'){
+                        $data['pay_status'] = 'no';
                         $data['isin'] ='pay';
-                        $da['isin'] ='pay';
-                    }
+                        //$da['isin'] ='pay';
+                        $data['room_price'] =$info_sf["fees"];
+                    //}
                 }
             }
             $data["live_url"] = $live["live_url"];
@@ -2988,6 +2989,7 @@ class UserController extends MobileController{
             
         }else{
             //返回进入打分的数据
+            $da["pay_status"] = "yes";
             $da["isin"] = "true";
             //根据房主id获取用户的信息
             $con['id'] = $live['room_user'];

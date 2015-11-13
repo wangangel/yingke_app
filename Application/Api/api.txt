@@ -1011,9 +1011,9 @@ datas :
 
 
 
-四十.用户进入公开直播房间
+四十.用户进入直播间（包括付费直播间）
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_publicroom?userid=6&key=0728a9171d15a7a0985975b87c6bca6f&client_id=qwert&liveroom_id=1&user_name=久居&head_pic=http://localhost/yingke/Upload/2015-08-27/55deb6edcb2e2.jpg
+/index.php/api/user/into_publicroom?userid=233&key=c9ac0218518f5314f843ff78910e8fbd&client_id=359092050091226&liveroom_id=678&user_name=18014111110&head_pic=http://api.bihuo123.com/Upload/2015-11-02/56370e968a76b.jpg
 接口参数:
         userid:
         key:
@@ -1025,33 +1025,50 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         执行成功并返回直播live_url,以及live_id
-       如 {
-    "errresult": true,
-    "datas": {
-        "isin":"false",此人不在该房间 isin:pay   跳转到支付页面
-        "live_url": "http://xvs-5.zhiboyun.com:80/live/id/aws-cn_north_1-5-4bf233e135a1648b.flv",
-        "live_id": "426",
-        "groupid": "1443512320306",
-        "praise": 0,
-        "score": 3,
-        groupid:返回环信群组
+       如:
+    2015-11-10返回实例
+    1、进入公共直播间返回数据（已经付费过的直播间）
+       {
+        "errresult": true,
+        "datas": {
+        "isin": "false",//isin为false的时候，代表用户不在此直播间，可以进入
+        "live_url": "http:\/\/54.223.239.231:80\/live\/id\/aws-cn_north_1-5-4972dea67ab9744a.flv",
+        "live_id": "687",
+        "groupid": "1444615600557",
+        "praise": "0",
+        "score": 0
+        }
     }
-该返回值,是用户非正常/未评分退出!
+    2、进入未支付过费用的直播间
     {
     "errresult": true,
     "datas": {
-        "pay_status":yes/no   判断收费房间支付状态,用户是否支付过
-        "isin": "true",//代表需要跳入评分页
-        "userid": "101",//房主id
-        "head_pic": "http://api.bihuo123.com/Upload/2015-10-21/5627ab65cea20.png",//房主头像
-        "ni_name": "13720037114",//房主昵称
-        "user_num": 1,//围观人数
-        "liveroom_id": "811",//房间id
-        "room_name": "大家九点半",//房间名称
-        "add_city": "北京市",//直播地址
-        "note": "该返回值,是用户非正常/未评分退出!"//备注
+        "isin": "pay",//isin为pay状态需要支付
+        "pay_status": "no",//pay_status 的状态为no代表未支付，需要支付
+        "room_price": "0",//进直播间的费用
+        "live_url": "http:\/\/54.223.239.231:80\/live\/id\/aws-cn_north_1-5-935c18104a9e8d56.flv",
+        "live_id": "678",
+        "groupid": "1444568707711",
+        "praise": "0",
+        "score": 0
     }
+}
+    3、此用户在过去的时候非正常/未评分退出该直播间
+    {
+    "errresult": true,
+    "datas": {
+        "pay_status": "yes",//这里yes代表不管是否收费直播间，都已经收费过，否则在过去也进不去该直播间
+        "isin": "true",//代表该用户还在此直播间，则需要去评分页面
+        "userid": null,
+        "head_pic": null,
+        "ni_name": null,
+        "user_num": 1,
+        "liveroom_id": "687",
+        "room_name": "\u7684",
+        "add_city": "\u5317\u4eac\u5e02",
+        "note": "\u8be5\u8fd4\u56de\u503c,\u662f\u7528\u6237\u975e\u6b63\u5e38\/\u672a\u8bc4\u5206\u9000\u51fa!"
     }
+}
 
 
 
@@ -1344,16 +1361,17 @@ http://api.bihuo123.com
 
 五十八、推送接口（邀请好友给对方推送）
 http://api.bihuo123.com
-/index.php/api/umeng/request_push?visterid=162&key=7530122d99ccbd4efc2d995652e78d8f&client_id=32E522CE-2330-4868-9A86-76CDD2BC635F&device=IOS&liveroom_id=859&friend_id=168
+/index.php/api/umeng/request_push?visterid=168&key=c046643120092cddaafc66b0a579448e&client_id=359092050091226&device=IOS&liveroom_id=859&friend_id=162
  接口参数:
         visterid----------邀请者id
         key:--------------key
         client_id:---------------设备id
-        friend_id ---------好友id（受邀者id，同时也是alias的值，alias_type统一为1.1）
+        friend_id ---------好友id,多个好友id，有英文逗号隔开（受邀者id，同时也是alias的值，alias_type统一为SkyEyesLive_1.1）
         device----------设备名称（IOS,ANDROID）必须大写
         liveroom_id---------------直播间id
 返回值：
         {"errresult":true,"datas":{"result":"success"}}
+        {"ret":"SUCCESS","data":{"msg_id":"uu17744144733741503001"}}
 
 备注：这里统一app对alias调用sdk中setAlias(alias, alias_type)，别名（alias为受邀者id，alias_type统一为1.1，前端有疑义就问）
 
@@ -1416,4 +1434,7 @@ http://api.bihuo123.com
 2015/11/9
 1、变更七号接口，获取个人信息（只需传userid参数）
 
+2015/11/10
+1、变更四十号接口，补充返回案例
+2、更新五十八推送接口参数说明
 

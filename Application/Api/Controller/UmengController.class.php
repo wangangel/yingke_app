@@ -302,7 +302,7 @@ class UmengController extends MobileController{
             $customizedcast->setPredefinedKeyValue("badge", 0);
             $customizedcast->setPredefinedKeyValue("sound", "chime");
             // Set 'production_mode' to 'true' if your app is under production mode
-            $customizedcast->setPredefinedKeyValue("production_mode", "true");
+            $customizedcast->setPredefinedKeyValue("production_mode", "false");
             //print("Sending customizedcast notification, please wait...\r\n");
             $customizedcast->send();
             //print("Sent SUCCESS\r\n");
@@ -314,14 +314,16 @@ class UmengController extends MobileController{
     public function ceshi(){
         $ios_appkey = "55e65c5be0f55a60dc0001f2";
         $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
-
+        $message = "尊敬的会员，您的好友dada邀请您前往名为琅琊榜房间观看直播";
+        $alias = 162;
+        $alias_type = "SkyEyesLive_1.1";
         $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
+        $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);
 
-        $ios_push->sendIOSBroadcast();
-       /* $android_appkey = "563ac69ce0f55abbca000cc1";
+        /*$android_appkey = "563ac69ce0f55abbca000cc1";
         $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
         $android_push = new UmengController($android_appkey, $android_mastersecret);
-        $android_push->sendAndroidBroadcast();*/
+        $android_push->sendAndroidCustomizedcast();*/
     }
 
     // Set your appkey and master secret here
@@ -342,7 +344,7 @@ class UmengController extends MobileController{
     /**
     * 邀请好友进行通知
     */
-    public function request_push(){
+     public function request_push(){
         if($_REQUEST['visterid'] == NULL || $_REQUEST['key'] == NULL){
             output_error('请先登录');
         }
@@ -375,35 +377,65 @@ class UmengController extends MobileController{
         $room["id"] = $_REQUEST["liveroom_id"];
         $live = M("live")->where($room)->find();
         $room_name = $live["room_name"];
-        $alias = $_REQUEST["friend_id"];
-        $alias_type = "1.1";
+        $alias_string = $_REQUEST["friend_id"];
+        $alias_type = "SkyEyesLive_1.1";
         $device = $_REQUEST["device"];
-        if($device == "IOS"){
+        /*if($device == "IOS"){
             $appkey = "55e65c5be0f55a60dc0001f2";
             $mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
         }else{
             $appkey = "563ac69ce0f55abbca000cc1";
             $mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
-        }
+        }*/
         //$description = "通知";
-        $_push = new UmengController($appkey, $mastersecret);
+        $ios_appkey = "55e65c5be0f55a60dc0001f2";
+        $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
+        $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
+        $android_appkey = "563ac69ce0f55abbca000cc1";
+        $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
+        $android_push = new UmengController($android_appkey, $android_mastersecret);
         $message = "尊敬的会员，您的好友".$vister_name."邀请您前往名为".$room_name."房间观看直播";
-        if($device == "IOS"){
-            $_push->sendIOSCustomizedcast($alias,$alias_type,$message);
+        $alias_arrary = split(',', $alias_string);
+        $alias_length = count($alias_arrary);
+        if($alias_length>1){
+            for ($i=0; $i < count($alias_arrary)-1; $i++) { 
+                $alias = $alias_arrary[$i];
+                /*if($device == "IOS"){
+                    $_push->sendIOSCustomizedcast($alias,$alias_type,$message);
+                }else{
+                    $_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+
+                }*/
+                $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
+                $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                //保存到信息表中
+                $mess_data["m_content"] = $message;
+                $mess_data["m_target"] = $alias;
+                $mess_data["m_date"] = time();
+                $mess_data["m_user"] = $vister_name;
+                $mess_data["m_isdelete"] = "no";
+                $mess_data["status"] = "user";
+                M("message")->add($mess_data);
+            } 
         }else{
-            $_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                $alias = $alias_arrary[0];
+                
+                $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
+                $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                   
+                //保存到信息表中
+                $mess_data["m_content"] = $message;
+                $mess_data["m_target"] = $alias;
+                $mess_data["m_date"] = time();
+                $mess_data["m_user"] = $vister_name;
+                $mess_data["m_isdelete"] = "no";
+                $mess_data["status"] = "user";
+                M("message")->add($mess_data);
+
         }
-        //保存到信息表中
-        $mess_data["m_content"] = $message;
-        $mess_data["m_target"] = $_REQUEST["friend_id"];
-        $mess_data["m_date"] = time();
-        $mess_data["m_user"] = $vister_name;
-        $mess_data["m_isdelete"] = "no";
-        $mess_data["status"] = "user";
-        M("message")->add($mess_data);
+        
         $result["status"] = "success";
         output_data($result);
 
     }
-
 }

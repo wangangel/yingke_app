@@ -44,7 +44,8 @@ class AndroidCustomizedcast extends AndroidNotification {
         $curlErrNo = curl_errno($ch);
         $curlErr = curl_error($ch); 
         curl_close($ch);
-        print($result."\r\n");
+        //将异常处理
+        /*print($result."\r\n");
         if ($httpCode == "0") //time out 
         	throw new Exception("Curl error number:" . $curlErrNo . " , Curl error details:" . $curlErr . "\r\n");
         else if ($httpCode != "200") //we did send the notifition out and got a non-200 response
@@ -53,7 +54,7 @@ class AndroidCustomizedcast extends AndroidNotification {
         if ($returnData["ret"] == "FAIL")
         	throw new Exception("Failed to upload file, details:" . $result . "\r\n");
         else
-        	$this->data["file_id"] = $returnData["data"]["file_id"];
+        	$this->data["file_id"] = $returnData["data"]["file_id"];*/
 	}
 
 	function getFileId() {
