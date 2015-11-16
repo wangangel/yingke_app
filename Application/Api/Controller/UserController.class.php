@@ -3581,10 +3581,10 @@ class UserController extends MobileController{
                 $weixin_data['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $weixin_data['shop_name'] = $_REQUEST['shop_name'];
                 $weixin_data['shop_type'] = $_REQUEST['shop_type'];
-                dump($weixin_data);
+                //dump($weixin_data);
                 $pay_info = M('pay') ->where($weixin_data)->find();
                 //判断该用户有没有购买该商品
-                dump($pay_info);
+                //dump($pay_info);
                 if(count($pay_info)>0){
                     $pay_status = $pay_info['pay_status'];
                     if($pay_status == 1){
