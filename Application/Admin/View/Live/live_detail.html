@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<include file="Index:css"/>
+</head>
+
+<body>
+
+  <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>查看直播间详情</li>
+    </ul>
+    </div>
+       <form id="myForm" action="" method='post'>
+              <div class="formbody">
+              <ul class="forminfo">
+              <li><label>房间名称 </label><label>{$live_info.room_name}</label></li>
+              <li><label>房间图片 </label> 
+              <img src={$live_info.room_pic_url} width="500px" height="200px">
+              </li>
+              <li><label>房间类型 </label><label>{$live_info.isopen}</label></li>
+              <if condition="$live_info.isopen eq '收费'">
+              <li><label>收费标准 </label><label>{$live_info.fees}</label></li>
+              </if>
+              <li><label>得分 </label><label>{$live_info.score}</label></li>
+              <li><label>围观 </label><label>{$live_info.user_num}</label></li>
+              <li><label>赞 </label><label>{$live_info.praise}</label></li>
+              <li><label>聊天记录 </label><label><textarea name="" cols="" rows="" class="textinput">{$live_info.chatRecord}</textarea></label></li>
+              <li><label>状态 </label><label><if condition='$live_info.status eq "success"'>已完成<elseif condition="$live_info.status eq 'in'"/>正在直播<elseif condition="$live_info.status eq 'stop'"/>已停止</if></label></li>
+              
+              <li><label>&nbsp;</label>
+                  <button type="button" onclick="history.go(-1)" class="btn">返回</button>
+              </li>
+              </ul>
+    
+    
+    </div>
+</form>
+</body>
+
+</html>

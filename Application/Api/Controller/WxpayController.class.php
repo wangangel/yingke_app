@@ -90,11 +90,11 @@ class WxpayController extends MobileController{
             else{
                 //此处应该更新一下订单状态，商户自行增删操作
                 //根据订单号来查询订单详情
-                $pay_data['shop_num'] = $_POST["out_trade_no"];
+                $pay_data['shop_num'] = $notify->data["out_trade_no"];
                 //变更订单状态
                 $pay_status['pay_status']=1;
                 $pay_info = M('pay')->where($pay_data)->find();
-                $pay_info = M('pay')->where($pay_data)->save($pay_status);
+                $pay_info_save = M('pay')->where($pay_data)->save($pay_status);
                 //out_trade_no 来获取房主的id
                 $live_data['id'] = $pay_info['liveroom_id'];
                 $live_info = M('live')->where($live_data)->find();

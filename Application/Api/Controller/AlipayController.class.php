@@ -9,14 +9,11 @@ class AlipayController extends MobileController{
         vendor('Alipay.alipay_notify');
     }
 
-
     function notify_url(){
       //计算得出通知验证结果
       $alipay_config = C('alipay_config');
       $alipayNotify = new \AlipayNotify($alipay_config);
       $verify_result = $alipayNotify->verifyNotify();
-        
-      
       if($verify_result) {
         //验证成功
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,18 +37,24 @@ class AlipayController extends MobileController{
             //调试用，写文本函数记录程序运行情况是否正常
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-            
             //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
+            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+            //如果有做过处理，不执行商户的业务程序
             //注意：
             //付款完成后，支付宝系统发送该交易状态通知
             //请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
             //调试用，写文本函数记录程序运行情况是否正常
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }
-       // $data['shop_name'] =1;
-        //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+        //这里记录订单详情
+        $shop_data['shop_num'] = $_POST('out_trade_no');
+        $shop_data['shop_name'] = $_POST('subject');
+        $shop_data['pay_status'] = 1;
+        $shop_data['pay_type'] = "支付宝支付";
+        $shop_data['pay_date'] = time();
+        $shop_data['shop_cash'] = $_POST['total_fee'];
+        $pay_info = M('pay')->add($shop_data);
+
         echo "success";     //请不要修改或删除
       }else {
         //$data['shop_name'] =2;

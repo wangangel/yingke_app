@@ -1630,7 +1630,7 @@ class UserController extends MobileController{
             $con_arr['status']  = array(array('eq',"in"),array('eq',"success"),'or');
             $con_arr['add_date'] = array('egt',$time);
             $con_arr["task_id"] = array('neq',"");
-            $liveroom_info = $live_model->where($con_arr)->order('status asc')->limit($start,$arrOpt['ps'])->select();
+            $liveroom_info = $live_model->where($con_arr)->order('status asc,add_date desc')->limit($start,$arrOpt['ps'])->select();
             //echo $live_model->getlastsql();
                 foreach ($liveroom_info as $k => $v) {
                     $data['liveroom_info'][$k]['room_id'] = $v['id'];
@@ -1902,7 +1902,7 @@ class UserController extends MobileController{
         $start = ($arrOpt['page']-1)*$arrOpt['ps'];
         $live_model = M('live');
         //1.获取正在直播的房间
-        $liveroom_info = $live_model->where(array('status'=>'in'))->limit($start,$arrOpt['ps'])->select();
+        $liveroom_info = $live_model->where(array('status'=>'in'))->limit($start,$arrOpt['ps'])->order('add_date desc')->select();
         
         if(empty($liveroom_info)){
             $data['liveroom_info'] = NULL;
@@ -3556,7 +3556,7 @@ class UserController extends MobileController{
             output_data($data); 
         }
     }
-
+    
 
 }
    
