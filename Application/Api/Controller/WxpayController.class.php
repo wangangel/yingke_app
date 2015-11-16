@@ -13,7 +13,7 @@ class WxpayController extends MobileController{
     }
 
      public function start_pay(){
-        if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL){
+        if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL || $_REQUEST['shop_type'] == NULL){
             output_error('参数不全');
         }
         $shop_desc = $_REQUEST['shop_desc'];
@@ -30,6 +30,7 @@ class WxpayController extends MobileController{
         $pay_model = M('pay');
         $pay_data['shop_name'] = $shop_desc;
         $pay_data['shop_num'] = $shop_num;
+        $pay_data['shop_type'] = $_REQUEST['shop_type'];
         $pay_data['shop_cash'] = $_REQUEST['shop_cash'];
         $pay_data['pay_type'] = '微信支付';
         $pay_data['pay_date'] = time();

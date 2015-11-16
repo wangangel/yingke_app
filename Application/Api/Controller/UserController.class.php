@@ -3515,7 +3515,7 @@ class UserController extends MobileController{
         //获取聊天记录
     }
       
-/**
+        /**
          * 判断用户第三方是否绑定
          */
     public function bind_show(){
@@ -3557,6 +3557,69 @@ class UserController extends MobileController{
         }
     }
     
+    /**
+     * [get_pay_status 获取支付状态]
+     * @return [type] [description]
+     * 1.判断支付类型
+     * 2.微信支付直接根据传递参数直接返回
+     * 3.支付宝支付，需要进行参数拼接，查询返回
+     */
+    public function get_pay_status(){
+        //获取支付类型
+           $pay_type = $_REQUEST['pay_type'];
+        //判断两种支付类型必传参数
+           if($_REQUEST['userid'] == null || $_REQUEST['liveroom_id'] == null){
+               output_error('参数不全');     
+            }
+        //根据支付类型来处理不同的支付方式
+        if($pay_type == 'weixin'){
+            //微信支付处理逻辑
+            if($_REQUEST['shop_name']==null){
+                output_error('商品名称不能为空!');
+            }else{
+                $weixin_data['pay_userid'] = $_REQUEST['userid'];
+                $weixin_data['liveroom_id'] = $_REQUEST['liveroom_id'];
+                $weixin_data['shop_name'] = $_REQUEST['shop_name'];
+                $weixin_data['shop_type'] = $_REQUEST['shop_type'];
+                dump($weixin_data);
+                $pay_info = M('pay') ->where($weixin_data)->find();
+                //判断该用户有没有购买该商品
+                dump($pay_info);
+                if(count($pay_info)>0){
+                    $pay_status = $pay_info['pay_status'];
+                    if($pay_status == 1){
+                        output_data("已支付");
+                    }else{
+                        output_error("未支付");
+                    }
+                }else{
+                    output_error('未购买该商品');
+                }
+            }
+        }else if($pay_type == 'alipay'){
+            //支付宝处理逻辑
+            //根据支付商品类型来进行不同的逻辑处理
+            //这里只处理房间购买记录，礼物可重复购买，不作逻辑处理
+            //根据房间名称规则： 房间名称+R+房间id+R+购买用户id   如：我要直播R521R117    
+            $alipay_data['shop_type'] = $_REQUEST['shop_type'];
+            $alipay_data['shop_name'] = $_REQUEST['shop_name'].'R'.$_REQUEST['liveroom_id'].'R'.$_REQUEST['userid'];
+            $pay_info = M('pay') ->where($alipay_data)->find();
+                //判断该用户有没有购买该商品
+                if(count($pay_info)>0){
+                    $pay_status = $pay_info['pay_status'];
+                    if($pay_status == 1){
+                        output_data("已支付");
+                    }else{
+                        output_data("未支付");
+                    }
+                }else{
+                    output_error('未购买该商品');
+                }
+        }
+    }
+
+
+
 
 }
    
