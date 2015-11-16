@@ -1333,7 +1333,7 @@ http://api.bihuo123.com
         shop_desc ------------商品名稱或者商品描述
         shop_cash----------商品支付金額
         liveroom_id---------------直播间id
-        shop_type---------商品类型 （礼物：gift    直播房间：live_room）
+        shop_type---------商品类型 （礼物：gift    直播房间：live）
 
     返回值:
         userid:用户id  
@@ -1372,12 +1372,11 @@ http://api.bihuo123.com
 
 五十九、支付状态查询接口
 http://api.bihuo123.com
-/index.php/api/user/get_pay_status?userid=236&liveroom_id=900&pay_type=weixin&shop_name=鲜花&shop_type=live
+/index.php/api/user/get_pay_status?userid=236&liveroom_id=900&shop_name=鲜花&is_room=0
 
 接口参数:
     userid ----------用户id
     liveroom_id-----------要进入房间的id
-    pay_type ---------------选择支付方式（分为两种：微信支付：weixin   支付宝支付：alipay）
     shop_name--------------商品名称（商品就填写商品名称，房间就填写直播间的名称）
     shop_type -----------------商品类型（分类两种类型1.gift 礼物   2.直播间：live）
 

@@ -47,14 +47,23 @@ class AlipayController extends MobileController{
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }
         //这里记录订单详情
+        if(strpos($_POST('subject'),"G")){
+            $name = $_POST('subject').split("G");
+            $shop_data['shop_type'] = "gift";
+            $shop_data['shop_name'] = $name[0];
+            $shop_data['is_room'] = 0;
+        }else if(strpos($_POST('subject'),"R")){
+            $name = $_POST('subject').split("R");
+            $shop_data['shop_type'] = "live";
+            $shop_data['shop_name'] = $name[0];
+            $shop_data['is_room'] = 1;
+        }
         $shop_data['shop_num'] = $_POST('out_trade_no');
-        $shop_data['shop_name'] = $_POST('subject');
         $shop_data['pay_status'] = 1;
         $shop_data['pay_type'] = "支付宝支付";
         $shop_data['pay_date'] = time();
         $shop_data['shop_cash'] = $_POST['total_fee'];
         $pay_info = M('pay')->add($shop_data);
-
         echo "success";     //请不要修改或删除
       }else {
         //$data['shop_name'] =2;

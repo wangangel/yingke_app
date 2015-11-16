@@ -36,7 +36,7 @@ class WxpayController extends MobileController{
         $pay_data['pay_date'] = time();
         $pay_data['pay_userid'] = $_REQUEST['userid'];
         $pay_data['pay_status'] = 0;
-        if(empty($_REQUEST['liveroom_id'])){
+        if($_REQUEST['shop_type']=='gift'){
             $pay_data['is_room'] = 0;
         }else{
             $pay_data['liveroom_id'] = $_REQUEST['liveroom_id'];

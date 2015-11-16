@@ -11,10 +11,10 @@ return array(
     //'MODULE_ALLOW_LIST' => array('Api', 'Admin','Home'),
     // 设置禁止访问的模块列表
     'DB_TYPE'               =>  'mysql',                // 数据库类型
-    'DB_HOST'               =>  '42.123.87.205',        // 服务器地址
+    'DB_HOST'               =>  'localhost',        // 服务器地址
     'DB_NAME'               =>  'yingke',                   // 数据库名
     'DB_USER'               =>  'root',                 // 用户名
-    'DB_PWD'                =>  'zhangzhao608@SIN',                 // 密码
+    'DB_PWD'                =>  'root',                 // 密码
     'DB_PORT'               =>  '3306',                 // 端口
     'DB_PREFIX'             =>  'yk_',                  // 数据库表前缀
     'DB_FIELDTYPE_CHECK'    =>  false,                  // 是否进行字段类型检查
