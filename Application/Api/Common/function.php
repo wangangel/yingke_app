@@ -6,10 +6,10 @@ function output_data($datas, $extend_data) {
        
     }
     if($extend_data == "1"){
-        $data['errresult'] = false;
+        $data['error_result'] = false;
     }
     else{
-        $data['errresult'] = true;
+        $data['error_result'] = true;
     }
 
     $data['datas'] = $datas;

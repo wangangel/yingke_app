@@ -1067,11 +1067,11 @@ class UserController extends MobileController{
      * 
      */
     public function bind_bankcard(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error('请先登录');
         }
          //验证key是否正确
-        $token_model = M('usertoken');
+        /*$token_model = M('usertoken');
         $arr = array();
         $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
@@ -1079,7 +1079,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
 
         if($_REQUEST['card_username'] == NULL || $_REQUEST['bankname'] == NULL || $_REQUEST['card_num'] == NULL){
             output_error('参数不全');
@@ -1087,27 +1087,26 @@ class UserController extends MobileController{
         //先去查询该用户是否已经绑定过银行卡
         $user_model = M('user');
         $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
+        $opt['card_name'] = $_REQUEST['card_username'];
+        $opt['card_bank'] = $_REQUEST['bankname'];
+        $opt['card_num'] = $_REQUEST['card_num'];
         if($user_info['card_num'] == NULL){
             //该用户没有绑定银行卡信息
-            $opt['card_name'] = $_REQUEST['card_username'];
-            $opt['card_bank'] = $_REQUEST['bankname'];
-            $opt['card_num'] = $_REQUEST['card_num'];
             $res = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->save($opt);
             if($res){
+                $opt['ID'] = $res;
                 //绑定成功
-                output_data(array('id'=>$res));
+                output_data($opt);
             }else{
                 output_error('银行卡绑定失败');
             }
         }else{
             //该用户已经绑定银行卡了,执行更新操作
-            $opt['card_name'] = $_REQUEST['card_username'];
-            $opt['card_bank'] = $_REQUEST['bankname'];
-            $opt['card_num'] = $_REQUEST['card_num'];
             $res = $user_model->where(array('id'=>$_REQUEST['userid']))->save($opt);
             if($res){
                 //绑定成功
-                output_data(array('ID'=>$res));
+                $opt['ID'] = $res;
+                output_data($opt);
             }else{
                 output_error('银行卡绑定失败');
             }
@@ -3285,10 +3284,10 @@ class UserController extends MobileController{
      * 获取当前直播间的关注头像
      */
     public function guanzhong_headpic(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error("请先登录");
         }
-        //验证秘钥是否正确
+        /*//验证秘钥是否正确
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
@@ -3297,7 +3296,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }else{
@@ -3332,7 +3331,16 @@ class UserController extends MobileController{
                $data['liveroom_info']['guanzong_info'][$k]['focus_count'] =  $f_count;
             }
         }
-        output_data($data);
+        //判断数据是否为空
+        if(empty($data)){
+            //为空给结果为0
+            $data['result']=0;
+            output_data($data);
+        }else{
+            output_data($data);
+        }
+        //dump($data);
+        
        
     }
 
@@ -3577,7 +3585,6 @@ class UserController extends MobileController{
                 $weixin_data['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $weixin_data['shop_name'] = $_REQUEST['shop_name'];
                 $weixin_data['shop_type'] = $_REQUEST['shop_type'];
-                //dump($weixin_data);
                 $pay_info = M('pay') ->where($weixin_data)->find();
                 //判断该用户有没有购买该商品
                 //dump($pay_info);
