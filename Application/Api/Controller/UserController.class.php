@@ -3077,11 +3077,11 @@ class UserController extends MobileController{
      * 直播间详情
      */
     public function into_liveroom(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error("请先登录");
         }
             
-        //验证秘钥是否正确
+       /* //验证秘钥是否正确
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
@@ -3089,7 +3089,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }
@@ -3148,10 +3148,10 @@ class UserController extends MobileController{
      * @return [type] [description]
      */
     public function out_live(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error("请先登录");
         } 
-        //验证秘钥是否正确
+        /*//验证秘钥是否正确
         $token_model = M('usertoken');
         $arr = array();
         $arr['userid'] = $_REQUEST['userid'];
@@ -3160,7 +3160,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         if($_REQUEST['liveroom_id'] == NULL){
             output_error('参数不全');
         }

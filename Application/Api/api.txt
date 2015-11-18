@@ -1328,11 +1328,11 @@ http://api.bihuo123.com
     如果没有则返回为null；
 
 
-五十六 微信發起支付接口
+五十六 微信支付接口
 http://api.bihuo123.com
 /index.php/api/wxpay/start_pay?userid=101&shop_desc=dadada&shop_cash=0.01&liveroom_id=859&shop_type=gift
  接口参数:
-        shop_desc ------------商品名稱或者商品描述
+        shop_desc ------------房间名稱或者商品描述
         shop_cash----------商品支付金額
         liveroom_id---------------直播间id
         shop_type---------商品类型 （礼物：gift    直播房间：live）
