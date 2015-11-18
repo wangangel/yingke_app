@@ -898,11 +898,11 @@ class UserController extends MobileController{
      *获取我的财富信息
      */
     public function my_moneyinfo(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error('请先登录');
         }
         //验证key是否正确,这边需要设备唯一标识
-        $token_model = M('usertoken');
+        /*$token_model = M('usertoken');
         $arr = array();
         $arr['client_id'] = $_REQUEST['client_id'];
         $arr['userid'] = $_REQUEST['userid'];
@@ -910,7 +910,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         //根据用户id获取用户信息 
         $user_model = M('user');
         $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->find();
@@ -1030,10 +1030,10 @@ class UserController extends MobileController{
      *
      */
     public function user_bindcard(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error('请先登录');
         }
-         //验证key是否正确
+        /* //验证key是否正确
         $token_model = M('usertoken');
         $arr = array();
         $arr['client_id'] = $_REQUEST['client_id'];
@@ -1042,7 +1042,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确');
-        }
+        }*/
         $user_model = M('user');
         $user_info = $user_model->where(array('id'=>$_REQUEST['userid']))->where(array('status'=>'start'))->find();
         if($user_info['card_num'] == NULL){
