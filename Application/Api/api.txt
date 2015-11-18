@@ -284,6 +284,11 @@ datas :
     返回值：
         "errresult":true|false 执行成功返回true，执行失败返回false
         datas:
+            userid====== 用户id
+            ni_name ========== 昵称
+            head_url ========== 头像
+            sex =========  性别
+            age========年龄
        error:错误描述，执行成功没有该字段
             datas: 
                    id
@@ -1393,17 +1398,29 @@ http://api.bihuo123.com
     接口参数
         userid-----------用户id
         type-----------消息类型(invite 是否接收邀请     focus  是否接收关注)
-    返回值
-        {"errresult":true,"datas":
-             {"result":0}
+    返回值   
+        {"errresult":true,"datas":{   0为接收消息    1为不接收消息
+             "is_invite":"1"  
+              "is_focus":"0"
+            }
         }
         {"errresult":false,"datas":
             {"result":1}
         }
-    返回说明:返回字段result,0为修改成功,1为修改失败
+    返回说明:返回字段result :1为修改失败
 
-
-
+六十一  查看消息接收状态
+http://api.bihuo123.com
+/index.php/api/user/message_status?userid=236
+    接口参数
+        userid-----------用户id
+        
+    返回值   
+        {"errresult":true,"datas":{   0为接收消息    1为不接收消息
+             "is_invite":"1"  
+            "is_focus":"0"
+            }
+        }
 
 
 ================================================================================

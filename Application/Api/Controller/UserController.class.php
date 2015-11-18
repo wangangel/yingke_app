@@ -3639,9 +3639,12 @@ class UserController extends MobileController{
         $receive['id'] = $_REQUEST['userid'];
         //更改状态
         $receive_info = $user_model ->save($receive);
+        $chaxun_info = $user_model->where($user_data)->find();
+        $data['is_invite'] = $chaxun_info['is_invite'];
+        $data['is_focus'] = $chaxun_info['is_focus'];
         if($receive_info){
-             $opt['result'] = 0;
-             output_data($opt);
+            //$opt['result'] = 0;
+            output_data($data);
         }else{
             $opt['result'] = 1;
             output_error($opt);
@@ -3650,6 +3653,26 @@ class UserController extends MobileController{
     }
 
 
+
+    public function message_status(){
+         //获取传递userid
+        if($_REQUEST['userid'] == NULL){
+            output_error('请先登录!');
+        }
+        $user_data['id'] = $_REQUEST['userid'];
+        $user_model=M('user');
+        //查询用户当前接收状态
+        $user_info = $user_model ->where($user_data)->find();
+        if($user_info){
+        $data['is_invite'] = $user_info['is_invite'];
+        $data['is_focus'] = $user_info['is_focus'];
+        output_data($data);
+        }else{
+         output_error("查看失败");
+        }   
+       
+
+    }
 
 
 }
