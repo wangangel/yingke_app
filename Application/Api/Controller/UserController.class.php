@@ -278,7 +278,6 @@ class UserController extends MobileController{
         if($count>0){
             //数据库中有未失效的验证码,有效期为60秒
             output_error("您的验证码已经发送，请不要重复发送");
-           
         }else{
             $arr = array();
             $arr['phonenum'] = $intPhone;
@@ -3599,6 +3598,55 @@ class UserController extends MobileController{
                     output_error('未购买该商品');
                 }
             }
+    }
+
+
+    /**
+     * [is_receive 是否接收消息接口]
+     * @return boolean [description]
+     * 1.user表中is_invite/is_focus字段,默认为0 接收消息  变更1为不接收消息
+     * 2.根据userid来判断当前用户的接收状态
+     * 3.执行一次接口,状态变更一次
+     */
+    public function is_invite_focus(){  
+        //获取传递userid
+        if($_REQUEST['userid'] == NULL){
+            output_error('请先登录!');
+        }
+        //判断必传参数是否齐全
+        if($_REQUEST['type'] == NULL){
+            output_error('参数不全');
+        }
+         //判断类型来赋值字段
+        if($_REQUEST['type'] == 'invite'){
+            $filed = 'is_invite';
+        }else if($_REQUEST['type'] == 'focus'){
+            $filed = 'is_focus';
+        }
+        $user_data['id'] = $_REQUEST['userid'];
+        $user_model=M('user');
+        //查询用户当前接收状态
+        $user_info = $user_model ->where($user_data)->find();
+        //根据当前用户状态来给接收状态赋值
+        if($user_info[$filed] == 0){
+            $receive[$filed] = 1;
+        }else if($user_info[$filed] == 1){
+            $receive[$filed] = 0;
+        }else if($user_info[$filed] == NULL){
+            //判断老用户,没有is_receive,置为1,因为前台默认为接收,再取消是不接收
+            $receive[$filed] = 1;
+        }
+        $receive['id'] = $_REQUEST['userid'];
+        //更改状态
+        $receive_info = $user_model ->save($receive);
+        if($receive_info){
+             $opt['result'] = 0;
+             output_data($opt);
+        }else{
+            $opt['result'] = 1;
+            output_error($opt);
+        }
+
     }
 
 
