@@ -302,27 +302,19 @@ class IndexController extends MobileController{
         if(!empty($_FILES['photo']['tmp_name'])){
             //echo'已选择文件';
             // 上传单个文件 
-            $info1 = $upload->uploadOne($_FILES['photo']);
-            if(!$info1) {
-                // 上传错误提示错误信息
-                $str = $upload->getError();
-                output_error($str);
-            }
-            //这里是设置文件的url注意使用.不是+  
-            $imgurl1 = $info1['savepath'].$info1['savename'];
             //压缩图片
-            /*$info = $upload->upload();
-            foreach ($info as $file) {
-                $file_path = './Upload/'.$file['savepath'].$file['savename'];
-               //$file_mini = '/Upload/mini/'.$file['savepath'].$file['savename'];
-            }
+            $info = $upload->uploadOne($_FILES['photo']);
+            $file_path ="./Upload/".$info['savepath'].$info['savename'];
             $image = new \Think\Image();
             $image->open($file_path);
-            $time = time();
-            $image->thumb(100,100)->save("./Upload/mini/".$time.".jpg");*/
+            $time = date("Y-m-d",time());
+            $file_name = $time."-".$info['savename'];
+            $image->thumb(100,100)->save("./Public/thumb/".$file_name);
 
+            //这里是设置文件的url注意使用.不是+  
+            $imgurl1 = "thumb/".$file_name;
             $data = array();
-            $data['picurl'] = "http://api.bihuo123.com/Upload/".$imgurl1;
+            $data['picurl'] = "http://api.bihuo123.com/Public/".$imgurl1;
             output_data($data);
             
         }else{

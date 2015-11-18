@@ -1362,14 +1362,15 @@ http://api.bihuo123.com
 
 五十八、推送接口（邀请好友给对方推送）
 http://api.bihuo123.com
-/index.php/api/umeng/request_push?visterid=168&key=c046643120092cddaafc66b0a579448e&client_id=359092050091226&device=IOS&liveroom_id=859&friend_id=162
+/index.php/api/umeng/request_push?visterid=168&key=c046643120092cddaafc66b0a579448e&client_id=359092050091226&device=IOS&liveroom_id=859&friend_id=162&type=1
  接口参数:
         visterid----------邀请者id
         key:--------------key
         client_id:---------------设备id
         friend_id ---------好友id,多个好友id，有英文逗号隔开（受邀者id，同时也是alias的值，alias_type统一为SkyEyesLive_1.1）
         device----------设备名称（IOS,ANDROID）必须大写
-        liveroom_id---------------直播间id
+        liveroom_id---------------直播间id（当type为0的时候，liveroom_id必填参数）
+        type--------------推送类型： 0为邀请推送，1为关注推送
 返回值：
         {"errresult":true,"datas":{"result":"success"}}
         {"ret":"SUCCESS","data":{"msg_id":"uu17744144733741503001"}}
@@ -1501,3 +1502,4 @@ http://api.bihuo123.com
 
 2015/11/17
 1.新增接口六十,是否接收消息接口(默认为0接收消息  1为不接收消息);
+2.变更五十八推送接口，需要传type参数，type参数为0，此时liveroom_id为必填，若type参数为1为关注推送，那么liveroom_id 可不传

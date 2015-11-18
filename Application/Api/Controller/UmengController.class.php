@@ -315,15 +315,15 @@ class UmengController extends MobileController{
         $ios_appkey = "55e65c5be0f55a60dc0001f2";
         $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
         $message = "尊敬的会员，您的好友dada邀请您前往名为琅琊榜房间观看直播";
-        $alias = 162;
+        $alias = 171;
         $alias_type = "SkyEyesLive_1.1";
-        $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
-        $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);
+        //$ios_push = new UmengController($ios_appkey, $ios_mastersecret);
+        //$ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);
 
-        /*$android_appkey = "563ac69ce0f55abbca000cc1";
+        $android_appkey = "563ac69ce0f55abbca000cc1";
         $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
         $android_push = new UmengController($android_appkey, $android_mastersecret);
-        $android_push->sendAndroidCustomizedcast();*/
+        $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
     }
 
     // Set your appkey and master secret here
@@ -367,6 +367,9 @@ class UmengController extends MobileController{
         if($_REQUEST["friend_id"] == NULL){
             output_error('好友id为空！');
         }
+        if($_REQUEST["type"] == NULL || is_numeric($_REQUEST["type"]) == false){
+            output_error("推送类型值错误！");
+        }
         $data["id"] = $_REQUEST['visterid'];
         $user = M("user")->where($data)->find();
         if(!empty($user["ni_name"])){
@@ -374,27 +377,28 @@ class UmengController extends MobileController{
         }else{
             $vister_name = "x童鞋";
         }
-        $room["id"] = $_REQUEST["liveroom_id"];
-        $live = M("live")->where($room)->find();
-        $room_name = $live["room_name"];
+        if($_REQUEST["type"] == 0 && $_REQUEST["liveroom_id"] != NULL){
+            //为邀请推送
+            $room["id"] = $_REQUEST["liveroom_id"];
+            $live = M("live")->where($room)->find();
+            $room_name = $live["room_name"];
+            $message = "尊敬的会员，您的好友".$vister_name."邀请您前往名为".$room_name."房间观看直播";
+        }elseif($_REQUEST["type"] == 0 && $_REQUEST["liveroom_id"] == NULL){
+            output_error("房间id不为空！");
+        }
+        if($_REQUEST["type"] == 1){
+            //为关注推送
+            $focus_mess = "尊敬的会员，您的粉丝".$vister_name."关注了您！";
+        }
         $alias_string = $_REQUEST["friend_id"];
         $alias_type = "SkyEyesLive_1.1";
         $device = $_REQUEST["device"];
-        /*if($device == "IOS"){
-            $appkey = "55e65c5be0f55a60dc0001f2";
-            $mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
-        }else{
-            $appkey = "563ac69ce0f55abbca000cc1";
-            $mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
-        }*/
-        //$description = "通知";
         $ios_appkey = "55e65c5be0f55a60dc0001f2";
         $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
         $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
         $android_appkey = "563ac69ce0f55abbca000cc1";
         $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
         $android_push = new UmengController($android_appkey, $android_mastersecret);
-        $message = "尊敬的会员，您的好友".$vister_name."邀请您前往名为".$room_name."房间观看直播";
         $alias_arrary = split(',', $alias_string);
         $alias_length = count($alias_arrary);
         if($alias_length>1){
@@ -406,8 +410,15 @@ class UmengController extends MobileController{
                     $_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
 
                 }*/
-                $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
-                $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                //增加是否接收邀请
+                if($_REQUEST["type"] == 0 && $user["is_invite"] == 0){
+                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
+                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                }elseif($_REQUEST["type"] == 1 && $user["is_focus"] == 0){
+                    //增加是否接收关注
+                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$focus_mess);    
+                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$focus_mess);
+                }
                 //保存到信息表中
                 $mess_data["m_content"] = $message;
                 $mess_data["m_target"] = $alias;
@@ -420,8 +431,15 @@ class UmengController extends MobileController{
         }else{
                 $alias = $alias_arrary[0];
                 
-                $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
-                $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                 //增加是否接收邀请
+                if($_REQUEST["type"] == 0 && $user["is_invite"] == 0){
+                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
+                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
+                }elseif($_REQUEST["type"] == 1 && $user["is_focus"] == 0){
+                    //增加是否接收关注
+                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$focus_mess);    
+                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$focus_mess);
+                }
                    
                 //保存到信息表中
                 $mess_data["m_content"] = $message;
