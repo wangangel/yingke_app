@@ -420,6 +420,10 @@ datas :
     返回值:
         "errresult":true|false 执行成功返回true，执行失败返回false
         "datas": {
+        userid---------用户id
+         card_username-----持卡人姓名
+            bankname-----开户行
+            card_num-------卡号
           
     }
 
