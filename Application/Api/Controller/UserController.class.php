@@ -1595,11 +1595,11 @@ class UserController extends MobileController{
      *获取正在直播的房间(当前房间人数,还未完成)---以及72小时
      */
     public function live_room(){
-           if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+           if($_REQUEST['userid'] == NULL){
                 output_error('请先登录');
             }
              //验证key是否正确
-            $token_model = M('usertoken');
+           /* $token_model = M('usertoken');
             $arr = array();
             $arr['client_id'] = $_REQUEST['client_id'];
             $arr['userid'] = $_REQUEST['userid'];
@@ -1607,7 +1607,7 @@ class UserController extends MobileController{
             $jieguo = $token_model->where($arr)->select();
             if($jieguo[0] == NULL){
                  output_error('秘钥key不正确');
-            }
+            }*/
             /*$live_ids = $this->live_list();
                 var_dump($live_ids);
             */
@@ -2029,10 +2029,10 @@ class UserController extends MobileController{
      *创建直播间
      */
     public function add_liveroom(){
-        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+        if($_REQUEST['userid'] == NULL){
             output_error('请先登录！');
         }
-         //验证key是否正确
+         /*/验证key是否正确
         $token_model = M('usertoken');
         $arr = array();
         $arr['client_id'] = $_REQUEST['client_id'];
@@ -2041,7 +2041,7 @@ class UserController extends MobileController{
         $jieguo = $token_model->where($arr)->select();
         if($jieguo[0] == NULL){
              output_error('秘钥key不正确！！');
-        }
+        }*/
         if($_REQUEST['room_name'] == NULL || $_REQUEST['room_pic_url'] == NULL || $_REQUEST['tags'] == NULL || $_REQUEST['isopen'] == NULL){
              output_error('参数不全');
         }
@@ -3610,11 +3610,8 @@ class UserController extends MobileController{
      */
     public function is_invite_focus(){  
         //获取传递userid
-        if($_REQUEST['userid'] == NULL){
-            output_error('请先登录!');
-        }
         //判断必传参数是否齐全
-        if($_REQUEST['type'] == NULL){
+        if($_REQUEST['type'] == NULL || $_REQUEST['userid'] == NULL){
             output_error('参数不全');
         }
          //判断类型来赋值字段
@@ -3657,7 +3654,7 @@ class UserController extends MobileController{
     public function message_status(){
          //获取传递userid
         if($_REQUEST['userid'] == NULL){
-            output_error('请先登录!');
+            output_error('参数不全!');
         }
         $user_data['id'] = $_REQUEST['userid'];
         $user_model=M('user');
