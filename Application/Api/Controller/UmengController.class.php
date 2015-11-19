@@ -377,18 +377,14 @@ class UmengController extends MobileController{
         }else{
             $vister_name = "x童鞋";
         }
-        if($_REQUEST["type"] == 0 && $_REQUEST["liveroom_id"] != NULL){
+        if($_REQUEST["liveroom_id"] != NULL){
             //为邀请推送
             $room["id"] = $_REQUEST["liveroom_id"];
             $live = M("live")->where($room)->find();
             $room_name = $live["room_name"];
             $message = "尊敬的会员，您的好友".$vister_name."邀请您前往名为".$room_name."房间观看直播";
-        }elseif($_REQUEST["type"] == 0 && $_REQUEST["liveroom_id"] == NULL){
+        }elseif($_REQUEST["liveroom_id"] == NULL){
             output_error("房间id不为空！");
-        }
-        if($_REQUEST["type"] == 1){
-            //为关注推送
-            $focus_mess = "尊敬的会员，您的粉丝".$vister_name."关注了您！";
         }
         $alias_string = $_REQUEST["friend_id"];
         $alias_type = "SkyEyesLive_1.1";
@@ -411,13 +407,9 @@ class UmengController extends MobileController{
 
                 }*/
                 //增加是否接收邀请
-                if($_REQUEST["type"] == 0 && $user["is_invite"] == 0){
+                if($user["is_invite"] == 0){
                     $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
                     $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
-                }elseif($_REQUEST["type"] == 1 && $user["is_focus"] == 0){
-                    //增加是否接收关注
-                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$focus_mess);    
-                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$focus_mess);
                 }
                 //保存到信息表中
                 $mess_data["m_content"] = $message;
@@ -432,13 +424,9 @@ class UmengController extends MobileController{
                 $alias = $alias_arrary[0];
                 
                  //增加是否接收邀请
-                if($_REQUEST["type"] == 0 && $user["is_invite"] == 0){
+                if($user["is_invite"] == 0){
                     $ios_push->sendIOSCustomizedcast($alias,$alias_type,$message);    
                     $android_push->sendAndroidCustomizedcast($alias,$alias_type,$message);
-                }elseif($_REQUEST["type"] == 1 && $user["is_focus"] == 0){
-                    //增加是否接收关注
-                    $ios_push->sendIOSCustomizedcast($alias,$alias_type,$focus_mess);    
-                    $android_push->sendAndroidCustomizedcast($alias,$alias_type,$focus_mess);
                 }
                    
                 //保存到信息表中
@@ -455,5 +443,98 @@ class UmengController extends MobileController{
         $result["status"] = "success";
         output_data($result);
 
+    }
+
+
+
+    /*
+     *关注用户
+     */
+    public function focus_user(){
+        if($_REQUEST['userid'] == NULL || $_REQUEST['key'] == NULL){
+            output_error('请先登录');
+        }
+        //验证key是否正确,这边需要设备唯一标识
+        $token_model = M('usertoken');
+        $arr = array();
+        $arr['client_id'] = $_REQUEST['client_id'];
+        $arr['userid'] = $_REQUEST['userid'];
+        $arr['token'] = $_REQUEST['key'];
+        $jieguo = $token_model->where($arr)->select();
+        if($jieguo[0] == NULL){
+             output_error('秘钥key不正确');
+        }
+        //先判断被关注人是否存在
+        $user_model = M('user');
+        $user_info = $user_model->where(array('id'=>$_REQUEST['focus_user']))->find();
+        if(empty($user_info)){
+            output_error('被关注人不存在');
+        }else{
+            $focus_model = M('friends_focus');
+            $opt['user_id'] = $_REQUEST['userid'];
+            $opt['focus_user'] = $_REQUEST['focus_user'];
+            $opt['status'] = "yes";
+            //判断当前用户是否已经关注过该用户
+            $res = $focus_model->where($opt)->find();
+            if(empty($res)){
+                //没有关注过,判断曾经是否取消过对该用户的关注
+                $tiaojian['user_id'] = $_REQUEST['userid'];
+                $tiaojian['focus_user'] = $_REQUEST['focus_user'];
+                $tiaojian['status'] = "no";
+                $jieguo = $focus_model->where($tiaojian)->find();
+                //进行关注推送
+                $vistor_info = M('user')->where(array('id'=>$_REQUEST['userid']))->find(); 
+                $message = "尊敬的会员，您的粉丝".$vistor_info["ni_name"]."已经关注了您！";
+                if($user_info["is_focus"] == 0){//可以推送
+                    $alias_string = $_REQUEST['focus_user'];
+                    $alias_type = "SkyEyesLive_1.1";
+                    $ios_appkey = "55e65c5be0f55a60dc0001f2";
+                    $ios_mastersecret = "iezbtuheko6jbvuofbxyzloc3e54bu2v";
+                    $ios_push = new UmengController($ios_appkey, $ios_mastersecret);
+                    $android_appkey = "563ac69ce0f55abbca000cc1";
+                    $android_mastersecret = "lcqmehvkg4fj8tlc0eras1uro87oct28";
+                    $android_push = new UmengController($android_appkey, $android_mastersecret);
+                    $ios_push->sendIOSCustomizedcast($alias_string,$alias_type,$message);    
+                    $android_push->sendAndroidCustomizedcast($alias_string,$alias_type,$message);
+
+                }
+                //保存到信息表中
+                $mess_data["m_content"] = $message;
+                $mess_data["m_target"] = $_REQUEST['focus_user'];
+                $mess_data["m_date"] = time();
+                $mess_data["m_user"] = $vistor_info["ni_name"];
+                $mess_data["m_isdelete"] = "no";
+                $mess_data["status"] = "user";
+                M("message")->add($mess_data);
+                if(empty($jieguo)){
+                    //没有,执行add
+                    $array['user_id'] = $_REQUEST['userid'];
+                    $array['focus_user'] = $_REQUEST['focus_user'];
+                    $array['status'] = "yes";
+                    $array['focus_date'] = time();
+                    $result = $focus_model->add($array);
+                    if($result){
+                        output_data(array('result'=>$result));
+                    }else{
+                         output_error("添加关注失败");
+                    }
+                }else{
+                    //执行save
+                    $condition['user_id'] = $_REQUEST['userid'];
+                    $condition['focus_user'] = $_REQUEST['focus_user'];
+                    $array['status'] = "yes";
+                    $array['focus_date'] = time();
+                    $result = $focus_model->where($condition)->save($array);
+                    if($result){
+                        output_data(array('result'=>$result));
+                    }else{
+                        output_error("添加关注失败");
+                    }
+                }
+            }else{
+                output_error("已经关注过该用户");
+            }
+        }
+        
     }
 }
