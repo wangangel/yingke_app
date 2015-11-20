@@ -309,7 +309,7 @@ class IndexController extends MobileController{
             $image->open($file_path);
             $time = date("Y-m-d",time());
             $file_name = $time."-".$info['savename'];
-            $image->thumb(100,100)->save("./Public/thumb/".$file_name);
+            $image->thumb(500,500)->save("./Public/thumb/".$file_name);
 
             //这里是设置文件的url注意使用.不是+  
             $imgurl1 = "thumb/".$file_name;

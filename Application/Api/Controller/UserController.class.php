@@ -1595,9 +1595,9 @@ class UserController extends MobileController{
      *获取正在直播的房间(当前房间人数,还未完成)---以及72小时
      */
     public function live_room(){
-           if($_REQUEST['userid'] == NULL){
+          /* if($_REQUEST['userid'] == NULL){
                 output_error('请先登录!');
-            }
+            }*/
              //验证key是否正确
            /* $token_model = M('usertoken');
             $arr = array();
@@ -1679,7 +1679,7 @@ class UserController extends MobileController{
                     $userroom_model = M('user_room');
                     $guanzhong_info = $userroom_model->where(array('liveroom_id'=>$v['id']))->select();
                     $data['liveroom_info'][$k]['user_num'] = count($guanzhong_info);
-                    if($k == $liveroom_counts -1){
+                    if($v["status"] == "in"){
                         $data['liveroom_info'][$k]["type"] = 0;
                     }else{
                         $data['liveroom_info'][$k]["type"] = 1;
