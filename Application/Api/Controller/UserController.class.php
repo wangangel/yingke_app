@@ -2501,7 +2501,7 @@ class UserController extends MobileController{
         $con['userid'] = $_REQUEST['userid'];
         $con['roomid'] = $_REQUEST['roomid'];
         $dianzan_info = $dianzan_model->where($con)->find();
-        if(empty($dianzan_info)){
+      /*  if(empty($dianzan_info)){*/
             //之前没有点过赞
             $opt['userid'] = $_REQUEST['userid'];
             $opt['roomid'] = $_REQUEST['roomid'];
@@ -2528,9 +2528,9 @@ class UserController extends MobileController{
             }else{
                 output_error("点赞失败");
             }
-        }else{
+       /* }else{
             output_error("已经点过赞了");
-        }
+        }*/
     }
 
     /*
