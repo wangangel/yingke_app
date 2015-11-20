@@ -2521,7 +2521,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="【系统】".$hx_ui['ni_name'].":点了个赞!";
+                $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."点了个赞!";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 output_data($live["praise"]);
@@ -2979,7 +2979,7 @@ class UserController extends MobileController{
             $hx_rdata['id'] = $_REQUEST['liveroom_id'];
             $hx_ri = M('live')->where($hx_rdata)->find();
             $username = array($hx_ri['groupid']);
-            $content="【系统】".$_REQUEST['user_name'].":进入了房间";
+            $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."进入了房间";
             $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
             $hx_a = json_decode($hx_info,true);
             $data['groupid'] = $hx_ri['groupid'];
@@ -3228,7 +3228,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="【系统】".$hx_ui['ni_name'].":添加标签[".$_REQUEST['tag']."]";
+                $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."添加标签[".$_REQUEST['tag']."]";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 $da_3['note'] = '观众评分成功,返回广场!';
@@ -3506,21 +3506,23 @@ class UserController extends MobileController{
     }
 
 
-    public function hx_chatrecord(){
+/*    public function hx_chatrecord(){
         $hx = new \Api\Common\HxController;
        // $ql ="select+*+where+groupId+=+";
         $record = $hx->chatRecord('','', 50);
         $data = json_decode($record, true);
         //根据参数判断显示循环聊天记录
         $chat_data= $data['entities'];
-        $groupid = '1442494790144';
+        //根据房间id来获取groupid
+        $live_data['id'] = $_REQUEST['']; 
+        $groupid = '';
         for($i=0;$i<count($chat_data);$i++){
             if($chat_data[$i]['groupId']==$groupid){
               $opt .= $chat_data[$i]['from'].":".$chat_data[$i]['payload']['bodies'][0]['msg']."\n";
             }
         }
         //获取聊天记录
-    }
+    }*/
       
         /**
          * 判断用户第三方是否绑定
