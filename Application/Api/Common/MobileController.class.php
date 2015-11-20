@@ -228,8 +228,8 @@ class MobileController extends Controller{
      */
     function getlive_list($ps,$page){
         //昨天，大前天
-        $from_time = date("Y-m-d",strtotime("-3 day"));
-        $to_time = date("Y-m-d",time());
+        $from_time = date("Y-m-d",strtotime("-1 day"));
+        $to_time = date("Y-m-d",strtotime("+1 day"));
         $key = "0ec08fd5";
         $header_timestamp = $this->getMillisecond();
         $signature = md5($key);
