@@ -2521,7 +2521,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."点了个赞!";
+                $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."点了个赞!";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 output_data($live["praise"]);
@@ -2979,7 +2979,7 @@ class UserController extends MobileController{
             $hx_rdata['id'] = $_REQUEST['liveroom_id'];
             $hx_ri = M('live')->where($hx_rdata)->find();
             $username = array($hx_ri['groupid']);
-            $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."进入了房间";
+            $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."进入了房间";
             $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
             $hx_a = json_decode($hx_info,true);
             $data['groupid'] = $hx_ri['groupid'];
@@ -3228,7 +3228,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="【系统】:".substr_replace($hx_ui['ni_name'],'****',3,4)."添加标签[".$_REQUEST['tag']."]";
+                $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."添加标签[".$_REQUEST['tag']."]";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 $da_3['note'] = '观众评分成功,返回广场!';
