@@ -1596,7 +1596,7 @@ class UserController extends MobileController{
      */
     public function live_room(){
            if($_REQUEST['userid'] == NULL){
-                output_error('请先登录');
+                output_error('请先登录!');
             }
              //验证key是否正确
            /* $token_model = M('usertoken');
