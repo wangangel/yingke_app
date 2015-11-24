@@ -2521,7 +2521,13 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."点了个赞!";
+                $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+                if($user_number){
+                    $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
+                }else{
+                    $hx_['ni_name'] = $hx_ui['ni_name'];
+                }
+                $content="系统:".$hx_['ni_name']."点了个赞!";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 output_data($live["praise"]);
@@ -2980,7 +2986,13 @@ class UserController extends MobileController{
             $hx_rdata['id'] = $_REQUEST['liveroom_id'];
             $hx_ri = M('live')->where($hx_rdata)->find();
             $username = array($hx_ri['groupid']);
-            $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."进入了房间";
+            $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+            if($user_number){
+                $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
+            }else{
+                $hx_['ni_name'] = $hx_ui['ni_name'];
+            }
+            $content="系统:".$hx_['ni_name']."进入了房间";
             $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
             $hx_a = json_decode($hx_info,true);
             $data['groupid'] = $hx_ri['groupid'];
@@ -3229,7 +3241,13 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $content="系统:".substr_replace($hx_ui['ni_name'],'****',3,4)."添加标签[".$_REQUEST['tag']."]";
+                $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+                if($user_number){
+                    $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
+                }else{
+                    $hx_['ni_name'] = $hx_ui['ni_name'];
+                }
+                $content="系统:".$hx_['ni_name']."添加标签[".$_REQUEST['tag']."]";
                 $hx_info = $HX->yy_hxSend($from_user, $username, $content, $target_type = "chatgroups", $ext);
                 $hx_a = json_decode($hx_info,true);
                 $da_3['note'] = '观众评分成功,返回广场!';
