@@ -2521,7 +2521,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+                $user_number = preg_match('/^\d{10}$/',$hx_ui['ni_name']);
                 if($user_number){
                     $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
                 }else{
@@ -2986,7 +2986,7 @@ class UserController extends MobileController{
             $hx_rdata['id'] = $_REQUEST['liveroom_id'];
             $hx_ri = M('live')->where($hx_rdata)->find();
             $username = array($hx_ri['groupid']);
-            $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+            $user_number = preg_match('/^\d{10}$/',$hx_ui['ni_name']);
             if($user_number){
                 $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
             }else{
@@ -3241,7 +3241,7 @@ class UserController extends MobileController{
                 $hx_rdata['id'] = $_REQUEST['liveroom_id'];
                 $hx_ri = M('live')->where($hx_rdata)->find();
                 $username = array($hx_ri['groupid']);
-                $user_number = preg_match('/^\d*$/',$hx_ui['ni_name']);
+                $user_number = preg_match('/^\d{10}$/',$hx_ui['ni_name']);
                 if($user_number){
                     $hx_['ni_name'] = substr_replace($hx_ui['ni_name'],'****',3,4);
                 }else{
