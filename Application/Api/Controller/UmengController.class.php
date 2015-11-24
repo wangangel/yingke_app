@@ -367,9 +367,9 @@ class UmengController extends MobileController{
         if($_REQUEST["friend_id"] == NULL){
             output_error('好友id为空！');
         }
-        if($_REQUEST["type"] == NULL || is_numeric($_REQUEST["type"]) == false){
+       /* if($_REQUEST["type"] == NULL || is_numeric($_REQUEST["type"]) == false){
             output_error("推送类型值错误！");
-        }
+        }*/
         $data["id"] = $_REQUEST['visterid'];
         $user = M("user")->where($data)->find();
         if(!empty($user["ni_name"])){

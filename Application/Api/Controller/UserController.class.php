@@ -2951,7 +2951,7 @@ class UserController extends MobileController{
             //获取直播间的直播url
             //根据房间类型,来判断用户是否支付过 
             $da['id'] = $_REQUEST['liveroom_id'];
-             $info_sf = M('live')->where($da)->find();
+            $info_sf = M('live')->where($da)->find();
             if($info_sf['isopen'] == '收费'){
                 $pay['pay_userid'] = $_REQUEST['userid'];
                 $pay['liveroom_id'] = $_REQUEST['liveroom_id'];
@@ -2965,6 +2965,7 @@ class UserController extends MobileController{
                     //}
                 }
             }
+            $data["room_name"] = $live["room_name"];
             $data["live_url"] = $live["live_url"];
             $data["live_id"] = $live["id"];
             $data["groupid"] = $live["groupid"];

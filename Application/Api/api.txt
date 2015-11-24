@@ -1,4 +1,4 @@
-用户模块
+﻿用户模块
 
 
 
@@ -1025,7 +1025,7 @@ datas :
 
 四十.用户进入直播间（包括付费直播间）
 请求地址：http://api.bihuo123.com
-/index.php/api/user/into_publicroom?userid=233&key=c9ac0218518f5314f843ff78910e8fbd&client_id=359092050091226&liveroom_id=678&user_name=18014111110&head_pic=http://api.bihuo123.com/Upload/2015-11-02/56370e968a76b.jpg
+/index.php/api/user/into_publicroom?userid=276&key=8448fdf704f1e156b629933dd9e20bf8&client_id=13F8DCD5-E77E-46EF-8E63-20557C728D9A&liveroom_id=1167&user_name=13382612532&head_pic=http://api.bihuo123.com/Public/images/default_head.png
 接口参数:
         userid:
         key:
@@ -1048,6 +1048,7 @@ datas :
         "live_id": "687",
         "groupid": "1444615600557",
         "praise": "0",
+        "room_name":"房间的名字",
         "score": 0
         }
     }
@@ -1062,6 +1063,7 @@ datas :
         "live_id": "678",
         "groupid": "1444568707711",
         "praise": "0",
+        "room_name":"房间的名字",
         "score": 0
     }
 }
