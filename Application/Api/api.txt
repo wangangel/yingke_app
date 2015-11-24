@@ -1354,15 +1354,14 @@ http://api.bihuo123.com
         server_code：服务码
         hx_user:环信用户名
         hx_password:环信用户密码
+
+
         
 五十七 支付宝回调接口
 http://api.bihuo123.com
 /index.php/api/alipay/notify_url
-    支付宝商品名称规则     
-    房间： 房间名称+R+房间id+R+购买用户id   如：我要直播R521R117    
-    礼物： 礼物名称+G+礼物id+G+购买用户id   如：鲜花G124G117
-
 }
+
 
 五十八、推送接口（邀请好友给对方推送）
 http://api.bihuo123.com
@@ -1426,6 +1425,30 @@ http://api.bihuo123.com
             }
         }
 
+
+
+六十二  支付宝支付之前记录购买商品
+http://api.bihuo123.com/index.php/api/alipay/add_alipay_shop??userid=101&shop_desc=dadada&shop_cash=0.01&liveroom_id=859&shop_type=gift
+接口参数:
+        shop_desc ------------房间名稱或者商品描述
+        shop_cash----------商品支付金額
+        liveroom_id---------------直播间id
+        shop_type---------商品类型 （礼物：gift    直播房间：live）
+        userid--------------购买用户id
+ {"errresult":true,"datas":{  
+          "id":"396",  用户id
+          "shop_name":"dadada",   商品名称
+          "shop_num":"201511241122391942",  订单号
+          "shop_type":"gift", 商品类型
+          "shop_cash":"0.01", 商品金额
+          "pay_type":"\u652f\u4ed8\u5b9d\u652f\u4ed8",支付类型
+          "pay_date":"1448335360", 支付日期
+          "pay_userid":"101", 购买用户
+          "is_room":"0", 是否购买房间   0不是房间  1为房间
+          "liveroom_id":"859",  直播间id
+          "pay_status":"0" 支付状态  0为未支付   1为已支付
+            }
+        }
 
 ================================================================================
 
@@ -1506,3 +1529,7 @@ http://api.bihuo123.com
 2015/11/17
 1.新增接口六十,是否接收消息接口(默认为0接收消息  1为不接收消息);
 2.变更十四号接口（注意：关注用户接口），访问路径变更
+
+2015/11/24
+1.更新接口五十七,删除命名规则
+2.新增接口六十二,在发起支付宝支付之前,需要记录购买商品,并获取订单号

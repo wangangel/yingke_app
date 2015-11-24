@@ -68,7 +68,6 @@ class WxpayController extends MobileController{
         }
         $returnXml = $notify->returnXml();
         echo $returnXml;
-         
         //==商户根据实际情况设置相应的处理流程，此处仅作举例=======
          
         //以log文件形式记录回调信息

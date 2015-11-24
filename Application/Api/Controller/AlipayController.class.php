@@ -9,6 +9,52 @@ class AlipayController extends MobileController{
         vendor('Alipay.alipay_notify');
     }
 
+
+    /**
+     * [add_alipay_shop description]
+     * 增加使用支付宝购买记录
+     */
+    public function add_alipay_shop(){
+         if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL || $_REQUEST['shop_type'] == NULL || $_REQUEST['userid'] == NULL ){
+            output_error('参数不全');
+        }
+        $shop_desc = $_REQUEST['shop_desc'];
+        //隨機生成訂單號
+        $shop_num = date('YmdHis').rand(0,9999);
+        //微信支付是以分為單位,這裡需要乘以100
+        $shop_cash = $_REQUEST['shop_cash'];
+        //訂單記錄保存到表中
+        $pay_model = M('pay');
+        $pay_data['shop_name'] = $shop_desc;
+        $pay_data['shop_num'] = $shop_num;
+        $pay_data['shop_type'] = $_REQUEST['shop_type'];
+        $pay_data['shop_cash'] = $_REQUEST['shop_cash'];
+        $pay_data['pay_type'] = '支付宝支付';
+        $pay_data['pay_date'] = time();
+        $pay_data['pay_userid'] = $_REQUEST['userid'];
+        $pay_data['pay_status'] = 0;
+        $pay_data['liveroom_id'] = $_REQUEST['liveroom_id'];
+        if($_REQUEST['shop_type']=='gift'){
+            $pay_data['is_room'] = 0;
+        }else{
+            $pay_data['is_room'] = 1;
+        }
+        //添加支付记录
+        $pay_info = $pay_model ->add($pay_data);
+        if($pay_info){
+            //根据添加记录的id 来返回响应的参数
+            $id['id'] = $pay_info;
+            $pay_data = $pay_model->where($id) ->find();
+            output_data($pay_data);
+        }else{
+            output_error('error');
+        }
+
+    }
+
+
+
+
     function notify_url(){
       //计算得出通知验证结果
       $alipay_config = C('alipay_config');
@@ -46,24 +92,10 @@ class AlipayController extends MobileController{
             //调试用，写文本函数记录程序运行情况是否正常
             //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }
-        //这里记录订单详情
-        if(strpos($_POST('subject'),"G")){
-            $name = $_POST('subject').split("G");
-            $shop_data['shop_type'] = "gift";
-            $shop_data['shop_name'] = $name[0];
-            $shop_data['is_room'] = 0;
-        }else if(strpos($_POST('subject'),"R")){
-            $name = $_POST('subject').split("R");
-            $shop_data['shop_type'] = "live";
-            $shop_data['shop_name'] = $name[0];
-            $shop_data['is_room'] = 1;
-        }
-        $shop_data['shop_num'] = $_POST('out_trade_no');
+        $where_data['shop_num'] = $_POST('out_trade_no');
         $shop_data['pay_status'] = 1;
-        $shop_data['pay_type'] = "支付宝支付";
         $shop_data['pay_date'] = time();
-        $shop_data['shop_cash'] = $_POST['total_fee'];
-        $pay_info = M('pay')->add($shop_data);
+        $pay_info = M('pay')->where($where_data)->save($shop_data);
         echo "success";     //请不要修改或删除
       }else {
         //$data['shop_name'] =2;
@@ -72,9 +104,7 @@ class AlipayController extends MobileController{
         //调试用，写文本函数记录程序运行情况是否正常
         //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
     }
-   //$info = M('pay')->add($data);
     
-
     }
 
 
