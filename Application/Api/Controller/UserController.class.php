@@ -3575,14 +3575,11 @@ class UserController extends MobileController{
      * 3.支付宝支付，需要进行参数拼接，查询返回
      */
     public function get_pay_status(){
-        //判断两种支付类型必传参数
-           if($_REQUEST['userid'] == null || $_REQUEST['liveroom_id'] == null){
+          //判断两种支付类型必传参数
+           if($_REQUEST['userid'] == null || $_REQUEST['liveroom_id'] == null || $_REQUEST['shop_name']==null){
                output_error('参数不全');     
             }
-     //根据支付类型来处理不同的支付方式
-            if($_REQUEST['shop_name']==null){
-                output_error('商品名称不能为空!');
-            }else{
+                //根据支付类型来处理不同的支付方式
                 $weixin_data['pay_userid'] = $_REQUEST['userid'];
                 $weixin_data['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $weixin_data['shop_name'] = $_REQUEST['shop_name'];
@@ -3600,7 +3597,6 @@ class UserController extends MobileController{
                 }else{
                     output_error('未购买该商品');
                 }
-            }
     }
 
 
