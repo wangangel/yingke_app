@@ -13,7 +13,7 @@ class WxpayController extends MobileController{
     }
 
      public function start_pay(){
-        if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL || $_REQUEST['shop_type'] == NULL){
+        if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL || $_REQUEST['shop_type'] == NULL || $_REQUEST['userid'] == NULL){
             output_error('参数不全');
         }
         $shop_desc = $_REQUEST['shop_desc'];

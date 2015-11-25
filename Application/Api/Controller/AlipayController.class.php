@@ -39,6 +39,7 @@ class AlipayController extends MobileController{
         }else{
             $pay_data['is_room'] = 1;
         }
+        $pay_data['callback_url'] = "http://api.bihuo123.com/index.php/api/alipay/notify_url";
         //添加支付记录
         $pay_info = $pay_model ->add($pay_data);
         if($pay_info){
