@@ -1435,17 +1435,10 @@ http://api.bihuo123.com/index.php/api/alipay/add_alipay_shop??userid=101&shop_de
         shop_type---------商品类型 （礼物：gift    直播房间：live）
         userid--------------购买用户id
  {"errresult":true,"datas":{  
-          "id":"396",  用户id
-          "shop_name":"dadada",   商品名称
-          "shop_num":"201511241122391942",  订单号
-          "shop_type":"gift", 商品类型
-          "shop_cash":"0.01", 商品金额
-          "pay_type":"\u652f\u4ed8\u5b9d\u652f\u4ed8",支付类型
-          "pay_date":"1448335360", 支付日期
-          "pay_userid":"101", 购买用户
-          "is_room":"0", 是否购买房间   0不是房间  1为房间
-          "liveroom_id":"859",  直播间id
-          "pay_status":"0" 支付状态  0为未支付   1为已支付
+         "out_trade_no":"201511251553194031",
+         "subject":"wewewe", 商品名称
+         "body":"wewewe"
+         "total_fee":"0.01"
           "callback_url":支付宝回调地址
             }
 

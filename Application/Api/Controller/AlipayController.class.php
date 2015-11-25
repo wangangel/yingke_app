@@ -15,8 +15,9 @@ class AlipayController extends MobileController{
      * 增加使用支付宝购买记录
      */
     public function add_alipay_shop(){
+        //dump($_REQUEST);
          if($_REQUEST['shop_desc'] == NULL || $_REQUEST['shop_cash'] == NULL || $_REQUEST['shop_type'] == NULL || $_REQUEST['userid'] == NULL ){
-            output_error('参数不全');
+            output_error('参数不全!');
         }
         $shop_desc = $_REQUEST['shop_desc'];
         //隨機生成訂單號
@@ -39,16 +40,21 @@ class AlipayController extends MobileController{
         }else{
             $pay_data['is_room'] = 1;
         }
-        $pay_data['callback_url'] = "http://api.bihuo123.com/index.php/api/alipay/notify_url";
+        $f_data['callback_url'] = "http://api.bihuo123.com/index.php/api/alipay/notify_url";
         //添加支付记录
         $pay_info = $pay_model ->add($pay_data);
         if($pay_info){
             //根据添加记录的id 来返回响应的参数
             $id['id'] = $pay_info;
             $pay_data = $pay_model->where($id) ->find();
-            output_data($pay_data);
+           // dump($pay_data);
+            $f_data['out_trade_no'] = $pay_data['shop_num'];
+            $f_data['subject'] = $pay_data['shop_name'];
+            $f_data['body'] = $pay_data['shop_name'];
+            $f_data['total_fee'] = $pay_data['shop_cash'];
+            output_data($f_data);
         }else{
-            output_error('error');
+            output_error('error!');
         }
 
     }
