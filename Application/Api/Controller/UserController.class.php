@@ -3602,12 +3602,11 @@ class UserController extends MobileController{
                 $weixin_data['liveroom_id'] = $_REQUEST['liveroom_id'];
                 $weixin_data['shop_name'] = $_REQUEST['shop_name'];
                 $weixin_data['shop_type'] = $_REQUEST['shop_type'];
-                $pay_info = M('pay') ->where($weixin_data)->find();
+                $pay_info = M('pay') ->where($weixin_data)->select();
                 //判断该用户有没有购买该商品
-                //dump($pay_info);
                 if(count($pay_info)>0){
                     $pay_status = $pay_info['pay_status'];
-                    if($pay_status == 1){
+                    if($pay_status == 0){
                         output_data("已支付");
                     }else{
                         output_error("未支付");
@@ -3686,6 +3685,69 @@ class UserController extends MobileController{
         }   
        
 
+    }
+
+    /*
+     * 点击用户头像获取关注信息
+     */
+    public function click_user(){
+      
+        if($_REQUEST['userid'] == NULL){
+             output_error('被关注用户id数据为空');
+        }
+        if($_REQUEST['focuser_id'] == NULL){
+             output_error('关注用户id数据为空');
+        }
+        $array = array();
+        $array['id'] = $_REQUEST['userid'];
+        $model_user = M('user');
+        $result = $model_user->where($array)->find();
+        if($result != NULL){
+            $datas = array();
+            $datas['userid'] = $result['id'];
+            $datas['user_id'] = $result['user_id'];
+            $datas['ni_name'] = $result['ni_name'];
+            $datas['sex'] = $result['sex'];
+            $datas['birth_date'] = $result['birth_date'];
+            $datas['lable'] = $result['lable'];
+            $datas['head_url'] = $result['head_url'];
+            $datas['profession'] = $result['profession'];
+            $datas['per_sign'] = $result['per_sign'];
+            //获取当前用户关注的人数
+            $focus_model = M('friends_focus');
+            $opt['user_id'] = $_REQUEST['userid'];
+            $opt['status'] = 'yes';
+            $focus_num = $focus_model->where($opt)->count();
+            $datas['focus_num'] = $focus_num;
+            //判断是否关注过
+            $con_focus['user_id'] = $_REQUEST['focuser_id'];
+            $con_focus['focus_user'] = $_REQUEST['userid'];
+            $con_focus['status'] = 'yes';
+            $focus_result = $focus_model->where($con_focus)->count();
+            if($focus_result>0){//已关注
+                $datas["is_focus"] = 0;
+            }else{
+                $datas["is_focus"] = 1;
+            }
+            //获取当前用户的粉丝人数
+            $opt1['focus_user'] = $_REQUEST['userid'];
+            $opt1['status'] = 'yes';
+            $fans_num = $focus_model->where($opt1)->count();
+            $datas['fans_num'] = $fans_num;
+            //获取评分
+            $live_model = M('live');
+            $live_info = $live_model->where(array('room_user'=>$_REQUEST['userid']))->select();
+            $total_score = 0;
+            $total_usernum = 0;
+            foreach ($live_info as $k => $v) {
+                $total_score += $v['score'];
+                $total_usernum += $v['score_usernum'];
+            }
+            $datas['score'] = round($total_score/$total_usernum);
+            output_data($datas);
+        }else{
+            output_error('没有该用户信息');
+        }
     }
 
 

@@ -1381,7 +1381,7 @@ http://api.bihuo123.com
 
 五十九、支付状态查询接口
 http://api.bihuo123.com
-/index.php/api/user/get_pay_status?userid=236&liveroom_id=900&shop_name=鲜花&is_room=0
+/index.php/api/user/get_pay_status?userid=236&liveroom_id=900&shop_name=鲜花&shop_type=0
 
 接口参数:
     userid ----------用户id
@@ -1446,6 +1446,31 @@ http://api.bihuo123.com/index.php/api/alipay/add_alipay_shop??userid=101&shop_de
     发起支付.
 
 
+六十三.直播间点击头像进行关注
+    请求地址：http://api.bihuo123.com
+/index.php/api/user/click_user?userid=6&focuser_id=162
+    接口参数:
+        userid:被点击者用户id
+        focuser_id：点击者用户id
+    返回值:
+       {
+        "error_result": true,
+        "datas": {
+        "userid": "229",    被关注用户id
+        "user_id": "18447248032",  映客平台规则id 
+        "ni_name": "18651551916", 昵称
+        "sex": null,性别
+        "birth_date": null,生日日期
+        "lable": null,标签
+        "head_url": "http://api.bihuo123.com/Upload/2015-11-01/563577c5abd84.jpg",头像
+        "profession": null,职业
+        "per_sign": null,个性签名
+        "focus_num": "0",关注人数
+        "is_focus": 0,  是否关注，0为已关注，1为未关注
+        "fans_num": "1",粉丝数量
+        "score": 0评分
+    }
+}
 ================================================================================
 
 
@@ -1529,3 +1554,6 @@ http://api.bihuo123.com/index.php/api/alipay/add_alipay_shop??userid=101&shop_de
 2015/11/24
 1.删除接口五十七,使用七十二
 2.新增接口六十二,在发起支付宝支付之前,需要记录购买商品,并获取订单号
+
+2015/11/29
+1.新增直播间点击头像关注判断接口，is_focus为0为已关注，为1是未关注
